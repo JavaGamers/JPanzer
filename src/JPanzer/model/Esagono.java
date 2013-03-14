@@ -1,14 +1,23 @@
 package JPanzer.model;
 
 public class Esagono {
-	int id;		// numerdo d'ordine all'interno della lista
-	int[] coordinate; // settore - livello - posizione
-	Esagono[] adiacenze; // contiene le adiacenze: i lati degli esagoni sono numerati a partire da quello in alto da 0 a 5 in senso orario
+	private int id;		// numerdo d'ordine all'interno della lista
+	private int[] coordinate; // settore - livello - posizione
+	private Esagono[] adiacenze; // contiene le adiacenze: i lati degli esagoni sono numerati a partire da quello in alto da 0 a 5 in senso orario
+	private static int[] startNums = {1,7,19,37,61};
 	
 	public Esagono(int[] c){
 		this.coordinate = new int[3];
 		this.adiacenze = new Esagono[6];
-		// settare id
+		
+		// algoritmo che date le coordinate fornisce id
+		if (c[1] == 0)
+			this.id = 0;
+		if (c[1] == 1)
+			this.id = c[0];
+		else
+			this.id = (c[0]-1)*c[1] + c[2] + startLiv(c[1]);
+
 		
 		if(c.length!=3)
 			throw new IllegalArgumentException("Invalid format, use settore - livello - posizione");
@@ -17,12 +26,44 @@ public class Esagono {
 			this.coordinate[i] = c[i];
 		}
 	}	
-		
+
 	public Esagono(int id){
 		this.id = id;
 		this.coordinate = new int[3];
 		this.adiacenze = new Esagono[6];
-		//settare coordinate
+		
+		// algoritmo che dato id fornisce le coordinate
+		this.coordinate[1]=0;
+		for(int i=0; i<startNums.length;i++){
+			if(id<startNums[i]){
+				this.coordinate[1]=i-1;
+				break;	
+			}
+		}
+
+		this.coordinate[2]=0;
+		this.coordinate[0]=0;
+
+		if(this.coordinate[1]==1){
+			
+			this.coordinate[0]=id;
+
+		} else{
+			
+			int k=id-startNums[this.coordinate[1]-1];
+			this.coordinate[2]= Esagono.mod(k, this.coordinate[1]);
+
+			if(k==0){
+				this.coordinate[0]=1;
+			} else{
+				if(this.coordinate[2]==0)
+					this.coordinate[0]= k/this.coordinate[1]+1;
+				else 
+					this.coordinate[0]=(int)(Math.ceil(k/this.coordinate[1]));
+			}
+
+		}
+
 	}
 	
 	public int getId(){
@@ -67,5 +108,15 @@ public class Esagono {
 		return n;
 	}
 	
+	
+//metodo per calcolare il valore iniziale dato il livello
+public static int startLiv (int livello){
+		return 3*livello^2 - 3*livello + 1 ;
+	}
+//metodo per calcolare il valore finale dato il livello
+public static int endLiv (int livello){
+		return 3*livello^2 + 3*livello ;
+	}
+
 }
 
