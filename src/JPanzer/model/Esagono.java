@@ -4,11 +4,18 @@ public class Esagono {
 	private int id;		// numerdo d'ordine all'interno della lista
 	private int[] coordinate; // settore - livello - posizione
 	private Esagono[] adiacenze; // contiene le adiacenze: i lati degli esagoni sono numerati a partire da quello in alto da 0 a 5 in senso orario
-	private static int[] startNums = {1,7,19,37,61};
+	private static int[] startNums = {1,7,19,37,61}; // indici dei primi elementi di ogni livello
 	
 	public Esagono(int[] c){
 		this.coordinate = new int[3];
 		this.adiacenze = new Esagono[6];
+		
+		if(c.length!=3)
+			throw new IllegalArgumentException("Invalid format, use settore - livello - posizione");
+		
+		for(int i=0; i<coordinate.length; i++){
+			this.coordinate[i] = c[i];
+		}
 		
 		// algoritmo che date le coordinate fornisce id
 		if (c[1] == 0)
@@ -18,13 +25,6 @@ public class Esagono {
 		else
 			this.id = (c[0]-1)*c[1] + c[2] + startLiv(c[1]);
 
-		
-		if(c.length!=3)
-			throw new IllegalArgumentException("Invalid format, use settore - livello - posizione");
-		
-		for(int i=0; i<coordinate.length; i++){
-			this.coordinate[i] = c[i];
-		}
 	}	
 
 	public Esagono(int id){
@@ -34,36 +34,40 @@ public class Esagono {
 		
 		// algoritmo che dato id fornisce le coordinate
 		this.coordinate[1]=0;
-		for(int i=0; i<startNums.length;i++){
-			if(id<startNums[i]){
-				this.coordinate[1]=i-1;
-				break;	
-			}
-		}
-
-		this.coordinate[2]=0;
-		this.coordinate[0]=0;
-
-		if(this.coordinate[1]==1){
-			
-			this.coordinate[0]=id;
-
+		if(id==0){
+			this.coordinate[0]=0;
+			this.coordinate[2]=0;
 		} else{
-			
-			int k=id-startNums[this.coordinate[1]-1];
-			this.coordinate[2]= Esagono.mod(k, this.coordinate[1]);
-
-			if(k==0){
-				this.coordinate[0]=1;
-			} else{
-				if(this.coordinate[2]==0)
-					this.coordinate[0]= k/this.coordinate[1]+1;
-				else 
-					this.coordinate[0]=(int)(Math.ceil(k/this.coordinate[1]));
-			}
-
+				
+				for(int i=0; i<startNums.length;i++){
+					if(id<startNums[i]){
+						this.coordinate[1]=i;
+						break;	
+					}
+				}
+		
+				this.coordinate[2]=0;
+				this.coordinate[0]=0;
+		
+				if(this.coordinate[1]==1){
+					this.coordinate[0]=id;
+		
+				} else{
+					
+					int k=id-startNums[this.coordinate[1]-1];
+					this.coordinate[2]= Esagono.mod(k, this.coordinate[1]);
+		
+					if(k==0){
+						this.coordinate[0]=1;
+					} else{
+						if(this.coordinate[2]==0)
+							this.coordinate[0]= k/this.coordinate[1]+1;
+						else 
+							this.coordinate[0]=(int)(Math.ceil(k/this.coordinate[1]));
+					}
+		
+				}
 		}
-
 	}
 	
 	public int getId(){
@@ -96,7 +100,7 @@ public class Esagono {
 			throw new IllegalArgumentException("Invalid range. Use number from 0 to 5");
 		
 		this.adiacenze[n]= e;
-		if(e.getAdiacenze()[Esagono.mod(n+3, 6)]==null)
+		if(e.getAdiacenze()[Esagono.mod(n+3, 6)].equals(null))
 			e.setAdiacenza(this, Esagono.mod(n+3, 6));
 		
 	}
@@ -109,13 +113,26 @@ public class Esagono {
 	}
 	
 	
-//metodo per calcolare il valore iniziale dato il livello
-public static int startLiv (int livello){
-		return 3*livello^2 - 3*livello + 1 ;
+	//metodo per calcolare il valore iniziale dato il livello
+	public static int startLiv (int livello){
+			return 3*livello^2 - 3*livello + 1 ;
+		}
+	//metodo per calcolare il valore finale dato il livello
+	public static int endLiv (int livello){
+			return 3*livello^2 + 3*livello ;
+		}
+	
+	public static int[] getStartNums(){
+		return startNums;
+	
 	}
-//metodo per calcolare il valore finale dato il livello
-public static int endLiv (int livello){
-		return 3*livello^2 + 3*livello ;
+	public String toString(){
+		String s="";
+		for(int i=0; i<6;i++){
+			s+=this.getAdiacenze()[i].getId()+'\t';
+		}
+		return "Esagono numero "+this.id+" di coordinate: settore "+this.coordinate[0]+" livello "
+	    +this.coordinate[1]+" posizione "+this.coordinate[2]+ " con adiacenze "+s;
 	}
 
 }
