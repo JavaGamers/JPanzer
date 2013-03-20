@@ -4,7 +4,7 @@ public class Esagono {
 	private int id;		// numerdo d'ordine all'interno della lista
 	private int[] coordinate; // settore - livello - posizione
 	private Esagono[] adiacenze; // contiene le adiacenze: i lati degli esagoni sono numerati a partire da quello in alto da 0 a 5 in senso orario
-	private static int[] startNums = {1,7,19,37,61}; // indici dei primi elementi di ogni livello
+	private static int[] startNums = {1,7,19,37,61,91,127,169,217,271,331,397,469,547,631,721,817,919,1027,1141,1261}; // indici dei primi elementi di ogni livello
 	
 	public Esagono(int[] c){
 		this.coordinate = new int[3];
@@ -24,7 +24,6 @@ public class Esagono {
 			this.id = c[0];
 		else
 			this.id = (c[0]-1)*c[1] + c[2] + startLiv(c[1]);
-
 	}	
 
 	public Esagono(int id){
@@ -95,13 +94,14 @@ public class Esagono {
 	}
 	
 	// n è il lato dell'esagono "e" passato come parametro
-	public void setAdiacenza(Esagono e, int n){ 
+	public void setAdiacenza(Esagono e, int n){
+		if(e==null)
+			throw new IllegalArgumentException("l'esagono pezzente è: "+this.id);
 		if(n>5)
 			throw new IllegalArgumentException("Invalid range. Use number from 0 to 5");
 		
 		this.adiacenze[n]= e;
-		if(e.getAdiacenze()[Esagono.mod(n+3, 6)].equals(null))
-			e.setAdiacenza(this, Esagono.mod(n+3, 6));
+		e.adiacenze[Esagono.mod(n+3, 6)]=this;
 		
 	}
 	
@@ -114,12 +114,13 @@ public class Esagono {
 	
 	
 	//metodo per calcolare il valore iniziale dato il livello
-	public static int startLiv (int livello){
-			return 3*livello^2 - 3*livello + 1 ;
+	public static int startLiv (int x){
+			return (3*x*x - 3*x + 1);
 		}
+	
 	//metodo per calcolare il valore finale dato il livello
-	public static int endLiv (int livello){
-			return 3*livello^2 + 3*livello ;
+	public static int endLiv (int x){
+			return (3*x*x + 3*x) ;
 		}
 	
 	public static int[] getStartNums(){
@@ -129,7 +130,8 @@ public class Esagono {
 	public String toString(){
 		String s="";
 		for(int i=0; i<6;i++){
-			s+=this.getAdiacenze()[i].getId()+'\t';
+			if(this.getAdiacenze()[i]!=null)
+				s+=this.getAdiacenze()[i].getId()+" - " + i + " || ";
 		}
 		return "Esagono numero "+this.id+" di coordinate: settore "+this.coordinate[0]+" livello "
 	    +this.coordinate[1]+" posizione "+this.coordinate[2]+ " con adiacenze "+s;
