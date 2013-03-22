@@ -1,12 +1,18 @@
-package JPanzer.model;
+package model;
+
+import view.Territorio;
 
 public class Esagono {
 	private int id;		// numerdo d'ordine all'interno della lista
 	private int[] coordinate; // settore - livello - posizione
 	private Esagono[] adiacenze; // contiene le adiacenze: i lati degli esagoni sono numerati a partire da quello in alto da 0 a 5 in senso orario
 	private static int[] startNums = {1,7,19,37,61,91,127,169,217,271,331,397,469,547,631,721,817,919,1027,1141,1261}; // indici dei primi elementi di ogni livello
+	private Unità unit; // unità presente sull'esagono
+	private Territorio territorio;
 	
 	public Esagono(int[] c){
+		this.territorio=null;
+		this.unit=null;
 		this.coordinate = new int[3];
 		this.adiacenze = new Esagono[6];
 		
@@ -27,6 +33,8 @@ public class Esagono {
 	}	
 
 	public Esagono(int id){
+		this.territorio=null;
+		this.unit=null;
 		this.id = id;
 		this.coordinate = new int[3];
 		this.adiacenze = new Esagono[6];
@@ -93,6 +101,14 @@ public class Esagono {
 		return this.adiacenze;
 	}
 	
+	public Unità getUnit(){
+		return this.unit;
+	}
+	
+	public Territorio getTerritorio(){
+		return this.territorio;
+	}
+	
 	// n è il lato dell'esagono "e" passato come parametro
 	public void setAdiacenza(Esagono e, int n){
 		if(e==null)
@@ -103,6 +119,14 @@ public class Esagono {
 		this.adiacenze[n]= e;
 		e.adiacenze[Esagono.mod(n+3, 6)]=this;
 		
+	}
+	
+	public void setUnit(Unità u){
+		this.unit=u;
+	}
+	
+	public void setTerritorio(Territorio t){
+		this.territorio=t;
 	}
 	
 	// metodo per calcolare n mod p

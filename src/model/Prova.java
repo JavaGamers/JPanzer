@@ -1,4 +1,4 @@
-package JPanzer.model;
+package model;
 
 public class Prova {
 
