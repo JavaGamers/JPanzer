@@ -13,13 +13,13 @@ public class DisegnaMappa extends Drawing {
 	private int xC;
 	private int yC;
 	private Mappa mappa;
-	private LinkedList esagoniDisegnati;
+	private LinkedList<Esagono> esagoniDisegnati;
 	
 	public DisegnaMappa(Mappa m, int x, int y){
 		this.xC=x;
 		this.yC=y;
 		this.mappa=m;
-		this.esagoniDisegnati= new LinkedList();
+		this.esagoniDisegnati= new LinkedList<Esagono>();
 	}
 
 	public void paint(Graphics g) {
@@ -30,12 +30,34 @@ public class DisegnaMappa extends Drawing {
 		centro = new DisegnaEsagono(this.xC, this.yC, r);
 		for(int j=0; j<6; j++){
 			switch(j){
-				case(0): dE = new DisegnaEsagono(this.xC,(int)(this.yC+2*centro.getApotema()),r);
+				case(0):{ dE = new DisegnaEsagono(this.xC,(int)(this.yC+2*centro.getApotema()),r);
+						this.esagoniDisegnati.add(this.mappa.getComponent()[j].getAdiacenze()[j]);
+				}
+				
+				case(1):{ dE = new DisegnaEsagono((int)(this.xC+2*r),(int)(this.yC+r),r);
+						this.esagoniDisegnati.add(this.mappa.getComponent()[j].getAdiacenze()[j]);
+				}
+				
+				case(2):{ dE = new DisegnaEsagono((int)(this.xC+2*r),(int)(this.yC-r),r);
+						this.esagoniDisegnati.add(this.mappa.getComponent()[j].getAdiacenze()[j]);
+				}
+				
+				case(3):{ dE = new DisegnaEsagono(this.xC,(int)(this.yC-2*r),r);
+						this.esagoniDisegnati.add(this.mappa.getComponent()[j].getAdiacenze()[j]);
+				}
+				
+				case(4):{ dE = new DisegnaEsagono((int)(this.xC-2*r),(int)(this.yC-r),r);
+						this.esagoniDisegnati.add(this.mappa.getComponent()[j].getAdiacenze()[j]);
+				}
+				
+				case(5):{ dE = new DisegnaEsagono((int)(this.xC-2*r),(int)(this.yC+r),r);
+						this.esagoniDisegnati.add(this.mappa.getComponent()[j].getAdiacenze()[j]);
+				}
 			}
 		}
 		for(int i=1;i<this.mappa.getComponent().length;i++){
 			if(!this.esagoniDisegnati.contains(this.mappa.getComponent()[i])){
-				dE = new DisegnaEsagono()
+				
 			}
 				
 		}
