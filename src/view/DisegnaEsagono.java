@@ -36,6 +36,10 @@ public class DisegnaEsagono extends Drawing {
 		this.yPoint[5]=this.yCentro-this.apotema;
 
 	}
+	
+	public double getApotema(){
+		return this.apotema;
+	}
 
 	public void paint(Graphics g) {
 		g.setColor(Color.black);

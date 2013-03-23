@@ -105,7 +105,7 @@ public class Mappa {
 	public Esagono[] getComponent(){
 		return this.component;
 	}
-	
+		
 	public String toString(){
 		String s="";
 		for(int i=0;i<this.component.length;i++){
