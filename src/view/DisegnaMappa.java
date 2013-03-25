@@ -30,28 +30,34 @@ public class DisegnaMappa extends Drawing {
 		centro = new DisegnaEsagono(this.xC, this.yC, r);
 		for(int j=0; j<6; j++){
 			switch(j){
-				case(0):{ dE = new DisegnaEsagono(this.xC,(int)(this.yC+2*centro.getApotema()),r);
+				case(0):{ dE = new DisegnaEsagono(this.xC,this.yC+2*centro.getApotema(),r);
 						this.esagoniDisegnati.add(this.mappa.getComponent()[j].getAdiacenze()[j]);
+						break;
 				}
 				
-				case(1):{ dE = new DisegnaEsagono((int)(this.xC+2*r),(int)(this.yC+r),r);
+				case(1):{ dE = new DisegnaEsagono(this.xC+2*r,this.yC+r,r);
 						this.esagoniDisegnati.add(this.mappa.getComponent()[j].getAdiacenze()[j]);
+						break;
 				}
 				
-				case(2):{ dE = new DisegnaEsagono((int)(this.xC+2*r),(int)(this.yC-r),r);
+				case(2):{ dE = new DisegnaEsagono(this.xC+2*r,this.yC-r,r);
 						this.esagoniDisegnati.add(this.mappa.getComponent()[j].getAdiacenze()[j]);
+						break;
 				}
 				
-				case(3):{ dE = new DisegnaEsagono(this.xC,(int)(this.yC-2*r),r);
+				case(3):{ dE = new DisegnaEsagono(this.xC,this.yC-2*r,r);
 						this.esagoniDisegnati.add(this.mappa.getComponent()[j].getAdiacenze()[j]);
+						break;
 				}
 				
-				case(4):{ dE = new DisegnaEsagono((int)(this.xC-2*r),(int)(this.yC-r),r);
+				case(4):{ dE = new DisegnaEsagono(this.xC-2*r,this.yC-r,r);
 						this.esagoniDisegnati.add(this.mappa.getComponent()[j].getAdiacenze()[j]);
+						break;
 				}
 				
-				case(5):{ dE = new DisegnaEsagono((int)(this.xC-2*r),(int)(this.yC+r),r);
+				case(5):{ dE = new DisegnaEsagono(this.xC-2*r,this.yC+r,r);
 						this.esagoniDisegnati.add(this.mappa.getComponent()[j].getAdiacenze()[j]);
+						break;
 				}
 			}
 		}

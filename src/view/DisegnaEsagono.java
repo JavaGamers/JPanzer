@@ -7,12 +7,12 @@ import java.awt.Shape;
 import java.awt.geom.Line2D;
 
 public class DisegnaEsagono extends Drawing {
-	private int xCentro, yCentro; 
+	private double xCentro, yCentro; 
 	private double apotema, raggio; // raggio= raggio circonferenza circoscritta all'esagono
 	private double[] xPoint; // ascisse dei vertici dell'esagono in senso antiorario a partire da destra (asse x)
 	private double[] yPoint; // ordinate dei vertici dell'esagono in senso antiorario a partire da destra (asse x)
 	
-	public DisegnaEsagono(int x, int y, double r){
+	public DisegnaEsagono(double x, double y, double r){
 		this.xCentro=x;
 		this.yCentro=y;
 		this.raggio=r;
