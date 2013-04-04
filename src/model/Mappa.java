@@ -7,6 +7,8 @@ public class Mappa {
 	
 	// d= dimensione
 	public Mappa(int d){
+		if(d>20)
+			throw new IllegalArgumentException("invalid number, level<=20");
 		this.root = new Esagono(0);
 		this.dim = d;
 		this.component = new Esagono[Esagono.endLiv(dim)+1];

@@ -1,8 +1,6 @@
-package view;
+package model;
 
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,14 +20,6 @@ public class Collina extends Component implements Territorio {
 	       }
 	}
 	
-	public Dimension getPreferredSize() {
-        if (bImg == null) {
-             return new Dimension(100,100); // da ridefinire
-        } else {
-           return new Dimension(bImg.getWidth(null), bImg.getHeight(null));
-        }
-    }
-
 	public String getNome() {
 		return "Collina";
 	}
@@ -42,9 +32,5 @@ public class Collina extends Component implements Territorio {
 		return BONUS;
 	}
 	
-	public void paint(Graphics g) {
-        g.drawImage(bImg, 0, 0, null);
-    }
-
 }
 

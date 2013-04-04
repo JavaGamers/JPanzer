@@ -1,7 +1,5 @@
 package model;
 
-import view.Territorio;
-
 public class Esagono {
 	private int id;		// numerdo d'ordine all'interno della lista
 	private int[] coordinate; // settore - livello - posizione
