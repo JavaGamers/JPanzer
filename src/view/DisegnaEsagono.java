@@ -49,6 +49,7 @@ public class DisegnaEsagono extends Drawing {
 			s = new Line2D.Double(this.xPoint[i], this.yPoint[i], this.xPoint[i+1], this.yPoint[i+1]);
 			g2d.draw(s);
 		}
+		g2d.draw(new Line2D.Double(this.xPoint[0], this.yPoint[0], this.xPoint[5], this.yPoint[5]));
 	}
 
 	
