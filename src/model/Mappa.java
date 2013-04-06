@@ -1,6 +1,8 @@
 package model;
 
-public class Mappa {
+import java.util.Observable;
+
+public class Mappa extends Observable {
 	private Esagono root;
 	private int dim; // coincide con il numerdo di livelli della mappa
 	private Esagono[] component;

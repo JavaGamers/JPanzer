@@ -1,6 +1,8 @@
 package model;
 
-public class Unità {
+import java.util.Observable;
+
+public class Unità extends Observable {
 	protected int att;	// attacco
 	protected int dif;	// difesa
 	protected int esp;	// esperienza
@@ -56,22 +58,32 @@ public class Unità {
 	public void setEsp(){
 		if(this.esp<10)
 			this.esp++;
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public void setPos(Esagono p){
 		this.pos=p;
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public void setAtt(){
 		// da fare
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public void setDif(){
 		// da fare
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public void setBonus(){
 		// da fare
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	// ritorna true se il set è andato a buon fine 
@@ -81,6 +93,9 @@ public class Unità {
 				ok= false;
 			else
 				this.passi=this.passi-p;
+			
+			this.setChanged();
+			this.notifyObservers();
 			return ok;
 	}
 

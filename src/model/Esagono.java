@@ -1,6 +1,8 @@
 package model;
 
-public class Esagono {
+import java.util.Observable;
+
+public class Esagono extends Observable {
 	private int id;		// numerdo d'ordine all'interno della lista
 	private int[] coordinate; // settore - livello - posizione
 	private Esagono[] adiacenze; // contiene le adiacenze: i lati degli esagoni sono numerati a partire da quello in alto da 0 a 5 in senso orario
@@ -117,14 +119,21 @@ public class Esagono {
 		this.adiacenze[n]= e;
 		e.adiacenze[Esagono.mod(n+3, 6)]=this;
 		
+		this.setChanged();
+		this.notifyObservers();
+		
 	}
 	
 	public void setUnit(Unità u){
 		this.unit=u;
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public void setTerritorio(Territorio t){
 		this.territorio=t;
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	// metodo per calcolare n mod p
