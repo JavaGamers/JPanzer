@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Component;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,9 +15,9 @@ public class Montagna extends Component implements Territorio {
 	
 	public Montagna(){
 		try {
-	           bImg = ImageIO.read(new File("da inserire"));
+	           bImg = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/modelmontagna.jpeg"));
 	       } catch (IOException e) {
-	    	   // da scrivere
+	    	   System.out.println("c'è qualcosa che non va");
 	       }
 	}
 
@@ -30,6 +31,11 @@ public class Montagna extends Component implements Territorio {
 	
 	public int getBonus(){
 		return BONUS;
+	}
+
+	
+	public Image getImage() {
+		return bImg;
 	}
 	
 }

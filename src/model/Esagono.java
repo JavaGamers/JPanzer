@@ -119,9 +119,6 @@ public class Esagono extends Observable {
 		this.adiacenze[n]= e;
 		e.adiacenze[Esagono.mod(n+3, 6)]=this;
 		
-		this.setChanged();
-		this.notifyObservers();
-		
 	}
 	
 	public void setUnit(Unità u){

@@ -3,6 +3,7 @@ package model;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +33,11 @@ public class Foresta extends Component implements Territorio {
 	
 	public int getBonus(){
 		return BONUS;
+	}
+
+	
+	public Image getImage() {
+		return bImg;
 	}
 	
 }
