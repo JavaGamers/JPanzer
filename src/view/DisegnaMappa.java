@@ -23,7 +23,7 @@ public class DisegnaMappa extends Drawing {
 		centro.paint(g);
 		
 		for(int i=1;i<this.mappa.getComponent().length;i++){
-			dE = new EsagonoGrafico(this.mappa.getComponent()[i],this.xC,this.yC,raggio); // il segno - indica il cambio di coordinate (asse y invertito)
+			dE = new EsagonoGrafico(this.mappa.getComponent()[i],this.xC,this.yC,raggio); // il segno "-" indica il cambio di coordinate (asse y invertito)
 			dE.paint(g);
 		}
 

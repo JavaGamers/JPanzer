@@ -6,12 +6,9 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Shape;
 import java.awt.geom.Line2D;
-import java.util.Observable;
-import java.util.Observer;
-
 import model.Esagono;
 
-public class EsagonoGrafico extends Drawing implements Observer {
+public class EsagonoGrafico extends Drawing{
 	private double xCentro, yCentro; 
 	private double apotema, raggio; // raggio= raggio circonferenza circoscritta all'esagono
 	private double[] xPoint; // ascisse dei vertici dell'esagono in senso antiorario a partire da destra (asse x)
@@ -84,7 +81,10 @@ public class EsagonoGrafico extends Drawing implements Observer {
 		g.setColor(Color.black);
 		Graphics2D g2d= (Graphics2D) g;
 		Shape s;
-		Image img = this.esagono.getTerritorio().getImage();
+		Image img = null;
+		if(this.esagono.getTerritorio()!=null){
+			img = esagono.getTerritorio().getImage();
+		}
 		g.drawImage(img,(int)(this.xCentro-this.raggio),(int)(this.yCentro-this.raggio), null);
 		
 		for(int i=0;i<5;i++){
@@ -97,11 +97,5 @@ public class EsagonoGrafico extends Drawing implements Observer {
 	public Esagono getEsagono(){
 		return this.esagono;
 	}
-
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	
 }

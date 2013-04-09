@@ -28,10 +28,6 @@ public class DisegnaQualcosaTiPrego extends JFrame {
 	
 	public static void main(String[] args) {
 		Mappa m = new Mappa(3);
-		Pianura t = new Pianura();
-		for(int i=0; i<m.getComponent().length;i++){
-			m.getComponent()[i].setTerritorio(t);
-		}
 		Drawing dM = new DisegnaMappa(m,700,400);
 		new DisegnaQualcosaTiPrego("Java meglio", dM).setVisible(true);
 	}
