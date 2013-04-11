@@ -2,26 +2,26 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Shape;
-import java.awt.geom.Line2D;
+import java.awt.Polygon;
 import model.Esagono;
 
-public class EsagonoGrafico extends Drawing{
+public class EsagonoGrafico extends Polygon{
 	private double xCentro, yCentro; 
 	private double apotema, raggio; // raggio= raggio circonferenza circoscritta all'esagono
-	private double[] xPoint; // ascisse dei vertici dell'esagono in senso antiorario a partire da destra (asse x)
-	private double[] yPoint; // ordinate dei vertici dell'esagono in senso antiorario a partire da destra (asse x)
 	private Esagono esagono;
 	
-	// xC, yC coordinate dell'origine, ovvero del centro dell'esagono root (numero 0)
+	 /* le ascisse dei vertici dell'esagono sono in senso antiorario a partire da destra (asse x)
+		le ordinate dei vertici dell'esagono sono in senso antiorario a partire da destra (asse x) 
+	 	xC, yC coordinate dell'origine, ovvero del centro dell'esagono root (numero 0) */
 	public EsagonoGrafico(Esagono e,double xC, double yC, double r){
+		super();
+		super.npoints=6;
+		super.xpoints= new int[6];
+		super.ypoints= new int[6];
 		this.esagono=e;
 		this.raggio=r;
 		this.apotema=Math.sqrt(3)/2*r;
-		this.xPoint= new double[6];
-		this.yPoint= new double[6];
 		
 		int s = this.esagono.getSettore();
 		int l = this.esagono.getLivello();
@@ -57,20 +57,19 @@ public class EsagonoGrafico extends Drawing{
 		}
 		
 		//riempio arrays coordinate
-				this.xPoint[0]=this.xCentro+this.raggio;
-				this.xPoint[1]=this.xCentro+this.raggio/2;
-				this.xPoint[2]=this.xCentro-this.raggio/2;
-				this.xPoint[3]=this.xCentro-this.raggio;
-				this.xPoint[4]=this.xCentro-this.raggio/2;
-				this.xPoint[5]=this.xCentro+this.raggio/2;
+				super.xpoints[0]=(int)(this.xCentro+this.raggio);
+				super.xpoints[1]=(int)(this.xCentro+this.raggio/2);
+				super.xpoints[2]=(int)(this.xCentro-this.raggio/2);
+				super.xpoints[3]=(int)(this.xCentro-this.raggio);
+				super.xpoints[4]=(int)(this.xCentro-this.raggio/2);
+				super.xpoints[5]=(int)(this.xCentro+this.raggio/2);
 				
-				this.yPoint[0]=this.yCentro;
-				this.yPoint[1]=this.yCentro+this.apotema;
-				this.yPoint[2]=this.yCentro+this.apotema;
-				this.yPoint[3]=this.yCentro;
-				this.yPoint[4]=this.yCentro-this.apotema;
-				this.yPoint[5]=this.yCentro-this.apotema;
-		
+				super.ypoints[0]=(int)this.yCentro;
+				super.ypoints[1]=(int)(this.yCentro+this.apotema);
+				super.ypoints[2]=(int)(this.yCentro+this.apotema);
+				super.ypoints[3]=(int)this.yCentro;
+				super.ypoints[4]=(int)(this.yCentro-this.apotema);
+				super.ypoints[5]=(int)(this.yCentro-this.apotema);
 	}
 	
 	public double getApotema(){
@@ -79,8 +78,6 @@ public class EsagonoGrafico extends Drawing{
 
 	public void paint(Graphics g) {
 		g.setColor(Color.black);
-		Graphics2D g2d= (Graphics2D) g;
-		Shape s;
 		Image img = null;
 		if(this.esagono.getTerritorio()!=null){
 			img = esagono.getTerritorio().getImage();
@@ -88,10 +85,9 @@ public class EsagonoGrafico extends Drawing{
 		g.drawImage(img,(int)(this.xCentro-this.raggio),(int)(this.yCentro-this.raggio), null);
 		
 		for(int i=0;i<5;i++){
-			s = new Line2D.Double(this.xPoint[i], this.yPoint[i], this.xPoint[i+1], this.yPoint[i+1]);
-			g2d.draw(s);
+			g.drawLine(this.xpoints[i], this.ypoints[i], this.xpoints[i+1], this.ypoints[i+1]);
 		}
-		g2d.draw(new Line2D.Double(this.xPoint[0], this.yPoint[0], this.xPoint[5], this.yPoint[5]));
+		g.drawLine(this.xpoints[0], this.ypoints[0], this.xpoints[5], this.ypoints[5]);
 	}
 	
 	public Esagono getEsagono(){
