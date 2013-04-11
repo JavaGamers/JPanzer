@@ -2,20 +2,24 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JPanel;
 import model.Mappa;
 
-public class DisegnaMappa extends Drawing {
+public class MappaGrafica extends JPanel {
+	
 	private int xC;
 	private int yC;
 	private Mappa mappa;
 	
-	public DisegnaMappa(Mappa m, int x, int y){
+	public MappaGrafica(Mappa m, int x, int y){
+		super();
 		this.xC=x;
 		this.yC=y;
 		this.mappa=m;
 	}
 
-	public void paint(Graphics g) {
+	public void paintComponent(Graphics g) {
+		super.paintComponents(g);
 		g.setColor(Color.black);
 		EsagonoGrafico centro, dE;
 		double raggio = 100; //raggio degli esagoni

@@ -15,7 +15,7 @@ public class Montagna extends Component implements Territorio {
 	
 	public Montagna(){
 		try {
-	           bImg = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/modelmontagna.jpeg"));
+	           bImg = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/model/montagna.jpeg"));
 	       } catch (IOException e) {
 	    	   System.out.println("c'è qualcosa che non va");
 	       }

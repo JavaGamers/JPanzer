@@ -79,10 +79,13 @@ public class EsagonoGrafico extends Polygon{
 	public void paint(Graphics g) {
 		g.setColor(Color.black);
 		Image img = null;
+		int height = 0, width=0;
 		if(this.esagono.getTerritorio()!=null){
 			img = esagono.getTerritorio().getImage();
+			height=img.getHeight(null);
+			width=img.getWidth(null);
 		}
-		g.drawImage(img,(int)(this.xCentro-this.raggio),(int)(this.yCentro-this.raggio), null);
+		g.drawImage(img,(int)(this.xCentro-width/2),(int)(this.yCentro-height/2), null);
 		
 		for(int i=0;i<5;i++){
 			g.drawLine(this.xpoints[i], this.ypoints[i], this.xpoints[i+1], this.ypoints[i+1]);
