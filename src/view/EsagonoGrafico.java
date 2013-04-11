@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Polygon;
 import model.Esagono;
@@ -78,6 +79,7 @@ public class EsagonoGrafico extends Polygon{
 
 	public void paint(Graphics g) {
 		g.setColor(Color.black);
+		Graphics2D g2 = (Graphics2D)g;
 		Image img = null;
 		int height = 0, width=0;
 		if(this.esagono.getTerritorio()!=null){
@@ -85,7 +87,9 @@ public class EsagonoGrafico extends Polygon{
 			height=img.getHeight(null);
 			width=img.getWidth(null);
 		}
-		g.drawImage(img,(int)(this.xCentro-width/2),(int)(this.yCentro-height/2), null);
+		g2.setClip(this);
+		g2.clip(this);
+		g2.drawImage(img,(int)(this.xCentro-width/2),(int)(this.yCentro-height/2), null);
 		
 		for(int i=0;i<5;i++){
 			g.drawLine(this.xpoints[i], this.ypoints[i], this.xpoints[i+1], this.ypoints[i+1]);
