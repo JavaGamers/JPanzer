@@ -90,11 +90,7 @@ public class EsagonoGrafico extends Polygon{
 		g2.setClip(this);
 		g2.clip(this);
 		g2.drawImage(img,(int)(this.xCentro-width/2),(int)(this.yCentro-height/2), null);
-		
-		for(int i=0;i<5;i++){
-			g.drawLine(this.xpoints[i], this.ypoints[i], this.xpoints[i+1], this.ypoints[i+1]);
-		}
-		g.drawLine(this.xpoints[0], this.ypoints[0], this.xpoints[5], this.ypoints[5]);
+		g.drawPolygon(this);
 	}
 	
 	public Esagono getEsagono(){

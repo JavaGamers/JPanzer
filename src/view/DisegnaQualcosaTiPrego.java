@@ -2,11 +2,9 @@ package view;
 
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import javax.swing.JFrame;
 import model.Mappa;
 import model.Montagna;
-import model.Pianura;
 import model.Territorio;
 
 public class DisegnaQualcosaTiPrego extends JFrame {

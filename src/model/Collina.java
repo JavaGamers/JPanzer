@@ -1,13 +1,12 @@
 package model;
 
-import java.awt.Component;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class Collina extends Component implements Territorio {
+public class Collina implements Territorio {
 
 	private final static int BONUS=0; // bonus di permanenza delle unità sul territorio (DA RIDEFINIRE)
 	private BufferedImage bImg; // immagine della collina
