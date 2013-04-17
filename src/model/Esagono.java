@@ -6,7 +6,6 @@ public class Esagono extends Observable {
 	private int id;		// numerdo d'ordine all'interno della lista
 	private int[] coordinate; // settore - livello - posizione
 	private Esagono[] adiacenze; // contiene le adiacenze: i lati degli esagoni sono numerati a partire da quello in alto da 0 a 5 in senso orario
-	private static int[] startNums = {1,7,19,37,61,91,127,169,217,271,331,397,469,547,631,721,817,919,1027,1141,1261}; // indici dei primi elementi di ogni livello
 	private Unità unit; // unità presente sull'esagono
 	private Territorio territorio;
 	
@@ -45,13 +44,11 @@ public class Esagono extends Observable {
 			this.coordinate[0]=0;
 			this.coordinate[2]=0;
 		} else{
-				
-				for(int i=0; i<startNums.length;i++){
-					if(id<startNums[i]){
-						this.coordinate[1]=i;
-						break;	
-					}
+			int i=0;
+				while(id>=startLiv(i)){
+					i++;
 				}
+				this.coordinate[1]=i-1;
 		
 				this.coordinate[2]=0;
 				this.coordinate[0]=0;
@@ -61,7 +58,7 @@ public class Esagono extends Observable {
 		
 				} else{
 					
-					int k=id-startNums[this.coordinate[1]-1];
+					int k=id-startLiv(this.coordinate[1]-1);
 					this.coordinate[2]= Esagono.mod(k, this.coordinate[1]);
 		
 					if(k==0){
@@ -151,10 +148,6 @@ public class Esagono extends Observable {
 			return (3*x*x + 3*x) ;
 		}
 	
-	public static int[] getStartNums(){
-		return startNums;
-	
-	}
 	public String toString(){
 		String s="";
 		for(int i=0; i<6;i++){

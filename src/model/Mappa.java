@@ -1,7 +1,6 @@
 package model;
 
 public class Mappa {
-	private Esagono root;
 	private int dim; // coincide con il numerdo di livelli della mappa
 	private Esagono[] component;
 	
@@ -9,10 +8,9 @@ public class Mappa {
 	public Mappa(int d){
 		if(d>20)
 			throw new IllegalArgumentException("invalid number, level<=20");
-		this.root = new Esagono(0);
 		this.dim = d;
 		this.component = new Esagono[Esagono.endLiv(dim)+1];
-		component[0]= this.root;
+		component[0]= new Esagono(0);
 		
 		int[] coord = new int[3];
 		
@@ -20,7 +18,7 @@ public class Mappa {
 		for(int i=1;i<=6;i++){
 			Esagono e = new Esagono(i);
 			this.component[i]=e;
-			root.setAdiacenza(e,i-1);
+			this.component[0].setAdiacenza(e,i-1);
 			if(i>1){ 
 				coord[0]=i-1;
 				coord[1]=1;
@@ -106,6 +104,10 @@ public class Mappa {
 	
 	public Esagono[] getComponent(){
 		return this.component;
+	}
+	
+	public int getDim(){
+		return this.dim;
 	}
 		
 	public String toString(){
