@@ -72,19 +72,8 @@ public class EsagonoGrafico extends Polygon{
 		return this.apotema;
 	}
 
-	public void paint(Graphics g, Esagono e) {
+	public void paint(Graphics g) {
 		g.setColor(Color.black);
-		Graphics2D g2 = (Graphics2D)g;
-		Image img = null;
-		int height = 0, width=0;
-		if(e.getTerritorio()!=null){
-			img = e.getTerritorio().getImage();
-			height=img.getHeight(null);
-			width=img.getWidth(null);
-		}
-		g2.setClip(this);
-		g2.clip(this);
-		g2.drawImage(img,(int)(this.xCentro-width/2),(int)(this.yCentro-height/2), null);
 		g.drawPolygon(this);
 	}
 	
@@ -141,5 +130,14 @@ public class EsagonoGrafico extends Polygon{
 				super.ypoints[4]=(int)(this.yCentro-this.apotema);
 				super.ypoints[5]=(int)(this.yCentro-this.apotema);
 	}
+	
+	public double getX(){
+		return this.xCentro;
+	}
+	
+	public double getY(){
+		return this.yCentro;
+	}
+	
 	
 }
