@@ -24,11 +24,17 @@ public class MappaGrafica extends JPanel {
 		g.setColor(Color.black);
 		EsagonoGrafico eG;
 		double raggio = 100; //raggio degli esagoni
-		eG = new EsagonoGrafico(this.mappa.getComponent()[0],this.xC, this.yC, raggio);
+		int s = this.mappa.getComponent()[0].getSettore();
+		int l = this.mappa.getComponent()[0].getLivello();
+		int p = this.mappa.getComponent()[0].getPosizione();
+		eG = new EsagonoGrafico(s,l,p,this.xC, this.yC, raggio);
 		eG.paint(g,this.mappa.getComponent()[0]);
 		
 		for(int i=1;i<this.mappa.getComponent().length;i++){
-			eG.newSet(this.mappa.getComponent()[i],this.xC,this.yC,raggio); // il segno "-" indica il cambio di coordinate (asse y invertito)
+			s = this.mappa.getComponent()[i].getSettore();
+			l = this.mappa.getComponent()[i].getLivello();
+			p = this.mappa.getComponent()[i].getPosizione();
+			eG.newSet(s,l,p,this.xC,this.yC,raggio); // il segno "-" indica il cambio di coordinate (asse y invertito)
 			eG.paint(g,this.mappa.getComponent()[i]);
 		}
 
@@ -36,9 +42,15 @@ public class MappaGrafica extends JPanel {
 	
 	public Esagono contains(double x, double y){
 		Esagono e=null;
-		EsagonoGrafico eG= new EsagonoGrafico(this.mappa.getComponent()[0],this.xC,this.yC,1.5);
+		int s = this.mappa.getComponent()[0].getSettore();
+		int l = this.mappa.getComponent()[0].getLivello();
+		int p = this.mappa.getComponent()[0].getPosizione();
+		EsagonoGrafico eG= new EsagonoGrafico(s,l,p,this.xC,this.yC,1.5);
 		for(int i=0; i<this.mappa.getComponent().length;i++){
-			eG.newSet(this.mappa.getComponent()[i],this.xC,this.yC,1.5);
+			s = this.mappa.getComponent()[i].getSettore();
+			l = this.mappa.getComponent()[i].getLivello();
+			p = this.mappa.getComponent()[i].getPosizione();
+			eG.newSet(s,l,p,this.xC,this.yC,1.5);
 			if(eG.contains(x,y)){
 				e=this.mappa.getComponent()[i];
 			}

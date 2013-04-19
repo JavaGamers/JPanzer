@@ -14,7 +14,7 @@ public class EsagonoGrafico extends Polygon{
 	 /* le ascisse dei vertici dell'esagono sono in senso antiorario a partire da destra (asse x)
 		le ordinate dei vertici dell'esagono sono in senso antiorario a partire da destra (asse x) 
 	 	xC, yC coordinate dell'origine, ovvero del centro dell'esagono root (numero 0) */
-	public EsagonoGrafico(Esagono e,double xC, double yC, double r){
+	public EsagonoGrafico(int s, int l, int p, double xC, double yC, double r){
 		super();
 		super.npoints=6;
 		super.xpoints= new int[6];
@@ -22,9 +22,6 @@ public class EsagonoGrafico extends Polygon{
 		this.raggio=r;
 		this.apotema=Math.sqrt(3)/2*r;
 		
-		int s = e.getSettore();
-		int l = e.getLivello();
-		int p = e.getPosizione();
 		switch(s){
 		case 0: this.xCentro=xC;
 				this.yCentro=yC;
@@ -91,16 +88,14 @@ public class EsagonoGrafico extends Polygon{
 		g.drawPolygon(this);
 	}
 	
-	public void newSet(Esagono e,double xC, double yC, double r){
+	// s= settore -	l= livello	-	p= posizione dell'esagono da disegnare
+	public void newSet(int s, int l, int p, double xC, double yC, double r){
 		super.npoints=6;
 		super.xpoints= new int[6];
 		super.ypoints= new int[6];
 		this.raggio=r;
 		this.apotema=Math.sqrt(3)/2*r;
 		
-		int s = e.getSettore();
-		int l = e.getLivello();
-		int p = e.getPosizione();
 		switch(s){
 		case 0: this.xCentro=xC;
 				this.yCentro=yC;
