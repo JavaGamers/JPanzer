@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
@@ -23,9 +24,15 @@ public class DisegnaQualcosaTiPrego extends JFrame {
 			m.getComponent()[i].setTerritorio(t);
 		}
 		MappaGrafica dm = new MappaGrafica(m,700,500);
+		CommandPanel cP = new CommandPanel();
+		InfoPanel iF = new InfoPanel();
+		LandPanel lP = new LandPanel();
 		DisegnaQualcosaTiPrego d=new DisegnaQualcosaTiPrego("Java meglio");
 		Container c =d.getContentPane();
-		c.add(dm);
+		c.setLayout(new BorderLayout());
+		c.add(lP,BorderLayout.EAST);
+		c.add(iF,BorderLayout.NORTH);
+		c.add(dm,BorderLayout.CENTER);
 		d.setVisible(true);
 	}
 

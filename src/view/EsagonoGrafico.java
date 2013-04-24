@@ -2,10 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Polygon;
-import model.Esagono;
 
 public class EsagonoGrafico extends Polygon{
 	private double xCentro, yCentro; 
@@ -77,6 +74,14 @@ public class EsagonoGrafico extends Polygon{
 		g.drawPolygon(this);
 	}
 	
+	public double getX(){
+		return this.xCentro;
+	}
+	
+	public double getY(){
+		return this.yCentro;
+	}
+	
 	// s= settore -	l= livello	-	p= posizione dell'esagono da disegnare
 	public void newSet(int s, int l, int p, double xC, double yC, double r){
 		super.npoints=6;
@@ -129,14 +134,6 @@ public class EsagonoGrafico extends Polygon{
 				super.ypoints[3]=(int)this.yCentro;
 				super.ypoints[4]=(int)(this.yCentro-this.apotema);
 				super.ypoints[5]=(int)(this.yCentro-this.apotema);
-	}
-	
-	public double getX(){
-		return this.xCentro;
-	}
-	
-	public double getY(){
-		return this.yCentro;
 	}
 	
 	
