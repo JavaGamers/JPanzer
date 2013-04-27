@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-
-import view.EsagonoGrafico;
 import model.Esagono;
 import model.Mappa;
 
@@ -92,6 +90,11 @@ public class MappaGrafica extends javax.swing.JPanel {
 			}
 		}
 		return e;
+	}
+	
+	public void newSet(int x, int y){
+		this.xC=x;
+		this.yC=y;
 	}
                         
     private void initComponents() {

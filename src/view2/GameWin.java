@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Graphics;
+
 import model.Mappa;
 import model.Montagna;
 import model.Territorio;
@@ -33,6 +35,7 @@ public class GameWin extends JFrame{
 		super.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		super.setPreferredSize(new Dimension(800,600));
 		super.pack();
+		mappaGrafica.newSet(mappaGrafica.getWidth()/2, mappaGrafica.getHeight()/2);
 		
 	}
 
@@ -45,5 +48,10 @@ public class GameWin extends JFrame{
 
 		GameWin gW=new GameWin("Java meglio",m);
 		gW.setVisible(true);
+	}
+	
+	public void paint(Graphics g){
+		mappaGrafica.newSet(mappaGrafica.getWidth()/2, mappaGrafica.getHeight()/2);
+		super.paint(g);
 	}
 }
