@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -7,6 +8,7 @@ import java.awt.event.MouseEvent;
 
 import model.Esagono;
 
+import view2.EsagonoGrafico;
 import view2.MappaGrafica;
 
 public class MappaListener extends MouseAdapter implements ActionListener {
@@ -36,10 +38,33 @@ public class MappaListener extends MouseAdapter implements ActionListener {
 	public void mouseClicked(MouseEvent mE){
 		double x = mE.getX();
 		double y = mE.getY();
-		// potenzialmente dannoso!!!
 		MappaGrafica mG =(MappaGrafica) mE.getSource();
-		Esagono e = mG.contains(x, y);
-		// to be continued...
+		Esagono e=null;
+		int s=0;
+		int l=0;
+		int p=0;
+		EsagonoGrafico eG = new EsagonoGrafico(s, l, p, mG.getXCentro(), mG.getYCentro(), MappaGrafica.RAGGIO, Color.BLACK);
+		
+		if(mG.getSelezionato()!=-1){
+			e = mG.getMappa().getComponent()[mG.getSelezionato()];
+			s = e.getSettore();
+			l = e.getLivello();
+			p = e.getPosizione();
+			
+			eG.newSet(s, l, p, mG.getXCentro(), mG.getYCentro(), MappaGrafica.RAGGIO, Color.BLACK);
+			eG.paint(mG.getGraphics());
+		}
+		
+		e = mG.contains(x, y);
+		
+		if(e!=null){
+			s = e.getSettore();
+			l = e.getLivello();
+			p = e.getPosizione();
+			eG.newSet(s, l, p, mG.getXCentro(), mG.getYCentro(), MappaGrafica.RAGGIO, Color.RED);
+			eG.paint(mG.getGraphics());
+			mG.setSelezionato(e.getId());
+		}
 	}
 
 	private void leftOpt() {

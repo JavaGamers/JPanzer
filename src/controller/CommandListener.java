@@ -86,7 +86,7 @@ public class CommandListener implements ActionListener {
 
 
 	private void attaccaOpt() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

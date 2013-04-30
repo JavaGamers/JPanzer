@@ -3,16 +3,19 @@ package view2;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
+import java.awt.Rectangle;
 
 public class EsagonoGrafico extends Polygon{
 	private double xCentro, yCentro; 
 	private double apotema, raggio; // raggio= raggio circonferenza circoscritta all'esagono
+	private Color c;
 	
 	 /* le ascisse dei vertici dell'esagono sono in senso antiorario a partire da destra (asse x)
 		le ordinate dei vertici dell'esagono sono in senso antiorario a partire da destra (asse x) 
 	 	xC, yC coordinate dell'origine, ovvero del centro dell'esagono root (numero 0) */
-	public EsagonoGrafico(int s, int l, int p, double xC, double yC, double r){
+	public EsagonoGrafico(int s, int l, int p, double xC, double yC, double r, Color c){
 		super();
+		this.c=c;
 		super.npoints=6;
 		super.xpoints= new int[6];
 		super.ypoints= new int[6];
@@ -70,7 +73,7 @@ public class EsagonoGrafico extends Polygon{
 	}
 
 	public void paint(Graphics g) {
-		g.setColor(Color.black);
+		g.setColor(this.c);
 		g.drawPolygon(this);
 	}
 	
@@ -83,7 +86,8 @@ public class EsagonoGrafico extends Polygon{
 	}
 	
 	// s= settore -	l= livello	-	p= posizione dell'esagono da disegnare
-	public void newSet(int s, int l, int p, double xC, double yC, double r){
+	public void newSet(int s, int l, int p, double xC, double yC, double r, Color c){
+		this.c = c;
 		super.npoints=6;
 		super.xpoints= new int[6];
 		super.ypoints= new int[6];
@@ -134,6 +138,29 @@ public class EsagonoGrafico extends Polygon{
 				super.ypoints[3]=(int)this.yCentro;
 				super.ypoints[4]=(int)(this.yCentro-this.apotema);
 				super.ypoints[5]=(int)(this.yCentro-this.apotema);
+				
+				this.calculateBounds(this.xpoints, this.ypoints, this.npoints);
+				
+
+	}
+	
+	private void calculateBounds(int xpoints[], int ypoints[], int npoints){
+		 int boundsMinX = Integer.MAX_VALUE;
+		 int boundsMinY = Integer.MAX_VALUE;
+		 int boundsMaxX = Integer.MIN_VALUE;
+		 int boundsMaxY = Integer.MIN_VALUE;
+		 for (int i = 0; i < npoints; i++) {
+			 
+			 int x = xpoints[i];
+			 boundsMinX = Math.min(boundsMinX, x);
+			 boundsMaxX = Math.max(boundsMaxX, x);
+			 int y = ypoints[i];
+			 boundsMinY = Math.min(boundsMinY, y);
+			 boundsMaxY = Math.max(boundsMaxY, y);
+		 }
+		 
+		 this.bounds = new Rectangle (boundsMinX, boundsMinY,boundsMaxX - boundsMinX,boundsMaxY - boundsMinY);
+		
 	}
 	
 	
