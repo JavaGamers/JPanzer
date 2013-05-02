@@ -11,6 +11,8 @@ public class UnitPanel extends javax.swing.JPanel {
     private javax.swing.JButton fanteriaPes;
     private javax.swing.JButton panzer;
     private javax.swing.JButton start;
+    private javax.swing.JLabel remainingUnits;
+    private javax.swing.JTextField numUnits;
       
 
 
@@ -43,8 +45,15 @@ public class UnitPanel extends javax.swing.JPanel {
         artiglieria.setActionCommand("artiglieria");
         
         start = new javax.swing.JButton();
+        start.setText("Start Game");
         start.addActionListener(uL);
         start.setActionCommand("start");
+        
+        numUnits = new javax.swing.JTextField();
+        numUnits.setText("0");
+        
+        remainingUnits = new javax.swing.JLabel();
+        remainingUnits.setText("/0");
 
         fanteriaLegg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Icon pack/Fanteria Leggera_Icon.gif"))); // NOI18N
         fanteriaLegg.setText("Fanteria Leggera");
@@ -71,7 +80,11 @@ public class UnitPanel extends javax.swing.JPanel {
         artiglieria.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         artiglieria.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        start.setText("Start Game");
+        
+
+        
+
+        
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -85,7 +98,11 @@ public class UnitPanel extends javax.swing.JPanel {
                     .addComponent(fanteriaPes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(fanteriaLegg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(artiglieria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(start, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(start, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(numUnits)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(remainingUnits, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -102,9 +119,12 @@ public class UnitPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(artiglieria)
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(numUnits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(remainingUnits))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(start)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-    }                       
-                     
+                .addContainerGap())
+        );                       
+    }            
 }
