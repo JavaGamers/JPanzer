@@ -1,4 +1,4 @@
-package view2;
+package view;
 
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
@@ -15,6 +15,7 @@ public class GameWin extends JFrame{
 	private InfoPanel infoPanel;
 	private CommandPanel commandPanel;
 	private MappaGrafica mappaGrafica;
+	private UnitPanel unitPanel;
 	
 	
 	public GameWin(String title, Mappa m){
@@ -38,9 +39,11 @@ public class GameWin extends JFrame{
 		infoPanel = new InfoPanel();
 		commandPanel = new CommandPanel();
 		mappaGrafica = new MappaGrafica(m,700,500);
+		unitPanel = new UnitPanel();
 		
 		Container c = this.getContentPane();
-		c.add(commandPanel,BorderLayout.EAST);
+	//	c.add(commandPanel,BorderLayout.EAST);
+		c.add(unitPanel,BorderLayout.EAST);
 		c.add(infoPanel,BorderLayout.NORTH);
 		c.add(mappaGrafica,BorderLayout.CENTER);
 		

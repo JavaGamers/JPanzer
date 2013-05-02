@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import view2.GameWin;
-import view2.MappaGrafica;
+import view.GameWin;
+import view.MappaGrafica;
 
 public class CommandListener implements ActionListener {
 	public final static String ZOOMOPT = "zoom";

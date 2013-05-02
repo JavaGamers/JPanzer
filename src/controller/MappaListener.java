@@ -8,8 +8,8 @@ import java.awt.event.MouseEvent;
 
 import model.Esagono;
 
-import view2.EsagonoGrafico;
-import view2.MappaGrafica;
+import view.EsagonoGrafico;
+import view.MappaGrafica;
 
 public class MappaListener extends MouseAdapter implements ActionListener {
 	
