@@ -19,20 +19,23 @@ public class MappaGrafica extends javax.swing.JPanel {
 	private int selezionato; // indica l'id dell'esagono selezionato. -1 se nessun esagono selezionato
 	private int xC;
 	private int yC;
+	public double raggio;
 	private Mappa mappa;
 	
-	public static double RAGGIO= 100;
+	public static final double STDRAGGIO = 100;
+	public static final double ZOOMRAGGIO = 30;
           
 
     public MappaGrafica(Mappa m, int x, int y) {
         initComponents();
+        this.raggio=STDRAGGIO;
         this.xC=x;
 		this.yC=y;
 		this.mappa=m;
 		this.selezionato=-1;
     }
     
-    public void paintComponent(Graphics g) {
+    public void paint(Graphics g) {
 		g.setColor(Color.black);
 		EsagonoGrafico eG;
 		Graphics2D g2 = (Graphics2D)g;
@@ -41,7 +44,7 @@ public class MappaGrafica extends javax.swing.JPanel {
 		int s = e.getSettore();
 		int l = e.getLivello();
 		int p = e.getPosizione();
-		eG = new EsagonoGrafico(s,l,p,this.xC, this.yC, RAGGIO,Color.BLACK);
+		eG = new EsagonoGrafico(s,l,p,this.xC, this.yC, raggio,Color.BLACK);
 		
 		Image img = null;
 		int height = 0, width=0;
@@ -61,7 +64,7 @@ public class MappaGrafica extends javax.swing.JPanel {
 			s = e.getSettore();
 			l = e.getLivello();
 			p = e.getPosizione();
-			eG.newSet(s,l,p,this.xC,this.yC,RAGGIO,Color.BLACK); // il segno "-" indica il cambio di coordinate (asse y invertito)
+			eG.newSet(s,l,p,this.xC,this.yC,raggio,Color.BLACK); // il segno "-" indica il cambio di coordinate (asse y invertito)
 			
 			if(e.getTerritorio()!=null){
 				img = e.getTerritorio().getImage();
@@ -85,14 +88,14 @@ public class MappaGrafica extends javax.swing.JPanel {
 		int l = 0;
 		int p = 0;
 		boolean trovato = false;
-		EsagonoGrafico eG= new EsagonoGrafico(s,l,p,this.xC,this.yC,RAGGIO,Color.BLACK);
+		EsagonoGrafico eG= new EsagonoGrafico(s,l,p,this.xC,this.yC,raggio,Color.BLACK);
 		
 		for(int i=0; i<this.mappa.getComponent().length && !trovato;i++){
 			
 			s = this.mappa.getComponent()[i].getSettore();
 			l = this.mappa.getComponent()[i].getLivello();
 			p = this.mappa.getComponent()[i].getPosizione();
-			eG.newSet(s,l,p,this.xC,this.yC,RAGGIO,Color.BLACK);
+			eG.newSet(s,l,p,this.xC,this.yC,raggio,Color.BLACK);
 			
 			if(eG.contains(x,y)){
 				
@@ -119,6 +122,10 @@ public class MappaGrafica extends javax.swing.JPanel {
 		return this.mappa;
 	}
 	
+	public double getRaggio(){
+		return this.raggio;
+	}
+	
 	public void newSet(int x, int y){
 		this.xC=x;
 		this.yC=y;
@@ -128,6 +135,11 @@ public class MappaGrafica extends javax.swing.JPanel {
 		if(id<-1 || id>this.mappa.getComponent().length)
 			throw new IllegalArgumentException("Invalid given id: insert a valid id or -1 for nothing");
 		this.selezionato=id;
+	}
+	
+	public void setRaggio(double r){
+		this.raggio=r;
+		this.paintComponent(this.getGraphics());
 	}
                         
     private void initComponents() {

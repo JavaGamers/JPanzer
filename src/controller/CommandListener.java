@@ -3,6 +3,11 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+
+import view2.GameWin;
+import view2.MappaGrafica;
+
 public class CommandListener implements ActionListener {
 	public final static String ZOOMOPT = "zoom";
 	public final static String MUOVIOPT = "muovi";
@@ -18,9 +23,10 @@ public class CommandListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		String com = e.getActionCommand();
+		JButton source = (JButton) e.getSource();
 		
 		if(com.equals(ZOOMOPT)){
-			zoomOpt();
+			zoomOpt(source);
 		}
 		else if(com.equals(MUOVIOPT)){
 			muoviOpt();
@@ -109,9 +115,15 @@ public class CommandListener implements ActionListener {
 	}
 
 
-	private void zoomOpt() {
-		// TODO Auto-generated method stub
-		
+	private void zoomOpt(JButton b) {
+		// potenzialmenta dannoso!!
+		GameWin dW = (GameWin) b.getParent().getParent().getParent().getParent().getParent();
+		MappaGrafica mG = dW.getMappaGrafica();
+		if(mG.getRaggio()== MappaGrafica.STDRAGGIO)
+			mG.setRaggio(MappaGrafica.ZOOMRAGGIO);
+		else
+			mG.setRaggio(MappaGrafica.STDRAGGIO);
+			mG.update(mG.getGraphics());
 	}
 
 }

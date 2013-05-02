@@ -1,5 +1,7 @@
 package view2;
 
+import controller.CommandListener;
+
 public class CommandPanel extends javax.swing.JPanel {
 	                    
     private javax.swing.JButton abbandona;
@@ -18,17 +20,48 @@ public class CommandPanel extends javax.swing.JPanel {
     }
                          
     private void initComponents() {
+    	
+    	CommandListener cL = new CommandListener();
 
         passa = new javax.swing.JButton();
+        passa.addActionListener(cL);
+        passa.setActionCommand("passa");
+        
         accorpa = new javax.swing.JButton();
+        accorpa.addActionListener(cL);
+        accorpa.setActionCommand("accorpa");
+        
         scorpora = new javax.swing.JButton();
+        scorpora.addActionListener(cL);
+        scorpora.setActionCommand("scorpora");
+        
         carica = new javax.swing.JButton();
+        carica.addActionListener(cL);
+        carica.setActionCommand("carica");
+        
         salva = new javax.swing.JButton();
+        salva.addActionListener(cL);
+        salva.setActionCommand("salva");
+        
         abbandona = new javax.swing.JButton();
+        abbandona.addActionListener(cL);
+        abbandona.setActionCommand("abbandona");
+        
         undo = new javax.swing.JButton();
+        undo.addActionListener(cL);
+        undo.setActionCommand("undo");
+        
         attacca = new javax.swing.JButton();
+        attacca.addActionListener(cL);
+        attacca.setActionCommand("attacca");
+        
         muovi = new javax.swing.JButton();
+        muovi.addActionListener(cL);
+        muovi.setActionCommand("muovi");
+        
         zoom = new javax.swing.JButton();
+        zoom.addActionListener(cL);
+        zoom.setActionCommand("zoom");
 
         passa.setText("PASSA");
 
@@ -49,12 +82,7 @@ public class CommandPanel extends javax.swing.JPanel {
         muovi.setText("MUOVI");
 
         zoom.setText("ZOOM");
-        zoom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zoomActionPerformed(evt);
-            }
-        });
-
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(

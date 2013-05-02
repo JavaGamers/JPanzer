@@ -43,7 +43,7 @@ public class MappaListener extends MouseAdapter implements ActionListener {
 		int s=0;
 		int l=0;
 		int p=0;
-		EsagonoGrafico eG = new EsagonoGrafico(s, l, p, mG.getXCentro(), mG.getYCentro(), MappaGrafica.RAGGIO, Color.BLACK);
+		EsagonoGrafico eG = new EsagonoGrafico(s, l, p, mG.getXCentro(), mG.getYCentro(), mG.getRaggio(), Color.BLACK);
 		
 		if(mG.getSelezionato()!=-1){
 			e = mG.getMappa().getComponent()[mG.getSelezionato()];
@@ -51,7 +51,7 @@ public class MappaListener extends MouseAdapter implements ActionListener {
 			l = e.getLivello();
 			p = e.getPosizione();
 			
-			eG.newSet(s, l, p, mG.getXCentro(), mG.getYCentro(), MappaGrafica.RAGGIO, Color.BLACK);
+			eG.newSet(s, l, p, mG.getXCentro(), mG.getYCentro(), mG.getRaggio(), Color.BLACK);
 			eG.paint(mG.getGraphics());
 		}
 		
@@ -61,7 +61,7 @@ public class MappaListener extends MouseAdapter implements ActionListener {
 			s = e.getSettore();
 			l = e.getLivello();
 			p = e.getPosizione();
-			eG.newSet(s, l, p, mG.getXCentro(), mG.getYCentro(), MappaGrafica.RAGGIO, Color.RED);
+			eG.newSet(s, l, p, mG.getXCentro(), mG.getYCentro(), mG.getRaggio(), Color.RED);
 			eG.paint(mG.getGraphics());
 			mG.setSelezionato(e.getId());
 		}

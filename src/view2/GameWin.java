@@ -21,6 +21,18 @@ public class GameWin extends JFrame{
 		super(title);
 		initComponents(m);
 	}
+	
+	public InfoPanel getInfoPanel(){
+		return this.infoPanel;
+	}
+	
+	public CommandPanel getCommandPanel(){
+		return this.commandPanel;
+	}
+	
+	public MappaGrafica getMappaGrafica(){
+		return this.mappaGrafica;
+	}
 		
 	private void initComponents(Mappa m) {
 		infoPanel = new InfoPanel();
@@ -40,7 +52,7 @@ public class GameWin extends JFrame{
 	}
 
 	public static void main(String[] args) {
-		Mappa m = new Mappa(3);
+		Mappa m = new Mappa(4);
 		Territorio t = new Montagna();
 		for(int i=0;i<m.getComponent().length;i++){
 			m.getComponent()[i].setTerritorio(t);
