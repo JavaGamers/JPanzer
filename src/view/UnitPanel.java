@@ -1,5 +1,7 @@
 package view;
 
+import controller.UnitListener;
+
 public class UnitPanel extends javax.swing.JPanel {
 	
 	                     
@@ -17,13 +19,32 @@ public class UnitPanel extends javax.swing.JPanel {
     }
                           
     private void initComponents() {
+    	
+    	UnitListener uL = new UnitListener();
 
         fanteriaLegg = new javax.swing.JButton();
+        fanteriaLegg.addActionListener(uL);
+        fanteriaLegg.setActionCommand("fanteriaLegg");
+        
         fanteriaPes = new javax.swing.JButton();
+        fanteriaPes.addActionListener(uL);
+        fanteriaPes.setActionCommand("fanteriaPes");
+        
         panzer = new javax.swing.JButton();
+        panzer.addActionListener(uL);
+        panzer.setActionCommand("panzer");
+        
         aereo = new javax.swing.JButton();
+        aereo.addActionListener(uL);
+        aereo.setActionCommand("aereo");
+        
         artiglieria = new javax.swing.JButton();
+        artiglieria.addActionListener(uL);
+        artiglieria.setActionCommand("artiglieria");
+        
         start = new javax.swing.JButton();
+        start.addActionListener(uL);
+        start.setActionCommand("start");
 
         fanteriaLegg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Icon pack/Fanteria Leggera_Icon.gif"))); // NOI18N
         fanteriaLegg.setText("Fanteria Leggera");

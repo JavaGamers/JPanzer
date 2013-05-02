@@ -24,64 +24,54 @@ public class CommandPanel extends javax.swing.JPanel {
     	CommandListener cL = new CommandListener();
 
         passa = new javax.swing.JButton();
+        passa.setText("PASSA");
         passa.addActionListener(cL);
         passa.setActionCommand("passa");
         
         accorpa = new javax.swing.JButton();
+        accorpa.setText("ACCORPA");
         accorpa.addActionListener(cL);
         accorpa.setActionCommand("accorpa");
         
         scorpora = new javax.swing.JButton();
+        scorpora.setText("SCORPORA");
         scorpora.addActionListener(cL);
         scorpora.setActionCommand("scorpora");
         
         carica = new javax.swing.JButton();
+        carica.setText("CARICA");
         carica.addActionListener(cL);
         carica.setActionCommand("carica");
         
         salva = new javax.swing.JButton();
+        salva.setText("SALVA");
         salva.addActionListener(cL);
         salva.setActionCommand("salva");
         
         abbandona = new javax.swing.JButton();
+        abbandona.setText("ABBANDONA");
         abbandona.addActionListener(cL);
         abbandona.setActionCommand("abbandona");
         
         undo = new javax.swing.JButton();
+        undo.setText("UNDO");
         undo.addActionListener(cL);
         undo.setActionCommand("undo");
         
         attacca = new javax.swing.JButton();
+        attacca.setText("ATTACCA");
         attacca.addActionListener(cL);
         attacca.setActionCommand("attacca");
         
         muovi = new javax.swing.JButton();
+        muovi.setText("MUOVI");
         muovi.addActionListener(cL);
         muovi.setActionCommand("muovi");
         
         zoom = new javax.swing.JButton();
+        zoom.setText("ZOOM");
         zoom.addActionListener(cL);
         zoom.setActionCommand("zoom");
-
-        passa.setText("PASSA");
-
-        accorpa.setText("ACCORPA");
-
-        scorpora.setText("SCORPORA");
-
-        carica.setText("CARICA");
-
-        salva.setText("SALVA");
-
-        abbandona.setText("ABBANDONA");
-
-        undo.setText("UNDO");
-
-        attacca.setText("ATTACCA");
-
-        muovi.setText("MUOVI");
-
-        zoom.setText("ZOOM");
         
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
