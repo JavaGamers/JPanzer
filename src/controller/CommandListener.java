@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 
 import view.GameWin;
 import view.MappaGrafica;
@@ -115,8 +116,7 @@ public class CommandListener implements ActionListener {
 
 
 	private void zoomOpt(JButton b) {
-		// potenzialmenta dannoso!!
-		GameWin dW = (GameWin) b.getParent().getParent().getParent().getParent().getParent();
+		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
 		MappaGrafica mG = dW.getMappaGrafica();
 		if(mG.getRaggio()== MappaGrafica.STDRAGGIO)
 			mG.setRaggio(MappaGrafica.ZOOMRAGGIO);

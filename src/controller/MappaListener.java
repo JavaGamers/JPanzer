@@ -36,6 +36,7 @@ public class MappaListener extends MouseAdapter implements ActionListener {
 	}
 	
 	public void mouseClicked(MouseEvent mE){
+		
 		double x = mE.getX();
 		double y = mE.getY();
 		MappaGrafica mG =(MappaGrafica) mE.getSource();
@@ -58,12 +59,13 @@ public class MappaListener extends MouseAdapter implements ActionListener {
 		e = mG.contains(x, y);
 		
 		if(e!=null){
+			
+			mG.setSelezionato(e.getId());
 			s = e.getSettore();
 			l = e.getLivello();
 			p = e.getPosizione();
 			eG.newSet(s, l, p, mG.getXCentro(), mG.getYCentro(), mG.getRaggio(), Color.RED);
 			eG.paint(mG.getGraphics());
-			mG.setSelezionato(e.getId());
 		}
 	}
 

@@ -14,7 +14,7 @@ public class Collina implements Territorio {
 	
 	public Collina(){
 		try {
-	           bImg = ImageIO.read(new File("da inserire"));
+	           bImg = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Land Pack - Copia/Collina_Icon.png"));
 	       } catch (IOException e) {
 	    	   // da scrivere
 	       }

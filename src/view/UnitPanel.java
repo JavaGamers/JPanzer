@@ -1,5 +1,8 @@
 package view;
 
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 import controller.UnitListener;
 
 public class UnitPanel extends javax.swing.JPanel {
@@ -11,13 +14,21 @@ public class UnitPanel extends javax.swing.JPanel {
     private javax.swing.JButton fanteriaPes;
     private javax.swing.JButton panzer;
     private javax.swing.JButton start;
-    private javax.swing.JLabel remainingUnits;
-    private javax.swing.JTextField numUnits;
+    private JLabel remainingUnits;
+    private JTextField numUnits;
       
 
 
     public UnitPanel() {
         initComponents();
+    }
+    
+    public JTextField getTextField(){
+    	return this.numUnits;
+    }
+    
+    private JLabel getLabel(){
+    	return this.remainingUnits;
     }
                           
     private void initComponents() {
@@ -51,6 +62,7 @@ public class UnitPanel extends javax.swing.JPanel {
         
         numUnits = new javax.swing.JTextField();
         numUnits.setText("0");
+        numUnits.setEditable(true);
         
         remainingUnits = new javax.swing.JLabel();
         remainingUnits.setText("/0");
@@ -79,13 +91,7 @@ public class UnitPanel extends javax.swing.JPanel {
         artiglieria.setText("Artiglieria");
         artiglieria.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         artiglieria.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
         
-
-        
-
-        
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
