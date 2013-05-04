@@ -64,7 +64,7 @@ public class MappaGrafica extends javax.swing.JPanel {
 			s = e.getSettore();
 			l = e.getLivello();
 			p = e.getPosizione();
-			eG.newSet(s,l,p,this.xC,this.yC,raggio,Color.BLACK); // il segno "-" indica il cambio di coordinate (asse y invertito)
+			eG.newSet(s,l,p,this.xC,this.yC,raggio,Color.BLACK);
 			
 			if(e.getTerritorio()!=null){
 				img = e.getTerritorio().getImage();

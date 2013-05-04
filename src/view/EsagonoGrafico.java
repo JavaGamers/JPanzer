@@ -23,32 +23,33 @@ public class EsagonoGrafico extends Polygon{
 		this.apotema=Math.sqrt(3)/2*r;
 		
 		switch(s){
+		
 		case 0: this.xCentro=xC;
 				this.yCentro=yC;
 				break;
 		
 		case 1: this.xCentro = 3/2*raggio*p+raggio*p/2 +xC;
-				this.yCentro = (2*l-p)*this.apotema+yC;
+				this.yCentro = -(2*l-p)*this.apotema+yC;
 				break;
 				
 		case 2: this.xCentro = 3/2*raggio*l+l*raggio/2+xC;
-				this.yCentro = (l-2*p)*this.apotema+yC;
+				this.yCentro = -(l-2*p)*this.apotema+yC;
 				break;	
 		
 		case 3: this.xCentro = 3/2*raggio*(l-p)+(l-p)*raggio/2+xC;
-				this.yCentro = -(l+p)*this.apotema+yC;
+				this.yCentro = +(l+p)*this.apotema+yC;
 				break;	
 				
 		case 4: this.xCentro = -3/2*raggio*p-raggio*p/2+xC;
-				this.yCentro = -(2*l-p)*this.apotema+yC;
+				this.yCentro = +(2*l-p)*this.apotema+yC;
 				break;	
 				
 		case 5: this.xCentro = -3/2*raggio*l-l*raggio/2+xC;
-				this.yCentro = -(l-2*p)*this.apotema+yC;
+				this.yCentro = +(l-2*p)*this.apotema+yC;
 				break;
 				
 		case 6: this.xCentro = -3/2*raggio*(l-p)-(l-p)*raggio/2+xC;
-				this.yCentro = (l+p)*this.apotema+yC;
+				this.yCentro = -(l+p)*this.apotema+yC;
 				break;		
 		}
 		
@@ -100,27 +101,27 @@ public class EsagonoGrafico extends Polygon{
 				break;
 		
 		case 1: this.xCentro = 3/2*raggio*p+raggio*p/2 +xC;
-				this.yCentro = (2*l-p)*this.apotema+yC;
+				this.yCentro = -(2*l-p)*this.apotema+yC;
 				break;
 				
 		case 2: this.xCentro = 3/2*raggio*l+l*raggio/2+xC;
-				this.yCentro = (l-2*p)*this.apotema+yC;
+				this.yCentro = -(l-2*p)*this.apotema+yC;
 				break;	
 		
 		case 3: this.xCentro = 3/2*raggio*(l-p)+(l-p)*raggio/2+xC;
-				this.yCentro = -(l+p)*this.apotema+yC;
+				this.yCentro = +(l+p)*this.apotema+yC;
 				break;	
 				
 		case 4: this.xCentro = -3/2*raggio*p-raggio*p/2+xC;
-				this.yCentro = -(2*l-p)*this.apotema+yC;
+				this.yCentro = +(2*l-p)*this.apotema+yC;
 				break;	
 				
 		case 5: this.xCentro = -3/2*raggio*l-l*raggio/2+xC;
-				this.yCentro = -(l-2*p)*this.apotema+yC;
+				this.yCentro = +(l-2*p)*this.apotema+yC;
 				break;
 				
 		case 6: this.xCentro = -3/2*raggio*(l-p)-(l-p)*raggio/2+xC;
-				this.yCentro = (l+p)*this.apotema+yC;
+				this.yCentro = -(l+p)*this.apotema+yC;
 				break;		
 		}
 		
