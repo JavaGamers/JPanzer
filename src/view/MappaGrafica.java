@@ -44,7 +44,7 @@ public class MappaGrafica extends javax.swing.JPanel {
 		int s = e.getSettore();
 		int l = e.getLivello();
 		int p = e.getPosizione();
-		eG = new EsagonoGrafico(s,l,p,this.xC, this.yC, raggio,Color.BLACK);
+		eG = new EsagonoGrafico(s,l,p,this.xC, this.yC, raggio, Color.BLACK);
 		
 		Image img = null;
 		int height = 0, width=0;
@@ -70,6 +70,8 @@ public class MappaGrafica extends javax.swing.JPanel {
 				img = e.getTerritorio().getImage();
 				height=img.getHeight(null);
 				width=img.getWidth(null);
+			}else{
+				img=null;
 			}
 			g2.setClip(eG);
 			g2.clip(eG);

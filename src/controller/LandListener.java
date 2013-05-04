@@ -2,6 +2,12 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
@@ -49,7 +55,7 @@ public class LandListener implements ActionListener {
 			caricaOpt();
 		}
 		else if(com.equals(SALVAOPT)){
-			salvaOpt();
+			salvaOpt(source);
 		}
 
 	}
@@ -110,9 +116,29 @@ public class LandListener implements ActionListener {
 		
 	}
 	
-	private void salvaOpt() {
-		// TODO Auto-generated method stub
+	private void salvaOpt(JButton b){
+		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
+		MappaGrafica mG = dW.getMappaGrafica();
 		
+		File f = new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/Mappe salvate/mappa.txt");
+		FileWriter fw;
+		BufferedWriter bw;
+		
+		try{
+			
+		fw = new FileWriter(f);
+		bw = new BufferedWriter(fw);
+		
+		for(int i=0;i<mG.getMappa().getComponent().length;i++){
+			bw.write(mG.getMappa().getComponent()[i].toString());
+			bw.write("\n");
+		}
+		bw.close();
+		fw.close();
+		
+		} catch(IOException io){
+			System.out.println(io.toString());
+		}
 	}
 
 	private void caricaOpt() {
