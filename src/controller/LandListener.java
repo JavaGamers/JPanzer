@@ -156,7 +156,6 @@ public class LandListener implements ActionListener {
 		if (f.isFile()) {
 			try {
 				br = new BufferedReader(new FileReader(f));
-				StringBuffer buffer = new StringBuffer();
 				// leggo la 1° riga del file
 				String text = br.readLine();
 				int dim = Integer.parseInt(text);
@@ -164,7 +163,6 @@ public class LandListener implements ActionListener {
 				Esagono e;
 				//leggo le altre righe
 				while ((text = br.readLine()) != null){
-					buffer.append(text + "\n");
 					elements=LandListener.getElements(text);
 					e = m.getComponent()[Integer.parseInt(elements[0])];
 					// setto il territorio dell'esagono
@@ -188,7 +186,6 @@ public class LandListener implements ActionListener {
 					}
 				}
 				br.close();
-				System.out.println(buffer.toString());
 				
 				//setto la nuova mappa nel pannello
 				mG.setMappa(m);

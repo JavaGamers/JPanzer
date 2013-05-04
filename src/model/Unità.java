@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.Observable;
 
 public abstract class Unità extends Observable {
@@ -11,8 +13,13 @@ public abstract class Unità extends Observable {
 	protected double bonus;	// bonus territorio
 	protected int numUnits;	// numero di unità
 	protected Esagono pos;	//	posizione sulla mappa
+	protected int player;	// 1=player 1 - 2= player 2
+	protected BufferedImage bImg;
 	
-	public Unità(int n){
+	public Unità(int n, int player){
+		if(player<1 || player>2){
+			throw new IllegalArgumentException("Si gioca in 2");
+		}
 		this.att=0;
 		this.dif=0;
 		this.rig=0;
@@ -21,6 +28,8 @@ public abstract class Unità extends Observable {
 		this.numUnits=n;
 		this.pos=null;
 		this.bonus=0;
+		this.player=player;
+		this.bImg=null;
 	}
 	
 	public int getAtt(){
@@ -56,6 +65,14 @@ public abstract class Unità extends Observable {
 	}
 	
 	public abstract String getNome();
+	
+	public int getPlayer(){
+		return this.player;
+	}
+	
+	public Image getImage(){
+		return this.bImg;
+	}
 	
 	public void setEsp(){
 		if(this.esp<10)

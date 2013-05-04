@@ -67,27 +67,27 @@ public class UnitPanel extends javax.swing.JPanel {
         remainingUnits = new javax.swing.JLabel();
         remainingUnits.setText("/0");
 
-        fanteriaLegg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Icon pack/Fanteria Leggera_Icon.gif"))); // NOI18N
+        fanteriaLegg.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Fanteria Leggera1_Icon.gif")); 
         fanteriaLegg.setText("Fanteria Leggera");
         fanteriaLegg.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         fanteriaLegg.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        fanteriaPes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Icon pack/Fanteria Pesante_Icon02.gif"))); // NOI18N
+        fanteriaPes.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Fanteria Pesante1_Icon.gif")); 
         fanteriaPes.setText("Fanteria Pesante");
         fanteriaPes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         fanteriaPes.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        panzer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Icon pack/Panzer_Icon.gif"))); // NOI18N
+        panzer.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Panzer1_Icon.gif")); 
         panzer.setText("Panzer");
         panzer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         panzer.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        aereo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Icon pack/Aereo_Icon.gif"))); // NOI18N
+        aereo.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Aereo1_Icon.gif")); 
         aereo.setText("Aereo");
         aereo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         aereo.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        artiglieria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Icon pack/Artiglieria_Icon.gif"))); // NOI18N
+        artiglieria.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Artiglieria1_Icon.gif")); 
         artiglieria.setText("Artiglieria");
         artiglieria.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         artiglieria.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
