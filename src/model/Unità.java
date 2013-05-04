@@ -2,7 +2,7 @@ package model;
 
 import java.util.Observable;
 
-public class Unità extends Observable {
+public abstract class Unità extends Observable {
 	protected int att;	// attacco
 	protected int dif;	// difesa
 	protected int esp;	// esperienza
@@ -55,6 +55,8 @@ public class Unità extends Observable {
 		return this.pos;
 	}
 	
+	public abstract String getNome();
+	
 	public void setEsp(){
 		if(this.esp<10)
 			this.esp++;
@@ -98,5 +100,7 @@ public class Unità extends Observable {
 			this.notifyObservers();
 			return ok;
 	}
+	
+	
 
 }

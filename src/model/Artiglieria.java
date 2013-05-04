@@ -14,4 +14,10 @@ public class Artiglieria extends Unità {
 		this.rig=Artiglieria.BASERIG;
 		this.passi=Artiglieria.PTT;
 		}
+
+	
+	public String getNome() {
+		
+		return "artiglieria";
+	}
 }

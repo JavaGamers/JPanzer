@@ -14,4 +14,9 @@ public class Panzer extends Unità {
 		this.rig=Panzer.BASERIG;
 		this.passi=Panzer.PTT;
 		}
+
+	public String getNome() {
+		
+		return "panzer";
+	}
 }

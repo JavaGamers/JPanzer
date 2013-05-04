@@ -143,6 +143,11 @@ public class MappaGrafica extends javax.swing.JPanel {
 		this.raggio=r;
 		this.paintComponent(this.getGraphics());
 	}
+	
+	public void setMappa(Mappa m){
+		this.mappa=m;
+		this.update(getGraphics());
+	}
                         
     private void initComponents() {
     	this.addMouseListener(new MappaListener());

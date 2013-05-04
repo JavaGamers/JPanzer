@@ -15,4 +15,10 @@ public class FanteriaLeggera extends Unità {
 		this.passi=FanteriaLeggera.PTT;
 		}
 
+	
+	public String getNome() {
+	
+		return "fanterialeggera";
+	}
+
 }

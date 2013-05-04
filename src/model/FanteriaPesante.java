@@ -14,4 +14,10 @@ public class FanteriaPesante extends Unità {
 		this.rig=FanteriaPesante.BASERIG;
 		this.passi=FanteriaPesante.PTT;
 		}
+
+	
+	public String getNome() {
+		
+		return "fanteriapesante";
+	}
 }

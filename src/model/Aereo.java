@@ -14,4 +14,10 @@ public class Aereo extends Unità {
 		this.rig=Aereo.BASERIG;
 		this.passi=Aereo.PTT;
 		}
+
+	
+	public String getNome() {
+		
+		return "aereo";
+	}
 }

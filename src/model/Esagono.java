@@ -157,6 +157,40 @@ public class Esagono extends Observable {
 		return "Esagono numero "+this.id+" di coordinate: settore "+this.coordinate[0]+" livello "
 	    +this.coordinate[1]+" posizione "+this.coordinate[2]+ " con adiacenze "+s;
 	}
+	
+	public String saveToString(){
+		
+		String s="";
+		s+=this.id;
+		s+="-";
+		
+		if(this.getTerritorio()!=null){
+			s+=this.getTerritorio().getNome();
+			s+="-";
+		}
+		else{
+			s+=" ";
+			s+="-";
+		}
+		
+		if(this.unit!=null){
+			s+=this.unit.getNome();
+			s+="-";
+			s+=this.unit.getNumUnits();
+			s+="-";
+			s+=this.unit.getEsp();
+			
+		}
+		else{
+			s+=" ";
+			s+="-";
+			s+=" ";
+			s+="-";
+			s+=" ";
+		}
+
+		return s;
+	}
 
 }
 

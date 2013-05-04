@@ -2,12 +2,15 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.StringTokenizer;
 
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
@@ -16,6 +19,7 @@ import model.Collina;
 import model.Esagono;
 import model.Foresta;
 import model.Lago;
+import model.Mappa;
 import model.Montagna;
 import model.Pianura;
 
@@ -52,7 +56,7 @@ public class LandListener implements ActionListener {
 			lagoOpt(source);
 		}
 		else if(com.equals(CARICAOPT)){
-			caricaOpt();
+			caricaOpt(source);
 		}
 		else if(com.equals(SALVAOPT)){
 			salvaOpt(source);
@@ -120,7 +124,7 @@ public class LandListener implements ActionListener {
 		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
 		MappaGrafica mG = dW.getMappaGrafica();
 		
-		File f = new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/Mappe salvate/mappa.txt");
+		File f = new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/Mappe salvate/mappa.doc");
 		FileWriter fw;
 		BufferedWriter bw;
 		
@@ -129,8 +133,10 @@ public class LandListener implements ActionListener {
 		fw = new FileWriter(f);
 		bw = new BufferedWriter(fw);
 		
+		bw.write(""+mG.getMappa().getDim());
+		bw.write("\n");
 		for(int i=0;i<mG.getMappa().getComponent().length;i++){
-			bw.write(mG.getMappa().getComponent()[i].toString());
+			bw.write(mG.getMappa().getComponent()[i].saveToString());
 			bw.write("\n");
 		}
 		bw.close();
@@ -141,9 +147,67 @@ public class LandListener implements ActionListener {
 		}
 	}
 
-	private void caricaOpt() {
-		// TODO Auto-generated method stub
-		
+	private void caricaOpt(JButton b) {
+		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
+		MappaGrafica mG = dW.getMappaGrafica();
+		File f= new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/Mappe salvate/mappa.doc");
+		BufferedReader br;
+		String[] elements;
+		if (f.isFile()) {
+			try {
+				br = new BufferedReader(new FileReader(f));
+				StringBuffer buffer = new StringBuffer();
+				// leggo la 1° riga del file
+				String text = br.readLine();
+				int dim = Integer.parseInt(text);
+				Mappa m = new Mappa(dim);
+				Esagono e;
+				//leggo le altre righe
+				while ((text = br.readLine()) != null){
+					buffer.append(text + "\n");
+					elements=LandListener.getElements(text);
+					e = m.getComponent()[Integer.parseInt(elements[0])];
+					// setto il territorio dell'esagono
+					if(elements[1].equals("Pianura")){
+						e.setTerritorio(new Pianura());
+					}
+					else if(elements[1].equals("Collina")){
+						e.setTerritorio(new Collina());
+					}
+					else if(elements[1].equals("Montagna")){
+						e.setTerritorio(new Montagna());
+					}
+					else if(elements[1].equals("Lago")){
+						e.setTerritorio(new Lago());
+					}
+					else if(elements[1].equals("Foresta")){
+						e.setTerritorio(new Foresta());
+					}
+					else{
+						e.setTerritorio(null);
+					}
+				}
+				br.close();
+				System.out.println(buffer.toString());
+				
+				//setto la nuova mappa nel pannello
+				mG.setMappa(m);
+			} 
+			catch (IOException ioException) {
+			}
+
+		}
+	}
+	
+	private static String[] getElements(String s){
+		String[] elements= new String[5];
+		StringTokenizer str = new StringTokenizer(s,"-");
+		int i=0;
+		while(str.hasMoreTokens()){
+			elements[i]= str.nextToken();
+			i++;
+		}
+		return elements;
 	}
 
 }
