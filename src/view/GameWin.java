@@ -45,8 +45,8 @@ public class GameWin extends JFrame{
 		
 		Container c = this.getContentPane();
 	//	c.add(commandPanel,BorderLayout.EAST);
-		c.add(unitPanel,BorderLayout.EAST);
-	//	c.add(landPanel,BorderLayout.EAST);
+	//	c.add(unitPanel,BorderLayout.EAST);
+		c.add(landPanel,BorderLayout.EAST);
 		c.add(infoPanel,BorderLayout.NORTH);
 		c.add(mappaGrafica,BorderLayout.CENTER);
 		

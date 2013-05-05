@@ -174,6 +174,8 @@ public class Esagono extends Observable {
 		}
 		
 		if(this.unit!=null){
+			s+=this.unit.getPlayer();
+			s+="-";
 			s+=this.unit.getNome();
 			s+="-";
 			s+=this.unit.getNumUnits();
@@ -182,6 +184,8 @@ public class Esagono extends Observable {
 			
 		}
 		else{
+			s+=" ";
+			s+="-";
 			s+=" ";
 			s+="-";
 			s+=" ";

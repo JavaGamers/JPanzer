@@ -163,7 +163,7 @@ public class LandListener implements ActionListener {
 				Esagono e;
 				//leggo le altre righe
 				while ((text = br.readLine()) != null){
-					elements=LandListener.getElements(text);
+					elements=getElements(text);
 					e = m.getComponent()[Integer.parseInt(elements[0])];
 					// setto il territorio dell'esagono
 					if(elements[1].equals("Pianura")){
@@ -197,7 +197,7 @@ public class LandListener implements ActionListener {
 	}
 	
 	private static String[] getElements(String s){
-		String[] elements= new String[5];
+		String[] elements= new String[6];
 		StringTokenizer str = new StringTokenizer(s,"-");
 		int i=0;
 		while(str.hasMoreTokens()){

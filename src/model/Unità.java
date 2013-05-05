@@ -74,7 +74,14 @@ public abstract class Unità extends Observable {
 		return this.bImg;
 	}
 	
-	public void setEsp(){
+	public void setEsp(int e){
+		if(e>10){
+			throw new IllegalArgumentException("Valore massimo 10");
+		}
+		this.esp=e;
+	}
+	
+	public void updateEsp(){
 		if(this.esp<10)
 			this.esp++;
 		this.setChanged();
