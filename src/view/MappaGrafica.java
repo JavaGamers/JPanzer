@@ -41,19 +41,26 @@ public class MappaGrafica extends javax.swing.JPanel {
 		EsagonoGrafico eG;
 		Graphics2D g2 = (Graphics2D)g;
 		Esagono e = this.mappa.getComponent()[0];
+		Image imgLand = null;
+		Image imgUnit = null;
 		
+		// disegno del 1° esagono (id=0)
 		int s = e.getSettore();
 		int l = e.getLivello();
 		int p = e.getPosizione();
 		eG = new EsagonoGrafico(s,l,p,this.xC, this.yC, raggio, Color.BLACK);
 		
-		Image img = null;
 		if(e.getTerritorio()!=null){
-			img = e.getTerritorio().getImage();
+			imgLand = e.getTerritorio().getImage();
 		}
-		this.paintImage(g2, eG, img);
+		if(e.getUnit()!=null){
+			imgUnit = e.getUnit().getImage();
+		}
+		this.paintImage(g2, eG, imgLand);
+		this.paintImage(g2, eG, imgUnit);
 		eG.paint(g);
 		
+		// disegno degli altri esagoni
 		for(int i=1;i<this.mappa.getComponent().length;i++){
 			e= this.mappa.getComponent()[i];
 			s = e.getSettore();
@@ -62,11 +69,20 @@ public class MappaGrafica extends javax.swing.JPanel {
 			eG.newSet(s,l,p,this.xC,this.yC,raggio,Color.BLACK);
 			
 			if(e.getTerritorio()!=null){
-				img = e.getTerritorio().getImage();
-			}else{
-				img=null;
-			}	
-			this.paintImage(g2, eG, img);
+				imgLand = e.getTerritorio().getImage();
+			}
+			else{
+				imgLand=null;
+			}
+			
+			if(e.getUnit()!=null){
+				imgUnit = e.getUnit().getImage();
+			}
+			else{
+				imgUnit = null;
+			}
+			this.paintImage(g2, eG, imgLand);
+			this.paintImage(g2, eG, imgUnit);
 			eG.paint(g);
 		}
     	super.paintComponent(g);

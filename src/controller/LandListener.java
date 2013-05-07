@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -21,6 +22,7 @@ import model.Mappa;
 import model.Montagna;
 import model.Pianura;
 
+import view.EsagonoGrafico;
 import view.GameWin;
 import view.MappaGrafica;
 
@@ -66,10 +68,15 @@ public class LandListener implements ActionListener {
 		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
 		MappaGrafica mG = dW.getMappaGrafica();
 		Esagono e = null;
+		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
 		e = mG.getMappa().getComponent()[mG.getSelezionato()];
 		e.setTerritorio(new Pianura());
-		mG.paint(mG.getGraphics());
+		int s = e.getSettore();
+		int l = e.getLivello();
+		int p = e.getPosizione();
+		eG = new EsagonoGrafico(s,l,p,mG.getXCentro(),mG.getYCentro(),mG.getRaggio(),Color.BLACK);
+		mG.paintImage(mG.getGraphics(), eG, e.getTerritorio().getImage());
 		}
 	}
 
@@ -77,10 +84,15 @@ public class LandListener implements ActionListener {
 		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
 		MappaGrafica mG = dW.getMappaGrafica();
 		Esagono e = null;
+		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
 		e = mG.getMappa().getComponent()[mG.getSelezionato()];
 		e.setTerritorio(new Lago());
-		mG.paint(mG.getGraphics());
+		int s = e.getSettore();
+		int l = e.getLivello();
+		int p = e.getPosizione();
+		eG = new EsagonoGrafico(s,l,p,mG.getXCentro(),mG.getYCentro(),mG.getRaggio(),Color.BLACK);
+		mG.paintImage(mG.getGraphics(), eG, e.getTerritorio().getImage());
 		}
 	}
 
@@ -88,10 +100,15 @@ public class LandListener implements ActionListener {
 		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
 		MappaGrafica mG = dW.getMappaGrafica();
 		Esagono e = null;
+		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
 		e = mG.getMappa().getComponent()[mG.getSelezionato()];
 		e.setTerritorio(new Montagna());
-		mG.paint(mG.getGraphics());
+		int s = e.getSettore();
+		int l = e.getLivello();
+		int p = e.getPosizione();
+		eG = new EsagonoGrafico(s,l,p,mG.getXCentro(),mG.getYCentro(),mG.getRaggio(),Color.BLACK);
+		mG.paintImage(mG.getGraphics(), eG, e.getTerritorio().getImage());
 		}
 	}
 
@@ -99,10 +116,15 @@ public class LandListener implements ActionListener {
 		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
 		MappaGrafica mG = dW.getMappaGrafica();
 		Esagono e = null;
+		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
 		e = mG.getMappa().getComponent()[mG.getSelezionato()];
 		e.setTerritorio(new Collina());
-		mG.paint(mG.getGraphics());
+		int s = e.getSettore();
+		int l = e.getLivello();
+		int p = e.getPosizione();
+		eG = new EsagonoGrafico(s,l,p,mG.getXCentro(),mG.getYCentro(),mG.getRaggio(),Color.BLACK);
+		mG.paintImage(mG.getGraphics(), eG, e.getTerritorio().getImage());
 		}
 	}
 
@@ -110,10 +132,15 @@ public class LandListener implements ActionListener {
 		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
 		MappaGrafica mG = dW.getMappaGrafica();
 		Esagono e = null;
+		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
 		e = mG.getMappa().getComponent()[mG.getSelezionato()];
 		e.setTerritorio(new Foresta());
-		mG.paint(mG.getGraphics());
+		int s = e.getSettore();
+		int l = e.getLivello();
+		int p = e.getPosizione();
+		eG = new EsagonoGrafico(s,l,p,mG.getXCentro(),mG.getYCentro(),mG.getRaggio(),Color.BLACK);
+		mG.paintImage(mG.getGraphics(), eG, e.getTerritorio().getImage());
 		}
 		
 	}
