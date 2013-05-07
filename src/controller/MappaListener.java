@@ -71,16 +71,17 @@ public class MappaListener extends MouseAdapter implements ActionListener {
 			p = e.getPosizione();
 			eG.newSet(s, l, p, mG.getXCentro(), mG.getYCentro(), mG.getRaggio(), Color.RED);
 			eG.paint(mG.getGraphics());
-		}
 		
-		// codice relativo all'update dell'infoPanel
-		GameWin gW = (GameWin)SwingUtilities.getRoot(mG);
-		InfoPanel iP = gW.getInfoPanel();
-		if(e.getUnit()!=null){
-			iP.setUnitLabel(e.getUnit());
-		}
-		if(e.getTerritorio()!=null){
-			iP.setLandLabel(e.getTerritorio());
+		
+			// codice relativo all'update dell'infoPanel
+			GameWin gW = (GameWin)SwingUtilities.getRoot(mG);
+			InfoPanel iP = gW.getInfoPanel();
+			if(e.getUnit()!=null){
+				iP.setUnitLabel(e.getUnit());
+			}
+			if(e.getTerritorio()!=null){
+				iP.setLandLabel(e.getTerritorio());
+			}
 		}
 		
 	}

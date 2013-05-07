@@ -36,6 +36,7 @@ public class MappaGrafica extends javax.swing.JPanel {
     }
     
     public void paint(Graphics g) {
+
 		g.setColor(Color.black);
 		EsagonoGrafico eG;
 		Graphics2D g2 = (Graphics2D)g;
@@ -47,11 +48,10 @@ public class MappaGrafica extends javax.swing.JPanel {
 		eG = new EsagonoGrafico(s,l,p,this.xC, this.yC, raggio, Color.BLACK);
 		
 		Image img = null;
-		int height = 0, width=0;
 		if(e.getTerritorio()!=null){
 			img = e.getTerritorio().getImage();
-			this.paintImage(g2, eG, img);
-		}		
+		}
+		this.paintImage(g2, eG, img);
 		eG.paint(g);
 		
 		for(int i=1;i<this.mappa.getComponent().length;i++){
@@ -63,20 +63,23 @@ public class MappaGrafica extends javax.swing.JPanel {
 			
 			if(e.getTerritorio()!=null){
 				img = e.getTerritorio().getImage();
-				this.paintImage(g2, eG, img);
 			}else{
 				img=null;
-			}			
+			}	
+			this.paintImage(g2, eG, img);
 			eG.paint(g);
-			super.paintComponents(g);
 		}
-
+    	super.paintComponent(g);
 	}
     
     public void paintImage(Graphics g, EsagonoGrafico eG, Image img){
     	Graphics2D g2 = (Graphics2D)g;
-    	int height=img.getHeight(null);
-		int width=img.getWidth(null);
+    	int height=0;
+    	int width=0;
+    	if(img!=null){
+	    	height=img.getHeight(null);
+			width=img.getWidth(null);
+    	}
 		
 		g2.setClip(eG);
 		g2.clip(eG);
