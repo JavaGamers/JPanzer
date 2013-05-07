@@ -1,5 +1,8 @@
 package view;
 
+import model.Territorio;
+import model.Unità;
+
 public class InfoPanel extends javax.swing.JPanel {
 	                     
     private javax.swing.JLabel attacco;
@@ -9,18 +12,51 @@ public class InfoPanel extends javax.swing.JPanel {
     private javax.swing.JLabel esperienza;
     private javax.swing.JLabel infoTerritorio;
     private javax.swing.JLabel infoUnità;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel numUnits;
     private javax.swing.JLabel passi;
     private javax.swing.JLabel tipo;    
+    
+    private static final String ATTACCOTXT = "Attacco: ";
+    private static final String BONUSTXT = "Bonus: ";
+    private static final String COSTOTXT = "Costo attraversamento: ";
+    private static final String DIFESATXT = "Difesa: ";
+    private static final String ESPERIENZATXT = "Esperienza: ";
+    private static final String INFOUNITATXT = "Caratteristiche Unità: ";
+    private static final String NUMUNITSTXT = "Numero unità: ";
+    private static final String PASSITXT = "Passi rimanenti: ";
+    private static final String TIPOTXT = "Tipo: ";
+    private static final String INFOTERRITORIOTXT = "Tipo: ";
 
     public InfoPanel() {
         initComponents();
     }
+    
+    public void setUnitLabel(Unità u){
+    	this.attacco.setText(ATTACCOTXT+u.getAtt());
+    	
+    	this.difesa.setText(DIFESATXT+u.getDif());
+    	
+    	this.difesa.setText(DIFESATXT+u.getEsp());
+    	
+    	this.esperienza.setText(ESPERIENZATXT+u.getEsp());
+    	
+    	this.passi.setText(PASSITXT+u.getPassi());
+    	
+    	this.numUnits.setText(NUMUNITSTXT+u.getNumUnits());
+    	
+    	this.infoUnità.setText(INFOUNITATXT+u.getNome());
+    }
+    
+    public void setLandLabel(Territorio t){
+    	this.tipo.setText(TIPOTXT+t.getNome());
+    	
+    	this.bonus.setText(BONUSTXT+t.getBonus());
+    	
+    	this.costo.setText(COSTOTXT+t.getCosto());
+    }
                         
     private void initComponents() {
 
-        jLabel9 = new javax.swing.JLabel();
         tipo = new javax.swing.JLabel();
         costo = new javax.swing.JLabel();
         bonus = new javax.swing.JLabel();
@@ -32,27 +68,25 @@ public class InfoPanel extends javax.swing.JPanel {
         infoTerritorio = new javax.swing.JLabel();
         infoUnità = new javax.swing.JLabel();
 
-        jLabel9.setText("jLabel9");
+        tipo.setText(TIPOTXT);
 
-        tipo.setText("Tipo: ");
+        costo.setText(COSTOTXT);
 
-        costo.setText("Costo attraversamento: ");
+        bonus.setText(BONUSTXT);
 
-        bonus.setText("Bonus: ");
+        attacco.setText(ATTACCOTXT);
 
-        attacco.setText("Attacco: ");
+        difesa.setText(DIFESATXT);
 
-        difesa.setText("Difesa: ");
+        esperienza.setText(ESPERIENZATXT);
 
-        esperienza.setText("Esperienza: ");
+        passi.setText(PASSITXT);
 
-        passi.setText("Passi rimanenti: ");
+        numUnits.setText(NUMUNITSTXT);
 
-        numUnits.setText("Numero unità: ");
+        infoTerritorio.setText(INFOTERRITORIOTXT);
 
-        infoTerritorio.setText("Caratteristiche Territorio");
-
-        infoUnità.setText("Caratteristiche Unità");
+        infoUnità.setText(INFOUNITATXT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -103,6 +137,6 @@ public class InfoPanel extends javax.swing.JPanel {
                     .addComponent(esperienza))
                 .addContainerGap())
         );
-    }// </editor-fold>                        
+    }                       
               
 }

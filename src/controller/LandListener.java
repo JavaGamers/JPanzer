@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -124,7 +122,7 @@ public class LandListener implements ActionListener {
 		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
 		MappaGrafica mG = dW.getMappaGrafica();
 		
-		File f = new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/Mappe salvate/mappa.doc");
+		File f = new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/Mappe salvate/mappa.txt");
 		FileWriter fw;
 		BufferedWriter bw;
 		
@@ -150,7 +148,7 @@ public class LandListener implements ActionListener {
 	private void caricaOpt(JButton b) {
 		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
 		MappaGrafica mG = dW.getMappaGrafica();
-		File f= new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/Mappe salvate/mappa.doc");
+		File f= new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/Mappe salvate/mappa.txt");
 		BufferedReader br;
 		String[] elements;
 		if (f.isFile()) {

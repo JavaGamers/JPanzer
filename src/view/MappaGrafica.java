@@ -50,13 +50,8 @@ public class MappaGrafica extends javax.swing.JPanel {
 		int height = 0, width=0;
 		if(e.getTerritorio()!=null){
 			img = e.getTerritorio().getImage();
-			height=img.getHeight(null);
-			width=img.getWidth(null);
-		}
-		g2.setClip(eG);
-		g2.clip(eG);
-		g2.drawImage(img,(int)(eG.getX()-width/2),(int)(eG.getY()-height/2), null);
-		
+			this.paintImage(g2, eG, img);
+		}		
 		eG.paint(g);
 		
 		for(int i=1;i<this.mappa.getComponent().length;i++){
@@ -68,20 +63,25 @@ public class MappaGrafica extends javax.swing.JPanel {
 			
 			if(e.getTerritorio()!=null){
 				img = e.getTerritorio().getImage();
-				height=img.getHeight(null);
-				width=img.getWidth(null);
+				this.paintImage(g2, eG, img);
 			}else{
 				img=null;
-			}
-			g2.setClip(eG);
-			g2.clip(eG);
-			g2.drawImage(img,(int)(eG.getX()-width/2),(int)(eG.getY()-height/2), null);
-			
+			}			
 			eG.paint(g);
 			super.paintComponents(g);
 		}
 
 	}
+    
+    public void paintImage(Graphics g, EsagonoGrafico eG, Image img){
+    	Graphics2D g2 = (Graphics2D)g;
+    	int height=img.getHeight(null);
+		int width=img.getWidth(null);
+		
+		g2.setClip(eG);
+		g2.clip(eG);
+		g2.drawImage(img,(int)(eG.getX()-width/2),(int)(eG.getY()-height/2), null);
+    }
 	
 	public Esagono contains(double x, double y){
 		

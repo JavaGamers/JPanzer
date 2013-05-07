@@ -98,7 +98,7 @@ public class CommandListener implements ActionListener {
 		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
 		MappaGrafica mG = dW.getMappaGrafica();
 		
-		File f = new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/Partite salvate/Partita1.doc");
+		File f = new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/Partite salvate/Partita1.txt");
 		FileWriter fw;
 		BufferedWriter bw;
 		
@@ -131,9 +131,9 @@ public class CommandListener implements ActionListener {
 
 
 	private void caricaOpt(JButton b) {
-		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
-		MappaGrafica mG = dW.getMappaGrafica();
-		File f= new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/Mappe salvate/mappa.doc");
+		GameWin gW = (GameWin) SwingUtilities.getRoot(b);
+		MappaGrafica mG = gW.getMappaGrafica();
+		File f= new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/Partite salvate/Partita1.txt");
 		BufferedReader br;
 		String[] elements;
 		if (f.isFile()) {
