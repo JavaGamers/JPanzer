@@ -58,7 +58,7 @@ public class Esagono extends Observable {
 		
 				} else{
 					
-					int k=id-startLiv(this.coordinate[1]-1);
+					int k=id-startLiv(this.coordinate[1]);
 					this.coordinate[2]= Esagono.mod(k, this.coordinate[1]);
 		
 					if(k==0){
@@ -67,7 +67,7 @@ public class Esagono extends Observable {
 						if(this.coordinate[2]==0)
 							this.coordinate[0]= k/this.coordinate[1]+1;
 						else 
-							this.coordinate[0]=(int)(Math.ceil(k/this.coordinate[1]));
+							this.coordinate[0]=sup(k/this.coordinate[1]);
 					}
 		
 				}
@@ -128,6 +128,45 @@ public class Esagono extends Observable {
 		this.territorio=t;
 		this.setChanged();
 		this.notifyObservers();
+	}
+	
+	public static int[] getCoord(int id){
+		int[] coordinate = new int[3];
+		coordinate[1]=0;
+		if(id==0){
+			coordinate[0]=0;
+			coordinate[2]=0;
+		} else{
+			int i=0;
+				while(id>=startLiv(i)){
+					i++;
+				}
+				coordinate[1]=i-1;
+		
+				coordinate[2]=0;
+				coordinate[0]=0;
+		
+				if(coordinate[1]==1){
+					coordinate[0]=id;
+		
+				} else{
+					
+					int k=id-startLiv(coordinate[1]);
+					coordinate[2]= Esagono.mod(k,coordinate[1]);
+		
+					if(k==0){
+						coordinate[0]=1;
+					} else{
+						if(coordinate[2]==0)
+							coordinate[0]= k/coordinate[1]+1;
+						else {
+							 coordinate[0]=sup(k/coordinate[1]);
+						}
+					}
+		
+				}
+		}
+		return coordinate;
 	}
 	
 	// metodo per calcolare n mod p
@@ -193,6 +232,27 @@ public class Esagono extends Observable {
 			s+=" ";
 		}
 
+		return s;
+	}
+	
+	private static int sup(double d){
+		int s=0;
+		
+		if(d<0||d>6){
+			throw new IllegalArgumentException("Use double value between 0 and 6");
+		}
+		if(d<1)
+			s=1;
+		else if(d<2)
+			s=2;
+		else if(d<3)
+			s=3;
+		else if(d<4)
+			s=4;
+		else if(d<5)
+			s=5;
+		else if(d<6)
+			s=6;
 		return s;
 	}
 

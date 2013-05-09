@@ -1,6 +1,9 @@
 package view;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -42,13 +45,17 @@ public class GameWin extends JFrame{
 		mappaGrafica = new MappaGrafica(m,700,500);
 		unitPanel = new UnitPanel();
 		landPanel = new LandPanel();
+		mappaGrafica.setPreferredSize(new Dimension(800,800));
+		JScrollPane sp = new JScrollPane();
+		sp.setViewportView(mappaGrafica);
+		
 		
 		Container c = this.getContentPane();
 	//	c.add(commandPanel,BorderLayout.EAST);
 		c.add(unitPanel,BorderLayout.EAST);
 	//	c.add(landPanel,BorderLayout.EAST);
 		c.add(infoPanel,BorderLayout.NORTH);
-		c.add(mappaGrafica,BorderLayout.CENTER);
+		c.add(sp,BorderLayout.CENTER);
 		
 		super.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		super.setPreferredSize(new Dimension(800,600));

@@ -9,8 +9,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.SwingUtilities;
 
 import model.Esagono;
+import model.EsagonoGrafico;
 
-import view.EsagonoGrafico;
 import view.GameWin;
 import view.InfoPanel;
 import view.MappaGrafica;
@@ -46,18 +46,13 @@ public class MappaListener extends MouseAdapter implements ActionListener {
 		double y = mE.getY();
 		MappaGrafica mG =(MappaGrafica) mE.getSource();
 		Esagono e=null;
-		int s=0;
-		int l=0;
-		int p=0;
-		EsagonoGrafico eG = new EsagonoGrafico(s, l, p, mG.getXCentro(), mG.getYCentro(), mG.getRaggio(), Color.BLACK);
+
+		EsagonoGrafico eG = new EsagonoGrafico(0, mG.getXCentro(), mG.getYCentro(), mG.getRaggio(), Color.BLACK);
 		
 		if(mG.getSelezionato()!=-1){
 			e = mG.getMappa().getComponent()[mG.getSelezionato()];
-			s = e.getSettore();
-			l = e.getLivello();
-			p = e.getPosizione();
 			
-			eG.newSet(s, l, p, mG.getXCentro(), mG.getYCentro(), mG.getRaggio(), Color.BLACK);
+			eG.newSet(mG.getSelezionato(), mG.getXCentro(), mG.getYCentro(), mG.getRaggio(), Color.BLACK);
 			eG.paint(mG.getGraphics());
 		}
 		
@@ -66,10 +61,7 @@ public class MappaListener extends MouseAdapter implements ActionListener {
 		if(e!=null){
 			
 			mG.setSelezionato(e.getId());
-			s = e.getSettore();
-			l = e.getLivello();
-			p = e.getPosizione();
-			eG.newSet(s, l, p, mG.getXCentro(), mG.getYCentro(), mG.getRaggio(), Color.RED);
+			eG.newSet(e.getId(), mG.getXCentro(), mG.getYCentro(), mG.getRaggio(), Color.RED);
 			eG.paint(mG.getGraphics());
 		
 		
@@ -83,7 +75,7 @@ public class MappaListener extends MouseAdapter implements ActionListener {
 				iP.setLandLabel(e.getTerritorio());
 			}
 		}
-		
+		System.out.println(mG.getSelezionato());
 	}
 
 	private void leftOpt() {

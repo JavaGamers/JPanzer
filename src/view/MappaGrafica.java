@@ -7,27 +7,23 @@ import java.awt.Image;
 
 import controller.MappaListener;
 import model.Esagono;
+import model.EsagonoGrafico;
 import model.Mappa;
 
 public class MappaGrafica extends javax.swing.JPanel {
-	                     
-    private javax.swing.JButton down;
-    private javax.swing.JButton left;
-    private javax.swing.JButton right;
-    private javax.swing.JButton up;
-    
+
 	private int selezionato; // indica l'id dell'esagono selezionato. -1 se nessun esagono selezionato
 	private int xC;
 	private int yC;
 	public double raggio;
 	private Mappa mappa;
 	
-	public static final double STDRAGGIO = 100;
+	public static final double STDRAGGIO = 70;
 	public static final double ZOOMRAGGIO = 30;
           
 
     public MappaGrafica(Mappa m, int x, int y) {
-        initComponents();
+        this.addMouseListener(new MappaListener());
         this.raggio=STDRAGGIO;
         this.xC=x;
 		this.yC=y;
@@ -44,11 +40,9 @@ public class MappaGrafica extends javax.swing.JPanel {
 		Image imgLand = null;
 		Image imgUnit = null;
 		
-		// disegno del 1° esagono (id=0)
-		int s = e.getSettore();
-		int l = e.getLivello();
-		int p = e.getPosizione();
-		eG = new EsagonoGrafico(s,l,p,this.xC, this.yC, raggio, Color.BLACK);
+		// disegno del 1° esagono 
+
+		eG = new EsagonoGrafico(e.getId(),this.xC, this.yC, raggio, Color.BLACK);
 		
 		if(e.getTerritorio()!=null){
 			imgLand = e.getTerritorio().getImage();
@@ -58,15 +52,13 @@ public class MappaGrafica extends javax.swing.JPanel {
 		}
 		this.paintImage(g2, eG, imgLand);
 		this.paintImage(g2, eG, imgUnit);
-		eG.paint(g);
+		g2.draw(eG);
 		
 		// disegno degli altri esagoni
 		for(int i=1;i<this.mappa.getComponent().length;i++){
 			e= this.mappa.getComponent()[i];
-			s = e.getSettore();
-			l = e.getLivello();
-			p = e.getPosizione();
-			eG.newSet(s,l,p,this.xC,this.yC,raggio,Color.BLACK);
+
+			eG.newSet(e.getId(),this.xC,this.yC,raggio,Color.BLACK);
 			
 			if(e.getTerritorio()!=null){
 				imgLand = e.getTerritorio().getImage();
@@ -83,7 +75,7 @@ public class MappaGrafica extends javax.swing.JPanel {
 			}
 			this.paintImage(g2, eG, imgLand);
 			this.paintImage(g2, eG, imgUnit);
-			eG.paint(g);
+			g2.draw(eG);
 		}
     	super.paintComponent(g);
 	}
@@ -105,18 +97,13 @@ public class MappaGrafica extends javax.swing.JPanel {
 	public Esagono contains(double x, double y){
 		
 		Esagono e=null;
-		int s = 0;
-		int l = 0;
-		int p = 0;
+
 		boolean trovato = false;
-		EsagonoGrafico eG= new EsagonoGrafico(s,l,p,this.xC,this.yC,raggio,Color.BLACK);
+		EsagonoGrafico eG= new EsagonoGrafico(0,this.xC,this.yC,raggio,Color.BLACK);
 		
 		for(int i=0; i<this.mappa.getComponent().length && !trovato;i++){
-			
-			s = this.mappa.getComponent()[i].getSettore();
-			l = this.mappa.getComponent()[i].getLivello();
-			p = this.mappa.getComponent()[i].getPosizione();
-			eG.newSet(s,l,p,this.xC,this.yC,raggio,Color.BLACK);
+
+			eG.newSet(i,this.xC,this.yC,raggio,Color.BLACK);
 			
 			if(eG.contains(x,y)){
 				
@@ -168,52 +155,7 @@ public class MappaGrafica extends javax.swing.JPanel {
 		this.update(getGraphics());
 	}
                         
-    private void initComponents() {
-    	this.addMouseListener(new MappaListener());
-        up = new javax.swing.JButton();
-        right = new javax.swing.JButton();
-        down = new javax.swing.JButton();
-        left = new javax.swing.JButton();
-
-        up.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Up.gif")); 
-
-        right.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Right.gif")); 
-
-        down.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Down.gif"));
-
-        left.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Left.gif"));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(293, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(left, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(right, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(down, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(up, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(157, Short.MAX_VALUE)
-                .addComponent(up, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(right, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(left, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(down, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-    }
+ 
     
     
             

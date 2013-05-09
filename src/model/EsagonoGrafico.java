@@ -1,4 +1,4 @@
-package view;
+package model;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -13,7 +13,7 @@ public class EsagonoGrafico extends Polygon{
 	 /* le ascisse dei vertici dell'esagono sono in senso antiorario a partire da destra (asse x)
 		le ordinate dei vertici dell'esagono sono in senso antiorario a partire da destra (asse x) 
 	 	xC, yC coordinate dell'origine, ovvero del centro dell'esagono root (numero 0) */
-	public EsagonoGrafico(int s, int l, int p, double xC, double yC, double r, Color c){
+	public EsagonoGrafico(int id, double xC, double yC, double r, Color c){
 		super();
 		this.c=c;
 		super.npoints=6;
@@ -21,6 +21,9 @@ public class EsagonoGrafico extends Polygon{
 		super.ypoints= new int[6];
 		this.raggio=r;
 		this.apotema=Math.sqrt(3)/2*r;
+		int s= Esagono.getCoord(id)[0];
+		int l= Esagono.getCoord(id)[1];
+		int p= Esagono.getCoord(id)[2];
 		
 		switch(s){
 		
@@ -87,13 +90,16 @@ public class EsagonoGrafico extends Polygon{
 	}
 	
 	// s= settore -	l= livello	-	p= posizione dell'esagono da disegnare
-	public void newSet(int s, int l, int p, double xC, double yC, double r, Color c){
+	public void newSet(int id, double xC, double yC, double r, Color c){
 		this.c = c;
 		super.npoints=6;
 		super.xpoints= new int[6];
 		super.ypoints= new int[6];
 		this.raggio=r;
 		this.apotema=Math.sqrt(3)/2*r;
+		int s= Esagono.getCoord(id)[0];
+		int l= Esagono.getCoord(id)[1];
+		int p= Esagono.getCoord(id)[2];
 		
 		switch(s){
 		case 0: this.xCentro=xC;
