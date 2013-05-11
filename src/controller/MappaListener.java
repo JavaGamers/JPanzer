@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -11,8 +12,8 @@ import javax.swing.SwingUtilities;
 import model.Esagono;
 import model.EsagonoGrafico;
 
+import view.CommandPanel;
 import view.GameWin;
-import view.InfoPanel;
 import view.MappaGrafica;
 
 public class MappaListener extends MouseAdapter implements ActionListener {
@@ -46,33 +47,33 @@ public class MappaListener extends MouseAdapter implements ActionListener {
 		double y = mE.getY();
 		MappaGrafica mG =(MappaGrafica) mE.getSource();
 		Esagono e=null;
+		Graphics2D g2 = (Graphics2D) mG.getGraphics();
+		g2.setColor(Color.BLACK);
 
-		EsagonoGrafico eG = new EsagonoGrafico(0, mG.getXCentro(), mG.getYCentro(), mG.getRaggio(), Color.BLACK);
+		EsagonoGrafico eG = new EsagonoGrafico(0, mG.getXCentro(), mG.getYCentro(), mG.getRaggio());
 		
 		if(mG.getSelezionato()!=-1){
 			e = mG.getMappa().getComponent()[mG.getSelezionato()];
 			
-			eG.newSet(mG.getSelezionato(), mG.getXCentro(), mG.getYCentro(), mG.getRaggio(), Color.BLACK);
-			eG.paint(mG.getGraphics());
+			eG.newSet(mG.getSelezionato(), mG.getXCentro(), mG.getYCentro(), mG.getRaggio());
+			g2.draw(eG);
 		}
 		
 		e = mG.contains(x, y);
 		
 		if(e!=null){
 			
+			g2.setColor(Color.RED);
 			mG.setSelezionato(e.getId());
-			eG.newSet(e.getId(), mG.getXCentro(), mG.getYCentro(), mG.getRaggio(), Color.RED);
-			eG.paint(mG.getGraphics());
+			eG.newSet(e.getId(), mG.getXCentro(), mG.getYCentro(), mG.getRaggio());
+			g2.draw(eG);
 		
 		
 			// codice relativo all'update dell'infoPanel
 			GameWin gW = (GameWin)SwingUtilities.getRoot(mG);
-			InfoPanel iP = gW.getInfoPanel();
+			CommandPanel cP = gW.getCommandPanel();
 			if(e.getUnit()!=null){
-				iP.setUnitLabel(e.getUnit());
-			}
-			if(e.getTerritorio()!=null){
-				iP.setLandLabel(e.getTerritorio());
+				cP.setUnitLabel(e.getUnit());
 			}
 		}
 		System.out.println(mG.getSelezionato());

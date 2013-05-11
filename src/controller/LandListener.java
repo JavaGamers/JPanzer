@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -73,7 +72,7 @@ public class LandListener implements ActionListener {
 		e = mG.getMappa().getComponent()[mG.getSelezionato()];
 		e.setTerritorio(new Pianura());
 		
-		eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio(),Color.BLACK);
+		eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
 		mG.paintImage(mG.getGraphics(), eG, e.getTerritorio().getImage());
 		}
 	}
@@ -87,7 +86,7 @@ public class LandListener implements ActionListener {
 		e = mG.getMappa().getComponent()[mG.getSelezionato()];
 		e.setTerritorio(new Lago());
 
-		eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio(),Color.BLACK);
+		eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
 		mG.paintImage(mG.getGraphics(), eG, e.getTerritorio().getImage());
 		}
 	}
@@ -101,7 +100,7 @@ public class LandListener implements ActionListener {
 		e = mG.getMappa().getComponent()[mG.getSelezionato()];
 		e.setTerritorio(new Montagna());
 
-		eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio(),Color.BLACK);
+		eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
 		mG.paintImage(mG.getGraphics(), eG, e.getTerritorio().getImage());
 		}
 	}
@@ -115,7 +114,7 @@ public class LandListener implements ActionListener {
 		e = mG.getMappa().getComponent()[mG.getSelezionato()];
 		e.setTerritorio(new Collina());
 
-		eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio(),Color.BLACK);
+		eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
 		mG.paintImage(mG.getGraphics(), eG, e.getTerritorio().getImage());
 		}
 	}
@@ -129,7 +128,7 @@ public class LandListener implements ActionListener {
 		e = mG.getMappa().getComponent()[mG.getSelezionato()];
 		e.setTerritorio(new Foresta());
 
-		eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio(),Color.BLACK);
+		eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
 		mG.paintImage(mG.getGraphics(), eG, e.getTerritorio().getImage());
 		}
 		

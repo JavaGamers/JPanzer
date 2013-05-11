@@ -15,7 +15,6 @@ import model.Territorio;
 
 public class GameWin extends JFrame{
 	
-	private InfoPanel infoPanel;
 	private CommandPanel commandPanel;
 	private MappaGrafica mappaGrafica;
 	private UnitPanel unitPanel;
@@ -27,10 +26,6 @@ public class GameWin extends JFrame{
 		initComponents(m);
 	}
 	
-	public InfoPanel getInfoPanel(){
-		return this.infoPanel;
-	}
-	
 	public CommandPanel getCommandPanel(){
 		return this.commandPanel;
 	}
@@ -40,7 +35,6 @@ public class GameWin extends JFrame{
 	}
 		
 	private void initComponents(Mappa m) {
-		infoPanel = new InfoPanel();
 		commandPanel = new CommandPanel();
 		mappaGrafica = new MappaGrafica(m,700,500);
 		unitPanel = new UnitPanel();

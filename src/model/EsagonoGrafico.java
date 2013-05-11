@@ -1,21 +1,17 @@
 package model;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 
 public class EsagonoGrafico extends Polygon{
 	private double xCentro, yCentro; 
 	private double apotema, raggio; // raggio= raggio circonferenza circoscritta all'esagono
-	private Color c;
 	
 	 /* le ascisse dei vertici dell'esagono sono in senso antiorario a partire da destra (asse x)
 		le ordinate dei vertici dell'esagono sono in senso antiorario a partire da destra (asse x) 
 	 	xC, yC coordinate dell'origine, ovvero del centro dell'esagono root (numero 0) */
-	public EsagonoGrafico(int id, double xC, double yC, double r, Color c){
+	public EsagonoGrafico(int id, double xC, double yC, double r){
 		super();
-		this.c=c;
 		super.npoints=6;
 		super.xpoints= new int[6];
 		super.ypoints= new int[6];
@@ -75,11 +71,6 @@ public class EsagonoGrafico extends Polygon{
 	public double getApotema(){
 		return this.apotema;
 	}
-
-	public void paint(Graphics g) {
-		g.setColor(this.c);
-		g.drawPolygon(this);
-	}
 	
 	public double getX(){
 		return this.xCentro;
@@ -90,8 +81,7 @@ public class EsagonoGrafico extends Polygon{
 	}
 	
 	// s= settore -	l= livello	-	p= posizione dell'esagono da disegnare
-	public void newSet(int id, double xC, double yC, double r, Color c){
-		this.c = c;
+	public void newSet(int id, double xC, double yC, double r){
 		super.npoints=6;
 		super.xpoints= new int[6];
 		super.ypoints= new int[6];

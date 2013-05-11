@@ -33,13 +33,14 @@ public class CommandListener implements ActionListener {
 	public final static String ZOOMOPT = "zoom";
 	public final static String MUOVIOPT = "muovi";
 	public final static String ATTACCAOPT = "attacca";
-	public final static String UNDOOPT = "undo";
 	public final static String ABBANDONAOPT = "abbandona";
 	public final static String SALVAOPT = "salva";
 	public final static String CARICAOPT = "carica";
 	public final static String SCORPORAOPT = "scorpora";
 	public final static String ACCORPAOPT = "accorpa";
 	public final static String PASSAOPT = "passa";
+	public final static String SHOPOPT = "shop";
+
 	
 
 	public void actionPerformed(ActionEvent e) {
@@ -73,20 +74,8 @@ public class CommandListener implements ActionListener {
 		else if(com.equals(SCORPORAOPT)){
 			scorporaOpt();
 		}
-		else if(com.equals(UNDOOPT)){
-			undoOpt();
-		}
-		
-		
-			
-	}
-
-
-	private void undoOpt() {
-		// TODO Auto-generated method stub
 		
 	}
-
 
 	private void scorporaOpt() {
 		// TODO Auto-generated method stub

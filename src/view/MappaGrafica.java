@@ -42,7 +42,7 @@ public class MappaGrafica extends javax.swing.JPanel {
 		
 		// disegno del 1° esagono 
 
-		eG = new EsagonoGrafico(e.getId(),this.xC, this.yC, raggio, Color.BLACK);
+		eG = new EsagonoGrafico(e.getId(),this.xC, this.yC, raggio);
 		
 		if(e.getTerritorio()!=null){
 			imgLand = e.getTerritorio().getImage();
@@ -58,7 +58,7 @@ public class MappaGrafica extends javax.swing.JPanel {
 		for(int i=1;i<this.mappa.getComponent().length;i++){
 			e= this.mappa.getComponent()[i];
 
-			eG.newSet(e.getId(),this.xC,this.yC,raggio,Color.BLACK);
+			eG.newSet(e.getId(),this.xC,this.yC,raggio);
 			
 			if(e.getTerritorio()!=null){
 				imgLand = e.getTerritorio().getImage();
@@ -99,11 +99,11 @@ public class MappaGrafica extends javax.swing.JPanel {
 		Esagono e=null;
 
 		boolean trovato = false;
-		EsagonoGrafico eG= new EsagonoGrafico(0,this.xC,this.yC,raggio,Color.BLACK);
+		EsagonoGrafico eG= new EsagonoGrafico(0,this.xC,this.yC,raggio);
 		
 		for(int i=0; i<this.mappa.getComponent().length && !trovato;i++){
 
-			eG.newSet(i,this.xC,this.yC,raggio,Color.BLACK);
+			eG.newSet(i,this.xC,this.yC,raggio);
 			
 			if(eG.contains(x,y)){
 				
