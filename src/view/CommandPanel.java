@@ -12,7 +12,7 @@ public class CommandPanel extends javax.swing.JPanel {
 	private javax.swing.JButton carica;
 	private javax.swing.JLabel esperienza;
 	private javax.swing.JLabel infoUnità;
-	private javax.swing.JLabel punteggio;
+	private javax.swing.JLabel soldi;
 	private javax.swing.JSeparator jSeparator1;
 	private javax.swing.JSeparator jSeparator2;
 	private javax.swing.JSeparator jSeparator3;
@@ -31,6 +31,7 @@ public class CommandPanel extends javax.swing.JPanel {
     private static final String NUMUNITSTXT = "Numero: ";
     private static final String PASSITXT = "Passi rimanenti: ";
     private static final String PLAYERTXT = "Giocatore: ";
+    private static final String SOLDITXT = "Soldi: ";
 
     
 
@@ -99,11 +100,13 @@ public class CommandPanel extends javax.swing.JPanel {
         passa.addActionListener(cL);
         passa.setActionCommand("passa");
         
-        punteggio = new javax.swing.JLabel();
+        soldi = new javax.swing.JLabel();
         player = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         
         shop = new javax.swing.JButton();
+        shop.addActionListener(cL);
+        shop.setActionCommand("shop");
         
         jSeparator4 = new javax.swing.JSeparator();
 
@@ -182,9 +185,9 @@ public class CommandPanel extends javax.swing.JPanel {
         passa.setMinimumSize(new java.awt.Dimension(89, 25));
         passa.setPreferredSize(new java.awt.Dimension(89, 25));
 
-        punteggio.setBackground(new java.awt.Color(241, 157, 30));
-        punteggio.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        punteggio.setText("Punteggio:  ");
+        soldi.setBackground(new java.awt.Color(241, 157, 30));
+        soldi.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        soldi.setText(SOLDITXT);
 
         player.setBackground(new java.awt.Color(241, 157, 30));
         player.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -222,7 +225,7 @@ public class CommandPanel extends javax.swing.JPanel {
                         .addGap(26, 26, 26)
                         .addComponent(player)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(punteggio)
+                        .addComponent(soldi)
                         .addGap(51, 51, 51))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -253,7 +256,7 @@ public class CommandPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(punteggio)
+                    .addComponent(soldi)
                     .addComponent(player))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)

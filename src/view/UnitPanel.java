@@ -1,36 +1,38 @@
 package view;
 
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 import controller.UnitListener;
 
 public class UnitPanel extends javax.swing.JPanel {
 	
 	                     
-    private javax.swing.JButton aereo;
+	private javax.swing.JButton aereo;
     private javax.swing.JButton artiglieria;
+    private javax.swing.JLabel costo;
     private javax.swing.JButton fanteriaLegg;
     private javax.swing.JButton fanteriaPes;
+    private javax.swing.JButton gioca;
     private javax.swing.JButton panzer;
-    private javax.swing.JButton start;
-    private JLabel remainingUnits;
-    private JTextField numUnits;
-      
+    private javax.swing.JLabel soldi;
+    
+    public static final String SOLDITXT = "Soldi rimanenti: ";
+    public static final String COSTOTXT = "Costo: ";
 
 
     public UnitPanel() {
         initComponents();
     }
     
-    public JTextField getTextField(){
-    	return this.numUnits;
+    public JLabel getSoldiLabel(){
+    	return this.soldi;
     }
     
-    private JLabel getLabel(){
-    	return this.remainingUnits;
+    public JLabel getCostoLabel(){
+    	return this.costo;
     }
-                          
+    
+                              
     private void initComponents() {
     	
     	UnitListener uL = new UnitListener();
@@ -55,17 +57,10 @@ public class UnitPanel extends javax.swing.JPanel {
         artiglieria.addActionListener(uL);
         artiglieria.setActionCommand("artiglieria");
         
-        start = new javax.swing.JButton();
-        start.setText("Start Game");
-        start.addActionListener(uL);
-        start.setActionCommand("start");
-        
-        numUnits = new javax.swing.JTextField();
-        numUnits.setText("0");
-        numUnits.setEditable(true);
-        
-        remainingUnits = new javax.swing.JLabel();
-        remainingUnits.setText("/0");
+        gioca = new javax.swing.JButton();
+        gioca.setText("Gioca");
+        gioca.addActionListener(uL);
+        gioca.setActionCommand("gioca");
 
         fanteriaLegg.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Fanteria Leggera1_Icon.gif")); 
         fanteriaLegg.setText("Fanteria Leggera");
@@ -92,23 +87,28 @@ public class UnitPanel extends javax.swing.JPanel {
         artiglieria.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         artiglieria.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         
+        soldi = new JLabel();
+        soldi.setText(SOLDITXT);
+        
+        costo = new JLabel();
+        costo.setText(COSTOTXT);
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(aereo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panzer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fanteriaPes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fanteriaLegg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(artiglieria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(start, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(numUnits)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(remainingUnits, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(aereo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panzer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fanteriaPes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fanteriaLegg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(artiglieria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(gioca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(costo)
+                    .addComponent(soldi))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -125,12 +125,12 @@ public class UnitPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(artiglieria)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(numUnits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(remainingUnits))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(start)
+                .addComponent(costo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(soldi)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(gioca)
                 .addContainerGap())
-        );                       
+        );
     }            
 }

@@ -74,6 +74,14 @@ public class CommandListener implements ActionListener {
 		else if(com.equals(SCORPORAOPT)){
 			scorporaOpt();
 		}
+		else if(com.equals(SHOPOPT)){
+			shopOpt();
+		}
+		
+	}
+
+	private void shopOpt() {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -204,9 +212,7 @@ public class CommandListener implements ActionListener {
 		
 	}
 
-
-	private void attaccaOpt() {
-		
+	private void attaccaOpt() {	
 		
 	}
 

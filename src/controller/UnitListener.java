@@ -3,6 +3,20 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.SwingUtilities;
+
+import model.Aereo;
+import model.Artiglieria;
+import model.Esagono;
+import model.EsagonoGrafico;
+import model.FanteriaLeggera;
+import model.FanteriaPesante;
+import model.Lago;
+import model.Panzer;
+import view.GameWin;
+import view.MappaGrafica;
+
 public class UnitListener implements ActionListener {
 	
 	public final static String FANTLEGGOPT = "fanteriaLegg";
@@ -10,64 +24,114 @@ public class UnitListener implements ActionListener {
 	public final static String PANZEROPT = "panzer";
 	public final static String AEREOOPT = "aereo";
 	public final static String ARTIGLIERIAOPT = "artiglieria";
-	public final static String STARTOPT = "start";
+	public final static String GIOCAOPT = "gioca";
 	
 	public void actionPerformed(ActionEvent e) {
 		String com = e.getActionCommand();
+		JButton source = (JButton) e.getSource();
 		
 		if(com.equals(FANTLEGGOPT)){
-			fanteriaLeggOpt();
+			fanteriaLeggOpt(source);
 		}
 		else if(com.equals(FANTPESOPT)){
-			fanteriaPesOpt();
+			fanteriaPesOpt(source);
 		}
 		else if(com.equals(PANZEROPT)){
-			panzerOpt();
+			panzerOpt(source);
 		}
 		else if(com.equals(AEREOOPT)){
-			aereoOpt();
+			aereoOpt(source);
 		}
 		else if(com.equals(ARTIGLIERIAOPT)){
-			artiglieriaOpt();
+			artiglieriaOpt(source);
 		}
-		else if(com.equals(STARTOPT)){
-			startOpt();
+		else if(com.equals(GIOCAOPT)){
+			giocaOpt();
 		}
 	}
 
 
-	private void startOpt() {
+	private void giocaOpt() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	
+	private void artiglieriaOpt(JButton b) {
+		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
+		MappaGrafica mG = dW.getMappaGrafica();
+		Esagono e = null;
+		EsagonoGrafico eG = null;
+		if(mG.getSelezionato()!=-1){
+		e = mG.getMappa().getComponent()[mG.getSelezionato()];
+		e.setUnit(new Artiglieria(10,1));
 
-	private void artiglieriaOpt() {
-		// TODO Auto-generated method stub
+		eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
+		mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
+		}
+	}
+
+
+	private void aereoOpt(JButton b) {
+		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
+		MappaGrafica mG = dW.getMappaGrafica();
+		Esagono e = null;
+		EsagonoGrafico eG = null;
+		if(mG.getSelezionato()!=-1){
+		e = mG.getMappa().getComponent()[mG.getSelezionato()];
+		e.setUnit(new Aereo(10,1));
+
+		eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
+		mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
+		}
 		
 	}
 
 
-	private void aereoOpt() {
-		// TODO Auto-generated method stub
+	private void panzerOpt(JButton b) {
+		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
+		MappaGrafica mG = dW.getMappaGrafica();
+		Esagono e = null;
+		EsagonoGrafico eG = null;
+		if(mG.getSelezionato()!=-1){
+		e = mG.getMappa().getComponent()[mG.getSelezionato()];
+		e.setUnit(new Panzer(10,1));
+
+		eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
+		mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
+		}
 		
 	}
 
 
-	private void panzerOpt() {
-		// TODO Auto-generated method stub
+	private void fanteriaPesOpt(JButton b) {
+		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
+		MappaGrafica mG = dW.getMappaGrafica();
+		Esagono e = null;
+		EsagonoGrafico eG = null;
+		if(mG.getSelezionato()!=-1){
+		e = mG.getMappa().getComponent()[mG.getSelezionato()];
+		e.setUnit(new FanteriaPesante(10,1));
+
+		eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
+		mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
+		}
 		
 	}
 
 
-	private void fanteriaPesOpt() {
-		// TODO Auto-generated method stub
-		
-	}
+	private void fanteriaLeggOpt(JButton b) {
+		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
+		MappaGrafica mG = dW.getMappaGrafica();
+		Esagono e = null;
+		EsagonoGrafico eG = null;
+		if(mG.getSelezionato()!=-1){
+		e = mG.getMappa().getComponent()[mG.getSelezionato()];
+		e.setUnit(new FanteriaLeggera(10,1));
 
-
-	private void fanteriaLeggOpt() {
-		// TODO Auto-generated method stub
+		eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
+		mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
+		}
 		
 	}
 
