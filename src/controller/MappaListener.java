@@ -16,36 +16,18 @@ import view.CommandPanel;
 import view.GameWin;
 import view.MappaGrafica;
 
-public class MappaListener extends MouseAdapter implements ActionListener {
-	
-	public static final String UPOPT = "up";
-	public static final String DOWNOPT = "down";
-	public static final String LEFTOPT = "left";
-	public static final String RIGHTOPT = "right";
+public class MappaListener extends MouseAdapter{
 
-	public void actionPerformed(ActionEvent e) {
-		String com = e.getActionCommand();
-		
-		if(com.equals(UPOPT)){
-			upOpt();
-		}
-		else if(com.equals(DOWNOPT)){
-			downOpt();
-		}
-		else if(com.equals(LEFTOPT)){
-			leftOpt();
-		}
-		else if(com.equals(RIGHTOPT)){
-			leftOpt();
-		}
-	}
+	private GameMode gM = GameMode.getGameMode();
+
 	
 	public void mouseClicked(MouseEvent mE){
 		
 		// codice relativo al selezionamento dell'esagono
 		double x = mE.getX();
 		double y = mE.getY();
-		MappaGrafica mG =(MappaGrafica) mE.getSource();
+		GameWin gW = this.gM.getGameWin();
+		MappaGrafica mG =gW.getMappaGrafica();
 		Esagono e=null;
 		Graphics2D g2 = (Graphics2D) mG.getGraphics();
 		g2.setColor(Color.BLACK);
@@ -70,28 +52,11 @@ public class MappaListener extends MouseAdapter implements ActionListener {
 		
 		
 			// codice relativo all'update dell'infoPanel
-			GameWin gW = (GameWin)SwingUtilities.getRoot(mG);
+			
 			CommandPanel cP = gW.getCommandPanel();
 			if(e.getUnit()!=null){
 				cP.setUnitLabel(e.getUnit());
 			}
 		}
-		System.out.println(mG.getSelezionato());
 	}
-
-	private void leftOpt() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void downOpt() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void upOpt() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

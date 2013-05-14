@@ -2,8 +2,8 @@ package model;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.net.URL;
+
 import javax.imageio.ImageIO;
 
 public class Lago implements Territorio {
@@ -14,10 +14,12 @@ public class Lago implements Territorio {
 	
 	public Lago(){
 		try {
-	           bImg = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Land Pack - Copia/Lake_Icon.png"));
-	       } catch (IOException e) {
-	    	   // da scrivere
-	       }
+			URL imgUrl=getClass().getResource("/view/Icon pack/Land Pack/Lago_Icon.png");
+			bImg = ImageIO.read(imgUrl);
+          
+       } catch (Exception e) {
+    	   System.out.println(e.toString());
+       }
 	}
 	
 	public String getNome() {

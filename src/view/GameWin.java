@@ -2,7 +2,8 @@ package view;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
+
+import controller.GameMode;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -10,8 +11,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 
 import model.Mappa;
-import model.Montagna;
-import model.Territorio;
 
 public class GameWin extends JFrame{
 	
@@ -46,8 +45,8 @@ public class GameWin extends JFrame{
 		
 		Container c = this.getContentPane();
 	//	c.add(commandPanel,BorderLayout.EAST);
-		c.add(unitPanel,BorderLayout.EAST);
-	//	c.add(landPanel,BorderLayout.EAST);
+	//	c.add(unitPanel,BorderLayout.EAST);
+		c.add(landPanel,BorderLayout.EAST);
 		c.add(sp,BorderLayout.CENTER);
 		
 		super.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -59,12 +58,10 @@ public class GameWin extends JFrame{
 
 	public static void main(String[] args) {
 		Mappa m = new Mappa(4);
-/*		Territorio t = new Montagna();
-		for(int i=0;i<m.getComponent().length;i++){
-			m.getComponent()[i].setTerritorio(t);
-		} */
-
 		GameWin gW=new GameWin("Java meglio",m);
+		GameMode gM = GameMode.getGameMode();
+		gM.setMappa(m);
+		gM.setGameWin(gW);
 		gW.setVisible(true);
 	}
 	

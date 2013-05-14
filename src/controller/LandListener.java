@@ -10,8 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-import javax.swing.JButton;
-import javax.swing.SwingUtilities;
+import javax.swing.JFileChooser;
 
 import model.Collina;
 import model.Esagono;
@@ -34,52 +33,53 @@ public class LandListener implements ActionListener {
 	public final static String LAGOOPT = "lago";
 	public final static String SALVAOPT = "salva";
 	public final static String CARICAOPT = "carica";
+	private GameMode gM = GameMode.getGameMode();
 
 	public void actionPerformed(ActionEvent e) {
 		String com = e.getActionCommand();
-		JButton source = (JButton) e.getSource();
 		
 		if(com.equals(PIANURAOPT)){
-			pianuraOpt(source);
+			pianuraOpt();
 		}
 		else if(com.equals(COLLINAOPT)){
-			collinaOpt(source);
+			collinaOpt();
 		}
 		else if(com.equals(FORESTAOPT)){
-			forestaOpt(source);
+			forestaOpt();
 		}
 		else if(com.equals(MONTAGNAOPT)){
-			montagnaOpt(source);
+			montagnaOpt();
 		}
 		else if(com.equals(LAGOOPT)){
-			lagoOpt(source);
+			lagoOpt();
 		}
 		else if(com.equals(CARICAOPT)){
-			caricaOpt(source);
+			caricaOpt();
 		}
 		else if(com.equals(SALVAOPT)){
-			salvaOpt(source);
+			salvaOpt();
 		}
 
 	}
 
-	private void pianuraOpt(JButton b) {
-		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
-		MappaGrafica mG = dW.getMappaGrafica();
+	private void pianuraOpt() {
+		GameWin gW = this.gM.getGameWin();
+		MappaGrafica mG = gW.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
-		if(mG.getSelezionato()!=-1){
-		e = mG.getMappa().getComponent()[mG.getSelezionato()];
-		e.setTerritorio(new Pianura());
-		
-		eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
-		mG.paintImage(mG.getGraphics(), eG, e.getTerritorio().getImage());
+		if (mG.getSelezionato() != -1) {
+			e = mG.getMappa().getComponent()[mG.getSelezionato()];
+			e.setTerritorio(new Pianura());
+
+			eG = new EsagonoGrafico(mG.getSelezionato(), mG.getXCentro(),
+					mG.getYCentro(), mG.getRaggio());
+			mG.paintImage(mG.getGraphics(), eG, e.getTerritorio().getImage());
 		}
 	}
 
-	private void lagoOpt(JButton b) {
-		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
-		MappaGrafica mG = dW.getMappaGrafica();
+	private void lagoOpt() {
+		GameWin gW = this.gM.getGameWin();
+		MappaGrafica mG = gW.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
@@ -91,9 +91,9 @@ public class LandListener implements ActionListener {
 		}
 	}
 
-	private void montagnaOpt(JButton b) {
-		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
-		MappaGrafica mG = dW.getMappaGrafica();
+	private void montagnaOpt() {
+		GameWin gW = this.gM.getGameWin();
+		MappaGrafica mG = gW.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
@@ -105,9 +105,9 @@ public class LandListener implements ActionListener {
 		}
 	}
 
-	private void collinaOpt(JButton b) {
-		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
-		MappaGrafica mG = dW.getMappaGrafica();
+	private void collinaOpt() {
+		GameWin gW = this.gM.getGameWin();
+		MappaGrafica mG = gW.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
@@ -119,9 +119,9 @@ public class LandListener implements ActionListener {
 		}
 	}
 
-	private void forestaOpt(JButton b) {
-		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
-		MappaGrafica mG = dW.getMappaGrafica();
+	private void forestaOpt() {
+		GameWin gW = this.gM.getGameWin();
+		MappaGrafica mG = gW.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
@@ -134,80 +134,89 @@ public class LandListener implements ActionListener {
 		
 	}
 	
-	private void salvaOpt(JButton b){
-		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
-		MappaGrafica mG = dW.getMappaGrafica();
-		
-		File f = new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/Mappe salvate/mappa.txt");
-		FileWriter fw;
-		BufferedWriter bw;
-		
-		try{
-			
-		fw = new FileWriter(f);
-		bw = new BufferedWriter(fw);
-		
-		bw.write(""+mG.getMappa().getDim());
-		bw.write("\n");
-		for(int i=0;i<mG.getMappa().getComponent().length;i++){
-			bw.write(mG.getMappa().getComponent()[i].saveToString());
-			bw.write("\n");
-		}
-		bw.close();
-		fw.close();
-		
-		} catch(IOException io){
-			System.out.println(io.toString());
-		}
+	private void salvaOpt(){
+		GameWin gW = this.gM.getGameWin();
+		MappaGrafica mG = gW.getMappaGrafica();
+		JFileChooser jfc = new JFileChooser();		
+		int returnVal = jfc.showSaveDialog(mG);
+		 
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = jfc.getSelectedFile();
+            FileWriter fw;
+    		BufferedWriter bw;
+    		
+    		try{
+    			
+    		fw = new FileWriter(file);
+    		bw = new BufferedWriter(fw);
+    		
+    		bw.write(""+mG.getMappa().getDim());
+    		bw.write("\n");
+    		for(int i=0;i<mG.getMappa().getComponent().length;i++){
+    			bw.write(mG.getMappa().getComponent()[i].saveToString());
+    			bw.write("\n");
+    		}
+    		bw.close();
+    		fw.close();
+    		
+    		} catch(IOException io){
+    			System.out.println(io.toString());
+    		}
+        }
 	}
 
-	private void caricaOpt(JButton b) {
-		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
-		MappaGrafica mG = dW.getMappaGrafica();
-		File f= new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/Mappe salvate/mappa.txt");
-		BufferedReader br;
-		String[] elements;
-		if (f.isFile()) {
-			try {
-				br = new BufferedReader(new FileReader(f));
-				// leggo la 1° riga del file
-				String text = br.readLine();
-				int dim = Integer.parseInt(text);
-				Mappa m = new Mappa(dim);
-				Esagono e;
-				//leggo le altre righe
-				while ((text = br.readLine()) != null){
-					elements=getElements(text);
-					e = m.getComponent()[Integer.parseInt(elements[0])];
-					// setto il territorio dell'esagono
-					if(elements[1].equals("Pianura")){
-						e.setTerritorio(new Pianura());
-					}
-					else if(elements[1].equals("Collina")){
-						e.setTerritorio(new Collina());
-					}
-					else if(elements[1].equals("Montagna")){
-						e.setTerritorio(new Montagna());
-					}
-					else if(elements[1].equals("Lago")){
-						e.setTerritorio(new Lago());
-					}
-					else if(elements[1].equals("Foresta")){
-						e.setTerritorio(new Foresta());
-					}
-					else{
-						e.setTerritorio(null);
-					}
-				}
-				br.close();
-				
-				//setto la nuova mappa nel pannello
-				mG.setMappa(m);
-			} 
-			catch (IOException ioException) {
-			}
-
-		}
+	private void caricaOpt() {
+		GameWin gW = this.gM.getGameWin();
+		MappaGrafica mG = gW.getMappaGrafica();
+		JFileChooser jfc = new JFileChooser();
+		int returnVal = jfc.showOpenDialog(mG);
+		 
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = jfc.getSelectedFile();
+            BufferedReader br;
+    		String[] elements;
+    		if (file.isFile()) {
+    			try {
+    				br = new BufferedReader(new FileReader(file));
+    				// leggo la 1° riga del file
+    				String text = br.readLine();
+    				int dim = Integer.parseInt(text);
+    				Mappa m = new Mappa(dim);
+    				Esagono e;
+    				//leggo le altre righe
+    				while ((text = br.readLine()) != null){
+    					elements=getElements(text);
+    					e = m.getComponent()[Integer.parseInt(elements[0])];
+    					// setto il territorio dell'esagono
+    					if(elements[1].equals("Pianura")){
+    						e.setTerritorio(new Pianura());
+    					}
+    					else if(elements[1].equals("Collina")){
+    						e.setTerritorio(new Collina());
+    					}
+    					else if(elements[1].equals("Montagna")){
+    						e.setTerritorio(new Montagna());
+    					}
+    					else if(elements[1].equals("Lago")){
+    						e.setTerritorio(new Lago());
+    					}
+    					else if(elements[1].equals("Foresta")){
+    						e.setTerritorio(new Foresta());
+    					}
+    					else{
+    						e.setTerritorio(null);
+    					}
+    				}
+    				br.close();
+    				
+    				//setto la nuova mappa nel pannello
+    				mG.setMappa(m);
+    			} 
+    			catch (IOException ioException) {
+    			}
+    		}
+        }
+		
 	}
 	
 	private static String[] getElements(String s){

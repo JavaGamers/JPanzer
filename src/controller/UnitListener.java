@@ -3,17 +3,14 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.SwingUtilities;
-
 import model.Aereo;
 import model.Artiglieria;
 import model.Esagono;
 import model.EsagonoGrafico;
 import model.FanteriaLeggera;
 import model.FanteriaPesante;
-import model.Lago;
 import model.Panzer;
+
 import view.GameWin;
 import view.MappaGrafica;
 
@@ -25,25 +22,25 @@ public class UnitListener implements ActionListener {
 	public final static String AEREOOPT = "aereo";
 	public final static String ARTIGLIERIAOPT = "artiglieria";
 	public final static String GIOCAOPT = "gioca";
+	private GameMode gM = GameMode.getGameMode();
 	
 	public void actionPerformed(ActionEvent e) {
 		String com = e.getActionCommand();
-		JButton source = (JButton) e.getSource();
 		
 		if(com.equals(FANTLEGGOPT)){
-			fanteriaLeggOpt(source);
+			fanteriaLeggOpt();
 		}
 		else if(com.equals(FANTPESOPT)){
-			fanteriaPesOpt(source);
+			fanteriaPesOpt();
 		}
 		else if(com.equals(PANZEROPT)){
-			panzerOpt(source);
+			panzerOpt();
 		}
 		else if(com.equals(AEREOOPT)){
-			aereoOpt(source);
+			aereoOpt();
 		}
 		else if(com.equals(ARTIGLIERIAOPT)){
-			artiglieriaOpt(source);
+			artiglieriaOpt();
 		}
 		else if(com.equals(GIOCAOPT)){
 			giocaOpt();
@@ -57,9 +54,9 @@ public class UnitListener implements ActionListener {
 	}
 
 	
-	private void artiglieriaOpt(JButton b) {
-		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
-		MappaGrafica mG = dW.getMappaGrafica();
+	private void artiglieriaOpt() {
+		GameWin gW = this.gM.getGameWin();
+		MappaGrafica mG = gW.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
@@ -72,9 +69,9 @@ public class UnitListener implements ActionListener {
 	}
 
 
-	private void aereoOpt(JButton b) {
-		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
-		MappaGrafica mG = dW.getMappaGrafica();
+	private void aereoOpt() {
+		GameWin gW = this.gM.getGameWin();
+		MappaGrafica mG = gW.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
@@ -88,9 +85,9 @@ public class UnitListener implements ActionListener {
 	}
 
 
-	private void panzerOpt(JButton b) {
-		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
-		MappaGrafica mG = dW.getMappaGrafica();
+	private void panzerOpt() {
+		GameWin gW = this.gM.getGameWin();
+		MappaGrafica mG = gW.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
@@ -104,9 +101,9 @@ public class UnitListener implements ActionListener {
 	}
 
 
-	private void fanteriaPesOpt(JButton b) {
-		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
-		MappaGrafica mG = dW.getMappaGrafica();
+	private void fanteriaPesOpt() {
+		GameWin gW = this.gM.getGameWin();
+		MappaGrafica mG = gW.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
@@ -120,9 +117,9 @@ public class UnitListener implements ActionListener {
 	}
 
 
-	private void fanteriaLeggOpt(JButton b) {
-		GameWin dW = (GameWin) SwingUtilities.getRoot(b);
-		MappaGrafica mG = dW.getMappaGrafica();
+	private void fanteriaLeggOpt() {
+		GameWin gW = this.gM.getGameWin();
+		MappaGrafica mG = gW.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
