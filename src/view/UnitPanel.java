@@ -9,7 +9,6 @@ public class UnitPanel extends javax.swing.JPanel {
 	                     
 	private javax.swing.JButton aereo;
     private javax.swing.JButton artiglieria;
-    private javax.swing.JLabel costo;
     private javax.swing.JButton fanteriaLegg;
     private javax.swing.JButton fanteriaPes;
     private javax.swing.JButton gioca;
@@ -17,8 +16,6 @@ public class UnitPanel extends javax.swing.JPanel {
     private javax.swing.JLabel soldi;
     
     public static final String SOLDITXT = "Soldi rimanenti: ";
-    public static final String COSTOTXT = "Costo: ";
-
 
     public UnitPanel() {
         initComponents();
@@ -27,12 +24,7 @@ public class UnitPanel extends javax.swing.JPanel {
     public JLabel getSoldiLabel(){
     	return this.soldi;
     }
-    
-    public JLabel getCostoLabel(){
-    	return this.costo;
-    }
-    
-                              
+                             
     private void initComponents() {
     	
     	UnitListener uL = new UnitListener();
@@ -90,8 +82,6 @@ public class UnitPanel extends javax.swing.JPanel {
         soldi = new JLabel();
         soldi.setText(SOLDITXT);
         
-        costo = new JLabel();
-        costo.setText(COSTOTXT);
         
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -107,7 +97,6 @@ public class UnitPanel extends javax.swing.JPanel {
                         .addComponent(fanteriaLegg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(artiglieria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(gioca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(costo)
                     .addComponent(soldi))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -125,12 +114,10 @@ public class UnitPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(artiglieria)
                 .addGap(18, 18, 18)
-                .addComponent(costo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(soldi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(gioca)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }            
 }

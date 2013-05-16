@@ -1,5 +1,6 @@
 package controller;
 
+import model.GraphMap;
 import model.Mappa;
 import model.Player;
 import view.GameWin;
@@ -10,6 +11,7 @@ public class GameMode {
 	private Mappa mappa;
 	private Player player1;
 	private Player player2;
+	private GraphMap graphMap;
 	
 	
 	private GameMode(){
@@ -17,6 +19,7 @@ public class GameMode {
 		this.mappa=null;
 		this.player1 = new Player(1);
 		this.player2 = new Player(2);
+		this.graphMap=null;
 	}
 	
 	public GameWin getGameWin(){
@@ -52,6 +55,12 @@ public class GameMode {
 			throw new IllegalArgumentException("Mappa nulla");
 		}
 		this.mappa=m;
+		// setto anche il graphMap in quanto questi 2 oggetti sono strettamente correlati
+		this.setGraphMap(mappa);
+	}
+	
+	private void setGraphMap(Mappa m){
+		this.graphMap= new GraphMap(m);
 	}
 	
 	// Metodo della classe impiegato per accedere al Singleton
