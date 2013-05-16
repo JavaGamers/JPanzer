@@ -4,6 +4,11 @@ public class Mappa {
 	private int dim; // coincide con il numerdo di livelli della mappa
 	private Esagono[] component;
 	
+	public static final int SMALL = 10;
+	public static final int MEDIUM = 20;
+	public static final int LARGE = 30;
+	public static final int EPIC = 50;
+	
 	// d= dimensione
 	public Mappa(int d){
 		this.dim = d;

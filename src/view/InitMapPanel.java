@@ -16,6 +16,15 @@ public class InitMapPanel extends javax.swing.JPanel {
     public InitMapPanel() {
         initComponents();
     }
+    
+    public boolean setDimListEnable(){
+    	boolean ok = false;
+    	if(!this.dimList.isEnabled()){
+    		this.dimList.setEnabled(true);
+    		ok=true;
+    	}
+    	return ok;
+    }
                         
     private void initComponents() {
 
@@ -40,6 +49,8 @@ public class InitMapPanel extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        dimList.setEnabled(false);
+        
         jScrollPane1.setViewportView(dimList);
 
         newMap.setText("Nuova Mappa");
