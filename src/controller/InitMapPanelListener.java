@@ -16,6 +16,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import view.GameWin;
+import view.LandPanel;
 
 import model.Collina;
 import model.Esagono;
@@ -26,11 +27,12 @@ import model.Montagna;
 import model.Pianura;
 
 public class InitMapPanelListener implements ActionListener, ListSelectionListener {
-	private GameMode gameMode = GameMode.getGameMode();
-	private static final String NEWOPT = "nuova";
+	public static GameMode gameMode = GameMode.getGameMode();
+	private static final String NEWOPT = "new";
 	private static final String EDITOPT = "edit";
 	private static final String BACKOPT = "back";
 	private static final String FORWARDOPT = "forward";
+	private static int choosedOpt = 1; // dimensione mappa di default: media
 	
 	public void actionPerformed(ActionEvent e) {
 		String com = e.getActionCommand();
@@ -52,14 +54,58 @@ public class InitMapPanelListener implements ActionListener, ListSelectionListen
 
 
 	private void forwardOpt() {
-	
+		if(gameMode.getInitMapPanel().getDimList().isEnabled()){
 		
+			switch(choosedOpt){
+			case 0: gameMode.createAndSetMappa(Mappa.SMALL);
+					break;
+			case 1: gameMode.createAndSetMappa(Mappa.MEDIUM);
+					break;
+			case 2: gameMode.createAndSetMappa(Mappa.LARGE);
+					break;
+			case 3: gameMode.createAndSetMappa(Mappa.EPIC);
+					break;
+				
+			}
+			
+			if(gameMode.getMappaGrafica()==null){
+				gameMode.createAndSetMappaGrafica();
+			}
+			
+			GameWin gameWin = gameMode.getGameWin();
+			LandPanel landPanel = null;
+			if(gameMode.getLandPanel()==null){
+				gameMode.createAndSetLandPanel();
+			}
+			
+			landPanel = gameMode.getLandPanel();
+			
+			Container c = gameWin.getContentPane();
+			
+			// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
+			c.removeAll();
+			c.add(landPanel, BorderLayout.EAST);
+			c.add(gameMode.getMappaGrafica(),BorderLayout.WEST);
+			
+			//ridisegno della finestra
+			gameWin.repaint();
+			gameWin.validate();
+			
+			//disattivo la JList
+			gameMode.getInitMapPanel().getDimList().setEnabled(false);
+		}	
 	}
 
 
 	private void backOpt() {
-		// TODO Auto-generated method stub
+		GameWin gameWin = gameMode.getGameWin();
+		Container c = gameWin.getContentPane();
 		
+		// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
+		c.removeAll();
+		c.add(gameMode.getStartPanel(),BorderLayout.CENTER);
+		gameWin.repaint();
+		gameWin.validate();
 	}
 
 
@@ -107,10 +153,27 @@ public class InitMapPanelListener implements ActionListener, ListSelectionListen
     				
     				//setto la nuova mappa 
     				gameMode.setMappa(m);
-    				gameMode.createAndSetMappaGrafica();
+    				if(gameMode.getMappaGrafica()==null){
+    					gameMode.createAndSetMappaGrafica();
+    				}
+    				
     				GameWin gameWin = gameMode.getGameWin();
+    				LandPanel landPanel = null;
+    				if(gameMode.getLandPanel()==null){
+    					gameMode.createAndSetLandPanel();
+    				}
+    				
+    				landPanel = gameMode.getLandPanel();
+    				
     				Container c = gameWin.getContentPane();
+    				
+    				// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
+    				c.removeAll();
     				c.add(gameMode.getMappaGrafica(),BorderLayout.WEST);
+    				c.add(landPanel, BorderLayout.EAST);
+    				//ridisegno della finestra
+    				gameWin.repaint();
+    				gameWin.validate();
     				
     			} 
     			catch (IOException ioException) {
@@ -121,6 +184,7 @@ public class InitMapPanelListener implements ActionListener, ListSelectionListen
 
 
 	private void newOpt() {
+		// rendo sensibile la JList di scelta
 		gameMode.getInitMapPanel().setDimListEnable();
 		
 	}
@@ -128,19 +192,22 @@ public class InitMapPanelListener implements ActionListener, ListSelectionListen
 
 	public void valueChanged(ListSelectionEvent e) {
 		ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+		
+		// non si sa se funziona
 		if (!lsm.isSelectionEmpty()){
             	if (lsm.isSelectedIndex(0)){
-            		gameMode.createAndSetMappa(Mappa.SMALL);
+            		choosedOpt=0;
             	}
             	else if (lsm.isSelectedIndex(1)){
-            		gameMode.createAndSetMappa(Mappa.MEDIUM);
+            		choosedOpt=1;
             	}
             	else if (lsm.isSelectedIndex(2)){
-            		gameMode.createAndSetMappa(Mappa.LARGE);
+            		choosedOpt=2;
             	}
             	else if (lsm.isSelectedIndex(3)){
-            		gameMode.createAndSetMappa(Mappa.EPIC);
-            	}            	
+            		choosedOpt=3;
+            	}
+            	
 		}
 	}
 	

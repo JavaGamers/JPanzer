@@ -1,5 +1,9 @@
 package view;
 
+import javax.swing.JList;
+
+import controller.InitMapPanelListener;
+
 public class InitMapPanel extends javax.swing.JPanel {
 
                        
@@ -7,7 +11,6 @@ public class InitMapPanel extends javax.swing.JPanel {
     private javax.swing.JList dimList;
     private javax.swing.JButton editMap;
     private javax.swing.JButton forward;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton newMap;
     private javax.swing.JLabel titleLabel;
@@ -25,10 +28,15 @@ public class InitMapPanel extends javax.swing.JPanel {
     	}
     	return ok;
     }
+    
+    public JList getDimList(){
+    	return this.dimList;
+    }
                         
     private void initComponents() {
+    	
+    	InitMapPanelListener impl = new InitMapPanelListener();
 
-        jButton1 = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
         editMap = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -37,12 +45,12 @@ public class InitMapPanel extends javax.swing.JPanel {
         back = new javax.swing.JButton();
         forward = new javax.swing.JButton();
 
-        jButton1.setText("jButton1");
-
         titleLabel.setFont(new java.awt.Font("Monotype Corsiva", 0, 48)); // NOI18N
         titleLabel.setText("Cosa vuoi fare?");
 
         editMap.setText("Edita preesistente");
+        editMap.addActionListener(impl);
+        editMap.setActionCommand("edit");
 
         dimList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Piccola", "Media", "Grande", "Epica"};
@@ -50,14 +58,21 @@ public class InitMapPanel extends javax.swing.JPanel {
             public Object getElementAt(int i) { return strings[i]; }
         });
         dimList.setEnabled(false);
+        dimList.addListSelectionListener(impl);
         
         jScrollPane1.setViewportView(dimList);
 
         newMap.setText("Nuova Mappa");
+        newMap.addActionListener(impl);
+        newMap.setActionCommand("new");
 
         back.setText("Indietro");
+        back.addActionListener(impl);
+        back.setActionCommand("back");
 
         forward.setText("Avanti");
+        forward.addActionListener(impl);
+        forward.setActionCommand("forward");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

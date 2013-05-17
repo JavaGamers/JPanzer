@@ -104,7 +104,11 @@ public class GameMode {
 		}
 		this.mappa=m;
 		// setto anche il graphMap in quanto questi 2 oggetti sono strettamente correlati
-		this.setGraphMap(mappa);
+//		this.setGraphMap(mappa);
+		// risetto anche la MappaGrafica per lo stesso motivo
+		if(this.mappaGrafica!=null){
+			this.mappaGrafica.setMappa(m);
+		}
 	}
 	
 	private void setGraphMap(Mappa m){
@@ -118,7 +122,7 @@ public class GameMode {
 	
 	public void createAndSetMappaGrafica(){
 		if(this.mappa!=null){
-			this.mappaGrafica = new MappaGrafica(this.mappa, 700, 500);
+			this.mappaGrafica = new MappaGrafica(this.mappa, this.gameWin.getWidth()/2,this.gameWin.getHeight()/2);
 		}
 		else{
 			System.out.println("no mappa");
@@ -148,6 +152,7 @@ public class GameMode {
 	public void createAndSetUnitPanel(){
 		this.unitPanel = new UnitPanel();
 	}
+	
 	
 	// Metodo della classe impiegato per accedere al Singleton
     public static synchronized GameMode getGameMode() {

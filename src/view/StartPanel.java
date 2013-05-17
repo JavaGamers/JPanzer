@@ -1,5 +1,7 @@
 package view;
 
+import controller.StartPanelListener;
+
 public class StartPanel extends javax.swing.JPanel {
 	                  
     private javax.swing.JButton editMap;
@@ -13,6 +15,8 @@ public class StartPanel extends javax.swing.JPanel {
     }
                        
     private void initComponents() {
+    	
+    	StartPanelListener spl = new StartPanelListener();
 
         newGame = new javax.swing.JButton();
         loadGame = new javax.swing.JButton();
@@ -20,10 +24,17 @@ public class StartPanel extends javax.swing.JPanel {
         welcomeTxt = new javax.swing.JLabel();
 
         newGame.setText("Nuova Partita");
+        newGame.addActionListener(spl);
+        newGame.setActionCommand("new");
+
 
         loadGame.setText("Carica Partita");
+        loadGame.addActionListener(spl);
+        loadGame.setActionCommand("load");
 
         editMap.setText("Editor di Mappa");
+        editMap.addActionListener(spl);
+        editMap.setActionCommand("edit");
 
         welcomeTxt.setFont(new java.awt.Font("Monotype Corsiva", 0, 48)); // NOI18N
         welcomeTxt.setText("Benvenuti in JPanzer!");

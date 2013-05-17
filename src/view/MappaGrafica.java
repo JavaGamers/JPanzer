@@ -22,7 +22,7 @@ public class MappaGrafica extends javax.swing.JPanel {
 	public static final double ZOOMRAGGIO = 30;
           
 
-    public MappaGrafica(Mappa m, int x, int y) {
+    public MappaGrafica(Mappa m, int x, int y) { 
         this.addMouseListener(new MappaListener());
         this.raggio=STDRAGGIO;
         this.xC=x;

@@ -1,12 +1,12 @@
 package controller;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
@@ -25,118 +25,53 @@ import model.Montagna;
 import model.Panzer;
 import model.Pianura;
 
+import view.CommandPanel;
 import view.GameWin;
-import view.MappaGrafica;
+import view.LandPanel;
 
-public class CommandListener implements ActionListener {
-	public final static String ZOOMOPT = "zoom";
-	public final static String MUOVIOPT = "muovi";
-	public final static String ATTACCAOPT = "attacca";
-	public final static String ABBANDONAOPT = "abbandona";
-	public final static String SALVAOPT = "salva";
-	public final static String CARICAOPT = "carica";
-	public final static String SCORPORAOPT = "scorpora";
-	public final static String ACCORPAOPT = "accorpa";
-	public final static String PASSAOPT = "passa";
-	public final static String SHOPOPT = "shop";
+public class StartPanelListener implements ActionListener {
 	public static GameMode gameMode = GameMode.getGameMode();
-
+	public final static String NEWOPT = "new";
+	public final static String LOADOPT = "load";
+	public final static String EDITOPT = "edit";
 	
-
 	public void actionPerformed(ActionEvent e) {
 		String com = e.getActionCommand();
 		
-		if(com.equals(ZOOMOPT)){
-			zoomOpt();
+		if(com.equals(NEWOPT)){
+			newOpt();
 		}
-		else if(com.equals(MUOVIOPT)){
-			muoviOpt();
+		else if(com.equals(LOADOPT)){
+			loadOpt();
 		}
-		else if(com.equals(ABBANDONAOPT)){
-			abbandonaOpt();
+		else if(com.equals(EDITOPT)){
+			editOpt();
 		}
-		else if(com.equals(ACCORPAOPT)){
-			accorpaOpt();
+
+	}
+
+	private void editOpt() {
+		GameWin gameWin = gameMode.getGameWin();
+		Container c = gameWin.getContentPane();
+		if(gameMode.getInitMapPanel()==null){
+			gameMode.createAndSetInitMapPanel();
 		}
-		else if(com.equals(ATTACCAOPT)){
-			attaccaOpt();
-		}
-		else if(com.equals(CARICAOPT)){
-			caricaOpt();
-		}
-		else if(com.equals(PASSAOPT)){
-			passaOpt();
-		}
-		else if(com.equals(SALVAOPT)){
-			salvaOpt();
-		}
-		else if(com.equals(SCORPORAOPT)){
-			scorporaOpt();
-		}
-		else if(com.equals(SHOPOPT)){
-			shopOpt();
-		}
+		
+		// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
+		c.removeAll();
+		c.add(gameMode.getInitMapPanel(),BorderLayout.CENTER);
+		
+		//ridisegno della finestra
+		gameWin.repaint();
+		gameWin.validate();
 		
 	}
 
-	private void shopOpt() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void scorporaOpt() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	private void salvaOpt() {
-		GameWin gW = gameMode.getGameWin();
-		MappaGrafica mG = gameMode.getMappaGrafica();
-		JFileChooser jfc = new JFileChooser();		
-		int returnVal = jfc.showSaveDialog(mG);
-		 
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-        	File file = jfc.getSelectedFile();  
-            FileWriter fw;
-    		BufferedWriter bw;
-    		
-    		try{
-    			
-    		fw = new FileWriter(file);
-    		bw = new BufferedWriter(fw);
-    		
-    		bw.write(""+mG.getMappa().getDim());
-    		bw.write("\n");
-    		//manca di scrivere di chi è il turno
-    		for(int i=0;i<mG.getMappa().getComponent().length;i++){
-    			bw.write(mG.getMappa().getComponent()[i].saveToString());
-    			bw.write("\n");
-    		}
-    		bw.close();
-    		fw.close();
-    		
-    		} catch(IOException io){
-    			System.out.println(io.toString());
-    		}
-        }
-        		
-	}
-
-
-	private void passaOpt() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	private void caricaOpt() {
-		GameWin gW = this.gameMode.getGameWin();
-		MappaGrafica mG = gameMode.getMappaGrafica();
+	private void loadOpt() {
 		JFileChooser jfc = new JFileChooser();
-		int returnVal = jfc.showOpenDialog(mG);
+		int returnVal = jfc.showOpenDialog(gameMode.getInitMapPanel());
 		 
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = jfc.getSelectedFile();  
             BufferedReader br;
     		String[] elements;
@@ -210,47 +145,51 @@ public class CommandListener implements ActionListener {
     				br.close();
     				
     				//setto la nuova mappa nel pannello
-    				mG.setMappa(m);
+    				gameMode.setMappa(m);
+    				if(gameMode.getMappaGrafica()==null){
+    					gameMode.createAndSetMappaGrafica();
+    				}
+    				
+    				GameWin gameWin = gameMode.getGameWin();
+    				CommandPanel commandPanel = null;
+    				if(gameMode.getCommandPanel()==null){
+    					gameMode.createAndSetCommandPanel();
+    				}
+    				
+    				commandPanel = gameMode.getCommandPanel();
+    				
+    				Container c = gameWin.getContentPane();
+    				
+    				// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
+    				c.removeAll();
+    				c.add(gameMode.getMappaGrafica(),BorderLayout.WEST);
+    				c.add(commandPanel, BorderLayout.EAST);
+    				//ridisegno della finestra
+    				gameWin.repaint();
+    				gameWin.validate();
+    				
     			} 
     			catch (IOException ioException) {
     			}
-
     		}
         }
-		
 	}
 
-	private void attaccaOpt() {	
+	private void newOpt() {
+		GameWin gameWin = gameMode.getGameWin();
+		Container c = gameWin.getContentPane();
+		if(gameMode.getInitGame()==null){
+			gameMode.createAndSetInitGame();
+		}
 		
-	}
-
-
-	private void accorpaOpt() {
-		// TODO Auto-generated method stub
+		// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
+		c.removeAll();
+		c.add(gameMode.getInitGame(),BorderLayout.CENTER);
 		
-	}
-
-
-	private void abbandonaOpt() {
-		// TODO Auto-generated method stub
+		//ridisegno della finestra
+		gameWin.repaint();
+		gameWin.validate();
 		
-	}
-
-
-	private void muoviOpt() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	private void zoomOpt() {
-		GameWin gW = gameMode.getGameWin();
-		MappaGrafica mG = gameMode.getMappaGrafica();
-		if(mG.getRaggio()== MappaGrafica.STDRAGGIO)
-			mG.setRaggio(MappaGrafica.ZOOMRAGGIO);
-		else
-			mG.setRaggio(MappaGrafica.STDRAGGIO);
-			mG.update(mG.getGraphics());
 	}
 	
 	private static String[] getElements(String s){

@@ -8,12 +8,15 @@ public class GraphMap {
 	public GraphMap(Mappa m){
 		int n = m.getComponent().length;
 		this.adiacenze = new LinkedList[n];
+		int costo=0;
 		
 		for(int i=0;i<n;i++){
 			this.adiacenze[i]= new LinkedList<Nodo>();
 			for(int j=0;j<6;j++){
 				int id = m.getComponent()[i].getAdiacenze()[j].getId();
-				int costo = m.getComponent()[i].getTerritorio().getCosto();
+				if(m.getComponent()[i].getTerritorio()!=null){
+				costo = m.getComponent()[i].getTerritorio().getCosto();
+				}
 				Nodo nodo = new Nodo(id,costo);
 				this.adiacenze[i].addLast(nodo);
 			}

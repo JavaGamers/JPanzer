@@ -33,7 +33,7 @@ public class LandListener implements ActionListener {
 	public final static String LAGOOPT = "lago";
 	public final static String SALVAOPT = "salva";
 	public final static String CARICAOPT = "carica";
-	private GameMode gM = GameMode.getGameMode();
+	public static GameMode gameMode = GameMode.getGameMode();
 
 	public void actionPerformed(ActionEvent e) {
 		String com = e.getActionCommand();
@@ -63,8 +63,8 @@ public class LandListener implements ActionListener {
 	}
 
 	private void pianuraOpt() {
-		GameWin gW = this.gM.getGameWin();
-		MappaGrafica mG = gW.getMappaGrafica();
+		GameWin gW = gameMode.getGameWin();
+		MappaGrafica mG = gameMode.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if (mG.getSelezionato() != -1) {
@@ -78,8 +78,8 @@ public class LandListener implements ActionListener {
 	}
 
 	private void lagoOpt() {
-		GameWin gW = this.gM.getGameWin();
-		MappaGrafica mG = gW.getMappaGrafica();
+		GameWin gW = gameMode.getGameWin();
+		MappaGrafica mG = gameMode.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
@@ -92,8 +92,8 @@ public class LandListener implements ActionListener {
 	}
 
 	private void montagnaOpt() {
-		GameWin gW = this.gM.getGameWin();
-		MappaGrafica mG = gW.getMappaGrafica();
+		GameWin gW = gameMode.getGameWin();
+		MappaGrafica mG = gameMode.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
@@ -106,8 +106,8 @@ public class LandListener implements ActionListener {
 	}
 
 	private void collinaOpt() {
-		GameWin gW = this.gM.getGameWin();
-		MappaGrafica mG = gW.getMappaGrafica();
+		GameWin gW = gameMode.getGameWin();
+		MappaGrafica mG = gameMode.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
@@ -120,8 +120,8 @@ public class LandListener implements ActionListener {
 	}
 
 	private void forestaOpt() {
-		GameWin gW = this.gM.getGameWin();
-		MappaGrafica mG = gW.getMappaGrafica();
+		GameWin gW = gameMode.getGameWin();
+		MappaGrafica mG = gameMode.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
@@ -135,8 +135,8 @@ public class LandListener implements ActionListener {
 	}
 	
 	private void salvaOpt(){
-		GameWin gW = this.gM.getGameWin();
-		MappaGrafica mG = gW.getMappaGrafica();
+		GameWin gW = gameMode.getGameWin();
+		MappaGrafica mG = gameMode.getMappaGrafica();
 		JFileChooser jfc = new JFileChooser();		
 		int returnVal = jfc.showSaveDialog(mG);
 		 
@@ -166,8 +166,8 @@ public class LandListener implements ActionListener {
 	}
 
 	private void caricaOpt() {
-		GameWin gW = this.gM.getGameWin();
-		MappaGrafica mG = gW.getMappaGrafica();
+		GameWin gW = gameMode.getGameWin();
+		MappaGrafica mG = gameMode.getMappaGrafica();
 		JFileChooser jfc = new JFileChooser();
 		int returnVal = jfc.showOpenDialog(mG);
 		 

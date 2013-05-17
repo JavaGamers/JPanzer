@@ -22,7 +22,7 @@ public class UnitListener implements ActionListener {
 	public final static String AEREOOPT = "aereo";
 	public final static String ARTIGLIERIAOPT = "artiglieria";
 	public final static String GIOCAOPT = "gioca";
-	private GameMode gM = GameMode.getGameMode();
+	public static GameMode gameMode = GameMode.getGameMode();
 	
 	public void actionPerformed(ActionEvent e) {
 		String com = e.getActionCommand();
@@ -55,8 +55,8 @@ public class UnitListener implements ActionListener {
 
 	
 	private void artiglieriaOpt() {
-		GameWin gW = this.gM.getGameWin();
-		MappaGrafica mG = gW.getMappaGrafica();
+		GameWin gW = gameMode.getGameWin();
+		MappaGrafica mG = gameMode.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
@@ -70,8 +70,8 @@ public class UnitListener implements ActionListener {
 
 
 	private void aereoOpt() {
-		GameWin gW = this.gM.getGameWin();
-		MappaGrafica mG = gW.getMappaGrafica();
+		GameWin gW = gameMode.getGameWin();
+		MappaGrafica mG = gameMode.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
@@ -86,8 +86,8 @@ public class UnitListener implements ActionListener {
 
 
 	private void panzerOpt() {
-		GameWin gW = this.gM.getGameWin();
-		MappaGrafica mG = gW.getMappaGrafica();
+		GameWin gW = gameMode.getGameWin();
+		MappaGrafica mG = gameMode.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
@@ -102,8 +102,8 @@ public class UnitListener implements ActionListener {
 
 
 	private void fanteriaPesOpt() {
-		GameWin gW = this.gM.getGameWin();
-		MappaGrafica mG = gW.getMappaGrafica();
+		GameWin gW = gameMode.getGameWin();
+		MappaGrafica mG = gameMode.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
@@ -118,8 +118,8 @@ public class UnitListener implements ActionListener {
 
 
 	private void fanteriaLeggOpt() {
-		GameWin gW = this.gM.getGameWin();
-		MappaGrafica mG = gW.getMappaGrafica();
+		GameWin gW = gameMode.getGameWin();
+		MappaGrafica mG = gameMode.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		if(mG.getSelezionato()!=-1){
