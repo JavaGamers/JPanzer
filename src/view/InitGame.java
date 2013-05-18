@@ -1,9 +1,10 @@
 package view;
 
-
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 import model.Mappa;
+import model.Player;
 import controller.InitGameListener;
 
 public class InitGame extends javax.swing.JPanel {
@@ -62,6 +63,16 @@ public class InitGame extends javax.swing.JPanel {
     		return this.p2initValueMoney;
     }
     
+    public JSlider getSlider(int num){
+    	if(num<1 || num>2){
+    		throw new IllegalArgumentException("invalid number: there are only 2 textfields");
+    	}
+    	if(num==1)
+    		return this.p1Slider;
+    	else
+    		return this.p2Slider;
+    }
+    
                         
     private void initComponents() {
     	
@@ -77,8 +88,8 @@ public class InitGame extends javax.swing.JPanel {
         p1Name = new javax.swing.JTextField();
         p1moneyLabel = new javax.swing.JLabel();
         p1initValueMoney = new javax.swing.JTextField();
-        p1Slider = new javax.swing.JSlider();
-        p2Slider = new javax.swing.JSlider();
+        p1Slider = new JSlider(JSlider.HORIZONTAL, Player.MINMONEY, Player.MAXMONEY, Player.STDMONEY);
+        p2Slider = new JSlider(JSlider.HORIZONTAL, Player.MINMONEY, Player.MAXMONEY, Player.STDMONEY);
         p2initValueMoney = new javax.swing.JTextField();
         p2Name = new javax.swing.JTextField();
         p2moneyLabel = new javax.swing.JLabel();
@@ -106,6 +117,16 @@ public class InitGame extends javax.swing.JPanel {
         chooseMap.setText("Scegli Mappa");
         chooseMap.addActionListener(igl);
         chooseMap.setActionCommand("chooseMap");
+        
+        p1Slider.addChangeListener(igl);
+        p1Slider.setMajorTickSpacing(500);
+        p1Slider.setMinorTickSpacing(100);
+        p1Slider.setPaintTicks(true);
+        
+        p2Slider.addChangeListener(igl);
+        p2Slider.setMajorTickSpacing(500);
+        p2Slider.setMinorTickSpacing(100);
+        p2Slider.setPaintTicks(true);
 
         player1Label.setText("Player 1");
 

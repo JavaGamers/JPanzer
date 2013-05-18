@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 import javax.swing.JFileChooser;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import model.Collina;
 import model.Esagono;
@@ -27,7 +30,7 @@ import view.InitGame;
 import view.MappaGrafica;
 import view.UnitPanel;
 
-public class InitGameListener implements ActionListener {
+public class InitGameListener implements ActionListener, ChangeListener {
 	public static GameMode gameMode = GameMode.getGameMode();
 	private static final String CHOOSEMAPOPT = "chooseMap";
 	private static final String FORWARDOPT = "forward";
@@ -219,5 +222,21 @@ public class InitGameListener implements ActionListener {
 			i++;
 		}
 		return elements;
+	}
+
+	public void stateChanged(ChangeEvent e) {
+		JSlider source = (JSlider)e.getSource();
+		if(source.equals(gameMode.getInitGame().getSlider(1))){
+			if (!source.getValueIsAdjusting()) {
+		    	int soldi = source.getValue();
+		    	gameMode.getInitGame().getTextFieldSoldi(1).setText(""+soldi);
+		    }
+		}
+		else{
+			if (!source.getValueIsAdjusting()) {
+		    	int soldi = source.getValue();
+		    	gameMode.getInitGame().getTextFieldSoldi(2).setText(""+soldi);
+			}
+		}
 	}
 }
