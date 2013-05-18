@@ -20,7 +20,7 @@ public class MappaGrafica extends javax.swing.JPanel {
 	
 	public static final double STDRAGGIO = 70;
 	public static final double ZOOMRAGGIO = 30;
-          
+	public static final double PREVIEWRAGGIO = 8;          
 
     public MappaGrafica(Mappa m, int x, int y) { 
         this.addMouseListener(new MappaListener());
@@ -147,12 +147,10 @@ public class MappaGrafica extends javax.swing.JPanel {
 	
 	public void setRaggio(double r){
 		this.raggio=r;
-		this.paintComponent(this.getGraphics());
 	}
 	
 	public void setMappa(Mappa m){
 		this.mappa=m;
-		this.update(getGraphics());
 	}
                         
  

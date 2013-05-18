@@ -4,6 +4,7 @@ import model.GraphMap;
 import model.Mappa;
 import model.Player;
 import view.CommandPanel;
+import view.ErrorWindow;
 import view.GameWin;
 import view.InitGame;
 import view.InitMapPanel;
@@ -26,6 +27,7 @@ public class GameMode {
 	private LandPanel landPanel;
 	private StartPanel startPanel;
 	private UnitPanel unitPanel;
+	private ErrorWindow errorWindow;
 	
 	
 	private GameMode(){
@@ -40,6 +42,11 @@ public class GameMode {
 		this.landPanel=null;
 		this.startPanel=null;
 		this.unitPanel=null;
+		this.errorWindow= new ErrorWindow();
+	}
+	
+	public ErrorWindow getErrorWindow(){
+		return this.errorWindow;
 	}
 	
 	public GameWin getGameWin(){
@@ -113,6 +120,17 @@ public class GameMode {
 	
 	private void setGraphMap(Mappa m){
 		this.graphMap= new GraphMap(m);
+	}
+	
+	public void setPlayer(Player p, int num){
+		if(num<1 || num>2){
+    		throw new IllegalArgumentException("invalid number in setplayer method of gameMode");
+    	}
+    	if(num==1){
+    		this.player1=p;
+    	}
+    	else
+    		this.player2=p;
 	}
 	
 	public void createAndSetMappa(int dim){

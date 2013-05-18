@@ -6,6 +6,8 @@ public class Player {
 	private boolean turno;
 	private int soldi;
 	public static final int STDMONEY = 1000;
+	public static final int MINMONEY = 500;
+	public static final int MAXMONEY = 2000;
 	
 	
 	public Player(String nome, int player){
@@ -49,7 +51,7 @@ public class Player {
 		this.nome=nome;
 	}
 	
-	public void updateMoney(int dindi){
+	public void setMoney(int dindi){
 		if(dindi<0){
 			throw new IllegalArgumentException("non puoi andare in debito");
 		}

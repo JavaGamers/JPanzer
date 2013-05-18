@@ -1,35 +1,76 @@
 package view;
 
+
+import javax.swing.JTextField;
+
+import model.Mappa;
+import controller.InitGameListener;
+
 public class InitGame extends javax.swing.JPanel {
 
                        
-    private javax.swing.JPanel PreviewMap;
+    private MappaGrafica PreviewMap;
+    
     private javax.swing.JButton back;
     private javax.swing.JButton chooseMap;
     private javax.swing.JButton forward;
+    
     private javax.swing.JTextField p1Name;
-    private javax.swing.JLabel p1NameLabel;
-    private javax.swing.JSlider p1Slider;
     private javax.swing.JTextField p1initValueMoney;
-    private javax.swing.JLabel p1moneyLabel;
     private javax.swing.JTextField p2Name;
-    private javax.swing.JLabel p2NameLabel;
-    private javax.swing.JSlider p2Slider;
     private javax.swing.JTextField p2initValueMoney;
+    
+    private javax.swing.JSlider p1Slider;
+    private javax.swing.JSlider p2Slider;
+    
+    private javax.swing.JLabel p1NameLabel;
+    private javax.swing.JLabel p1moneyLabel;
+    private javax.swing.JLabel p2NameLabel;
     private javax.swing.JLabel p2moneyLabel;
     private javax.swing.JLabel player1Label;
     private javax.swing.JLabel player2Label;
     private javax.swing.JLabel titleLabel;
     
+    public static final Mappa DEFMAP = new Mappa(Mappa.MEDIUM);
+    
     
     public InitGame() {
         initComponents();
     }
+    
+    public MappaGrafica getPreviewMap(){
+    	return this.PreviewMap;
+    }
+    
+    public JTextField getTextFieldNome(int num){
+    	if(num<1 || num>2){
+    		throw new IllegalArgumentException("invalid number: there are only 2 textfields");
+    	}
+    	if(num==1)
+    		return this.p1Name;
+    	else
+    		return this.p2Name;
+    }
+    
+    public JTextField getTextFieldSoldi(int num){
+    	if(num<1 || num>2){
+    		throw new IllegalArgumentException("invalid number: there are only 2 textfields");
+    	}
+    	if(num==1)
+    		return this.p1initValueMoney;
+    	else
+    		return this.p2initValueMoney;
+    }
+    
                         
     private void initComponents() {
-
+    	
+    	InitGameListener igl = new InitGameListener();
         titleLabel = new javax.swing.JLabel();
-        PreviewMap = new javax.swing.JPanel();
+        
+        PreviewMap = new MappaGrafica(DEFMAP,0,0);
+        PreviewMap.setRaggio(MappaGrafica.PREVIEWRAGGIO);
+        
         chooseMap = new javax.swing.JButton();
         player1Label = new javax.swing.JLabel();
         p1NameLabel = new javax.swing.JLabel();
@@ -63,6 +104,8 @@ public class InitGame extends javax.swing.JPanel {
         );
 
         chooseMap.setText("Scegli Mappa");
+        chooseMap.addActionListener(igl);
+        chooseMap.setActionCommand("chooseMap");
 
         player1Label.setText("Player 1");
 
@@ -77,8 +120,12 @@ public class InitGame extends javax.swing.JPanel {
         p2NameLabel.setText("Nome: ");
 
         back.setText("Indietro");
+        back.addActionListener(igl);
+        back.setActionCommand("back");
 
         forward.setText("Avanti");
+        forward.addActionListener(igl);
+        forward.setActionCommand("forward");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -111,39 +158,37 @@ public class InitGame extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(p1Name, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(p1initValueMoney, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                .addComponent(PreviewMap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(chooseMap)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(PreviewMap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 81, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(forward, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(chooseMap)
-                .addGap(73, 73, 73))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(player1Label)
+                .addGap(4, 4, 4)
+                .addComponent(chooseMap)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(player1Label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(chooseMap)
-                        .addGap(18, 18, 18)
-                        .addComponent(PreviewMap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(p1NameLabel)
                             .addComponent(p1Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -165,12 +210,16 @@ public class InitGame extends javax.swing.JPanel {
                             .addComponent(p2initValueMoney, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(p2Slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addComponent(PreviewMap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(back)
                     .addComponent(forward))
                 .addContainerGap())
         );
-    }                                
+    }                               
                   
 }

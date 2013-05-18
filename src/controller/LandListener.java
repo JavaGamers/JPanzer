@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -33,6 +35,7 @@ public class LandListener implements ActionListener {
 	public final static String LAGOOPT = "lago";
 	public final static String SALVAOPT = "salva";
 	public final static String CARICAOPT = "carica";
+	public final static String MAINMENUOPT = "main";
 	public static GameMode gameMode = GameMode.getGameMode();
 
 	public void actionPerformed(ActionEvent e) {
@@ -59,7 +62,22 @@ public class LandListener implements ActionListener {
 		else if(com.equals(SALVAOPT)){
 			salvaOpt();
 		}
+		else if(com.equals(MAINMENUOPT)){
+			mainMenuOpt();
+		}
 
+	}
+
+	private void mainMenuOpt() {
+		GameWin gameWin = gameMode.getGameWin();
+		Container c = gameWin.getContentPane();
+		
+		// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
+		c.removeAll();
+		c.add(gameMode.getStartPanel(),BorderLayout.CENTER);
+		gameWin.repaint();
+		gameWin.validate();
+		
 	}
 
 	private void pianuraOpt() {
