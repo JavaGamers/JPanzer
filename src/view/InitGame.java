@@ -100,6 +100,9 @@ public class InitGame extends javax.swing.JPanel {
 
         titleLabel.setFont(new java.awt.Font("Monotype Corsiva", 0, 48)); // NOI18N
         titleLabel.setText("Pronti per cominciare...");
+        
+        p1initValueMoney.setText(""+Player.STDMONEY);
+        p2initValueMoney.setText(""+Player.STDMONEY);
 
         PreviewMap.setPreferredSize(new java.awt.Dimension(245, 245));
 

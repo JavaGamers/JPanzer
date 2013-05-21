@@ -39,6 +39,10 @@ public class Player {
 		return this.player;
 	}
 	
+	public int getSoldi(){
+		return this.soldi;
+	}
+	
 	public boolean isTurno(){
 		return this.turno;
 	}

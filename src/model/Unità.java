@@ -16,6 +16,8 @@ public abstract class Unità extends Observable {
 	protected int player;	// 1=player 1 - 2= player 2
 	protected BufferedImage bImg;
 	
+	public static final int UNITACOMPRABILI = 10;
+	
 	public Unità(int n, int player){
 		if(player<1 || player>2){
 			throw new IllegalArgumentException("Si gioca in 2");
@@ -81,6 +83,13 @@ public abstract class Unità extends Observable {
 		this.esp=e;
 	}
 	
+	public void setNumUnits(int n){
+		if(n<0){
+			throw new IllegalArgumentException("non ha senso avere numero di unità negative");
+		}
+		this.numUnits = n;
+	}
+	
 	public void updateEsp(){
 		if(this.esp<10)
 			this.esp++;
@@ -111,6 +120,8 @@ public abstract class Unità extends Observable {
 		this.setChanged();
 		this.notifyObservers();
 	}
+	
+	
 	
 	// ritorna true se il set è andato a buon fine 
 	public boolean aggiornaPassi(int p){

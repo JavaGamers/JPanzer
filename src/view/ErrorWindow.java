@@ -11,8 +11,8 @@ public class ErrorWindow extends javax.swing.JFrame {
         initComponents();
     }
     
-    public JLabel getErrorLabel(){
-    	return this.errorMessage;
+    public void setErrorLabel(String s){
+    	this.errorMessage.setText(DEFTEXT+s);
     }
                          
     private void initComponents() {

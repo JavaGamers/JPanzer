@@ -70,7 +70,7 @@ public class InitGameListener implements ActionListener, ChangeListener {
 		error = false;
 		if(!scelta){
 			ErrorWindow errorWindow = gameMode.getErrorWindow();
-			errorWindow.getErrorLabel().setText(ErrorWindow.DEFTEXT + "non hai scelto la mappa!");
+			errorWindow.setErrorLabel("non hai scelto la mappa!");
 			errorWindow.setVisible(true);
 			error=true;
 		}
@@ -98,7 +98,7 @@ public class InitGameListener implements ActionListener, ChangeListener {
 		int soldi1 = Integer.parseInt(gameMode.getInitGame().getTextFieldSoldi(1).getText());
 		if(soldi1<Player.MINMONEY || soldi1>Player.MAXMONEY){
 			ErrorWindow errorWindow = gameMode.getErrorWindow();
-			errorWindow.getErrorLabel().setText(ErrorWindow.DEFTEXT + "Valore soldi player 1 errato!");
+			errorWindow.setErrorLabel("Valore soldi player 1 errato!");
 			errorWindow.setVisible(true);
 			error= true;
 				
@@ -127,7 +127,7 @@ public class InitGameListener implements ActionListener, ChangeListener {
 			
 		if(soldi2<Player.MINMONEY || soldi2>Player.MAXMONEY){
 			ErrorWindow errorWindow = gameMode.getErrorWindow();
-			errorWindow.getErrorLabel().setText(ErrorWindow.DEFTEXT + "Valore soldi player 2 errato!");
+			errorWindow.setErrorLabel("Valore soldi player 2 errato!");
 			errorWindow.setVisible(true);
 			error= true;
 			
@@ -144,7 +144,7 @@ public class InitGameListener implements ActionListener, ChangeListener {
 			// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
 			c.removeAll();
 			c.add(unitPanel, BorderLayout.EAST);
-			c.add(gameMode.getMappaGrafica(),BorderLayout.WEST);
+			c.add(gameMode.getMappaGrafica(),BorderLayout.CENTER);
 			
 			//ridisegno della finestra
 			gameWin.repaint();

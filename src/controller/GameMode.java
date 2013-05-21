@@ -28,6 +28,7 @@ public class GameMode {
 	private StartPanel startPanel;
 	private UnitPanel unitPanel;
 	private ErrorWindow errorWindow;
+	private int turno;
 	
 	
 	private GameMode(){
@@ -43,6 +44,11 @@ public class GameMode {
 		this.startPanel=null;
 		this.unitPanel=null;
 		this.errorWindow= new ErrorWindow();
+		this.turno=1;
+	}
+	
+	public int getTurno(){
+		return this.turno;
 	}
 	
 	public ErrorWindow getErrorWindow(){
@@ -169,7 +175,16 @@ public class GameMode {
 		else{
 			System.out.println("no mappa");
 		}
-	}	
+	}
+	
+	public void switchTurno(){
+		if(this.turno==1){
+			this.turno=2;
+		}
+		else{
+			this.turno=1;
+		}
+	}
 	
 	// Metodo della classe impiegato per accedere al Singleton
     public static synchronized GameMode getGameMode() {

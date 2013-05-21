@@ -2,10 +2,11 @@ package view;
 
 import javax.swing.JLabel;
 
+import controller.GameMode;
 import controller.UnitListener;
 
 public class UnitPanel extends javax.swing.JPanel {
-	
+	public static GameMode gameMode = GameMode.getGameMode();
 	                     
 	private javax.swing.JButton aereo;
     private javax.swing.JButton artiglieria;
@@ -14,15 +15,17 @@ public class UnitPanel extends javax.swing.JPanel {
     private javax.swing.JButton gioca;
     private javax.swing.JButton panzer;
     private javax.swing.JLabel soldi;
+    private javax.swing.JLabel playerTxt;
     
     public static final String SOLDITXT = "Soldi rimanenti: ";
-
+    public static final String PLAYERTXT = "Giocatore ";
+    
     public UnitPanel() {
         initComponents();
     }
     
-    public JLabel getSoldiLabel(){
-    	return this.soldi;
+    public void setSoldiLabel(int n){
+    	this.soldi.setText(SOLDITXT+n);
     }
                              
     private void initComponents() {
@@ -80,7 +83,12 @@ public class UnitPanel extends javax.swing.JPanel {
         artiglieria.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         
         soldi = new JLabel();
-        soldi.setText(SOLDITXT);
+        soldi.setText(SOLDITXT+gameMode.getPlayer(gameMode.getTurno()).getSoldi());
+        
+        playerTxt = new JLabel();
+        playerTxt.setText(PLAYERTXT+gameMode.getTurno());
+        
+        
         
         
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -88,22 +96,28 @@ public class UnitPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(aereo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panzer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(fanteriaPes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(fanteriaLegg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(artiglieria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(gioca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(soldi))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(aereo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panzer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(fanteriaPes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(fanteriaLegg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(artiglieria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(gioca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(soldi)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(playerTxt)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(playerTxt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fanteriaLegg)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fanteriaPes)
