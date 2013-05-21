@@ -20,8 +20,6 @@ public class MappaListener extends MouseAdapter{
 		double x = mE.getX();
 		double y = mE.getY();
 		MappaGrafica mG =gameMode.getMappaGrafica();
-		if(mG==null)
-			System.out.println("la mappa è nulla");
 		Esagono e=null;
 		Graphics2D g2 = (Graphics2D) mG.getGraphics();
 		g2.setColor(Color.BLACK);

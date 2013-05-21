@@ -46,10 +46,16 @@ public class GameMode {
 	}
 	
 	public ErrorWindow getErrorWindow(){
+		if(this.errorWindow==null){
+			this.errorWindow = new ErrorWindow();
+		}
 		return this.errorWindow;
 	}
 	
 	public GameWin getGameWin(){
+		if(this.gameWin==null){
+			this.gameWin = new GameWin("JPanzer");
+		}
 		return this.gameWin;
 	}
 	
@@ -58,30 +64,48 @@ public class GameMode {
 	}
 	
 	public CommandPanel getCommandPanel(){
+		if(this.commandPanel==null){
+			this.commandPanel = new CommandPanel();
+		}
 		return this.commandPanel;
 	}
 	
 	public InitGame getInitGame(){
+		if(this.initGame==null){
+			this.initGame = new InitGame();
+		}
 		return this.initGame;
 	}
 	
 	public InitMapPanel getInitMapPanel(){
+		if(this.initMapPanel==null){
+			this.initMapPanel = new InitMapPanel();
+		}
 		return this.initMapPanel;
 	}
 	
 	public LandPanel getLandPanel(){
+		if(this.landPanel==null){
+			this.landPanel = new LandPanel();
+		}
 		return this.landPanel;
 	}
 	
 	public StartPanel getStartPanel(){
+		if(this.startPanel==null){
+			this.startPanel = new StartPanel();
+		}
 		return this.startPanel;
 	}
 	
 	public UnitPanel getUnitPanel(){
+		if(this.unitPanel==null){
+			this.unitPanel = new UnitPanel();
+		}
 		return this.unitPanel;
 	}
 	
-	public Mappa getMappa(){
+	public Mappa getMappa(){// c,jsdbfgvug syvhkw
 		return this.mappa;
 	}
 	
@@ -133,7 +157,7 @@ public class GameMode {
     		this.player2=p;
 	}
 	
-	public void createAndSetMappa(int dim){
+	public void setMappa(int dim){
 		Mappa m = new Mappa(dim);
 		setMappa(m);
 	}
@@ -145,32 +169,7 @@ public class GameMode {
 		else{
 			System.out.println("no mappa");
 		}
-	}
-	
-	public void createAndSetCommandPanel(){
-		this.commandPanel = new CommandPanel();
-	}
-	
-	public void createAndSetInitGame(){
-		this.initGame = new InitGame();
-	}
-	
-	public void createAndSetInitMapPanel(){
-		this.initMapPanel = new InitMapPanel();
-	}
-	
-	public void createAndSetLandPanel(){
-		this.landPanel = new LandPanel();
-	}
-	
-	public void createAndSetStartPanel(){
-		this.startPanel = new StartPanel();
-	}
-	
-	public void createAndSetUnitPanel(){
-		this.unitPanel = new UnitPanel();
-	}
-	
+	}	
 	
 	// Metodo della classe impiegato per accedere al Singleton
     public static synchronized GameMode getGameMode() {

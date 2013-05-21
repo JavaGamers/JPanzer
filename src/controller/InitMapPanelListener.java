@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 import javax.swing.JFileChooser;
+import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -57,13 +58,13 @@ public class InitMapPanelListener implements ActionListener, ListSelectionListen
 		if(gameMode.getInitMapPanel().getDimList().isEnabled()){
 		
 			switch(choosedOpt){
-			case 0: gameMode.createAndSetMappa(Mappa.SMALL);
+			case 0: gameMode.setMappa(Mappa.SMALL);
 					break;
-			case 1: gameMode.createAndSetMappa(Mappa.MEDIUM);
+			case 1: gameMode.setMappa(Mappa.MEDIUM);
 					break;
-			case 2: gameMode.createAndSetMappa(Mappa.LARGE);
+			case 2: gameMode.setMappa(Mappa.LARGE);
 					break;
-			case 3: gameMode.createAndSetMappa(Mappa.EPIC);
+			case 3: gameMode.setMappa(Mappa.EPIC);
 					break;
 				
 			}
@@ -71,21 +72,16 @@ public class InitMapPanelListener implements ActionListener, ListSelectionListen
 			if(gameMode.getMappaGrafica()==null){
 				gameMode.createAndSetMappaGrafica();
 			}
-			
+					
 			GameWin gameWin = gameMode.getGameWin();
-			LandPanel landPanel = null;
-			if(gameMode.getLandPanel()==null){
-				gameMode.createAndSetLandPanel();
-			}
-			
-			landPanel = gameMode.getLandPanel();
+			LandPanel landPanel = gameMode.getLandPanel();
 			
 			Container c = gameWin.getContentPane();
 			
 			// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
 			c.removeAll();
 			c.add(landPanel, BorderLayout.EAST);
-			c.add(gameMode.getMappaGrafica(),BorderLayout.WEST);
+			c.add(gameMode.getMappaGrafica(),BorderLayout.CENTER);
 			
 			//ridisegno della finestra
 			gameWin.repaint();
@@ -158,12 +154,7 @@ public class InitMapPanelListener implements ActionListener, ListSelectionListen
     				}
     				
     				GameWin gameWin = gameMode.getGameWin();
-    				LandPanel landPanel = null;
-    				if(gameMode.getLandPanel()==null){
-    					gameMode.createAndSetLandPanel();
-    				}
-    				
-    				landPanel = gameMode.getLandPanel();
+    				LandPanel landPanel = gameMode.getLandPanel();
     				
     				Container c = gameWin.getContentPane();
     				
@@ -191,23 +182,24 @@ public class InitMapPanelListener implements ActionListener, ListSelectionListen
 
 
 	public void valueChanged(ListSelectionEvent e) {
-		ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+		JList list = null;
+		if( e.getSource() instanceof JList){
+			list = (JList) e.getSource();
+		}
 		
-		// non si sa se funziona
-		if (!lsm.isSelectionEmpty()){
-            	if (lsm.isSelectedIndex(0)){
-            		choosedOpt=0;
-            	}
-            	else if (lsm.isSelectedIndex(1)){
-            		choosedOpt=1;
-            	}
-            	else if (lsm.isSelectedIndex(2)){
-            		choosedOpt=2;
-            	}
-            	else if (lsm.isSelectedIndex(3)){
-            		choosedOpt=3;
-            	}
-            	
+		if (e.getValueIsAdjusting() == false){
+			if(list.getSelectedIndex()!=-1){
+				switch(list.getSelectedIndex()){
+				case 0: choosedOpt=0;
+						break;
+				case 1: choosedOpt=1;
+						break;
+				case 2: choosedOpt=2;
+						break;
+				case 3: choosedOpt=3;
+						break;
+				}
+			}
 		}
 	}
 	

@@ -16,13 +16,13 @@ public class GameWin extends JFrame{
 		super(title);
 		super.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		super.setPreferredSize(new Dimension(1024,768));
+		super.setLayout(new BorderLayout());
 		super.pack();
 	}
 
 	public static void main(String[] args) {
 		GameWin gameWin = new GameWin("JPanzer");
 		gameMode.setGameWin(gameWin);
-		gameMode.createAndSetStartPanel();
 		Container c = gameWin.getContentPane();
 		c.add(gameMode.getStartPanel());
 		gameWin.setVisible(true);

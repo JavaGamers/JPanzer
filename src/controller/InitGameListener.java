@@ -139,9 +139,6 @@ public class InitGameListener implements ActionListener, ChangeListener {
 		if(!error){
 			GameWin gameWin = gameMode.getGameWin();
 			Container c = gameWin.getContentPane();
-			if(gameMode.getUnitPanel()==null){
-				gameMode.createAndSetUnitPanel();
-			}
 			UnitPanel unitPanel = gameMode.getUnitPanel();
 			
 			// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi

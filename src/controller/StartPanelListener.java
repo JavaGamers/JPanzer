@@ -53,9 +53,6 @@ public class StartPanelListener implements ActionListener {
 	private void editOpt() {
 		GameWin gameWin = gameMode.getGameWin();
 		Container c = gameWin.getContentPane();
-		if(gameMode.getInitMapPanel()==null){
-			gameMode.createAndSetInitMapPanel();
-		}
 		
 		// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
 		c.removeAll();
@@ -149,14 +146,8 @@ public class StartPanelListener implements ActionListener {
     				if(gameMode.getMappaGrafica()==null){
     					gameMode.createAndSetMappaGrafica();
     				}
-    				
     				GameWin gameWin = gameMode.getGameWin();
-    				CommandPanel commandPanel = null;
-    				if(gameMode.getCommandPanel()==null){
-    					gameMode.createAndSetCommandPanel();
-    				}
-    				
-    				commandPanel = gameMode.getCommandPanel();
+    				CommandPanel commandPanel = gameMode.getCommandPanel();
     				
     				Container c = gameWin.getContentPane();
     				
@@ -178,9 +169,6 @@ public class StartPanelListener implements ActionListener {
 	private void newOpt() {
 		GameWin gameWin = gameMode.getGameWin();
 		Container c = gameWin.getContentPane();
-		if(gameMode.getInitGame()==null){
-			gameMode.createAndSetInitGame();
-		}
 		
 		// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
 		c.removeAll();

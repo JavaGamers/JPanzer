@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.JList;
+import javax.swing.ListSelectionModel;
 
 import controller.InitMapPanelListener;
 
@@ -57,7 +58,10 @@ public class InitMapPanel extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        dimList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        dimList.setSelectedIndex(1);
         dimList.setEnabled(false);
+        dimList.setVisibleRowCount(4);
         dimList.addListSelectionListener(impl);
         
         jScrollPane1.setViewportView(dimList);
