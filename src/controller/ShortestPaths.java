@@ -8,59 +8,40 @@ import java.util.PriorityQueue;
 import model.GraphMap;
 
 public class ShortestPaths {
-	
-	
-	private static long[] InitializeSingleSource(GraphMap gm, Nodo n){
-		int lenght = gm.getList().length;
-		long [] distance = new long[lenght];
-		for(int i=0;i<lenght;i++){
-			distance[i]= Integer.MAX_VALUE;
-		}
-		distance[n.getId()]=0;
-		return distance;
-	}
-	
-	private static void relax(Nodo u, Nodo v, long costo, long[] distance){
-		if(distance[v.getId()]>distance[u.getId()]+costo){
-			distance[v.getId()]=distance[u.getId()]+costo;
-		}
-	}
-	
+
 	public static List<Nodo> dijkstra(GraphMap gm, Nodo source){
-		long[] distance = InitializeSingleSource(gm,source);
 		int lenght = gm.getList().length;
-		int[] color = new int[lenght]; // 0-white	1-gray	
+		int[] color = new int[lenght]; // 0-white	1-gray
 		
 		for(int i=0;i<lenght;i++){
 			color[i]=0;
 		}
-		
-		List<Nodo> shortestPathTree = new LinkedList<Nodo>();
+		source.setDistance(0);
 		PriorityQueue<Nodo> q = new PriorityQueue<Nodo>();
-		color[source.getId()]=1;
+		List<Nodo> shortestPathTree = new LinkedList<Nodo>();
 		q.add(source);
-		
+		color[source.getId()]=1;
 		
 		while(!q.isEmpty()){
 			Nodo u = q.poll();
-			//System.out.println("ho pescato il nodo "+u.getId());
-			u.setCosto(distance[u.getId()]);
 			shortestPathTree.add(u);
+			color[u.getId()]=1;
 			Iterator<Nodo> it = gm.getList()[u.getId()].iterator();
 			
 			while(it.hasNext()){
 				Nodo v = it.next();
-				relax(u,v,gm.getList()[u.getId()].getFirst().getCosto(),distance);
-				if(color[v.getId()]==0){
-					color[v.getId()]=1;
-					q.add(v);
-					System.out.println("ho aggiunto il nodo "+v.getId());
-
+				int weight = v.getCosto();
+				long distanceToU = u.getMinDistance()+weight;
+				if(distanceToU<v.getMinDistance()){
+					q.remove(v);
+					if(color[v.getId()]==0){
+						v.setDistance(distanceToU);
+						q.add(v);
+						color[v.getId()]=1;
+					}
 				}
 			}
 		}
-		
 		return shortestPathTree;
 	}
-
 }

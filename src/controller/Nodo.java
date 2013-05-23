@@ -4,7 +4,8 @@ import model.Esagono;
 
 public class Nodo implements Comparable<Nodo>{
 	private int id;
-	private long costo;
+	private int costo;
+	private long minDistance;
 	
 	public Nodo(Esagono e){
 		this.id=e.getId();
@@ -12,11 +13,12 @@ public class Nodo implements Comparable<Nodo>{
 			this.costo=e.getTerritorio().getCosto();
 		}
 		else{
-			this.costo = Integer.MAX_VALUE;
+			this.costo = 0;
 		}
+		this.minDistance = Integer.MAX_VALUE;
 	}
 	
-	public long getCosto(){
+	public int getCosto(){
 		return this.costo;
 	}
 	
@@ -24,14 +26,18 @@ public class Nodo implements Comparable<Nodo>{
 		return this.id;
 	}
 	
-	public void setCosto(long distance){
+	public void setDistance(long distance){
 		if(distance<0){
 			throw new IllegalArgumentException("non possono esistere pesi negativi");
 		}
-		this.costo=distance;
+		this.minDistance=distance;
+	}
+	
+	public long getMinDistance(){
+		return this.minDistance;
 	}
 
 	public int compareTo(Nodo n) {
-		return Long.compare(this.costo,n.getCosto());
+		return Long.compare(this.minDistance,n.minDistance);
 	}
 }
