@@ -160,7 +160,7 @@ public class InitMapPanelListener implements ActionListener, ListSelectionListen
     				
     				// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
     				c.removeAll();
-    				c.add(gameMode.getMappaGrafica(),BorderLayout.WEST);
+    				c.add(gameMode.getMappaGrafica(),BorderLayout.CENTER);
     				c.add(landPanel, BorderLayout.EAST);
     				//ridisegno della finestra
     				gameWin.repaint();
