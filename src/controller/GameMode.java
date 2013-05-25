@@ -1,6 +1,5 @@
 package controller;
 
-import model.GraphMap;
 import model.Mappa;
 import model.Player;
 import view.CommandPanel;
@@ -19,7 +18,6 @@ public class GameMode {
 	private Mappa mappa;
 	private Player player1;
 	private Player player2;
-	private GraphMap graphMap;
 	private MappaGrafica mappaGrafica;
 	private CommandPanel commandPanel;
 	private InitGame initGame;
@@ -160,18 +158,11 @@ public class GameMode {
 			throw new IllegalArgumentException("Mappa nulla");
 		}
 		this.mappa=m;
-		// setto anche il graphMap in quanto questi 2 oggetti sono strettamente correlati
-//		this.setGraphMap(mappa);
-		// risetto anche la MappaGrafica per lo stesso motivo
 		if(this.mappaGrafica!=null){
 			this.mappaGrafica.setMappa(m);
 		}
 	}
-	
-	private void setGraphMap(Mappa m){
-		this.graphMap= new GraphMap(m);
-	}
-	
+		
 	public void setPlayer(Player p, int num){
 		if(num<1 || num>2){
     		throw new IllegalArgumentException("invalid number in setplayer method of gameMode");

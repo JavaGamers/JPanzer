@@ -7,8 +7,8 @@ import java.awt.event.MouseEvent;
 
 import model.Esagono;
 import model.EsagonoGrafico;
+import model.Mappa;
 
-import view.CommandPanel;
 import view.MappaGrafica;
 
 public class MappaListener extends MouseAdapter{
@@ -20,13 +20,14 @@ public class MappaListener extends MouseAdapter{
 		double x = mE.getX();
 		double y = mE.getY();
 		MappaGrafica mG =gameMode.getMappaGrafica();
+		Mappa m = gameMode.getMappa();
 		Esagono e=null;
 		Graphics2D g2 = (Graphics2D) mG.getGraphics();
 		g2.setColor(Color.BLACK);
 
 		EsagonoGrafico eG = new EsagonoGrafico(0, mG.getXCentro(), mG.getYCentro(), mG.getRaggio());
-		if(mG.getSelezionato()!=-1){
-			e = mG.getMappa().getComponent()[mG.getSelezionato()];
+		if(m.getSelezionato()!=-1){
+			e = m.getComponent()[m.getSelezionato()];
 			if(gameMode.isSelecionUnitMode()){
 				int turno =gameMode.getTurno();
 				int settore = e.getCoordinate()[0];
@@ -36,7 +37,7 @@ public class MappaListener extends MouseAdapter{
 				}
 			}
 			
-			eG.newSet(mG.getSelezionato(), mG.getXCentro(), mG.getYCentro(), mG.getRaggio());
+			eG.newSet(m.getSelezionato(), mG.getXCentro(), mG.getYCentro(), mG.getRaggio());
 			g2.draw(eG);
 		}
 		
@@ -44,17 +45,10 @@ public class MappaListener extends MouseAdapter{
 		
 		if(e!=null){
 			g2.setColor(Color.RED);
-			mG.setSelezionato(e.getId());
+			m.setSelezionato(e.getId());
 			eG.newSet(e.getId(), mG.getXCentro(), mG.getYCentro(), mG.getRaggio());
 			g2.draw(eG);
 		
-		
-			// codice relativo all'update dell'infoPanel
-			/*
-			CommandPanel cP = gameMode.getCommandPanel();
-			if(e.getUnit()!=null){
-				cP.setUnitLabel(e.getUnit());    
-			}  */
 		}
 	}
 }

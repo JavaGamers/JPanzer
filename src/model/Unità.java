@@ -3,11 +3,11 @@ package model;
 import java.awt.Image;
 import java.util.List;
 import java.awt.image.BufferedImage;
-import java.util.Observable;
 
-import controller.Nodo;
+import controller.Dijkstra;
+import controller.GameMode;
 
-public abstract class Unità extends Observable {
+public abstract class Unità {
 	protected int att;	// attacco
 	protected int dif;	// difesa
 	protected int esp;	// esperienza
@@ -18,7 +18,14 @@ public abstract class Unità extends Observable {
 	protected Esagono pos;	//	posizione sulla mappa
 	protected int player;	// 1=player 1 - 2= player 2
 	protected BufferedImage bImg;
-	protected List<Nodo> esagoniRaggiungibili;
+	protected List<Esagono> esagoniRaggiungibili;
+	public static GameMode gameMode = GameMode.getGameMode();
+	/*
+	 counter è una variabile che indica la correttezza di esagoniRaggiungibili:
+	 counter = 0 esagoniRaggiungibili è coerente con la posizione dell'esagono
+	 counter > 0 l'unità è stata spostata di counter volte senza aver aggiornato esagoniRaggiungibili
+	 */
+	protected int counter;
 	
 	public static final int UNITACOMPRABILI = 10;
 	
@@ -37,6 +44,7 @@ public abstract class Unità extends Observable {
 		this.player=player;
 		this.bImg=null;
 		this.esagoniRaggiungibili=null;
+		this.counter = 0;
 	}
 	
 	public int getAtt(){
@@ -81,12 +89,18 @@ public abstract class Unità extends Observable {
 		return this.bImg;
 	}
 	
-	public List<Nodo> getEsagoniRaggiungibili(){
+	public List<Esagono> getEsagoniRaggiungibili(){
+		if(counter>0 || this.esagoniRaggiungibili==null){
+			this.calcolaEsagoniRaggiungibili();
+		}
 		return this.esagoniRaggiungibili;
 	}
 	
-	public void setEsagoniRaggiungibili(List<Nodo> list){
-		this.esagoniRaggiungibili= list;
+	private void calcolaEsagoniRaggiungibili(){
+		Mappa m = gameMode.getMappa();
+		m.resetDistances();
+		this.esagoniRaggiungibili = Dijkstra.shortestPath(m, pos, passi);
+		this.counter=0;
 	}
 	
 	public void setEsp(int e){
@@ -106,32 +120,23 @@ public abstract class Unità extends Observable {
 	public void updateEsp(){
 		if(this.esp<10)
 			this.esp++;
-		this.setChanged();
-		this.notifyObservers();
 	}
 	
 	public void setPos(Esagono p){
 		this.pos=p;
-		this.setChanged();
-		this.notifyObservers();
+		this.counter++;
 	}
 	
 	public void setAtt(){
 		// da fare
-		this.setChanged();
-		this.notifyObservers();
 	}
 	
 	public void setDif(){
 		// da fare
-		this.setChanged();
-		this.notifyObservers();
 	}
 	
 	public void setBonus(){
 		// da fare
-		this.setChanged();
-		this.notifyObservers();
 	}
 	
 	
@@ -139,13 +144,13 @@ public abstract class Unità extends Observable {
 	// ritorna true se il set è andato a buon fine 
 	public boolean aggiornaPassi(int p){
 			boolean ok = true;
-			if(this.passi<p)
+			if(this.passi<p){
 				ok= false;
-			else
+			}
+			else{
 				this.passi=this.passi-p;
+			}
 			
-			this.setChanged();
-			this.notifyObservers();
 			return ok;
 	}
 	

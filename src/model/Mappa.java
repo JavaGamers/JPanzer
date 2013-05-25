@@ -3,6 +3,7 @@ package model;
 public class Mappa {
 	private int dim; // coincide con il numerdo di livelli della mappa
 	private Esagono[] component;
+	private int selezionato; // indica l'id dell'esagono selezionato. -1 se nessun esagono selezionato
 	
 	public static final int SMALL = 10;
 	public static final int MEDIUM = 15;
@@ -13,6 +14,7 @@ public class Mappa {
 	public Mappa(int d){
 		this.dim = d;
 		this.component = new Esagono[Esagono.endLiv(dim)+1];
+		this.selezionato=-1;
 		component[0]= new Esagono(0);
 		
 		int[] coord = new int[3];
@@ -111,6 +113,23 @@ public class Mappa {
 	
 	public int getDim(){
 		return this.dim;
+	}
+	
+	public int getSelezionato(){
+		return this.selezionato;
+	}
+	
+	public void setSelezionato(int id){
+		if(id<-1 || id>this.getComponent().length)
+			throw new IllegalArgumentException("Invalid given id: insert a valid id or -1 for nothing");
+		this.selezionato=id;
+	}
+	
+	public void resetDistances(){
+		for(int i=0;i<this.component.length;i++){
+			Esagono e = this.component[i];
+			e.setDistance(Integer.MAX_VALUE);
+		}
 	}
 		
 	public String toString(){

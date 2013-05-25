@@ -11,6 +11,7 @@ import model.Esagono;
 import model.EsagonoGrafico;
 import model.FanteriaLeggera;
 import model.FanteriaPesante;
+import model.Mappa;
 import model.Panzer;
 import model.Player;
 import model.Unità;
@@ -101,22 +102,23 @@ public class UnitListener implements ActionListener {
 	private void artiglieriaOpt() {
 		
 		MappaGrafica mG = gameMode.getMappaGrafica();
+		Mappa m = gameMode.getMappa();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		int turno =gameMode.getTurno();
 		Player player = gameMode.getPlayer(turno);
 		
 		if(player.getSoldi()>=Artiglieria.COSTO){
-			if(mG.getSelezionato()!=-1){
-				e = mG.getMappa().getComponent()[mG.getSelezionato()];
+			if(m.getSelezionato()!=-1){
+				e = m.getComponent()[m.getSelezionato()];
 				
 				int settore = e.getCoordinate()[0];
 				int posizione = e.getCoordinate()[2];
 				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
 					if(e.getUnit()==null){
 						e.setUnit(new Artiglieria(Unità.UNITACOMPRABILI,gameMode.getTurno()));
-				
-						eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
+						
+						eG = new EsagonoGrafico(m.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
 						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 					
 						//aggiorno i soldi del player
@@ -160,14 +162,15 @@ public class UnitListener implements ActionListener {
 
 	private void aereoOpt() {
 		MappaGrafica mG = gameMode.getMappaGrafica();
+		Mappa m = gameMode.getMappa();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		int turno =gameMode.getTurno();
 		Player player = gameMode.getPlayer(turno);
 		
 		if(player.getSoldi()>=Aereo.COSTO){
-			if(mG.getSelezionato()!=-1){
-				e = mG.getMappa().getComponent()[mG.getSelezionato()];
+			if(m.getSelezionato()!=-1){
+				e = m.getComponent()[m.getSelezionato()];
 				
 				int settore = e.getCoordinate()[0];
 				int posizione = e.getCoordinate()[2];
@@ -175,7 +178,7 @@ public class UnitListener implements ActionListener {
 					if(e.getUnit()==null){
 						e.setUnit(new Aereo(Unità.UNITACOMPRABILI,gameMode.getTurno()));
 				
-						eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
+						eG = new EsagonoGrafico(m.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
 						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 					
 						//aggiorno i soldi del player
@@ -219,14 +222,15 @@ public class UnitListener implements ActionListener {
 
 	private void panzerOpt() {
 		MappaGrafica mG = gameMode.getMappaGrafica();
+		Mappa m = gameMode.getMappa();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		int turno =gameMode.getTurno();
 		Player player = gameMode.getPlayer(turno);
 		
 		if(player.getSoldi()>=Panzer.COSTO){
-			if(mG.getSelezionato()!=-1){
-				e = mG.getMappa().getComponent()[mG.getSelezionato()];
+			if(m.getSelezionato()!=-1){
+				e = m.getComponent()[m.getSelezionato()];
 				
 				int settore = e.getCoordinate()[0];
 				int posizione = e.getCoordinate()[2];
@@ -234,7 +238,7 @@ public class UnitListener implements ActionListener {
 					if(e.getUnit()==null){
 						e.setUnit(new Panzer(Unità.UNITACOMPRABILI,gameMode.getTurno()));
 				
-						eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
+						eG = new EsagonoGrafico(m.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
 						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 					
 						//aggiorno i soldi del player
@@ -278,13 +282,14 @@ public class UnitListener implements ActionListener {
 
 	private void fanteriaPesOpt() {
 		MappaGrafica mG = gameMode.getMappaGrafica();
+		Mappa m = gameMode.getMappa();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		int turno =gameMode.getTurno();
 		Player player = gameMode.getPlayer(turno);
 		if(player.getSoldi()>=FanteriaPesante.COSTO){
-			if(mG.getSelezionato()!=-1){
-				e = mG.getMappa().getComponent()[mG.getSelezionato()];
+			if(m.getSelezionato()!=-1){
+				e = m.getComponent()[m.getSelezionato()];
 				
 				int settore = e.getCoordinate()[0];
 				int posizione = e.getCoordinate()[2];
@@ -292,7 +297,7 @@ public class UnitListener implements ActionListener {
 					if(e.getUnit()==null){
 						e.setUnit(new FanteriaPesante(Unità.UNITACOMPRABILI,gameMode.getTurno()));
 				
-						eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
+						eG = new EsagonoGrafico(m.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
 						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 					
 						//aggiorno i soldi del player
@@ -336,13 +341,14 @@ public class UnitListener implements ActionListener {
 
 	private void fanteriaLeggOpt() {
 		MappaGrafica mG = gameMode.getMappaGrafica();
+		Mappa m = gameMode.getMappa();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
 		int turno =gameMode.getTurno();
 		Player player = gameMode.getPlayer(turno);
 		if(player.getSoldi()>=FanteriaLeggera.COSTO){
-			if(mG.getSelezionato()!=-1){
-				e = mG.getMappa().getComponent()[mG.getSelezionato()];
+			if(m.getSelezionato()!=-1){
+				e = m.getComponent()[m.getSelezionato()];
 				
 				int settore = e.getCoordinate()[0];
 				int posizione = e.getCoordinate()[2];
@@ -350,7 +356,7 @@ public class UnitListener implements ActionListener {
 					if(e.getUnit()==null){
 						e.setUnit(new FanteriaLeggera(Unità.UNITACOMPRABILI,gameMode.getTurno()));
 				
-						eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
+						eG = new EsagonoGrafico(m.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
 						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 					
 						//aggiorno i soldi del player

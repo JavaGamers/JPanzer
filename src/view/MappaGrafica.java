@@ -13,7 +13,7 @@ import model.Mappa;
 
 public class MappaGrafica extends javax.swing.JPanel {
 
-	private int selezionato; // indica l'id dell'esagono selezionato. -1 se nessun esagono selezionato
+	
 	private int xC;
 	private int yC;
 	public double raggio;
@@ -30,7 +30,7 @@ public class MappaGrafica extends javax.swing.JPanel {
         this.xC=x;
 		this.yC=y;
 		this.mappa=m;
-		this.selezionato=-1;
+		
     }
     
     public void paint(Graphics g) {
@@ -131,10 +131,7 @@ public class MappaGrafica extends javax.swing.JPanel {
 	public int getYCentro(){
 		return this.yC;
 	}
-	
-	public int getSelezionato(){
-		return this.selezionato;
-	}
+
 	
 	public Mappa getMappa(){
 		return this.mappa;
@@ -147,12 +144,6 @@ public class MappaGrafica extends javax.swing.JPanel {
 	public void newSet(int x, int y){
 		this.xC=x;
 		this.yC=y;
-	}
-	
-	public void setSelezionato(int id){
-		if(id<-1 || id>this.mappa.getComponent().length)
-			throw new IllegalArgumentException("Invalid given id: insert a valid id or -1 for nothing");
-		this.selezionato=id;
 	}
 	
 	public void setRaggio(double r){

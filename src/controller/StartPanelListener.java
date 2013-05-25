@@ -27,7 +27,6 @@ import model.Pianura;
 
 import view.CommandPanel;
 import view.GameWin;
-import view.LandPanel;
 
 public class StartPanelListener implements ActionListener {
 	public static GameMode gameMode = GameMode.getGameMode();

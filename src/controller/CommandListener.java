@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -80,8 +82,15 @@ public class CommandListener implements ActionListener {
 	}
 
 	private void shopOpt() {
-		// TODO Auto-generated method stub
-		
+		gameMode.setSelectionUnitMode(true);
+		GameWin gameWin = gameMode.getGameWin();
+		Container c = gameWin.getContentPane();
+		c.removeAll();
+		gameMode.getUnitPanel().updateLabel();
+		c.add(gameMode.getUnitPanel(), BorderLayout.EAST);
+		c.add(gameMode.getMappaGrafica(), BorderLayout.CENTER);
+		c.repaint();
+		c.validate();
 	}
 
 	private void scorporaOpt() {
@@ -238,7 +247,8 @@ public class CommandListener implements ActionListener {
 
 
 	private void muoviOpt() {
-		// TODO Auto-generated method stub
+		Mappa m = gameMode.getMappa();
+		
 		
 	}
 
