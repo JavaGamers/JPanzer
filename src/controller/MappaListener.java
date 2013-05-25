@@ -27,7 +27,7 @@ public class MappaListener extends MouseAdapter{
 		EsagonoGrafico eG = new EsagonoGrafico(0, mG.getXCentro(), mG.getYCentro(), mG.getRaggio());
 		if(mG.getSelezionato()!=-1){
 			e = mG.getMappa().getComponent()[mG.getSelezionato()];
-			if(gameMode.getSelecionUnitMode()){
+			if(gameMode.isSelecionUnitMode()){
 				int turno =gameMode.getTurno();
 				int settore = e.getCoordinate()[0];
 				int posizione = e.getCoordinate()[2];

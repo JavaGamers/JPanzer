@@ -2,18 +2,21 @@ package model;
 
 import java.util.Observable;
 
-public class Esagono extends Observable {
+// gli esagoni sono comparabili in base al costo del loro territorio
+public class Esagono implements Comparable<Esagono> {
 	private int id;		// numerdo d'ordine all'interno della lista
 	private int[] coordinate; // settore - livello - posizione
 	private Esagono[] adiacenze; // contiene le adiacenze: i lati degli esagoni sono numerati a partire da quello in alto da 0 a 5 in senso orario
 	private Unità unit; // unità presente sull'esagono
 	private Territorio territorio;
+	private long minDistance;
 	
 	public Esagono(int[] c){
 		this.territorio=null;
 		this.unit=null;
 		this.coordinate = new int[3];
 		this.adiacenze = new Esagono[6];
+		this.minDistance = Integer.MAX_VALUE;
 		
 		if(c.length!=3)
 			throw new IllegalArgumentException("Invalid format, use settore - livello - posizione");
@@ -37,6 +40,7 @@ public class Esagono extends Observable {
 		this.id = id;
 		this.coordinate = new int[3];
 		this.adiacenze = new Esagono[6];
+		this.minDistance = Integer.MAX_VALUE;
 		
 		// algoritmo che dato id fornisce le coordinate
 		this.coordinate[1]=0;
@@ -106,6 +110,26 @@ public class Esagono extends Observable {
 		return this.territorio;
 	}
 	
+	public int getCosto(){
+		if(this.getTerritorio()!=null){
+			return this.getTerritorio().getCosto();
+		}
+		else{
+			return 0;
+		}
+	}
+	
+	public long getMinDistance(){
+		return this.minDistance;
+	}
+	
+	public void setDistance(long distance){
+		if(distance<0){
+			throw new IllegalArgumentException("non possono esistere pesi negativi");
+		}
+		this.minDistance=distance;
+	}
+	
 	// n è il lato dell'esagono "e" passato come parametro
 	public void setAdiacenza(Esagono e, int n){
 		if(e==null)
@@ -120,14 +144,10 @@ public class Esagono extends Observable {
 	
 	public void setUnit(Unità u){
 		this.unit=u;
-		this.setChanged();
-		this.notifyObservers();
 	}
 	
 	public void setTerritorio(Territorio t){
 		this.territorio=t;
-		this.setChanged();
-		this.notifyObservers();
 	}
 	
 	public static int[] getCoord(int id){
@@ -254,6 +274,10 @@ public class Esagono extends Observable {
 		else if(d<6)
 			s=6;
 		return s;
+	}
+
+	public int compareTo(Esagono o) {
+		return Long.compare(this.minDistance,o.minDistance);
 	}
 
 }

@@ -27,6 +27,11 @@ public class UnitPanel extends javax.swing.JPanel {
     public void setSoldiLabel(int n){
     	this.soldi.setText(SOLDITXT+n);
     }
+    
+    public void updateLabel(){
+    	this.soldi.setText(SOLDITXT+gameMode.getPlayer(gameMode.getTurno()).getSoldi());
+    	this.playerTxt.setText(PLAYERTXT+gameMode.getTurno());
+    }
                              
     private void initComponents() {
     	

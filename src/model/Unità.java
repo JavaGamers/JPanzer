@@ -1,8 +1,11 @@
 package model;
 
 import java.awt.Image;
+import java.util.List;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
+
+import controller.Nodo;
 
 public abstract class Unità extends Observable {
 	protected int att;	// attacco
@@ -15,6 +18,7 @@ public abstract class Unità extends Observable {
 	protected Esagono pos;	//	posizione sulla mappa
 	protected int player;	// 1=player 1 - 2= player 2
 	protected BufferedImage bImg;
+	protected List<Nodo> esagoniRaggiungibili;
 	
 	public static final int UNITACOMPRABILI = 10;
 	
@@ -32,6 +36,7 @@ public abstract class Unità extends Observable {
 		this.bonus=0;
 		this.player=player;
 		this.bImg=null;
+		this.esagoniRaggiungibili=null;
 	}
 	
 	public int getAtt(){
@@ -74,6 +79,14 @@ public abstract class Unità extends Observable {
 	
 	public Image getImage(){
 		return this.bImg;
+	}
+	
+	public List<Nodo> getEsagoniRaggiungibili(){
+		return this.esagoniRaggiungibili;
+	}
+	
+	public void setEsagoniRaggiungibili(List<Nodo> list){
+		this.esagoniRaggiungibili= list;
 	}
 	
 	public void setEsp(int e){

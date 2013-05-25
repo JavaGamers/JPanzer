@@ -1,6 +1,7 @@
 package controller;
 
-import java.awt.Color;
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,6 +16,7 @@ import model.Player;
 import model.Unità;
 
 import view.ErrorWindow;
+import view.GameWin;
 import view.MappaGrafica;
 import view.UnitPanel;
 
@@ -53,7 +55,46 @@ public class UnitListener implements ActionListener {
 
 
 	private void giocaOpt() {
-		
+		MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
+		if(!gameMode.isPlayingMode()){
+			int turno = gameMode.getTurno();
+			if(turno==1){
+				gameMode.switchTurno();
+				GameWin gameWin = gameMode.getGameWin();
+				Container c = gameWin.getContentPane();
+				c.removeAll();
+				gameMode.getUnitPanel().updateLabel();
+				c.add(gameMode.getUnitPanel(), BorderLayout.EAST);
+				c.add(mappaGrafica, BorderLayout.CENTER);
+				gameWin.repaint();
+				gameWin.validate();
+			}
+			else{
+				gameMode.switchTurno();
+				gameMode.setSelectionUnitMode(false);
+				GameWin gameWin = gameMode.getGameWin();
+				Container c = gameWin.getContentPane();
+				c.removeAll();
+				// ora inizia il gioco
+				gameMode.setPlayingMode(true);
+				c.add(gameMode.getCommandPanel(), BorderLayout.EAST);
+				c.add(mappaGrafica, BorderLayout.CENTER);
+				gameWin.repaint();
+				gameWin.validate();
+			}
+		}
+		else{
+			gameMode.setSelectionUnitMode(false);
+			GameWin gameWin = gameMode.getGameWin();
+			Container c = gameWin.getContentPane();
+			c.removeAll();
+			// ricomincia il gioco
+			gameMode.setPlayingMode(true);
+			c.add(mappaGrafica, BorderLayout.CENTER);
+			c.add(gameMode.getCommandPanel(), BorderLayout.EAST);
+			gameWin.repaint();
+			gameWin.validate();
+		}
 	}
 
 	

@@ -60,7 +60,7 @@ public class MappaGrafica extends javax.swing.JPanel {
 		for(int i=1;i<this.mappa.getComponent().length;i++){
 			g.setColor(Color.BLACK);
 			e= this.mappa.getComponent()[i];
-			if(gameMode.getSelecionUnitMode()){
+			if(gameMode.isSelecionUnitMode()){
 				int turno =gameMode.getTurno();
 				int settore = e.getCoordinate()[0];
 				int posizione = e.getCoordinate()[2];

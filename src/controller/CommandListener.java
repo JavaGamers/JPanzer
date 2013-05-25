@@ -89,7 +89,7 @@ public class CommandListener implements ActionListener {
 		
 	}
 
-
+	// da rivedere
 	private void salvaOpt() {
 		GameWin gW = gameMode.getGameWin();
 		MappaGrafica mG = gameMode.getMappaGrafica();
@@ -125,11 +125,11 @@ public class CommandListener implements ActionListener {
 
 
 	private void passaOpt() {
-		// TODO Auto-generated method stub
+		gameMode.switchTurno();
 		
 	}
 
-
+	// da rivedere
 	private void caricaOpt() {
 		GameWin gW = this.gameMode.getGameWin();
 		MappaGrafica mG = gameMode.getMappaGrafica();
@@ -244,13 +244,16 @@ public class CommandListener implements ActionListener {
 
 
 	private void zoomOpt() {
-		GameWin gW = gameMode.getGameWin();
+		GameWin gameWin = gameMode.getGameWin();
 		MappaGrafica mG = gameMode.getMappaGrafica();
-		if(mG.getRaggio()== MappaGrafica.STDRAGGIO)
+		if(mG.getRaggio()== MappaGrafica.STDRAGGIO){
 			mG.setRaggio(MappaGrafica.ZOOMRAGGIO);
-		else
+		}
+		else{
 			mG.setRaggio(MappaGrafica.STDRAGGIO);
-			mG.update(mG.getGraphics());
+		}
+		gameWin.repaint();
+		mG.validate();
 	}
 	
 	private static String[] getElements(String s){
