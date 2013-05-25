@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +15,6 @@ import model.Player;
 import model.Unità;
 
 import view.ErrorWindow;
-import view.GameWin;
 import view.MappaGrafica;
 import view.UnitPanel;
 
@@ -58,53 +58,61 @@ public class UnitListener implements ActionListener {
 
 	
 	private void artiglieriaOpt() {
+		
 		MappaGrafica mG = gameMode.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
-		Player player = gameMode.getPlayer(gameMode.getTurno());
+		int turno =gameMode.getTurno();
+		Player player = gameMode.getPlayer(turno);
+		
 		if(player.getSoldi()>=Artiglieria.COSTO){
 			if(mG.getSelezionato()!=-1){
 				e = mG.getMappa().getComponent()[mG.getSelezionato()];
-				if(e.getUnit()==null){
-					e.setUnit(new Artiglieria(Unità.UNITACOMPRABILI,gameMode.getTurno()));
-			
-					eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
-					mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 				
-					//aggiorno i soldi del player
-					player = gameMode.getPlayer(gameMode.getTurno());
-					int soldiPrecedenti = player.getSoldi();
-					int soldiNuovi = soldiPrecedenti - Artiglieria.COSTO;
-					player.setMoney(soldiNuovi);
-					UnitPanel unitPanel = gameMode.getUnitPanel();
-					unitPanel.setSoldiLabel(soldiNuovi);
+				int settore = e.getCoordinate()[0];
+				int posizione = e.getCoordinate()[2];
+				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
+					if(e.getUnit()==null){
+						e.setUnit(new Artiglieria(Unità.UNITACOMPRABILI,gameMode.getTurno()));
 				
-				}
-				else if(e.getUnit() instanceof Artiglieria){
-					int unitàPrec = e.getUnit().getNumUnits();
-					int unitàNuove =unitàPrec+Unità.UNITACOMPRABILI;
-					e.getUnit().setNumUnits(unitàNuove);
+						eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
+						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 					
-					//aggiorno i soldi del player
-					player = gameMode.getPlayer(gameMode.getTurno());
-					int soldiPrecedenti = player.getSoldi();
-					int soldiNuovi = soldiPrecedenti - Artiglieria.COSTO;
-					player.setMoney(soldiNuovi);
-					UnitPanel unitPanel = gameMode.getUnitPanel();
-					unitPanel.setSoldiLabel(soldiNuovi);
+						//aggiorno i soldi del player
+						player = gameMode.getPlayer(gameMode.getTurno());
+						int soldiPrecedenti = player.getSoldi();
+						int soldiNuovi = soldiPrecedenti - Artiglieria.COSTO;
+						player.setMoney(soldiNuovi);
+						UnitPanel unitPanel = gameMode.getUnitPanel();
+						unitPanel.setSoldiLabel(soldiNuovi);
 					
-				}
-				else{
-					ErrorWindow ew = gameMode.getErrorWindow();
-					ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
-					ew.setVisible(true);
+					}
+					else if(e.getUnit() instanceof Artiglieria){
+						int unitàPrec = e.getUnit().getNumUnits();
+						int unitàNuove =unitàPrec+Unità.UNITACOMPRABILI;
+						e.getUnit().setNumUnits(unitàNuove);
+						
+						//aggiorno i soldi del player
+						player = gameMode.getPlayer(gameMode.getTurno());
+						int soldiPrecedenti = player.getSoldi();
+						int soldiNuovi = soldiPrecedenti - Artiglieria.COSTO;
+						player.setMoney(soldiNuovi);
+						UnitPanel unitPanel = gameMode.getUnitPanel();
+						unitPanel.setSoldiLabel(soldiNuovi);
+						
+					}
+					else{
+						ErrorWindow ew = gameMode.getErrorWindow();
+						ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
+						ew.setVisible(true);
+					}
 				}
 			}
-		}
-		else{
-			ErrorWindow ew = gameMode.getErrorWindow();
-			ew.setErrorLabel("Non hai abbastanza soldi per comprare quest'unità");
-			ew.setVisible(true);
+			else{
+				ErrorWindow ew = gameMode.getErrorWindow();
+				ew.setErrorLabel("Non hai abbastanza soldi per comprare quest'unità");
+				ew.setVisible(true);
+			}
 		}
 	}
 
@@ -113,52 +121,58 @@ public class UnitListener implements ActionListener {
 		MappaGrafica mG = gameMode.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
-		Player player = gameMode.getPlayer(gameMode.getTurno());
+		int turno =gameMode.getTurno();
+		Player player = gameMode.getPlayer(turno);
+		
 		if(player.getSoldi()>=Aereo.COSTO){
 			if(mG.getSelezionato()!=-1){
 				e = mG.getMappa().getComponent()[mG.getSelezionato()];
-				if(e.getUnit()==null){
-					e.setUnit(new Aereo(Unità.UNITACOMPRABILI,gameMode.getTurno()));
-			
-					eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
-					mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 				
-					//aggiorno i soldi del player
-					player = gameMode.getPlayer(gameMode.getTurno());
-					int soldiPrecedenti = player.getSoldi();
-					int soldiNuovi = soldiPrecedenti - Aereo.COSTO;
-					player.setMoney(soldiNuovi);
-					UnitPanel unitPanel = gameMode.getUnitPanel();
-					unitPanel.setSoldiLabel(soldiNuovi);
+				int settore = e.getCoordinate()[0];
+				int posizione = e.getCoordinate()[2];
+				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
+					if(e.getUnit()==null){
+						e.setUnit(new Aereo(Unità.UNITACOMPRABILI,gameMode.getTurno()));
 				
-				}
-				else if(e.getUnit() instanceof Aereo){
-					int unitàPrec = e.getUnit().getNumUnits();
-					int unitàNuove =unitàPrec+Unità.UNITACOMPRABILI;
-					e.getUnit().setNumUnits(unitàNuove);
+						eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
+						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 					
-					//aggiorno i soldi del player
-					player = gameMode.getPlayer(gameMode.getTurno());
-					int soldiPrecedenti = player.getSoldi();
-					int soldiNuovi = soldiPrecedenti - Aereo.COSTO;
-					player.setMoney(soldiNuovi);
-					UnitPanel unitPanel = gameMode.getUnitPanel();
-					unitPanel.setSoldiLabel(soldiNuovi);
+						//aggiorno i soldi del player
+						player = gameMode.getPlayer(gameMode.getTurno());
+						int soldiPrecedenti = player.getSoldi();
+						int soldiNuovi = soldiPrecedenti - Aereo.COSTO;
+						player.setMoney(soldiNuovi);
+						UnitPanel unitPanel = gameMode.getUnitPanel();
+						unitPanel.setSoldiLabel(soldiNuovi);
 					
-				}
-				else{
-					ErrorWindow ew = gameMode.getErrorWindow();
-					ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
-					ew.setVisible(true);
+					}
+					else if(e.getUnit() instanceof Aereo){
+						int unitàPrec = e.getUnit().getNumUnits();
+						int unitàNuove =unitàPrec+Unità.UNITACOMPRABILI;
+						e.getUnit().setNumUnits(unitàNuove);
+						
+						//aggiorno i soldi del player
+						player = gameMode.getPlayer(gameMode.getTurno());
+						int soldiPrecedenti = player.getSoldi();
+						int soldiNuovi = soldiPrecedenti - Aereo.COSTO;
+						player.setMoney(soldiNuovi);
+						UnitPanel unitPanel = gameMode.getUnitPanel();
+						unitPanel.setSoldiLabel(soldiNuovi);
+						
+					}
+					else{
+						ErrorWindow ew = gameMode.getErrorWindow();
+						ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
+						ew.setVisible(true);
+					}
 				}
 			}
+			else{
+				ErrorWindow ew = gameMode.getErrorWindow();
+				ew.setErrorLabel("Non hai abbastanza soldi per comprare quest'unità");
+				ew.setVisible(true);
+			}
 		}
-		else{
-			ErrorWindow ew = gameMode.getErrorWindow();
-			ew.setErrorLabel("Non hai abbastanza soldi per comprare quest'unità");
-			ew.setVisible(true);
-		}
-		
 	}
 
 
@@ -166,52 +180,58 @@ public class UnitListener implements ActionListener {
 		MappaGrafica mG = gameMode.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
-		Player player = gameMode.getPlayer(gameMode.getTurno());
+		int turno =gameMode.getTurno();
+		Player player = gameMode.getPlayer(turno);
+		
 		if(player.getSoldi()>=Panzer.COSTO){
 			if(mG.getSelezionato()!=-1){
 				e = mG.getMappa().getComponent()[mG.getSelezionato()];
-				if(e.getUnit()==null){
-					e.setUnit(new Panzer(Unità.UNITACOMPRABILI,gameMode.getTurno()));
-			
-					eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
-					mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 				
-					//aggiorno i soldi del player
-					player = gameMode.getPlayer(gameMode.getTurno());
-					int soldiPrecedenti = player.getSoldi();
-					int soldiNuovi = soldiPrecedenti - Panzer.COSTO;
-					player.setMoney(soldiNuovi);
-					UnitPanel unitPanel = gameMode.getUnitPanel();
-					unitPanel.setSoldiLabel(soldiNuovi);
+				int settore = e.getCoordinate()[0];
+				int posizione = e.getCoordinate()[2];
+				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
+					if(e.getUnit()==null){
+						e.setUnit(new Panzer(Unità.UNITACOMPRABILI,gameMode.getTurno()));
 				
-				}
-				else if(e.getUnit() instanceof Panzer){
-					int unitàPrec = e.getUnit().getNumUnits();
-					int unitàNuove =unitàPrec+Unità.UNITACOMPRABILI;
-					e.getUnit().setNumUnits(unitàNuove);
+						eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
+						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 					
-					//aggiorno i soldi del player
-					player = gameMode.getPlayer(gameMode.getTurno());
-					int soldiPrecedenti = player.getSoldi();
-					int soldiNuovi = soldiPrecedenti - Panzer.COSTO;
-					player.setMoney(soldiNuovi);
-					UnitPanel unitPanel = gameMode.getUnitPanel();
-					unitPanel.setSoldiLabel(soldiNuovi);
+						//aggiorno i soldi del player
+						player = gameMode.getPlayer(gameMode.getTurno());
+						int soldiPrecedenti = player.getSoldi();
+						int soldiNuovi = soldiPrecedenti - Panzer.COSTO;
+						player.setMoney(soldiNuovi);
+						UnitPanel unitPanel = gameMode.getUnitPanel();
+						unitPanel.setSoldiLabel(soldiNuovi);
 					
-				}
-				else{
-					ErrorWindow ew = gameMode.getErrorWindow();
-					ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
-					ew.setVisible(true);
+					}
+					else if(e.getUnit() instanceof Panzer){
+						int unitàPrec = e.getUnit().getNumUnits();
+						int unitàNuove =unitàPrec+Unità.UNITACOMPRABILI;
+						e.getUnit().setNumUnits(unitàNuove);
+						
+						//aggiorno i soldi del player
+						player = gameMode.getPlayer(gameMode.getTurno());
+						int soldiPrecedenti = player.getSoldi();
+						int soldiNuovi = soldiPrecedenti - Panzer.COSTO;
+						player.setMoney(soldiNuovi);
+						UnitPanel unitPanel = gameMode.getUnitPanel();
+						unitPanel.setSoldiLabel(soldiNuovi);
+						
+					}
+					else{
+						ErrorWindow ew = gameMode.getErrorWindow();
+						ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
+						ew.setVisible(true);
+					}
 				}
 			}
+			else{
+				ErrorWindow ew = gameMode.getErrorWindow();
+				ew.setErrorLabel("Non hai abbastanza soldi per comprare quest'unità");
+				ew.setVisible(true);
+			}
 		}
-		else{
-			ErrorWindow ew = gameMode.getErrorWindow();
-			ew.setErrorLabel("Non hai abbastanza soldi per comprare quest'unità");
-			ew.setVisible(true);
-		}
-		
 	}
 
 
@@ -219,52 +239,57 @@ public class UnitListener implements ActionListener {
 		MappaGrafica mG = gameMode.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
-		Player player = gameMode.getPlayer(gameMode.getTurno());
+		int turno =gameMode.getTurno();
+		Player player = gameMode.getPlayer(turno);
 		if(player.getSoldi()>=FanteriaPesante.COSTO){
 			if(mG.getSelezionato()!=-1){
 				e = mG.getMappa().getComponent()[mG.getSelezionato()];
-				if(e.getUnit()==null){
-					e.setUnit(new FanteriaPesante(Unità.UNITACOMPRABILI,gameMode.getTurno()));
-			
-					eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
-					mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 				
-					//aggiorno i soldi del player
-					player = gameMode.getPlayer(gameMode.getTurno());
-					int soldiPrecedenti = player.getSoldi();
-					int soldiNuovi = soldiPrecedenti - FanteriaPesante.COSTO;
-					player.setMoney(soldiNuovi);
-					UnitPanel unitPanel = gameMode.getUnitPanel();
-					unitPanel.setSoldiLabel(soldiNuovi);
+				int settore = e.getCoordinate()[0];
+				int posizione = e.getCoordinate()[2];
+				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
+					if(e.getUnit()==null){
+						e.setUnit(new FanteriaPesante(Unità.UNITACOMPRABILI,gameMode.getTurno()));
 				
-				}
-				else if(e.getUnit() instanceof FanteriaPesante){
-					int unitàPrec = e.getUnit().getNumUnits();
-					int unitàNuove =unitàPrec+Unità.UNITACOMPRABILI;
-					e.getUnit().setNumUnits(unitàNuove);
+						eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
+						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 					
-					//aggiorno i soldi del player
-					player = gameMode.getPlayer(gameMode.getTurno());
-					int soldiPrecedenti = player.getSoldi();
-					int soldiNuovi = soldiPrecedenti - FanteriaPesante.COSTO;
-					player.setMoney(soldiNuovi);
-					UnitPanel unitPanel = gameMode.getUnitPanel();
-					unitPanel.setSoldiLabel(soldiNuovi);
+						//aggiorno i soldi del player
+						player = gameMode.getPlayer(gameMode.getTurno());
+						int soldiPrecedenti = player.getSoldi();
+						int soldiNuovi = soldiPrecedenti - FanteriaPesante.COSTO;
+						player.setMoney(soldiNuovi);
+						UnitPanel unitPanel = gameMode.getUnitPanel();
+						unitPanel.setSoldiLabel(soldiNuovi);
 					
-				}
-				else{
-					ErrorWindow ew = gameMode.getErrorWindow();
-					ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
-					ew.setVisible(true);
+					}
+					else if(e.getUnit() instanceof FanteriaPesante){
+						int unitàPrec = e.getUnit().getNumUnits();
+						int unitàNuove =unitàPrec+Unità.UNITACOMPRABILI;
+						e.getUnit().setNumUnits(unitàNuove);
+						
+						//aggiorno i soldi del player
+						player = gameMode.getPlayer(gameMode.getTurno());
+						int soldiPrecedenti = player.getSoldi();
+						int soldiNuovi = soldiPrecedenti - FanteriaPesante.COSTO;
+						player.setMoney(soldiNuovi);
+						UnitPanel unitPanel = gameMode.getUnitPanel();
+						unitPanel.setSoldiLabel(soldiNuovi);
+						
+					}
+					else{
+						ErrorWindow ew = gameMode.getErrorWindow();
+						ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
+						ew.setVisible(true);
+					}
 				}
 			}
-		}
-		else{
-			ErrorWindow ew = gameMode.getErrorWindow();
-			ew.setErrorLabel("Non hai abbastanza soldi per comprare quest'unità");
-			ew.setVisible(true);
-		}
-		
+			else{
+				ErrorWindow ew = gameMode.getErrorWindow();
+				ew.setErrorLabel("Non hai abbastanza soldi per comprare quest'unità");
+				ew.setVisible(true);
+			}
+		}	
 	}
 
 
@@ -272,50 +297,56 @@ public class UnitListener implements ActionListener {
 		MappaGrafica mG = gameMode.getMappaGrafica();
 		Esagono e = null;
 		EsagonoGrafico eG = null;
-		Player player = gameMode.getPlayer(gameMode.getTurno());
+		int turno =gameMode.getTurno();
+		Player player = gameMode.getPlayer(turno);
 		if(player.getSoldi()>=FanteriaLeggera.COSTO){
 			if(mG.getSelezionato()!=-1){
 				e = mG.getMappa().getComponent()[mG.getSelezionato()];
-				if(e.getUnit()==null){
-					e.setUnit(new FanteriaLeggera(Unità.UNITACOMPRABILI,gameMode.getTurno()));
-			
-					eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
-					mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 				
-					//aggiorno i soldi del player
-					player = gameMode.getPlayer(gameMode.getTurno());
-					int soldiPrecedenti = player.getSoldi();
-					int soldiNuovi = soldiPrecedenti - FanteriaLeggera.COSTO;
-					player.setMoney(soldiNuovi);
-					UnitPanel unitPanel = gameMode.getUnitPanel();
-					unitPanel.setSoldiLabel(soldiNuovi);
+				int settore = e.getCoordinate()[0];
+				int posizione = e.getCoordinate()[2];
+				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
+					if(e.getUnit()==null){
+						e.setUnit(new FanteriaLeggera(Unità.UNITACOMPRABILI,gameMode.getTurno()));
 				
-				}
-				else if(e.getUnit() instanceof FanteriaLeggera){
-					int unitàPrec = e.getUnit().getNumUnits();
-					int unitàNuove =unitàPrec+Unità.UNITACOMPRABILI;
-					e.getUnit().setNumUnits(unitàNuove);
+						eG = new EsagonoGrafico(mG.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
+						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 					
-					//aggiorno i soldi del player
-					player = gameMode.getPlayer(gameMode.getTurno());
-					int soldiPrecedenti = player.getSoldi();
-					int soldiNuovi = soldiPrecedenti - FanteriaLeggera.COSTO;
-					player.setMoney(soldiNuovi);
-					UnitPanel unitPanel = gameMode.getUnitPanel();
-					unitPanel.setSoldiLabel(soldiNuovi);
+						//aggiorno i soldi del player
+						player = gameMode.getPlayer(gameMode.getTurno());
+						int soldiPrecedenti = player.getSoldi();
+						int soldiNuovi = soldiPrecedenti - FanteriaLeggera.COSTO;
+						player.setMoney(soldiNuovi);
+						UnitPanel unitPanel = gameMode.getUnitPanel();
+						unitPanel.setSoldiLabel(soldiNuovi);
 					
-				}
-				else{
-					ErrorWindow ew = gameMode.getErrorWindow();
-					ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
-					ew.setVisible(true);
+					}
+					else if(e.getUnit() instanceof FanteriaLeggera){
+						int unitàPrec = e.getUnit().getNumUnits();
+						int unitàNuove =unitàPrec+Unità.UNITACOMPRABILI;
+						e.getUnit().setNumUnits(unitàNuove);
+						
+						//aggiorno i soldi del player
+						player = gameMode.getPlayer(gameMode.getTurno());
+						int soldiPrecedenti = player.getSoldi();
+						int soldiNuovi = soldiPrecedenti - FanteriaLeggera.COSTO;
+						player.setMoney(soldiNuovi);
+						UnitPanel unitPanel = gameMode.getUnitPanel();
+						unitPanel.setSoldiLabel(soldiNuovi);
+						
+					}
+					else{
+						ErrorWindow ew = gameMode.getErrorWindow();
+						ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
+						ew.setVisible(true);
+					}
 				}
 			}
-		}
-		else{
-			ErrorWindow ew = gameMode.getErrorWindow();
-			ew.setErrorLabel("Non hai abbastanza soldi per comprare quest'unità");
-			ew.setVisible(true);
+			else{
+				ErrorWindow ew = gameMode.getErrorWindow();
+				ew.setErrorLabel("Non hai abbastanza soldi per comprare quest'unità");
+				ew.setVisible(true);
+			}
 		}
 	}
 }

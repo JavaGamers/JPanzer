@@ -80,6 +80,7 @@ public class InitGameListener implements ActionListener, ChangeListener {
 				gameMode.createAndSetMappaGrafica();
 			}
 		}
+		gameMode.setSelectionUnitMode(true);
 		
 		//gestisco il player 1
 		//gestisco il nome

@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
+import controller.GameMode;
 import controller.MappaListener;
 import model.Esagono;
 import model.EsagonoGrafico;
@@ -17,6 +18,7 @@ public class MappaGrafica extends javax.swing.JPanel {
 	private int yC;
 	public double raggio;
 	private Mappa mappa;
+	public static GameMode gameMode = GameMode.getGameMode();
 	
 	public static final double STDRAGGIO = 70;
 	public static final double ZOOMRAGGIO = 30;
@@ -33,7 +35,7 @@ public class MappaGrafica extends javax.swing.JPanel {
     
     public void paint(Graphics g) {
 
-		g.setColor(Color.black);
+		g.setColor(Color.BLACK);
 		EsagonoGrafico eG;
 		Graphics2D g2 = (Graphics2D)g;
 		Esagono e = this.mappa.getComponent()[0];
@@ -56,8 +58,16 @@ public class MappaGrafica extends javax.swing.JPanel {
 		
 		// disegno degli altri esagoni
 		for(int i=1;i<this.mappa.getComponent().length;i++){
+			g.setColor(Color.BLACK);
 			e= this.mappa.getComponent()[i];
-
+			if(gameMode.getSelecionUnitMode()){
+				int turno =gameMode.getTurno();
+				int settore = e.getCoordinate()[0];
+				int posizione = e.getCoordinate()[2];
+				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
+					g.setColor(Color.BLUE);
+				}
+			}
 			eG.newSet(e.getId(),this.xC,this.yC,raggio);
 			
 			if(e.getTerritorio()!=null){

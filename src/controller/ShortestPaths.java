@@ -9,7 +9,7 @@ import model.GraphMap;
 
 public class ShortestPaths {
 
-	public static List<Nodo> dijkstra(GraphMap gm, Nodo source){
+	public static List<Nodo> dijkstra(GraphMap gm, Nodo source, int limit){
 		int lenght = gm.getList().length;
 		int[] color = new int[lenght]; // 0-white	1-gray
 		
@@ -21,23 +21,29 @@ public class ShortestPaths {
 		List<Nodo> shortestPathTree = new LinkedList<Nodo>();
 		q.add(source);
 		color[source.getId()]=1;
+		boolean finito= false;
 		
-		while(!q.isEmpty()){
+		while(!q.isEmpty()&& !finito){
 			Nodo u = q.poll();
-			shortestPathTree.add(u);
-			color[u.getId()]=1;
-			Iterator<Nodo> it = gm.getList()[u.getId()].iterator();
-			
-			while(it.hasNext()){
-				Nodo v = it.next();
-				int weight = v.getCosto();
-				long distanceToU = u.getMinDistance()+weight;
-				if(distanceToU<v.getMinDistance()){
-					q.remove(v);
-					if(color[v.getId()]==0){
-						v.setDistance(distanceToU);
-						q.add(v);
-						color[v.getId()]=1;
+			if(u.getMinDistance()>limit){
+				finito = true;
+			}
+			else{
+				shortestPathTree.add(u);
+				color[u.getId()]=1;
+				Iterator<Nodo> it = gm.getList()[u.getId()].iterator();
+				
+				while(it.hasNext()){
+					Nodo v = it.next();
+					int weight = v.getCosto();
+					long distanceToU = u.getMinDistance()+weight;
+					if(distanceToU<v.getMinDistance()){
+						q.remove(v);
+						if(color[v.getId()]==0){
+							v.setDistance(distanceToU);
+							q.add(v);
+							color[v.getId()]=1;
+						}
 					}
 				}
 			}

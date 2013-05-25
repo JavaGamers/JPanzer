@@ -25,9 +25,16 @@ public class MappaListener extends MouseAdapter{
 		g2.setColor(Color.BLACK);
 
 		EsagonoGrafico eG = new EsagonoGrafico(0, mG.getXCentro(), mG.getYCentro(), mG.getRaggio());
-		System.out.println(""+mG.getSelezionato());
 		if(mG.getSelezionato()!=-1){
 			e = mG.getMappa().getComponent()[mG.getSelezionato()];
+			if(gameMode.getSelecionUnitMode()){
+				int turno =gameMode.getTurno();
+				int settore = e.getCoordinate()[0];
+				int posizione = e.getCoordinate()[2];
+				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
+					g2.setColor(Color.BLUE);
+				}
+			}
 			
 			eG.newSet(mG.getSelezionato(), mG.getXCentro(), mG.getYCentro(), mG.getRaggio());
 			g2.draw(eG);
@@ -36,7 +43,6 @@ public class MappaListener extends MouseAdapter{
 		e = mG.contains(x, y);
 		
 		if(e!=null){
-			System.out.println("trovato");
 			g2.setColor(Color.RED);
 			mG.setSelezionato(e.getId());
 			eG.newSet(e.getId(), mG.getXCentro(), mG.getYCentro(), mG.getRaggio());

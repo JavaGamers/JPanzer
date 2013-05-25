@@ -29,6 +29,7 @@ public class GameMode {
 	private UnitPanel unitPanel;
 	private ErrorWindow errorWindow;
 	private int turno;
+	private boolean selectionUnitMode;
 	
 	
 	private GameMode(){
@@ -45,10 +46,15 @@ public class GameMode {
 		this.unitPanel=null;
 		this.errorWindow= new ErrorWindow();
 		this.turno=1;
+		this.selectionUnitMode=false;
 	}
 	
 	public int getTurno(){
 		return this.turno;
+	}
+	
+	public boolean getSelecionUnitMode(){
+		return this.selectionUnitMode;
 	}
 	
 	public ErrorWindow getErrorWindow(){
@@ -126,6 +132,10 @@ public class GameMode {
 			return this.player2;
 		}
 		
+	}
+	
+	public void setSelectionUnitMode(boolean value){
+		this.selectionUnitMode=value;
 	}
 	
 	public void setGameWin(GameWin gW){
