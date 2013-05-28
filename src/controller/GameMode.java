@@ -29,6 +29,7 @@ public class GameMode {
 	private int turno;
 	private boolean selectionUnitMode;
 	private boolean playingMode;
+	private boolean movingMode;
 	
 	
 	private GameMode(){
@@ -47,6 +48,7 @@ public class GameMode {
 		this.turno=1;
 		this.selectionUnitMode=false;
 		this.playingMode=false;
+		this.movingMode = false;
 	}
 	
 	public int getTurno(){
@@ -55,6 +57,10 @@ public class GameMode {
 	
 	public boolean isPlayingMode(){
 		return this.playingMode;
+	}
+	
+	public boolean isMovingMode(){
+		return this.movingMode;
 	}
 	
 	public boolean isSelecionUnitMode(){
@@ -135,7 +141,10 @@ public class GameMode {
 		else{
 			return this.player2;
 		}
-		
+	}
+	
+	public void setMovingMode(boolean value){
+		this.movingMode=value;
 	}
 	
 	public void setSelectionUnitMode(boolean value){

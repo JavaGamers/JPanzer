@@ -144,7 +144,9 @@ public class Esagono implements Comparable<Esagono> {
 	
 	public void setUnit(Unità u){
 		this.unit=u;
-		u.setPos(this);
+		if(u!=null){
+			u.setPos(this);
+		}
 	}
 	
 	public void setTerritorio(Territorio t){
@@ -280,6 +282,9 @@ public class Esagono implements Comparable<Esagono> {
 	public int compareTo(Esagono o) {
 		return Long.compare(this.minDistance,o.minDistance);
 	}
-
+	
+	public boolean equals(Esagono o){
+		return (this.id==o.id);
+	}
 }
 

@@ -10,7 +10,7 @@ public class Lago implements Territorio {
 
 	private final static int BONUS=0; // bonus di permanenza delle unità sul territorio (DA RIDEFINIRE)
 	private BufferedImage bImg; // immagine della lago
-	private final static int costo= 0; // non verrà mai attraversato
+	private final static int costo= Integer.MAX_VALUE; // non verrà mai attraversato
 	
 	public Lago(){
 		try {

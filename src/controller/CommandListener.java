@@ -1,7 +1,9 @@
 package controller;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -10,6 +12,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.swing.JFileChooser;
@@ -18,6 +22,7 @@ import model.Aereo;
 import model.Artiglieria;
 import model.Collina;
 import model.Esagono;
+import model.EsagonoGrafico;
 import model.FanteriaLeggera;
 import model.FanteriaPesante;
 import model.Foresta;
@@ -26,7 +31,9 @@ import model.Mappa;
 import model.Montagna;
 import model.Panzer;
 import model.Pianura;
+import model.Unità;
 
+import view.CommandPanel;
 import view.GameWin;
 import view.MappaGrafica;
 
@@ -100,7 +107,6 @@ public class CommandListener implements ActionListener {
 
 	// da rivedere
 	private void salvaOpt() {
-		GameWin gW = gameMode.getGameWin();
 		MappaGrafica mG = gameMode.getMappaGrafica();
 		JFileChooser jfc = new JFileChooser();		
 		int returnVal = jfc.showSaveDialog(mG);
@@ -140,7 +146,6 @@ public class CommandListener implements ActionListener {
 
 	// da rivedere
 	private void caricaOpt() {
-		GameWin gW = this.gameMode.getGameWin();
 		MappaGrafica mG = gameMode.getMappaGrafica();
 		JFileChooser jfc = new JFileChooser();
 		int returnVal = jfc.showOpenDialog(mG);
@@ -248,19 +253,47 @@ public class CommandListener implements ActionListener {
 
 	private void muoviOpt() {
 		Mappa m = gameMode.getMappa();
+		Esagono selected = m.getComponent()[m.getSelezionato()];
+		int turno = gameMode.getTurno();
+		Unità u = selected.getUnit();
 		
-		
+		if(u!=null){
+			if(u.getPlayer()==turno){
+				MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
+				int xC = mappaGrafica.getXCentro();
+				int yC = mappaGrafica.getYCentro();
+				double raggio = MappaGrafica.STDRAGGIO;
+				int id = 0;
+				EsagonoGrafico eG = new EsagonoGrafico(id, xC,yC, raggio);
+				Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
+				List<Esagono> esagoniRaggiungibili = u.getEsagoniRaggiungibili();
+				Iterator<Esagono> it = esagoniRaggiungibili.iterator();
+				
+				while(it.hasNext()){
+					Esagono e = it.next();
+					id = e.getId();
+					eG.newSet(id, xC, yC, raggio);
+					g2.setColor(Color.MAGENTA);
+					g2.draw(eG);
+				}
+				gameMode.setMovingMode(true);
+				g2.setColor(Color.BLACK);
+			}
+		}
 	}
 
 
 	private void zoomOpt() {
 		GameWin gameWin = gameMode.getGameWin();
 		MappaGrafica mG = gameMode.getMappaGrafica();
+		CommandPanel commandPanel = gameMode.getCommandPanel();
 		if(mG.getRaggio()== MappaGrafica.STDRAGGIO){
 			mG.setRaggio(MappaGrafica.ZOOMRAGGIO);
+			commandPanel.silenceAll();
 		}
 		else{
 			mG.setRaggio(MappaGrafica.STDRAGGIO);
+			commandPanel.enableAll();
 		}
 		gameWin.repaint();
 		mG.validate();

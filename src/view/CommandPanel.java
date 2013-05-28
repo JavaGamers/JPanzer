@@ -47,6 +47,31 @@ public class CommandPanel extends javax.swing.JPanel {
     	
     	this.numUnits.setText(NUMUNITSTXT+u.getNumUnits());
     }
+    
+    // disabilito tutti i bottoni tranne lo Zoom
+    public void silenceAll(){
+    	this.abbandona.setEnabled(false);
+    	this.accorpa.setEnabled(false);
+    	this.attacca.setEnabled(false);
+    	this.carica.setEnabled(false);
+    	this.muovi.setEnabled(false);
+    	this.passa.setEnabled(false);
+    	this.salva.setEnabled(false);
+    	this.scorpora.setEnabled(false);
+    	this.shop.setEnabled(false);
+    }
+    
+    public void enableAll(){
+    	this.abbandona.setEnabled(true);
+    	this.accorpa.setEnabled(true);
+    	this.attacca.setEnabled(true);
+    	this.carica.setEnabled(true);
+    	this.muovi.setEnabled(true);
+    	this.passa.setEnabled(true);
+    	this.salva.setEnabled(true);
+    	this.scorpora.setEnabled(true);
+    	this.shop.setEnabled(true);
+    }
                          
     private void initComponents() {
     	
