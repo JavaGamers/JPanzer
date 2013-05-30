@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 import javax.swing.JFileChooser;
+import javax.swing.JScrollPane;
 import javax.swing.JSlider;
+import javax.swing.JViewport;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -145,7 +147,10 @@ public class InitGameListener implements ActionListener, ChangeListener {
 			// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
 			c.removeAll();
 			c.add(unitPanel, BorderLayout.EAST);
-			c.add(gameMode.getMappaGrafica(),BorderLayout.CENTER);
+			JScrollPane jsp = new JScrollPane();
+			jsp.setViewportView(gameMode.getMappaGrafica());
+			jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+			c.add(jsp,BorderLayout.CENTER);
 			
 			//ridisegno della finestra
 			gameWin.repaint();

@@ -13,6 +13,7 @@ import java.util.StringTokenizer;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JViewport;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -81,8 +82,9 @@ public class InitMapPanelListener implements ActionListener, ListSelectionListen
 			// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
 			c.removeAll();
 			c.add(landPanel, BorderLayout.EAST);
-			JScrollPane jsp = new JScrollPane(gameMode.getMappaGrafica());
-			//jsp.setViewportView(gameMode.getMappaGrafica());
+			JScrollPane jsp = new JScrollPane();
+			jsp.setViewportView(gameMode.getMappaGrafica());
+			jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 			c.add(jsp,BorderLayout.CENTER);
 			
 			//ridisegno della finestra

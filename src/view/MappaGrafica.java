@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -30,6 +31,20 @@ public class MappaGrafica extends javax.swing.JPanel {
         this.xC=x;
 		this.yC=y;
 		this.mappa=m;
+		
+		EsagonoGrafico eG = new EsagonoGrafico(0,0,0,STDRAGGIO);
+		
+		int height = (int) ((m.getDim()*2+1)*2*eG.getApotema());
+		int width = 0;
+		if(m.getDim()%2==0){
+			width = (int) (3*m.getDim()*STDRAGGIO+2*STDRAGGIO);
+		}
+		else{
+			width = (int) (3*m.getDim()*STDRAGGIO+4*STDRAGGIO);
+		}
+		
+		Dimension d = new Dimension(width,height);
+		this.setPreferredSize(d);
 		
     }
     
@@ -152,10 +167,5 @@ public class MappaGrafica extends javax.swing.JPanel {
 	
 	public void setMappa(Mappa m){
 		this.mappa=m;
-	}
-                        
- 
-    
-    
-            
+	}          
 }
