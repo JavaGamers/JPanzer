@@ -10,7 +10,7 @@ import controller.GameMode;
 public abstract class Unità {
 	protected int att;	// attacco
 	protected int dif;	// difesa
-	protected int esp;	// esperienza
+	protected int esp;	// esperienza valori da 1 a 10
 	protected int passi;	// passi rimanenti
 	protected double rig;	// rigenerazione
 	protected double bonus;	// bonus territorio
@@ -19,7 +19,9 @@ public abstract class Unità {
 	protected int player;	// 1=player 1 - 2= player 2
 	protected BufferedImage bImg;
 	protected List<Esagono> esagoniRaggiungibili;
+	protected boolean alreadyAttack;
 	public static GameMode gameMode = GameMode.getGameMode();
+	
 	/*
 	 counter è una variabile che indica la correttezza di esagoniRaggiungibili:
 	 counter = 0 esagoniRaggiungibili è coerente con la posizione dell'esagono
@@ -45,6 +47,11 @@ public abstract class Unità {
 		this.bImg=null;
 		this.esagoniRaggiungibili=null;
 		this.counter = 0;
+		this.alreadyAttack=false;
+	}
+	
+	public boolean hasAlreadyAttack(){
+		return this.alreadyAttack;
 	}
 	
 	public int getAtt(){
@@ -110,6 +117,10 @@ public abstract class Unità {
 		this.esp=e;
 	}
 	
+	public void setAlreadyAttack(boolean value){
+		this.alreadyAttack = value;
+	}
+	
 	public void setNumUnits(int n){
 		if(n<0){
 			throw new IllegalArgumentException("non ha senso avere numero di unità negative");
@@ -124,22 +135,17 @@ public abstract class Unità {
 	
 	public void setPos(Esagono p){
 		this.pos=p;
+		if(p.getTerritorio()!=null){
+			this.bonus=p.getTerritorio().getBonus();
+		}
 		this.counter++;
 	}
 	
-	public void setAtt(){
-		// da fare
+	public abstract void resetPassi();
+	
+	public void setPassi(int passi){
+		this.passi = passi;
 	}
-	
-	public void setDif(){
-		// da fare
-	}
-	
-	public void setBonus(){
-		// da fare
-	}
-	
-	
 	
 	// ritorna true se il set è andato a buon fine 
 	public boolean aggiornaPassi(int p){
@@ -154,6 +160,7 @@ public abstract class Unità {
 			return ok;
 	}
 	
-	
-
+	public boolean isSameUnitOf(Unità other){
+		return this.getNome().equals(other.getNome());
+	}
 }

@@ -40,4 +40,8 @@ public class FanteriaPesante extends Unità {
 		
 		return "fanteriapesante";
 	}
+
+	public void resetPassi() {
+		this.passi=FanteriaPesante.PTT;
+	}
 }

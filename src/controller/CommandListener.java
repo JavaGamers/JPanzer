@@ -31,6 +31,7 @@ import model.Mappa;
 import model.Montagna;
 import model.Panzer;
 import model.Pianura;
+import model.Player;
 import model.Unità;
 
 import view.CommandPanel;
@@ -101,8 +102,36 @@ public class CommandListener implements ActionListener {
 	}
 
 	private void scorporaOpt() {
-		// TODO Auto-generated method stub
-		
+		Mappa m = gameMode.getMappa();
+		Esagono selected = m.getComponent()[m.getSelezionato()];
+		int turno = gameMode.getTurno();
+		Unità unitSelected = selected.getUnit();
+		Esagono adiacenza = null;
+		Unità u = null;
+		if(unitSelected!=null){
+			if(unitSelected.getPlayer()==turno){
+				MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
+				int xC = mappaGrafica.getXCentro();
+				int yC = mappaGrafica.getYCentro();
+				double raggio = MappaGrafica.STDRAGGIO;
+				int id = 0;
+				EsagonoGrafico eG = new EsagonoGrafico(id, xC,yC, raggio);
+				Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
+				List<Esagono> esagoniRaggiungibili = unitSelected.getEsagoniRaggiungibili();
+				for(int i=0;i<6;i++){
+					adiacenza = selected.getAdiacenze()[i];
+					if(esagoniRaggiungibili.contains(adiacenza)){
+						u = adiacenza.getUnit();
+						if(u==null){
+							eG.newSet(adiacenza.getId(), xC, yC, raggio);
+							g2.setColor(Color.MAGENTA);
+							g2.draw(eG);
+							gameMode.setScorporaMode(true);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	// da rivedere
@@ -140,8 +169,30 @@ public class CommandListener implements ActionListener {
 
 
 	private void passaOpt() {
+		
+		// resettiamo i valori delle unità	
+		Mappa m = gameMode.getMappa();
+		Esagono e = null;
+		Unità u = null;
+		for(int i=0; i<m.getComponent().length;i++){
+			e = m.getComponent()[i];
+			u = e.getUnit();
+			if(u!=null){
+				u.setAlreadyAttack(false);
+				u.resetPassi();
+			}
+		}
+		
+		// aggiorniamo i soldi del player che ha passato il turno
+		Player p = gameMode.getPlayer(gameMode.getTurno());
+		p.setMoney(p.getSoldi()+Player.MONEYPERTURNO);
+		
+		// cambia turno (ovviamente)
 		gameMode.switchTurno();
 		
+		// settiamo le label del CommandPanel
+		p = gameMode.getPlayer(gameMode.getTurno());
+		gameMode.getCommandPanel().setPlayerLabel(p);
 	}
 
 	// da rivedere
@@ -235,13 +286,72 @@ public class CommandListener implements ActionListener {
 	}
 
 	private void attaccaOpt() {	
-		
+		Mappa m = gameMode.getMappa();
+		Esagono selected = m.getComponent()[m.getSelezionato()];
+		int turno = gameMode.getTurno();
+		Unità unitSelected = selected.getUnit();
+		Esagono adiacenza = null;
+		Unità u = null;
+		if(unitSelected!=null){
+			if(unitSelected.getPlayer()==turno){
+				MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
+				int xC = mappaGrafica.getXCentro();
+				int yC = mappaGrafica.getYCentro();
+				double raggio = MappaGrafica.STDRAGGIO;
+				int id = 0;
+				EsagonoGrafico eG = new EsagonoGrafico(id, xC,yC, raggio);
+				Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
+				
+				for(int i=0;i<6;i++){
+					adiacenza = selected.getAdiacenze()[i];
+					if(adiacenza!=null){
+						id= adiacenza.getId();
+						u=adiacenza.getUnit();
+						if(u!=null && u.getPlayer()!=turno){
+							eG.newSet(id, xC, yC, raggio);
+							g2.setColor(Color.MAGENTA);
+							g2.draw(eG);
+							gameMode.setAttackMode(true);
+						}
+					}
+				}
+				g2.setColor(Color.BLACK);
+			}
+		}
 	}
 
 
 	private void accorpaOpt() {
-		// TODO Auto-generated method stub
-		
+		Mappa m = gameMode.getMappa();
+		Esagono selected = m.getComponent()[m.getSelezionato()];
+		int turno = gameMode.getTurno();
+		Unità unitSelected = selected.getUnit();
+		Esagono adiacenza = null;
+		Unità u = null;
+		if(unitSelected!=null){
+			if(unitSelected.getPlayer()==turno){
+				MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
+				int xC = mappaGrafica.getXCentro();
+				int yC = mappaGrafica.getYCentro();
+				double raggio = MappaGrafica.STDRAGGIO;
+				int id = 0;
+				EsagonoGrafico eG = new EsagonoGrafico(id, xC,yC, raggio);
+				Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
+				List<Esagono> esagoniRaggiungibili = unitSelected.getEsagoniRaggiungibili();
+				for(int i=0;i<6;i++){
+					adiacenza = selected.getAdiacenze()[i];
+					if(esagoniRaggiungibili.contains(adiacenza)){
+						u = adiacenza.getUnit();
+						if(u!=null && unitSelected.isSameUnitOf(u) && u.getPlayer()==turno){
+							eG.newSet(adiacenza.getId(), xC, yC, raggio);
+							g2.setColor(Color.MAGENTA);
+							g2.draw(eG);
+							gameMode.setAccorpaMode(true);
+						}
+					}
+				}
+			}
+		}
 	}
 
 

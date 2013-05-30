@@ -8,6 +8,7 @@ public class Player {
 	public static final int STDMONEY = 1000;
 	public static final int MINMONEY = 500;
 	public static final int MAXMONEY = 2000;
+	public static final int MONEYPERTURNO = 100;
 	
 	
 	public Player(String nome, int player){

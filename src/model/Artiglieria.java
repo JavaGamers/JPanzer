@@ -40,4 +40,8 @@ public class Artiglieria extends Unità {
 		
 		return "artiglieria";
 	}
+
+	public void resetPassi() {
+		this.passi=Artiglieria.PTT;
+	}
 }

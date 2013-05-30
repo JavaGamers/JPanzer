@@ -39,4 +39,8 @@ public class Panzer extends Unità {
 		
 		return "panzer";
 	}
+
+	public void resetPassi() {
+		this.passi=Panzer.PTT;
+	}
 }

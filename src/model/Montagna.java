@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 
 public class Montagna implements Territorio {
 
-	private final static int BONUS=0; // bonus di permanenza delle unità sul territorio (DA RIDEFINIRE)
+	private final static double BONUS=1.7; // bonus di permanenza delle unità sul territorio (DA RIDEFINIRE)
 	private BufferedImage bImg; // immagine della montagna
 	private final static int costo= 4; // da ridefinire
 	
@@ -30,7 +30,7 @@ public class Montagna implements Territorio {
 		return costo;
 	}
 	
-	public int getBonus(){
+	public double getBonus(){
 		return BONUS;
 	}
 

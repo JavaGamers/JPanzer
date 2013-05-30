@@ -30,6 +30,9 @@ public class GameMode {
 	private boolean selectionUnitMode;
 	private boolean playingMode;
 	private boolean movingMode;
+	private boolean attackMode;
+	private boolean accorpaMode;
+	private boolean scorporaMode;
 	
 	
 	private GameMode(){
@@ -49,10 +52,25 @@ public class GameMode {
 		this.selectionUnitMode=false;
 		this.playingMode=false;
 		this.movingMode = false;
+		this.attackMode = false;
+		this.accorpaMode = false;
+		this.scorporaMode = false;
+	}
+	
+	public boolean isScorporaMode(){
+		return this.scorporaMode;
+	}
+	
+	public boolean isAccorpaMode(){
+		return this.accorpaMode;
 	}
 	
 	public int getTurno(){
 		return this.turno;
+	}
+	
+	public boolean isAttackMode(){
+		return this.attackMode;
 	}
 	
 	public boolean isPlayingMode(){
@@ -141,6 +159,18 @@ public class GameMode {
 		else{
 			return this.player2;
 		}
+	}
+	
+	public void setScorporaMode(boolean value){
+		this.scorporaMode = value;
+	}
+	
+	public void setAccorpaMode(boolean value){
+		this.accorpaMode = value;
+	}
+	
+	public void setAttackMode(boolean value){
+		this.attackMode=value;
 	}
 	
 	public void setMovingMode(boolean value){

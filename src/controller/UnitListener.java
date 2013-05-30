@@ -11,6 +11,7 @@ import model.Esagono;
 import model.EsagonoGrafico;
 import model.FanteriaLeggera;
 import model.FanteriaPesante;
+import model.Lago;
 import model.Mappa;
 import model.Panzer;
 import model.Player;
@@ -115,7 +116,7 @@ public class UnitListener implements ActionListener {
 				int settore = e.getCoordinate()[0];
 				int posizione = e.getCoordinate()[2];
 				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
-					if(e.getUnit()==null){
+					if(e.getUnit()==null && !(e.getTerritorio() instanceof Lago)){
 						e.setUnit(new Artiglieria(Unità.UNITACOMPRABILI,gameMode.getTurno()));
 						
 						eG = new EsagonoGrafico(m.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
@@ -130,7 +131,7 @@ public class UnitListener implements ActionListener {
 						unitPanel.setSoldiLabel(soldiNuovi);
 					
 					}
-					else if(e.getUnit() instanceof Artiglieria){
+					else if(e.getUnit() instanceof Artiglieria && !(e.getTerritorio() instanceof Lago)){
 						int unitàPrec = e.getUnit().getNumUnits();
 						int unitàNuove =unitàPrec+Unità.UNITACOMPRABILI;
 						e.getUnit().setNumUnits(unitàNuove);
@@ -151,10 +152,15 @@ public class UnitListener implements ActionListener {
 					}
 				}
 			}
+			else if (!(e.getTerritorio() instanceof Lago)){
+				ErrorWindow ew = gameMode.getErrorWindow();
+				ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
+				ew.setVisible(true);
+			}
 			else{
 				ErrorWindow ew = gameMode.getErrorWindow();
-				ew.setErrorLabel("Non hai abbastanza soldi per comprare quest'unità");
-				ew.setVisible(true);
+				ew.setErrorLabel("Non puoi mettere un'Unità di terra nel lago!");
+				ew.setVisible(true);	
 			}
 		}
 	}
@@ -235,7 +241,7 @@ public class UnitListener implements ActionListener {
 				int settore = e.getCoordinate()[0];
 				int posizione = e.getCoordinate()[2];
 				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
-					if(e.getUnit()==null){
+					if(e.getUnit()==null && !(e.getTerritorio() instanceof Lago)){
 						e.setUnit(new Panzer(Unità.UNITACOMPRABILI,gameMode.getTurno()));
 				
 						eG = new EsagonoGrafico(m.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
@@ -250,7 +256,7 @@ public class UnitListener implements ActionListener {
 						unitPanel.setSoldiLabel(soldiNuovi);
 					
 					}
-					else if(e.getUnit() instanceof Panzer){
+					else if(e.getUnit() instanceof Panzer && !(e.getTerritorio() instanceof Lago)){
 						int unitàPrec = e.getUnit().getNumUnits();
 						int unitàNuove =unitàPrec+Unità.UNITACOMPRABILI;
 						e.getUnit().setNumUnits(unitàNuove);
@@ -264,10 +270,15 @@ public class UnitListener implements ActionListener {
 						unitPanel.setSoldiLabel(soldiNuovi);
 						
 					}
-					else{
+					else if (!(e.getTerritorio() instanceof Lago)){
 						ErrorWindow ew = gameMode.getErrorWindow();
 						ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
 						ew.setVisible(true);
+					}
+					else{
+						ErrorWindow ew = gameMode.getErrorWindow();
+						ew.setErrorLabel("Non puoi mettere un'Unità di terra nel lago!");
+						ew.setVisible(true);	
 					}
 				}
 			}
@@ -294,7 +305,7 @@ public class UnitListener implements ActionListener {
 				int settore = e.getCoordinate()[0];
 				int posizione = e.getCoordinate()[2];
 				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
-					if(e.getUnit()==null){
+					if(e.getUnit()==null && !(e.getTerritorio() instanceof Lago)){
 						e.setUnit(new FanteriaPesante(Unità.UNITACOMPRABILI,gameMode.getTurno()));
 				
 						eG = new EsagonoGrafico(m.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
@@ -309,7 +320,7 @@ public class UnitListener implements ActionListener {
 						unitPanel.setSoldiLabel(soldiNuovi);
 					
 					}
-					else if(e.getUnit() instanceof FanteriaPesante){
+					else if(e.getUnit() instanceof FanteriaPesante && !(e.getTerritorio() instanceof Lago)){
 						int unitàPrec = e.getUnit().getNumUnits();
 						int unitàNuove =unitàPrec+Unità.UNITACOMPRABILI;
 						e.getUnit().setNumUnits(unitàNuove);
@@ -353,7 +364,7 @@ public class UnitListener implements ActionListener {
 				int settore = e.getCoordinate()[0];
 				int posizione = e.getCoordinate()[2];
 				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
-					if(e.getUnit()==null){
+					if(e.getUnit()==null && !(e.getTerritorio() instanceof Lago)){
 						e.setUnit(new FanteriaLeggera(Unità.UNITACOMPRABILI,gameMode.getTurno()));
 				
 						eG = new EsagonoGrafico(m.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
@@ -368,7 +379,7 @@ public class UnitListener implements ActionListener {
 						unitPanel.setSoldiLabel(soldiNuovi);
 					
 					}
-					else if(e.getUnit() instanceof FanteriaLeggera){
+					else if(e.getUnit() instanceof FanteriaLeggera && !(e.getTerritorio() instanceof Lago)){
 						int unitàPrec = e.getUnit().getNumUnits();
 						int unitàNuove =unitàPrec+Unità.UNITACOMPRABILI;
 						e.getUnit().setNumUnits(unitàNuove);
@@ -382,10 +393,15 @@ public class UnitListener implements ActionListener {
 						unitPanel.setSoldiLabel(soldiNuovi);
 						
 					}
-					else{
+					else if (!(e.getTerritorio() instanceof Lago)){
 						ErrorWindow ew = gameMode.getErrorWindow();
 						ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
 						ew.setVisible(true);
+					}
+					else{
+						ErrorWindow ew = gameMode.getErrorWindow();
+						ew.setErrorLabel("Non puoi mettere un'Unità di terra nel lago!");
+						ew.setVisible(true);	
 					}
 				}
 			}
