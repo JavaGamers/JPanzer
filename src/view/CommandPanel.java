@@ -58,8 +58,8 @@ public class CommandPanel extends javax.swing.JPanel {
     	this.player.setText(PLAYERTXT+p.getNome());
     }
     
-    // disabilito tutti i bottoni tranne lo Zoom
-    public void silenceAll(){
+    // disabilita bottoni: option = 0 tutti, option = 1 tutti tranne lo zoom 
+    public void silenceAll(int option){
     	this.abbandona.setEnabled(false);
     	this.accorpa.setEnabled(false);
     	this.attacca.setEnabled(false);
@@ -69,6 +69,12 @@ public class CommandPanel extends javax.swing.JPanel {
     	this.salva.setEnabled(false);
     	this.scorpora.setEnabled(false);
     	this.shop.setEnabled(false);
+    	if(option<0 || option>1){
+    		throw new IllegalArgumentException("argomento errato del metodo silenceAll");
+    	}
+    	else if(option == 0){
+    		this.zoom.setEnabled(false);
+    	}
     }
     
     public void enableAll(){
@@ -81,6 +87,7 @@ public class CommandPanel extends javax.swing.JPanel {
     	this.salva.setEnabled(true);
     	this.scorpora.setEnabled(true);
     	this.shop.setEnabled(true);
+    	this.zoom.setEnabled(true);
     }
                          
     private void initComponents() {
@@ -179,7 +186,7 @@ public class CommandPanel extends javax.swing.JPanel {
 
         abbandona.setBackground(new java.awt.Color(241, 157, 30));
         abbandona.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        abbandona.setText("ABBANDONA");
+        abbandona.setText("ABBANDONA PARTITA");
         abbandona.setMaximumSize(new java.awt.Dimension(89, 25));
         abbandona.setMinimumSize(new java.awt.Dimension(89, 25));
         abbandona.setPreferredSize(new java.awt.Dimension(89, 25));

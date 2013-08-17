@@ -60,7 +60,7 @@ public class UnitListener implements ActionListener {
 		MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
 		if(!gameMode.isPlayingMode()){
 			int turno = gameMode.getTurno();
-			if(turno==1){
+			if(turno==1 && gameMode.getPlayer(turno).hasUnits()){
 				gameMode.switchTurno();
 				GameWin gameWin = gameMode.getGameWin();
 				Container c = gameWin.getContentPane();
@@ -71,7 +71,7 @@ public class UnitListener implements ActionListener {
 				gameWin.repaint();
 				gameWin.validate();
 			}
-			else{
+			else if(turno == 2 && gameMode.getPlayer(turno).hasUnits()){
 				gameMode.switchTurno();
 				gameMode.setSelectionUnitMode(false);
 				GameWin gameWin = gameMode.getGameWin();
@@ -83,6 +83,12 @@ public class UnitListener implements ActionListener {
 				c.add(mappaGrafica, BorderLayout.CENTER);
 				gameWin.repaint();
 				gameWin.validate();
+			}
+			else{
+				ErrorWindow ew = gameMode.getErrorWindow();
+				ew.setErrorLabel("Devi posizionare almeno 1 unità per giocare");
+				ew.setVisible(true);
+				
 			}
 		}
 		else{
@@ -118,6 +124,7 @@ public class UnitListener implements ActionListener {
 				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
 					if(e.getUnit()==null && !(e.getTerritorio() instanceof Lago)){
 						e.setUnit(new Artiglieria(Unità.UNITACOMPRABILI,gameMode.getTurno()));
+						player.aggiungiUnità(e.getUnit());
 						
 						eG = new EsagonoGrafico(m.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
 						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
@@ -183,6 +190,7 @@ public class UnitListener implements ActionListener {
 				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
 					if(e.getUnit()==null){
 						e.setUnit(new Aereo(Unità.UNITACOMPRABILI,gameMode.getTurno()));
+						player.aggiungiUnità(e.getUnit());
 				
 						eG = new EsagonoGrafico(m.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
 						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
@@ -243,6 +251,7 @@ public class UnitListener implements ActionListener {
 				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
 					if(e.getUnit()==null && !(e.getTerritorio() instanceof Lago)){
 						e.setUnit(new Panzer(Unità.UNITACOMPRABILI,gameMode.getTurno()));
+						player.aggiungiUnità(e.getUnit());
 				
 						eG = new EsagonoGrafico(m.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
 						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
@@ -307,6 +316,7 @@ public class UnitListener implements ActionListener {
 				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
 					if(e.getUnit()==null && !(e.getTerritorio() instanceof Lago)){
 						e.setUnit(new FanteriaPesante(Unità.UNITACOMPRABILI,gameMode.getTurno()));
+						player.aggiungiUnità(e.getUnit());
 				
 						eG = new EsagonoGrafico(m.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
 						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
@@ -366,6 +376,7 @@ public class UnitListener implements ActionListener {
 				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
 					if(e.getUnit()==null && !(e.getTerritorio() instanceof Lago)){
 						e.setUnit(new FanteriaLeggera(Unità.UNITACOMPRABILI,gameMode.getTurno()));
+						player.aggiungiUnità(e.getUnit());
 				
 						eG = new EsagonoGrafico(m.getSelezionato(),mG.getXCentro(),mG.getYCentro(),mG.getRaggio());
 						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());

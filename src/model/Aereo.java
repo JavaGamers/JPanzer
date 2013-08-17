@@ -7,8 +7,6 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import controller.Dijkstra;
-
 public class Aereo extends Unità {
 
 	private final static int BASEATT=0;	// attacco di base

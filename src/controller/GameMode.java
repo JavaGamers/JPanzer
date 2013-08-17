@@ -1,13 +1,17 @@
 package controller;
 
+import java.util.List;
+
 import model.Mappa;
 import model.Player;
+import model.Unità;
 import view.CommandPanel;
 import view.ErrorWindow;
 import view.GameWin;
 import view.InitGame;
 import view.InitMapPanel;
 import view.LandPanel;
+import view.LeavingWin;
 import view.MappaGrafica;
 import view.StartPanel;
 import view.UnitPanel;
@@ -26,6 +30,7 @@ public class GameMode {
 	private StartPanel startPanel;
 	private UnitPanel unitPanel;
 	private ErrorWindow errorWindow;
+	private LeavingWin leavingWin;
 	private int turno;
 	private boolean selectionUnitMode;
 	private boolean playingMode;
@@ -92,6 +97,13 @@ public class GameMode {
 		return this.errorWindow;
 	}
 	
+	public LeavingWin getLeavingWin(){
+		if(this.leavingWin==null){
+			this.leavingWin = new LeavingWin();
+		}
+		return this.leavingWin;
+	}
+	
 	public GameWin getGameWin(){
 		if(this.gameWin==null){
 			this.gameWin = new GameWin("JPanzer");
@@ -145,7 +157,7 @@ public class GameMode {
 		return this.unitPanel;
 	}
 	
-	public Mappa getMappa(){// c,jsdbfgvug syvhkw
+	public Mappa getMappa(){
 		return this.mappa;
 	}
 	
@@ -234,6 +246,30 @@ public class GameMode {
 		else{
 			this.turno=1;
 		}
+	}
+	
+	public void salvaPartita(){
+		
+	}
+	
+	public void caricaPartita(){
+		
+	}
+	
+	/* metodo per controllare se qualcuno ha vinto la partita
+	   valori di ritorno: 0 nessuo ha ancora vinto - 1 vittoria player 1 - 2 vittoria player 2 - 3 pareggio*/
+	public int checkVictory(){
+		int victory = 0;
+		List<Unità> p1Unit = this.player1.getUnitList();
+		List<Unità> p2Unit = this.player2.getUnitList();
+		if(p1Unit.isEmpty() && p2Unit.isEmpty())
+			victory = 3;
+		else if(p1Unit.isEmpty())
+			victory = 2;
+		else
+			victory = 1;
+		
+		return victory;	
 	}
 	
 	// Metodo della classe impiegato per accedere al Singleton

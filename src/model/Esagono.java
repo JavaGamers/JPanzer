@@ -1,6 +1,5 @@
 package model;
 
-import java.util.Observable;
 
 // gli esagoni sono comparabili in base al costo del loro territorio
 public class Esagono implements Comparable<Esagono> {

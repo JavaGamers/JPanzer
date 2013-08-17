@@ -1,10 +1,14 @@
 package model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Player {
 	private String nome;
 	private int player;
 	private boolean turno;
 	private int soldi;
+	private LinkedList<Unità> unitList;
 	public static final int STDMONEY = 1000;
 	public static final int MINMONEY = 500;
 	public static final int MAXMONEY = 2000;
@@ -19,6 +23,7 @@ public class Player {
 		this.player=player;
 		this.turno=false;
 		this.soldi= STDMONEY;
+		this.unitList = new LinkedList<Unità>();
 		
 	}
 	
@@ -26,10 +31,11 @@ public class Player {
 		if(player<1||player>2){
 			throw new IllegalArgumentException("Si può giocare solo in 2");
 		}
-		this.nome = "";
+		this.nome = "Player "+player;
 		this.player=player;
 		this.turno=false;
 		this.soldi= STDMONEY;
+		this.unitList = new LinkedList<Unità>();
 	}
 	
 	public String getNome(){
@@ -42,6 +48,10 @@ public class Player {
 	
 	public int getSoldi(){
 		return this.soldi;
+	}
+	
+	public List<Unità> getUnitList(){
+		return this.unitList;
 	}
 	
 	public boolean isTurno(){
@@ -61,6 +71,23 @@ public class Player {
 			throw new IllegalArgumentException("non puoi andare in debito");
 		}
 		this.soldi= dindi;
+	}
+	
+	public boolean aggiungiUnità(Unità u){
+		boolean aggiunto = false;
+		if(!this.unitList.contains(u)){
+			this.unitList.add(u);
+			aggiunto = true;
+		}
+		return aggiunto;
+	}
+	
+	public boolean rimuoviUnità(Unità u){
+		return this.unitList.remove(u);
+	}
+	
+	public boolean hasUnits(){
+		return !this.unitList.isEmpty();
 	}
 	
 }

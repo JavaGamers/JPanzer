@@ -36,6 +36,7 @@ import model.Unità;
 
 import view.CommandPanel;
 import view.GameWin;
+import view.LeavingWin;
 import view.MappaGrafica;
 
 public class CommandListener implements ActionListener {
@@ -356,8 +357,9 @@ public class CommandListener implements ActionListener {
 
 
 	private void abbandonaOpt() {
-		// TODO Auto-generated method stub
-		
+		gameMode.getCommandPanel().silenceAll(0);
+		LeavingWin leavingWin = gameMode.getLeavingWin();
+		leavingWin.setVisible(true);
 	}
 
 
@@ -399,7 +401,7 @@ public class CommandListener implements ActionListener {
 		CommandPanel commandPanel = gameMode.getCommandPanel();
 		if(mG.getRaggio()== MappaGrafica.STDRAGGIO){
 			mG.setRaggio(MappaGrafica.ZOOMRAGGIO);
-			commandPanel.silenceAll();
+			commandPanel.silenceAll(1);
 		}
 		else{
 			mG.setRaggio(MappaGrafica.STDRAGGIO);

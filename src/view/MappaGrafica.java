@@ -6,13 +6,15 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
+import javax.swing.JPanel;
+
 import controller.GameMode;
 import controller.MappaListener;
 import model.Esagono;
 import model.EsagonoGrafico;
 import model.Mappa;
 
-public class MappaGrafica extends javax.swing.JPanel {
+public class MappaGrafica extends JPanel {
 
 	
 	private int xC;

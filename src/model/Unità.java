@@ -16,7 +16,7 @@ public abstract class Unità {
 	protected double bonus;	// bonus territorio
 	protected int numUnits;	// numero di unità
 	protected Esagono pos;	//	posizione sulla mappa
-	protected int player;	// 1=player 1 - 2= player 2
+	protected int player;	// 1=player 1 / 2=player 2
 	protected BufferedImage bImg;
 	protected List<Esagono> esagoniRaggiungibili;
 	protected boolean alreadyAttack;
@@ -162,5 +162,13 @@ public abstract class Unità {
 	
 	public boolean isSameUnitOf(Unità other){
 		return this.getNome().equals(other.getNome());
+	}
+	
+	public boolean equals(Unità other){
+		boolean ok = false;
+		if(this.pos.equals(other.pos))
+			ok = true;
+		
+		return ok;
 	}
 }

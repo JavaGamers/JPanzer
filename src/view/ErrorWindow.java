@@ -1,7 +1,5 @@
 package view;
 
-import javax.swing.JLabel;
-
 public class ErrorWindow extends javax.swing.JFrame {
                     
     private javax.swing.JLabel errorMessage;
@@ -21,7 +19,7 @@ public class ErrorWindow extends javax.swing.JFrame {
 
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 
-        errorMessage.setFont(new java.awt.Font("Monotype Corsiva", 0, 24)); // NOI18N
+        errorMessage.setFont(new java.awt.Font("Monotype Corsiva", 0, 24)); 
         errorMessage.setText(DEFTEXT);
         
 

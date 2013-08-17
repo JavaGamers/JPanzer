@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Iterator;
+
 import java.util.List;
 
 import model.Aereo;
@@ -152,10 +152,13 @@ public class MappaListener extends MouseAdapter{
 							other.updateEsp();
 						}
 						else{
+							Player p = gameMode.getPlayer(other.getPlayer());
+							p.rimuoviUnità(other);
 							nuovo.setUnit(null);
 							eG2.newSet(newSelected, xC, yC, raggio);
 							img = nuovo.getTerritorio().getImage();
 							mappaGrafica.paintImage(g2, eG2, img);
+							
 						}
 					
 						if(numSelectedRemaining>0){
@@ -167,6 +170,8 @@ public class MappaListener extends MouseAdapter{
 							p.setMoney(p.getSoldi()+moneyEarned);
 						}
 						else{
+							Player p = gameMode.getPlayer(selectedUnit.getPlayer());
+							p.rimuoviUnità(selectedUnit);
 							vecchio.setUnit(null);
 							eG2.newSet(oldSelected, xC, yC, raggio);
 							img = vecchio.getTerritorio().getImage();
@@ -174,6 +179,9 @@ public class MappaListener extends MouseAdapter{
 						}
 					}
 					gameMode.setAttackMode(false);
+					if(gameMode.checkVictory()!=0){
+						// fai comparire la finestra finale
+					}
 				}
 			}
 			
@@ -196,6 +204,10 @@ public class MappaListener extends MouseAdapter{
 						other.setNumUnits(numUnits);
 						other.setEsp(esperienza);
 						other.setPassi(passi);
+						
+						//rimuovo selectedUnit dalla UnitList del suo player
+						Player player = gameMode.getPlayer(gameMode.getTurno());
+						player.rimuoviUnità(selectedUnit);
 						
 						//cancello il disegno dell'unità accorpata
 						vecchio.setUnit(null);
@@ -251,6 +263,11 @@ public class MappaListener extends MouseAdapter{
 						other.setEsp(esp);
 						other.aggiornaPassi(nuovo.getCosto());
 						nuovo.setUnit(other);
+						
+						//aggiungo other alla UnitList del suo player
+						Player player = gameMode.getPlayer(gameMode.getTurno());
+						player.aggiungiUnità(other);
+						
 						gameMode.setScorporaMode(false);
 						
 						//repaint intenzionale XD XD
