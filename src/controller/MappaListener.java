@@ -21,6 +21,7 @@ import model.Panzer;
 import model.Player;
 import model.Unità;
 
+import view.CommandPanel;
 import view.FinalPanel;
 import view.GameWin;
 import view.MappaGrafica;
@@ -128,31 +129,30 @@ public class MappaListener extends MouseAdapter{
 				selectedUnit = vecchio.getUnit();
 				if(!selectedUnit.hasAlreadyAttack()){
 					other= nuovo.getUnit();
+					//se esiste un'unità attaccata e se appartiene all'avversario
 					if(other!=null && other.getPlayer()!=gameMode.getTurno()){
 						
 						//unità attaccante
 						int numSelectedRemaining = selectedUnit.getNumUnits();
 						int defSelected = selectedUnit.getDif();
-						int espSelected = selectedUnit.getEsp();
 						int attSelected = selectedUnit.getAtt();
-						double bonusSelected = selectedUnit.getBonus();
-						
+
 						//unità attaccata
 						int numOtherRemaining = other.getNumUnits();
 						int defOther = other.getDif();
-						int espOther = other.getEsp();
 						int attOther = other.getAtt();
-						double bonusOther = other.getBonus();
 						
 						System.out.println("attacco: "+numSelectedRemaining+ " difesa: " +numOtherRemaining );
+						CommandPanel commandPanel = gameMode.getCommandPanel();
+						commandPanel.setInfoBattleLabel(selectedUnit, other);
 						
-						numOtherRemaining = (int)((numOtherRemaining*defOther*bonusOther-numSelectedRemaining*attSelected)/(defOther*bonusOther));
+						numOtherRemaining = (int)((numOtherRemaining*defOther-numSelectedRemaining*attSelected)/(defOther));
 						int moneyEarned = calulateMoneyEarned(other.getNumUnits(),numOtherRemaining,other);
 						
 						if(numOtherRemaining>0){
 							other.setNumUnits(numOtherRemaining);
 							// se l'unità di difesa non è morta contrattacca
-							numSelectedRemaining = (int)((numSelectedRemaining*defSelected*bonusSelected-numOtherRemaining*attOther)/(defSelected*bonusSelected));
+							numSelectedRemaining = (int)((numSelectedRemaining*defSelected-numOtherRemaining*attOther)/(defSelected));
 							other.updateEsp();
 						}
 						else{
@@ -214,7 +214,7 @@ public class MappaListener extends MouseAdapter{
 					other = nuovo.getUnit();
 					if(other!=null && selectedUnit.isSameUnitOf(other)){
 						int numUnits = selectedUnit.getNumUnits() + other.getNumUnits();
-						int esperienza = (selectedUnit.getEsp()*selectedUnit.getNumUnits()+other.getEsp()*other.getNumUnits())/numUnits;
+						double esperienza = (selectedUnit.getEsp()*selectedUnit.getNumUnits()+other.getEsp()*other.getNumUnits())/numUnits;
 						int passi = 0;
 						if(selectedUnit.getPassi()<other.getPassi()){
 							passi = selectedUnit.getPassi();
@@ -251,7 +251,7 @@ public class MappaListener extends MouseAdapter{
 				if(esagoniRaggiungibili.contains(nuovo)){
 					other = nuovo.getUnit();
 					if(other==null){
-						int esp = selectedUnit.getEsp();
+						double esp = selectedUnit.getEsp();
 						int num1 = 0;
 						int num2 = 0;
 						if(selectedUnit.getNumUnits()%2==0){

@@ -5,7 +5,6 @@ import java.util.List;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -15,7 +14,7 @@ import controller.GameMode;
 public abstract class Unità {
 	protected int att;	// attacco
 	protected int dif;	// difesa
-	protected int esp;	// esperienza valori da 1 a 10
+	protected double esp;	// esperienza valori da 0 a 1 con passo 0.1
 	protected int passi;	// passi rimanenti
 	protected double rig;	// rigenerazione
 	protected double bonus;	// bonus territorio
@@ -83,7 +82,7 @@ public abstract class Unità {
 		return this.dif;
 	}
 	
-	public int getEsp(){
+	public double getEsp(){
 		return this.esp;
 	}
 	
@@ -135,9 +134,9 @@ public abstract class Unità {
 		this.counter=0;
 	}
 	
-	public void setEsp(int e){
-		if(e>10){
-			throw new IllegalArgumentException("Valore massimo 10");
+	public void setEsp(double e){
+		if(e>1){
+			throw new IllegalArgumentException("Valore massimo 1");
 		}
 		this.esp=e;
 	}
@@ -154,8 +153,10 @@ public abstract class Unità {
 	}
 	
 	public void updateEsp(){
-		if(this.esp<10)
-			this.esp++;
+		if(this.esp+0.1<=1)
+			this.esp+=0.1;
+		else
+			this.esp=1;
 	}
 	
 	public void setPos(Esagono p){

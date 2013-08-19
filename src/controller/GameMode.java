@@ -286,10 +286,33 @@ public class GameMode {
 			victory = 3;
 		else if(p1Unit.isEmpty())
 			victory = 2;
-		else
+		else if(p2Unit.isEmpty())
 			victory = 1;
 		
 		return victory;	
+	}
+	
+	public void resetAll(){
+		this.mappa=null;
+		this.player1 = new Player(1);
+		this.player2 = new Player(2);
+		this.mappaGrafica=null;
+		this.commandPanel=null;
+		this.initGame=null;
+		this.initMapPanel=null;
+		this.landPanel=null;
+		this.startPanel=null;
+		this.unitPanel=null;
+		this.finalPanel = null;
+		this.errorWindow= null;
+		this.turno=1;
+		this.selectionUnitMode=false;
+		this.playingMode=false;
+		this.movingMode = false;
+		this.attackMode = false;
+		this.accorpaMode = false;
+		this.scorporaMode = false;
+		this.zoomOutMode = false;
 	}
 	
 	// Metodo della classe impiegato per accedere al Singleton

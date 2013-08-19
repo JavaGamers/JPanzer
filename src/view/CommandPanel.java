@@ -3,6 +3,7 @@ package view;
 import model.Player;
 import model.Unità;
 import controller.CommandListener;
+import controller.GameMode;
 
 public class CommandPanel extends javax.swing.JPanel {
 	
@@ -31,14 +32,13 @@ public class CommandPanel extends javax.swing.JPanel {
 	private javax.swing.JButton shop;
 	private javax.swing.JButton zoom;
 	private javax.swing.JLabel passi;
+	public static GameMode gameMode = GameMode.getGameMode();
 	
     private static final String ESPERIENZATXT = "Esperienza: ";
     private static final String NUMUNITSTXT = "Numero: ";
     private static final String PASSITXT = "Passi rimanenti: ";
     private static final String PLAYERTXT = "Giocatore: ";
-    private static final String SOLDITXT = "Soldi: ";
-
-    
+    private static final String SOLDITXT = "Soldi: ";    
 
     public CommandPanel() {
         initComponents();
@@ -93,7 +93,19 @@ public class CommandPanel extends javax.swing.JPanel {
     	this.shop.setEnabled(true);
     	this.zoom.setEnabled(true);
     }
-                         
+    
+    public void setInfoBattleLabel(Unità att, Unità def){
+    	
+    	Player playerAtt = gameMode.getPlayer(att.getPlayer());
+    	Player playerDef = gameMode.getPlayer(def.getPlayer());
+    	
+    	this.infoBattle.setText(att.getNome()+" di "+playerAtt.getNome()+" attacca con "+att.getAtt()+" potenza di fuoco "+def.getNome()+" di "+playerDef.getNome()+" che difende con "+def.getDif()+" scudo");
+    }
+    
+  /*  public void setBattleStatsLabel(Unità att, Unità def){
+    	this.infoAtt.setText(att.getNome()+" attacca con "+att.getAtt()+" e dopo la battaglia resta con ");
+    }
+                         */
     private void initComponents() {
     	
     	CommandListener cL = new CommandListener();
@@ -254,13 +266,13 @@ public class CommandPanel extends javax.swing.JPanel {
         jSeparator5.setForeground(new java.awt.Color(196, 68, 4));
 
         infoBattle = new javax.swing.JLabel();
-        infoBattle.setText("jLabel1");
+        infoBattle.setText("");
 
         infoAtt = new javax.swing.JLabel();
-        infoAtt.setText("jLabel1");
+        infoAtt.setText("");
 
         infoDef = new javax.swing.JLabel();
-        infoDef.setText("jLabel2");
+        infoDef.setText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
