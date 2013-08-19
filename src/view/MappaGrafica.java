@@ -58,51 +58,104 @@ public class MappaGrafica extends JPanel {
 		Esagono e = this.mappa.getComponent()[0];
 		Image imgLand = null;
 		Image imgUnit = null;
+		Image imgX1 = null;
+		Image imgX2 = null;
 		
-		// disegno del 1° esagono 
+		if(!gameMode.isZoomOutMode()){
 
-		eG = new EsagonoGrafico(e.getId(),this.xC, this.yC, raggio);
-		
-		if(e.getTerritorio()!=null){
-			imgLand = e.getTerritorio().getImage();
-		}
-		if(e.getUnit()!=null){
-			imgUnit = e.getUnit().getImage();
-		}
-		this.paintImage(g2, eG, imgLand);
-		this.paintImage(g2, eG, imgUnit);
-		g2.draw(eG);
-		
-		// disegno degli altri esagoni
-		for(int i=1;i<this.mappa.getComponent().length;i++){
-			g.setColor(Color.BLACK);
-			e= this.mappa.getComponent()[i];
-			if(gameMode.isSelecionUnitMode()){
-				int turno =gameMode.getTurno();
-				int settore = e.getCoordinate()[0];
-				int posizione = e.getCoordinate()[2];
-				if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
-					g.setColor(Color.BLUE);
-				}
-			}
-			eG.newSet(e.getId(),this.xC,this.yC,raggio);
+			// disegno del 1° esagono 
+
+			eG = new EsagonoGrafico(e.getId(),this.xC, this.yC, raggio);
 			
 			if(e.getTerritorio()!=null){
 				imgLand = e.getTerritorio().getImage();
 			}
-			else{
-				imgLand=null;
-			}
-			
 			if(e.getUnit()!=null){
 				imgUnit = e.getUnit().getImage();
-			}
-			else{
-				imgUnit = null;
 			}
 			this.paintImage(g2, eG, imgLand);
 			this.paintImage(g2, eG, imgUnit);
 			g2.draw(eG);
+			
+			// disegno degli altri esagoni
+			for(int i=1;i<this.mappa.getComponent().length;i++){
+				g.setColor(Color.BLACK);
+				e= this.mappa.getComponent()[i];
+				if(gameMode.isSelecionUnitMode()){
+					int turno =gameMode.getTurno();
+					int settore = e.getCoordinate()[0];
+					int posizione = e.getCoordinate()[2];
+					if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
+						g.setColor(Color.BLUE);
+					}
+				}
+				eG.newSet(e.getId(),this.xC,this.yC,raggio);
+				
+				if(e.getTerritorio()!=null){
+					imgLand = e.getTerritorio().getImage();
+				}
+				else{
+					imgLand=null;
+				}
+				
+				if(e.getUnit()!=null){
+					imgUnit = e.getUnit().getImage();
+				}
+				else{
+					imgUnit = null;
+				}
+				this.paintImage(g2, eG, imgLand);
+				this.paintImage(g2, eG, imgUnit);
+				g2.draw(eG);
+			}
+		}
+		else{
+			
+			// disegno del 1° esagono 
+
+			eG = new EsagonoGrafico(e.getId(),this.xC, this.yC, raggio);
+			
+			if(e.getTerritorio()!=null){
+				imgLand = e.getTerritorio().getImage();
+			}
+			if(e.getUnit()!=null){
+				imgUnit = e.getUnit().getXImage();
+			}
+			this.paintImage(g2, eG, imgLand);
+			this.paintImage(g2, eG, imgUnit);
+			g2.draw(eG);
+			
+			// disegno degli altri esagoni
+			for(int i=1;i<this.mappa.getComponent().length;i++){
+				g.setColor(Color.BLACK);
+				e= this.mappa.getComponent()[i];
+				if(gameMode.isSelecionUnitMode()){
+					int turno =gameMode.getTurno();
+					int settore = e.getCoordinate()[0];
+					int posizione = e.getCoordinate()[2];
+					if(((turno==1 && settore>3) || (turno==2 && settore<4)) && !(settore==4 && posizione==0) && !(settore==1 && posizione==0)){
+						g.setColor(Color.BLUE);
+					}
+				}
+				eG.newSet(e.getId(),this.xC,this.yC,raggio);
+				
+				if(e.getTerritorio()!=null){
+					imgLand = e.getTerritorio().getImage();
+				}
+				else{
+					imgLand=null;
+				}
+				
+				if(e.getUnit()!=null){
+					imgUnit = e.getUnit().getXImage();
+				}
+				else{
+					imgUnit = null;
+				}
+				this.paintImage(g2, eG, imgLand);
+				this.paintImage(g2, eG, imgUnit);
+				g2.draw(eG);
+			}
 		}
     	super.paintComponent(g);
 	}

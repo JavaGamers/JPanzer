@@ -7,6 +7,7 @@ import model.Player;
 import model.Unità;
 import view.CommandPanel;
 import view.ErrorWindow;
+import view.FinalPanel;
 import view.GameWin;
 import view.InitGame;
 import view.InitMapPanel;
@@ -29,6 +30,7 @@ public class GameMode {
 	private LandPanel landPanel;
 	private StartPanel startPanel;
 	private UnitPanel unitPanel;
+	private FinalPanel finalPanel;
 	private ErrorWindow errorWindow;
 	private LeavingWin leavingWin;
 	private int turno;
@@ -38,6 +40,7 @@ public class GameMode {
 	private boolean attackMode;
 	private boolean accorpaMode;
 	private boolean scorporaMode;
+	private boolean zoomOutMode;
 	
 	
 	private GameMode(){
@@ -52,7 +55,8 @@ public class GameMode {
 		this.landPanel=null;
 		this.startPanel=null;
 		this.unitPanel=null;
-		this.errorWindow= new ErrorWindow();
+		this.finalPanel = null;
+		this.errorWindow= null;
 		this.turno=1;
 		this.selectionUnitMode=false;
 		this.playingMode=false;
@@ -60,6 +64,7 @@ public class GameMode {
 		this.attackMode = false;
 		this.accorpaMode = false;
 		this.scorporaMode = false;
+		this.zoomOutMode = false;
 	}
 	
 	public boolean isScorporaMode(){
@@ -68,6 +73,10 @@ public class GameMode {
 	
 	public boolean isAccorpaMode(){
 		return this.accorpaMode;
+	}
+	
+	public boolean isZoomOutMode(){
+		return this.zoomOutMode;
 	}
 	
 	public int getTurno(){
@@ -157,6 +166,13 @@ public class GameMode {
 		return this.unitPanel;
 	}
 	
+	public FinalPanel getFinalPanel(){
+		if(this.finalPanel == null){
+			this.finalPanel = new FinalPanel();
+		}
+		return this.finalPanel;
+	}
+	
 	public Mappa getMappa(){
 		return this.mappa;
 	}
@@ -195,6 +211,10 @@ public class GameMode {
 	
 	public void setPlayingMode(boolean value){
 		this.playingMode=value;
+	}
+	
+	public void setZoomOutMode(boolean value){
+		this.zoomOutMode = value;
 	}
 	
 	public void setGameWin(GameWin gW){

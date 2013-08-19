@@ -1,6 +1,8 @@
 package controller;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -19,6 +21,8 @@ import model.Panzer;
 import model.Player;
 import model.Unità;
 
+import view.FinalPanel;
+import view.GameWin;
 import view.MappaGrafica;
 
 public class MappaListener extends MouseAdapter{
@@ -179,8 +183,25 @@ public class MappaListener extends MouseAdapter{
 						}
 					}
 					gameMode.setAttackMode(false);
-					if(gameMode.checkVictory()!=0){
-						// fai comparire la finestra finale
+					
+					int winner = gameMode.checkVictory();
+					if(winner!=0){
+						
+						GameWin gameWin = gameMode.getGameWin();
+						Container c = gameWin.getContentPane();
+						FinalPanel finalPanel = gameMode.getFinalPanel();
+						
+						// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
+						c.removeAll();
+						c.add(finalPanel,BorderLayout.CENTER);
+						if(winner==3){
+							finalPanel.setText("nessuno ha vinto!");
+						}
+						else{
+							finalPanel.setWinner(gameMode.getPlayer(winner));
+						}
+						gameWin.repaint();
+						gameWin.validate();
 					}
 				}
 			}

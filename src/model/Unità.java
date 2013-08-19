@@ -3,6 +3,11 @@ package model;
 import java.awt.Image;
 import java.util.List;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
 
 import controller.Dijkstra;
 import controller.GameMode;
@@ -18,6 +23,7 @@ public abstract class Unità {
 	protected Esagono pos;	//	posizione sulla mappa
 	protected int player;	// 1=player 1 / 2=player 2
 	protected BufferedImage bImg;
+	protected BufferedImage xImage;
 	protected List<Esagono> esagoniRaggiungibili;
 	protected boolean alreadyAttack;
 	public static GameMode gameMode = GameMode.getGameMode();
@@ -48,6 +54,21 @@ public abstract class Unità {
 		this.esagoniRaggiungibili=null;
 		this.counter = 0;
 		this.alreadyAttack=false;
+		
+		if(this.player==1){
+			try {
+				xImage = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Xrossa.jpg"));
+		       } catch (IOException e) {
+		    	   // da scrivere
+		       }
+		}
+		else{
+			try {
+				xImage = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Xblu.jpg"));
+		       } catch (IOException e) {
+		    	   // da scrivere
+		       }
+		}
 	}
 	
 	public boolean hasAlreadyAttack(){
@@ -84,6 +105,10 @@ public abstract class Unità {
 	
 	public Esagono getPos(){
 		return this.pos;
+	}
+	
+	public Image getXImage(){
+		return this.xImage;
 	}
 	
 	public abstract String getNome();

@@ -395,15 +395,17 @@ public class CommandListener implements ActionListener {
 	}
 
 
-	private void zoomOpt() {
+	private void zoomOpt(){
 		GameWin gameWin = gameMode.getGameWin();
 		MappaGrafica mG = gameMode.getMappaGrafica();
 		CommandPanel commandPanel = gameMode.getCommandPanel();
 		if(mG.getRaggio()== MappaGrafica.STDRAGGIO){
+			gameMode.setZoomOutMode(true);
 			mG.setRaggio(MappaGrafica.ZOOMRAGGIO);
 			commandPanel.silenceAll(1);
 		}
 		else{
+			gameMode.setZoomOutMode(false);
 			mG.setRaggio(MappaGrafica.STDRAGGIO);
 			commandPanel.enableAll();
 		}
