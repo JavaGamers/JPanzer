@@ -53,6 +53,6 @@ public class FanteriaLeggera extends Unità {
 	}
 
 	public int getDef() {
-		return (int) (BASEDIF * (1 + this.esp) * this.bonus);
+		return (int) (BASEDIF *(1 + this.esp)*this.bonus);
 	}
 }

@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 public class Lago implements Territorio {
 
-	private final static double BONUS=0; // bonus di permanenza delle unità sul territorio (DA RIDEFINIRE)
+	private final static double BONUS=0.8; // bonus di permanenza delle unità sul territorio (DA RIDEFINIRE)
 	private BufferedImage bImg; // immagine della lago
 	private final static int costo= Integer.MAX_VALUE; // non verrà mai attraversato
 	

@@ -37,19 +37,19 @@ public class InitGameListener implements ActionListener, ChangeListener {
 	private static final String CHOOSEMAPOPT = "chooseMap";
 	private static final String FORWARDOPT = "forward";
 	private static final String BACKOPT = "back";
-	private static boolean scelta = false;  //variabile usata per verificare se la mappa è stata scelta o no 
-	private static boolean error = false; // variabile usata per verificare se ci sono errori
-	
+	private static boolean scelta = false; // variabile usata per verificare se
+											// la mappa è stata scelta o no
+	private static boolean error = false; // variabile usata per verificare se
+											// ci sono errori
+
 	public void actionPerformed(ActionEvent e) {
 		String com = e.getActionCommand();
-		
-		if(com.equals(CHOOSEMAPOPT)){
+
+		if (com.equals(CHOOSEMAPOPT)) {
 			chooseMapOpt();
-		}
-		else if(com.equals(FORWARDOPT)){
+		} else if (com.equals(FORWARDOPT)) {
 			forwardOpt();
-		}
-		else if(com.equals(BACKOPT)){
+		} else if (com.equals(BACKOPT)) {
 			backOpt();
 		}
 
@@ -58,187 +58,178 @@ public class InitGameListener implements ActionListener, ChangeListener {
 	private void backOpt() {
 		GameWin gameWin = gameMode.getGameWin();
 		Container c = gameWin.getContentPane();
-		
-		// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
+
+		// rimuovo gli eventuali altri pannelli presenti sulla finestra e
+		// aggiungo quelli nuovi
 		c.removeAll();
-		c.add(gameMode.getStartPanel(),BorderLayout.CENTER);
+		c.add(gameMode.getStartPanel(), BorderLayout.CENTER);
 		gameWin.repaint();
 		gameWin.validate();
 		gameMode.getInitGame().getPreviewMap().setMappa(InitGame.DEFMAP);
-		
+
 	}
 
 	private void forwardOpt() {
 		error = false;
-		if(!scelta){
+		if (!scelta) {
 			ErrorWindow errorWindow = gameMode.getErrorWindow();
 			errorWindow.setErrorLabel("non hai scelto la mappa!");
 			errorWindow.setVisible(true);
-			error=true;
-		}
-		else{
+			error = true;
+		} else {
 			gameMode.setMappa(gameMode.getInitGame().getPreviewMap().getMappa());
-			if(gameMode.getMappaGrafica()==null){
+			if (gameMode.getMappaGrafica() == null) {
 				gameMode.createAndSetMappaGrafica();
 			}
+			gameMode.setSelectionUnitMode(true);
+
+			// gestisco il player 1
+			// gestisco il nome
+			String txt1 = gameMode.getInitGame().getTextFieldNome(1).getText();
+			Player p1 = null;
+
+			if (txt1.equals(null) || txt1.equals("")) {
+				p1 = new Player("Player 1", 1);
+			} else {
+				p1 = new Player(txt1, 1);
+			}
+			gameMode.setPlayer(p1, 1);
+
+			// gestisco soldi
+			int soldi1 = Integer.parseInt(gameMode.getInitGame()
+					.getTextFieldSoldi(1).getText());
+			if (soldi1 < Player.MINMONEY || soldi1 > Player.MAXMONEY) {
+				ErrorWindow errorWindow = gameMode.getErrorWindow();
+				errorWindow.setErrorLabel("Valore soldi player 1 errato!");
+				errorWindow.setVisible(true);
+				error = true;
+
+			} else {
+				gameMode.getPlayer(1).setMoney(soldi1);
+			}
+
+			// gestisco il plyer 2
+			// gestisco il nome
+			String txt2 = gameMode.getInitGame().getTextFieldNome(2).getText();
+			Player p2 = null;
+
+			if (txt2.equals(null) || txt2.equals("")) {
+				p2 = new Player("Player 2", 2);
+			} else {
+				p2 = new Player(txt2, 2);
+			}
+			gameMode.setPlayer(p2, 2);
+
+			// gestisco soldi
+
+			int soldi2 = Integer.parseInt(gameMode.getInitGame()
+					.getTextFieldSoldi(2).getText());
+
+			if (soldi2 < Player.MINMONEY || soldi2 > Player.MAXMONEY) {
+				ErrorWindow errorWindow = gameMode.getErrorWindow();
+				errorWindow.setErrorLabel("Valore soldi player 2 errato!");
+				errorWindow.setVisible(true);
+				error = true;
+
+			} else {
+				gameMode.getPlayer(2).setMoney(soldi2);
+			}
+
+			if (!error) {
+				GameWin gameWin = gameMode.getGameWin();
+				Container c = gameWin.getContentPane();
+				UnitPanel unitPanel = gameMode.getUnitPanel();
+
+				// rimuovo gli eventuali altri pannelli presenti sulla finestra
+				// e aggiungo quelli nuovi
+				c.removeAll();
+				c.add(unitPanel, BorderLayout.EAST);
+				JScrollPane jsp = new JScrollPane();
+				jsp.setViewportView(gameMode.getMappaGrafica());
+				jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+				c.add(jsp, BorderLayout.CENTER);
+
+				// ridisegno della finestra
+				gameWin.repaint();
+				gameWin.validate();
+			}
 		}
-		gameMode.setSelectionUnitMode(true);
-		
-		//gestisco il player 1
-		//gestisco il nome
-		String txt1 = gameMode.getInitGame().getTextFieldNome(1).getText();
-		Player p1=null;
-			
-		if(txt1.equals(null) ||txt1.equals("")){
-			p1 = new Player("Player 1",1);
-		}
-		else{
-			p1 = new Player(txt1,1);
-		}
-		gameMode.setPlayer(p1,1);
-		
-		//gestisco soldi
-		int soldi1 = Integer.parseInt(gameMode.getInitGame().getTextFieldSoldi(1).getText());
-		if(soldi1<Player.MINMONEY || soldi1>Player.MAXMONEY){
-			ErrorWindow errorWindow = gameMode.getErrorWindow();
-			errorWindow.setErrorLabel("Valore soldi player 1 errato!");
-			errorWindow.setVisible(true);
-			error= true;
-				
-		}
-		else{
-			gameMode.getPlayer(1).setMoney(soldi1);
-		}
-					
-			
-		//gestisco il plyer 2
-		//gestisco il nome
-		String txt2 = gameMode.getInitGame().getTextFieldNome(2).getText();
-		Player p2=null;
-			
-		if(txt2.equals(null) ||txt2.equals("")){
-			p2 = new Player("Player 2",2);
-		}
-		else{
-			p2 = new Player(txt2,2);
-		}
-		gameMode.setPlayer(p2,2);
-			
-		//gestisco soldi
-			
-		int soldi2 = Integer.parseInt(gameMode.getInitGame().getTextFieldSoldi(2).getText());
-			
-		if(soldi2<Player.MINMONEY || soldi2>Player.MAXMONEY){
-			ErrorWindow errorWindow = gameMode.getErrorWindow();
-			errorWindow.setErrorLabel("Valore soldi player 2 errato!");
-			errorWindow.setVisible(true);
-			error= true;
-			
-		}
-		else{
-			gameMode.getPlayer(2).setMoney(soldi2);
-		}
-		
-		if(!error){
-			GameWin gameWin = gameMode.getGameWin();
-			Container c = gameWin.getContentPane();
-			UnitPanel unitPanel = gameMode.getUnitPanel();
-			
-			// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
-			c.removeAll();
-			c.add(unitPanel, BorderLayout.EAST);
-			JScrollPane jsp = new JScrollPane();
-			jsp.setViewportView(gameMode.getMappaGrafica());
-			jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-			c.add(jsp,BorderLayout.CENTER);
-			
-			//ridisegno della finestra
-			gameWin.repaint();
-			gameWin.validate();
-		}
-		
 	}
 
 	private void chooseMapOpt() {
 		JFileChooser jfc = new JFileChooser();
 		int returnVal = jfc.showOpenDialog(gameMode.getInitMapPanel());
-		 
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = jfc.getSelectedFile();
-            BufferedReader br;
-    		String[] elements;
-    		if (file.isFile()){
-    			try {
-    				br = new BufferedReader(new FileReader(file));
-    				// leggo la 1° riga del file
-    				String text = br.readLine();
-    				int dim = Integer.parseInt(text);
-    				Mappa m = new Mappa(dim);
-    				Esagono e;
-    				//leggo le altre righe
-    				while ((text = br.readLine()) != null){
-    					elements=getElements(text);
-    					e = m.getComponent()[Integer.parseInt(elements[0])];
-    					// setto il territorio dell'esagono
-    					if(elements[1].equals("Pianura")){
-    						e.setTerritorio(new Pianura());
-    					}
-    					else if(elements[1].equals("Collina")){
-    						e.setTerritorio(new Collina());
-    					}
-    					else if(elements[1].equals("Montagna")){
-    						e.setTerritorio(new Montagna());
-    					}
-    					else if(elements[1].equals("Lago")){
-    						e.setTerritorio(new Lago());
-    					}
-    					else if(elements[1].equals("Foresta")){
-    						e.setTerritorio(new Foresta());
-    					}
-    					else{
-    						e.setTerritorio(null);
-    					}
-    				}
-    				br.close();
-    				
-    				// setto la nuova mappa nell'anteprima
-    				MappaGrafica anteprima = gameMode.getInitGame().getPreviewMap();
-    				GameWin gameWin = gameMode.getGameWin();
-    				anteprima.setMappa(m);
-    				scelta = true;
-    				anteprima.paint(anteprima.getGraphics());
-    				gameWin.repaint();
-    				gameWin.validate();
-    			}
-    			catch (IOException ioException) {
-    			}
-    		}
-        }
+
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File file = jfc.getSelectedFile();
+			BufferedReader br;
+			String[] elements;
+			if (file.isFile()) {
+				try {
+					br = new BufferedReader(new FileReader(file));
+					// leggo la 1° riga del file
+					String text = br.readLine();
+					int dim = Integer.parseInt(text);
+					Mappa m = new Mappa(dim);
+					Esagono e;
+					// leggo le altre righe
+					while ((text = br.readLine()) != null) {
+						elements = getElements(text);
+						e = m.getComponent()[Integer.parseInt(elements[0])];
+						// setto il territorio dell'esagono
+						if (elements[1].equals("Pianura")) {
+							e.setTerritorio(new Pianura());
+						} else if (elements[1].equals("Collina")) {
+							e.setTerritorio(new Collina());
+						} else if (elements[1].equals("Montagna")) {
+							e.setTerritorio(new Montagna());
+						} else if (elements[1].equals("Lago")) {
+							e.setTerritorio(new Lago());
+						} else if (elements[1].equals("Foresta")) {
+							e.setTerritorio(new Foresta());
+						} else {
+							e.setTerritorio(null);
+						}
+					}
+					br.close();
+
+					// setto la nuova mappa nell'anteprima
+					MappaGrafica anteprima = gameMode.getInitGame()
+							.getPreviewMap();
+					GameWin gameWin = gameMode.getGameWin();
+					anteprima.setMappa(m);
+					scelta = true;
+					anteprima.paint(anteprima.getGraphics());
+					gameWin.repaint();
+					gameWin.validate();
+				} catch (IOException ioException) {
+				}
+			}
+		}
 	}
-	
-	private static String[] getElements(String s){
-		String[] elements= new String[6];
-		StringTokenizer str = new StringTokenizer(s,"-");
-		int i=0;
-		while(str.hasMoreTokens()){
-			elements[i]= str.nextToken();
+
+	private static String[] getElements(String s) {
+		String[] elements = new String[6];
+		StringTokenizer str = new StringTokenizer(s, "-");
+		int i = 0;
+		while (str.hasMoreTokens()) {
+			elements[i] = str.nextToken();
 			i++;
 		}
 		return elements;
 	}
 
 	public void stateChanged(ChangeEvent e) {
-		JSlider source = (JSlider)e.getSource();
-		if(source.equals(gameMode.getInitGame().getSlider(1))){
+		JSlider source = (JSlider) e.getSource();
+		if (source.equals(gameMode.getInitGame().getSlider(1))) {
 			if (!source.getValueIsAdjusting()) {
-		    	int soldi = source.getValue();
-		    	gameMode.getInitGame().getTextFieldSoldi(1).setText(""+soldi);
-		    }
-		}
-		else{
+				int soldi = source.getValue();
+				gameMode.getInitGame().getTextFieldSoldi(1).setText("" + soldi);
+			}
+		} else {
 			if (!source.getValueIsAdjusting()) {
-		    	int soldi = source.getValue();
-		    	gameMode.getInitGame().getTextFieldSoldi(2).setText(""+soldi);
+				int soldi = source.getValue();
+				gameMode.getInitGame().getTextFieldSoldi(2).setText("" + soldi);
 			}
 		}
 	}

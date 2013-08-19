@@ -48,7 +48,8 @@ public class LeavingListener implements ActionListener {
 		
 		// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
 		c.removeAll();
-		c.add(gameMode.getInitGame(),BorderLayout.CENTER);
+		gameMode.resetAll();
+		c.add(gameMode.getStartPanel(),BorderLayout.CENTER);
 		gameWin.repaint();
 		gameWin.validate();
 
@@ -65,7 +66,8 @@ public class LeavingListener implements ActionListener {
 		
 		// rimuovo gli eventuali altri pannelli presenti sulla finestra e aggiungo quelli nuovi
 		c.removeAll();
-		c.add(gameMode.getInitGame(),BorderLayout.CENTER);
+		gameMode.resetAll();
+		c.add(gameMode.getStartPanel(),BorderLayout.CENTER);
 		gameWin.repaint();
 		gameWin.validate();
 	}

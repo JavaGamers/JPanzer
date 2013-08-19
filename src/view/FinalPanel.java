@@ -1,7 +1,10 @@
 package view;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -40,17 +43,14 @@ public class FinalPanel extends javax.swing.JPanel {
 
         menù.setText("Menù Principale");
         menù.addActionListener(new FinalPanelListener());
-   /*     
+        
         try {
-			URL imgUrl=getClass().getResource("/view/Icon pack/vittoria.gif");
-			bImg = ImageIO.read(imgUrl);
+			bImg = ImageIO.read(new File(
+					"C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/vittoria.gif"));
           
         } catch (Exception e) {
     	   System.out.println(e.toString());
-        }
-        
-        Graphics2D g2d = (Graphics2D) this.getGraphics();
-        g2d.drawImage(bImg, this.WIDTH/2, this.HEIGHT/2, null); */
+        } 
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -74,6 +74,12 @@ public class FinalPanel extends javax.swing.JPanel {
                 .addComponent(menù)
                 .addContainerGap())
         );
-    }                   
-               
+    }
+    
+    public void paint(Graphics g){
+        
+        Graphics2D g2d = (Graphics2D) this.getGraphics();
+        g2d.drawImage(bImg, 500, 300, null);
+        super.paint(g);
+    }              
 }
