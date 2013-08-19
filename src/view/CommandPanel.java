@@ -12,12 +12,16 @@ public class CommandPanel extends javax.swing.JPanel {
 	private javax.swing.JButton attacca;
 	private javax.swing.JButton carica;
 	private javax.swing.JLabel esperienza;
+	private javax.swing.JLabel infoBattle;
+    private javax.swing.JLabel infoAtt;
+    private javax.swing.JLabel infoDef;
 	private javax.swing.JLabel infoUnità;
 	private javax.swing.JLabel soldi;
 	private javax.swing.JSeparator jSeparator1;
 	private javax.swing.JSeparator jSeparator2;
 	private javax.swing.JSeparator jSeparator3;
 	private javax.swing.JSeparator jSeparator4;
+	private javax.swing.JSeparator jSeparator5;
 	private javax.swing.JButton muovi;
 	private javax.swing.JLabel numUnits;
 	private javax.swing.JButton passa;
@@ -244,6 +248,19 @@ public class CommandPanel extends javax.swing.JPanel {
 
         jSeparator4.setBackground(new java.awt.Color(241, 157, 30));
         jSeparator4.setForeground(new java.awt.Color(196, 68, 4));
+        
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator5.setBackground(new java.awt.Color(241, 157, 30));
+        jSeparator5.setForeground(new java.awt.Color(196, 68, 4));
+
+        infoBattle = new javax.swing.JLabel();
+        infoBattle.setText("jLabel1");
+
+        infoAtt = new javax.swing.JLabel();
+        infoAtt.setText("jLabel1");
+
+        infoDef = new javax.swing.JLabel();
+        infoDef.setText("jLabel2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -252,9 +269,12 @@ public class CommandPanel extends javax.swing.JPanel {
             .addComponent(jSeparator1)
             .addComponent(jSeparator2)
             .addComponent(jSeparator3)
+            .addComponent(jSeparator4)
+            .addComponent(jSeparator5)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(infoBattle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(salva, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
@@ -288,9 +308,10 @@ public class CommandPanel extends javax.swing.JPanel {
                                 .addComponent(numUnits, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(infoUnità, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(infoAtt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(infoDef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(jSeparator4)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,7 +355,15 @@ public class CommandPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(abbandona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(infoBattle)
+                .addGap(18, 18, 18)
+                .addComponent(infoAtt)
+                .addGap(18, 18, 18)
+                .addComponent(infoDef)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
     }                                              
 
