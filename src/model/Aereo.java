@@ -23,14 +23,14 @@ public class Aereo extends Unità {
 		this.passi=Aereo.PTT;
 		if(this.player==1){
 			try {
-		           bImg = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Aereo1_Icon.gif"));
+		           bImg = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Aereo1_Icon.png"));
 		       } catch (IOException e) {
 		    	   // da scrivere
 		       }
 		}
 		else{
 			try {
-		           bImg = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Aereo2_Icon.gif"));
+		           bImg = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Aereo2_Icon.png"));
 		       } catch (IOException e) {
 		    	   // da scrivere
 		       }

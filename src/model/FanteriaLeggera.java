@@ -23,7 +23,7 @@ public class FanteriaLeggera extends Unità {
 			try {
 				bImg = ImageIO
 						.read(new File(
-								"C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Fanteria Leggera1_Icon.gif"));
+								"C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Fanteria Leggera1_Icon.png"));
 			} catch (IOException e) {
 				// da scrivere
 			}
@@ -31,7 +31,7 @@ public class FanteriaLeggera extends Unità {
 			try {
 				bImg = ImageIO
 						.read(new File(
-								"C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Fanteria Leggera2_Icon.gif"));
+								"C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Fanteria Leggera2_Icon.png"));
 			} catch (IOException e) {
 				// da scrivere
 			}
