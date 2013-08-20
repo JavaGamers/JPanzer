@@ -60,6 +60,8 @@ public abstract class Unità {
 		       } catch (IOException e) {
 		    	   // da scrivere
 		       }
+			
+			gameMode.getPlayer(1).aggiungiUnità(this);
 		}
 		else{
 			try {
@@ -67,6 +69,7 @@ public abstract class Unità {
 		       } catch (IOException e) {
 		    	   // da scrivere
 		       }
+			gameMode.getPlayer(2).aggiungiUnità(this);
 		}
 	}
 	

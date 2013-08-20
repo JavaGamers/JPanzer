@@ -93,7 +93,9 @@ public class Player {
 	public String toString(){
 		String s ="";
 		s+=this.nome;
+		s+="-";
 		s+=this.player;
+		s+="-";
 		s+=this.soldi;
 		return s;
 	}

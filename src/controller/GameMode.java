@@ -359,9 +359,8 @@ public class GameMode {
 					text = br.readLine();
 					int dim = Integer.parseInt(text);
 					Mappa m = new Mappa(dim);
-
+					
 					Esagono e;
-
 					// leggo le altre righe
 					while ((text = br.readLine()) != null) {
 						elements = getElements(text);
@@ -417,8 +416,9 @@ public class GameMode {
 					}
 					br.close();
 
-					// setto la nuova mappa nel pannello
+					// setto la nuova mappa nel GameMode
 					this.setMappa(m);
+					this.createAndSetMappaGrafica();
 				} catch (IOException ioException) {
 				}
 			}

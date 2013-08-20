@@ -120,7 +120,6 @@ public class UnitListener implements ActionListener {
 							&& !(e.getTerritorio() instanceof Lago)) {
 						e.setUnit(new Artiglieria(Unità.UNITACOMPRABILI,
 								gameMode.getTurno()));
-						player.aggiungiUnità(e.getUnit());
 
 						eG = new EsagonoGrafico(m.getSelezionato(),
 								mG.getXCentro(), mG.getYCentro(),
@@ -198,7 +197,6 @@ public class UnitListener implements ActionListener {
 					if (e.getUnit() == null) {
 						e.setUnit(new Aereo(Unità.UNITACOMPRABILI, gameMode
 								.getTurno()));
-						player.aggiungiUnità(e.getUnit());
 
 						eG = new EsagonoGrafico(m.getSelezionato(),
 								mG.getXCentro(), mG.getYCentro(),
@@ -272,7 +270,6 @@ public class UnitListener implements ActionListener {
 							&& !(e.getTerritorio() instanceof Lago)) {
 						e.setUnit(new Panzer(Unità.UNITACOMPRABILI, gameMode
 								.getTurno()));
-						player.aggiungiUnità(e.getUnit());
 
 						eG = new EsagonoGrafico(m.getSelezionato(),
 								mG.getXCentro(), mG.getYCentro(),
@@ -348,7 +345,6 @@ public class UnitListener implements ActionListener {
 							&& !(e.getTerritorio() instanceof Lago)) {
 						e.setUnit(new FanteriaLeggera(Unità.UNITACOMPRABILI,
 								gameMode.getTurno()));
-						player.aggiungiUnità(e.getUnit());
 
 						eG = new EsagonoGrafico(m.getSelezionato(),
 								mG.getXCentro(), mG.getYCentro(),
@@ -426,7 +422,6 @@ public class UnitListener implements ActionListener {
 							&& !(e.getTerritorio() instanceof Lago)) {
 						e.setUnit(new FanteriaPesante(Unità.UNITACOMPRABILI,
 								gameMode.getTurno()));
-						player.aggiungiUnità(e.getUnit());
 
 						eG = new EsagonoGrafico(m.getSelezionato(),
 								mG.getXCentro(), mG.getYCentro(),

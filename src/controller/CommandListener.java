@@ -167,94 +167,9 @@ public class CommandListener implements ActionListener {
 		gameMode.getCommandPanel().setPlayerLabel(p);
 	}
 
-	// da rivedere
-	private void caricaOpt() {
-		MappaGrafica mG = gameMode.getMappaGrafica();
-		JFileChooser jfc = new JFileChooser();
-		int returnVal = jfc.showOpenDialog(mG);
-		 
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = jfc.getSelectedFile();  
-            BufferedReader br;
-    		String[] elements;
-    		if (file.isFile()) {
-    			try {
-    				br = new BufferedReader(new FileReader(file));
-    				// leggo la 1° riga del file
-    				String text = br.readLine();
-    				int dim = Integer.parseInt(text);
-    				Mappa m = new Mappa(dim);
-    				//manca di leggere di chi è il turno
-    				Esagono e;
-    				int player=0;	// variabile d'appoggio inizializzata a 0 per comodità e ridefinita in seguito
-    				//leggo le altre righe
-    				while ((text = br.readLine()) != null){
-    					elements=getElements(text);
-    					e = m.getComponent()[Integer.parseInt(elements[0])];
-    					// setto il territorio dell'esagono
-    					if(elements[1].equals("Pianura")){
-    						e.setTerritorio(new Pianura());
-    					}
-    					else if(elements[1].equals("Collina")){
-    						e.setTerritorio(new Collina());
-    					}
-    					else if(elements[1].equals("Montagna")){
-    						e.setTerritorio(new Montagna());
-    					}
-    					else if(elements[1].equals("Lago")){
-    						e.setTerritorio(new Lago());
-    					}
-    					else if(elements[1].equals("Foresta")){
-    						e.setTerritorio(new Foresta());
-    					}
-    					else{
-    						e.setTerritorio(null);
-    					}
-    					// controllo se è presente un'unità sul territorio
-    					if(!elements[3].equals(" ")){
-    						player= Integer.parseInt(elements[3]);
-    					}
-    					
-    					/* se player = 0 significa che non è stata ridefinita e quindi non è presente alcun unità sull'esagono
-    					 se player = 0 allora sono sicuro che i campi elements[i] con i=3,4,5 contengono valori corretti e posso
-    					 evitare di controllarli
-    					 */
-    					if(player!=0){
-    						if(elements[3].equals("aereo")){
-    							e.setUnit(new Aereo(Integer.parseInt(elements[4]),player));
-    							e.getUnit().setEsp(Integer.parseInt(elements[5]));
-    						}
-    						else if(elements[3].equals("artiglieria")){
-    							e.setUnit(new Artiglieria(Integer.parseInt(elements[4]),player));
-    							e.getUnit().setEsp(Integer.parseInt(elements[5]));
-    						}
-    						else if(elements[3].equals("fanterialeggera")){
-    							e.setUnit(new FanteriaLeggera(Integer.parseInt(elements[4]),player));
-    							e.getUnit().setEsp(Integer.parseInt(elements[5]));
-    						}
-    						else if(elements[3].equals("fanteriapesante")){
-    							e.setUnit(new FanteriaPesante(Integer.parseInt(elements[4]),player));
-    							e.getUnit().setEsp(Integer.parseInt(elements[5]));
-    						}
-    						else if(elements[3].equals("panzer")){
-    							e.setUnit(new Panzer(Integer.parseInt(elements[4]),player));
-    							e.getUnit().setEsp(Integer.parseInt(elements[5]));
-    						}
-    					}
-    					
-    					
-    				}
-    				br.close();
-    				
-    				//setto la nuova mappa nel pannello
-    				mG.setMappa(m);
-    			} 
-    			catch (IOException ioException) {
-    			}
 
-    		}
-        }
-		
+	private void caricaOpt() {
+		gameMode.caricaPartita();
 	}
 
 	private void attaccaOpt() {	
