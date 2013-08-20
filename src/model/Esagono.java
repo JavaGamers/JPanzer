@@ -209,7 +209,7 @@ public class Esagono implements Comparable<Esagono> {
 			return (3*x*x + 3*x) ;
 		}
 	
-	public String toString(){
+/*	public String toString(){
 		String s="";
 		for(int i=0; i<6;i++){
 			if(this.getAdiacenze()[i]!=null)
@@ -218,8 +218,8 @@ public class Esagono implements Comparable<Esagono> {
 		return "Esagono numero "+this.id+" di coordinate: settore "+this.coordinate[0]+" livello "
 	    +this.coordinate[1]+" posizione "+this.coordinate[2]+ " con adiacenze "+s;
 	}
-	
-	public String saveToString(){
+	*/
+	public String toString(){
 		
 		String s="";
 		s+=this.id;
@@ -235,16 +235,23 @@ public class Esagono implements Comparable<Esagono> {
 		}
 		
 		if(this.unit!=null){
-			s+=this.unit.getPlayer();
-			s+="-";
 			s+=this.unit.getNome();
+			s+="-";
+			s+=this.unit.getPlayer();
 			s+="-";
 			s+=this.unit.getNumUnits();
 			s+="-";
 			s+=this.unit.getEsp();
-			
+			s+="-";
+			s+=this.unit.getPassi();
+			s+="-";
+			s+=this.unit.alreadyAttack;
 		}
 		else{
+			s+=" ";
+			s+="-";
+			s+=" ";
+			s+="-";
 			s+=" ";
 			s+="-";
 			s+=" ";

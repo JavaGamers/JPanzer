@@ -167,12 +167,8 @@ public class LandListener implements ActionListener {
     		fw = new FileWriter(file);
     		bw = new BufferedWriter(fw);
     		
-    		bw.write(""+mG.getMappa().getDim());
-    		bw.write("\n");
-    		for(int i=0;i<mG.getMappa().getComponent().length;i++){
-    			bw.write(mG.getMappa().getComponent()[i].saveToString());
-    			bw.write("\n");
-    		}
+    		bw.write(gameMode.getMappa().toString());
+    		
     		bw.close();
     		fw.close();
     		

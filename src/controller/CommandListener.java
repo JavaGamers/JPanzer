@@ -135,37 +135,8 @@ public class CommandListener implements ActionListener {
 		}
 	}
 
-	// da rivedere
 	private void salvaOpt() {
-		MappaGrafica mG = gameMode.getMappaGrafica();
-		JFileChooser jfc = new JFileChooser();		
-		int returnVal = jfc.showSaveDialog(mG);
-		 
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-        	File file = jfc.getSelectedFile();  
-            FileWriter fw;
-    		BufferedWriter bw;
-    		
-    		try{
-    			
-    		fw = new FileWriter(file);
-    		bw = new BufferedWriter(fw);
-    		
-    		bw.write(""+mG.getMappa().getDim());
-    		bw.write("\n");
-    		//manca di scrivere di chi è il turno
-    		for(int i=0;i<mG.getMappa().getComponent().length;i++){
-    			bw.write(mG.getMappa().getComponent()[i].saveToString());
-    			bw.write("\n");
-    		}
-    		bw.close();
-    		fw.close();
-    		
-    		} catch(IOException io){
-    			System.out.println(io.toString());
-    		}
-        }
-        		
+		gameMode.salvaPartita();   		
 	}
 
 

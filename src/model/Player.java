@@ -90,4 +90,12 @@ public class Player {
 		return !this.unitList.isEmpty();
 	}
 	
+	public String toString(){
+		String s ="";
+		s+=this.nome;
+		s+=this.player;
+		s+=this.soldi;
+		return s;
+	}
+	
 }
