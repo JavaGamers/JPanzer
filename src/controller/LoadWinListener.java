@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 import view.GameWin;
 
-public class LeavingListener implements ActionListener {
+public class LoadWinListener implements ActionListener {
 
 	private GameMode gameMode = GameMode.getGameMode();
 
@@ -28,26 +28,27 @@ public class LeavingListener implements ActionListener {
 	}
 
 	private void annullaOpt() {
-		gameMode.getLeavingWin().setVisible(false);
+		gameMode.getLoadWin().setVisible(false);
 		gameMode.getCommandPanel().enableAll();
 
 	}
 
 	private void noOpt() {
-
 		GameWin gameWin = gameMode.getGameWin();
 		Container c = gameWin.getContentPane();
 
-		gameMode.getLeavingWin().setVisible(false);
+		gameMode.getLoadWin().setVisible(false);
 
-		// rimuovo gli eventuali altri pannelli presenti sulla finestra e
-		// aggiungo quelli nuovi
-		c.removeAll();
-		gameMode.resetAll();
-		c.add(gameMode.getStartPanel(), BorderLayout.CENTER);
-		gameWin.repaint();
-		gameWin.validate();
-
+		if (gameMode.caricaPartita()) {
+			gameWin = gameMode.getGameWin();
+			c = gameWin.getContentPane();
+			c.removeAll();
+			c.add(gameMode.getCommandPanel(), BorderLayout.EAST);
+			c.add(gameMode.getMappaGrafica(), BorderLayout.CENTER);
+			c.repaint();
+			c.validate();
+		}
+		gameMode.getCommandPanel().enableAll();
 	}
 
 	private void siOpt() {
@@ -56,15 +57,18 @@ public class LeavingListener implements ActionListener {
 			GameWin gameWin = gameMode.getGameWin();
 			Container c = gameWin.getContentPane();
 
-			gameMode.getLeavingWin().setVisible(false);
+			gameMode.getLoadWin().setVisible(false);
 
-			// rimuovo gli eventuali altri pannelli presenti sulla finestra e
-			// aggiungo quelli nuovi
-			c.removeAll();
-			gameMode.resetAll();
-			c.add(gameMode.getStartPanel(), BorderLayout.CENTER);
-			gameWin.repaint();
-			gameWin.validate();
+			if (gameMode.caricaPartita()) {
+				gameWin = gameMode.getGameWin();
+				c = gameWin.getContentPane();
+				c.removeAll();
+				c.add(gameMode.getCommandPanel(), BorderLayout.EAST);
+				c.add(gameMode.getMappaGrafica(), BorderLayout.CENTER);
+				c.repaint();
+				c.validate();
+			}
 		}
+		gameMode.getCommandPanel().enableAll();
 	}
 }

@@ -34,6 +34,7 @@ import view.InitGame;
 import view.InitMapPanel;
 import view.LandPanel;
 import view.LeavingWin;
+import view.LoadWin;
 import view.MappaGrafica;
 import view.StartPanel;
 import view.UnitPanel;
@@ -54,6 +55,7 @@ public class GameMode {
 	private FinalPanel finalPanel;
 	private ErrorWindow errorWindow;
 	private LeavingWin leavingWin;
+	private LoadWin loadWin;
 	private int turno;
 	private boolean selectionUnitMode;
 	private boolean playingMode;
@@ -77,6 +79,7 @@ public class GameMode {
 		this.unitPanel = null;
 		this.finalPanel = null;
 		this.errorWindow = null;
+		this.loadWin = null;
 		this.turno = 1;
 		this.selectionUnitMode = false;
 		this.playingMode = false;
@@ -131,6 +134,13 @@ public class GameMode {
 			this.leavingWin = new LeavingWin();
 		}
 		return this.leavingWin;
+	}
+	
+	public LoadWin getLoadWin(){
+		if (this.loadWin == null) {
+			this.loadWin = new LoadWin();
+		}
+		return this.loadWin;
 	}
 
 	public GameWin getGameWin() {
@@ -286,7 +296,8 @@ public class GameMode {
 		}
 	}
 
-	public void salvaPartita() {
+	public boolean salvaPartita() {
+		boolean done = false;
 		MappaGrafica mG = getMappaGrafica();
 		JFileChooser jfc = new JFileChooser();
 		int returnVal = jfc.showSaveDialog(mG);
@@ -314,11 +325,13 @@ public class GameMode {
 			} catch (IOException io) {
 				System.out.println(io.toString());
 			}
+			done = true;
 		}
+		return done;
 	}
 
-	public void caricaPartita() {
-
+	public boolean caricaPartita() {
+		boolean done = false;
 		MappaGrafica mG = getMappaGrafica();
 		JFileChooser jfc = new JFileChooser();
 		int returnVal = jfc.showOpenDialog(mG);
@@ -422,7 +435,100 @@ public class GameMode {
 				} catch (IOException ioException) {
 				}
 			}
+			done = true;
 		}
+		return done;
+	}
+	
+	public boolean salvaMappa(){
+		boolean done = false;
+		MappaGrafica mG = getMappaGrafica();
+		JFileChooser jfc = new JFileChooser();		
+		int returnVal = jfc.showSaveDialog(mG);
+		 
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = jfc.getSelectedFile();
+            FileWriter fw;
+    		BufferedWriter bw;
+    		
+    		try{
+    			
+    		fw = new FileWriter(file);
+    		bw = new BufferedWriter(fw);
+    		
+    		bw.write(getMappa().toString());
+    		
+    		bw.close();
+    		fw.close();
+    		
+    		} catch(IOException io){
+    			System.out.println(io.toString());
+    		}
+    		done = true;
+        }
+        return done;
+	}
+	
+	public boolean caricaMappa(){
+		boolean done = false;
+		MappaGrafica mG = getMappaGrafica();
+		JFileChooser jfc = new JFileChooser();
+		int returnVal = jfc.showOpenDialog(mG);
+		int i = 0;
+		 
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = jfc.getSelectedFile();
+            BufferedReader br;
+    		LinkedList<String> elements;
+    		if (file.isFile()) {
+    			try {
+    				br = new BufferedReader(new FileReader(file));
+    				// leggo la 1° riga del file
+    				String text = br.readLine();
+    				int dim = Integer.parseInt(text);
+    				Mappa m = new Mappa(dim);
+    				Esagono e;
+    				//leggo le altre righe
+    				
+    				while ((text = br.readLine()) != null){
+    					i++;
+    					elements=getElements(text);
+    					e = m.getComponent()[Integer.parseInt(elements.remove())];
+    					String territorio = elements.remove();
+    					// setto il territorio dell'esagono
+    					if(territorio.equals("Pianura")){
+    						e.setTerritorio(new Pianura());
+    					}
+    					else if(territorio.equals("Collina")){
+    						e.setTerritorio(new Collina());
+    					}
+    					else if(territorio.equals("Montagna")){
+    						e.setTerritorio(new Montagna());
+    					}
+    					else if(territorio.equals("Lago")){
+    						e.setTerritorio(new Lago());
+    					}
+    					else if(territorio.equals("Foresta")){
+    						e.setTerritorio(new Foresta());
+    					}
+    					else{
+    						e.setTerritorio(null);
+    					}
+    				}
+    				br.close();
+    				
+    				//setto la nuova mappa nel pannello
+    				this.setMappa(m);
+    				this.createAndSetMappaGrafica();
+    			} 
+    			catch (IOException ioException) {
+    				System.out.println(ioException.toString());
+    			}
+    		}
+    		done = true;
+        }
+        System.out.println(i);
+        return done;
 	}
 
 	private static LinkedList<String> getElements(String s) {

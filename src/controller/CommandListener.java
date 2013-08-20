@@ -169,7 +169,8 @@ public class CommandListener implements ActionListener {
 
 
 	private void caricaOpt() {
-		gameMode.caricaPartita();
+		gameMode.getLoadWin().setVisible(true);
+		gameMode.getCommandPanel().silenceAll(0);
 	}
 
 	private void attaccaOpt() {	

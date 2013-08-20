@@ -42,21 +42,22 @@ public class StartPanelListener implements ActionListener {
 	}
 
 	private void loadOpt() {
-		gameMode.caricaPartita();
-		
-		//visualizzo la partita
-		GameWin gameWin = gameMode.getGameWin();
-		Container c = gameWin.getContentPane();
+		if (gameMode.caricaPartita()) {
 
-		// rimuovo gli eventuali altri pannelli presenti sulla finestra e
-		// aggiungo quelli nuovi
-		c.removeAll();
-		c.add(gameMode.getMappaGrafica(), BorderLayout.CENTER);
-		c.add(gameMode.getCommandPanel(), BorderLayout.EAST);
+			// visualizzo la partita
+			GameWin gameWin = gameMode.getGameWin();
+			Container c = gameWin.getContentPane();
 
-		// ridisegno della finestra
-		gameWin.repaint();
-		gameWin.validate();
+			// rimuovo gli eventuali altri pannelli presenti sulla finestra e
+			// aggiungo quelli nuovi
+			c.removeAll();
+			c.add(gameMode.getMappaGrafica(), BorderLayout.CENTER);
+			c.add(gameMode.getCommandPanel(), BorderLayout.EAST);
+
+			// ridisegno della finestra
+			gameWin.repaint();
+			gameWin.validate();
+		}
 	}
 
 	private void newOpt() {
