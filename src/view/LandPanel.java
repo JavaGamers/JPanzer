@@ -1,5 +1,10 @@
 package view;
 
+import java.awt.image.BufferedImage;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -37,36 +42,72 @@ public class LandPanel extends javax.swing.JPanel {
         
         panel =new JPanel();
         scrollPane = new JScrollPane();
-
-        pianura.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Land Pack - Copia/Pianura_Icon.jpg"));
+        
+        ImageIcon imgIcon= null;
+        try {
+			URL imgUrl=getClass().getResource("Icon pack/Land Pack/pianura.png");
+			imgIcon = new ImageIcon(imgUrl);
+	          
+	       } catch (Exception e) {
+	    	   System.out.println(e.toString());
+	       }
+        pianura.setIcon(imgIcon);
         pianura.setText("Pianura");
         pianura.addActionListener(lL);
         pianura.setActionCommand("pianura");
         pianura.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         pianura.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        collina.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Land Pack - Copia/Collina_Icon.png"));
+        try {
+			URL imgUrl=getClass().getResource("Icon pack/Land Pack/collina.png");
+			imgIcon = new ImageIcon(imgUrl);
+	          
+	       } catch (Exception e) {
+	    	   System.out.println(e.toString());
+	       }
+        collina.setIcon(imgIcon);
         collina.setText("Collina");
         collina.addActionListener(lL);
         collina.setActionCommand("collina");
         collina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         collina.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        foresta.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Land Pack - Copia/Forest_Icon.png"));
+        try {
+			URL imgUrl=getClass().getResource("Icon pack/Land Pack/foresta.png");
+			imgIcon = new ImageIcon(imgUrl);
+	          
+	       } catch (Exception e) {
+	    	   System.out.println(e.toString());
+	       }
+        foresta.setIcon(imgIcon);
         foresta.setText("Foresta");
         foresta.addActionListener(lL);
         foresta.setActionCommand("foresta");
         foresta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         foresta.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        montagna.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Land Pack - Copia/Mountain_Icon.png"));
+        try {
+			URL imgUrl=getClass().getResource("Icon pack/Land Pack/montagna.png");
+			imgIcon = new ImageIcon(imgUrl);
+	          
+	       } catch (Exception e) {
+	    	   System.out.println(e.toString());
+	       }
+        montagna.setIcon(imgIcon);
         montagna.setText("Montagna");
         montagna.addActionListener(lL);
         montagna.setActionCommand("montagna");
         montagna.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         montagna.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        lago.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Land Pack - Copia/Lake_Icon.png"));
+        try {
+			URL imgUrl=getClass().getResource("Icon pack/Land Pack/lago.jpg");
+			imgIcon = new ImageIcon(imgUrl);
+	          
+	       } catch (Exception e) {
+	    	   System.out.println(e.toString());
+	       }
+        lago.setIcon(imgIcon);
         lago.setText("Lago");
         lago.addActionListener(lL);
         lago.setActionCommand("lago");

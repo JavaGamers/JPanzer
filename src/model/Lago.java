@@ -15,7 +15,8 @@ public class Lago implements Territorio {
 	
 	public Lago(){
 		try {
-			bImg = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Land Pack/lago.jpg"));
+			URL imgUrl=getClass().getResource("/view/Icon pack/Land Pack/lago.jpg");
+			bImg = ImageIO.read(imgUrl);
 
        } catch (Exception e) {
     	   System.out.println(e.toString());

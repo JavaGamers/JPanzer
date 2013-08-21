@@ -16,7 +16,8 @@ public class Montagna implements Territorio {
 	
 	public Montagna(){
 		try {
-			bImg = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Land Pack/montagna.png"));
+			URL imgUrl=getClass().getResource("/view/Icon pack/Land Pack/montagna.png");
+			bImg = ImageIO.read(imgUrl);
 			
 	       } catch (IOException e) {
 	    	   System.out.println("c'è qualcosa che non va");

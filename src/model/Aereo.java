@@ -2,6 +2,7 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,14 +24,16 @@ public class Aereo extends Unità {
 		this.passi=Aereo.PTT;
 		if(this.player==1){
 			try {
-		           bImg = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Aereo1_Icon.png"));
+				URL imgUrl=getClass().getResource("/view/Icon pack/Unit Pack/Aereo1_Icon.png");
+				bImg = ImageIO.read(imgUrl);
 		       } catch (IOException e) {
 		    	   // da scrivere
 		       }
 		}
 		else{
 			try {
-		           bImg = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Aereo2_Icon.png"));
+				URL imgUrl=getClass().getResource("/view/Icon pack/Unit Pack/Aereo2_Icon.png");
+				bImg = ImageIO.read(imgUrl);
 		       } catch (IOException e) {
 		    	   // da scrivere
 		       }

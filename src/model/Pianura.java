@@ -15,7 +15,8 @@ public class Pianura implements Territorio {
 	
 	public Pianura(){
 		try {
-			bImg = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Land Pack/pianura.png"));
+			URL imgUrl=getClass().getResource("/view/Icon pack/Land Pack/pianura.png");
+			bImg = ImageIO.read(imgUrl);
 	          
 	       } catch (Exception e) {
 	    	   System.out.println(e.toString());

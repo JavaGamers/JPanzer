@@ -1,5 +1,8 @@
 package view;
 
+import java.net.URL;
+
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import controller.GameMode;
@@ -61,28 +64,66 @@ public class UnitPanel extends javax.swing.JPanel {
         gioca.setText("Gioca");
         gioca.addActionListener(uL);
         gioca.setActionCommand("gioca");
+        
+        ImageIcon imgIcon= null;
 
-        fanteriaLegg.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Fanteria Leggera1_Icon.gif")); 
+        try {
+			URL imgUrl=getClass().getResource("Icon pack/Unit Pack/Fanteria Leggera1_Icon.png");
+			imgIcon = new ImageIcon(imgUrl);
+	          
+	       } catch (Exception e) {
+	    	   System.out.println(e.toString());
+	       }
+        fanteriaLegg.setIcon(imgIcon);
         fanteriaLegg.setText("Fanteria Leggera");
         fanteriaLegg.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         fanteriaLegg.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        fanteriaPes.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Fanteria Pesante1_Icon.gif")); 
+
+        try {
+			URL imgUrl=getClass().getResource("Icon pack/Unit Pack/Fanteria Pesante1_Icon.png");
+			imgIcon = new ImageIcon(imgUrl);
+	          
+	       } catch (Exception e) {
+	    	   System.out.println(e.toString());
+	       }
+        fanteriaPes.setIcon(imgIcon);
         fanteriaPes.setText("Fanteria Pesante");
         fanteriaPes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         fanteriaPes.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        panzer.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Panzer1_Icon.gif")); 
+        try {
+			URL imgUrl=getClass().getResource("Icon pack/Unit Pack/Panzer1_Icon.png");
+			imgIcon = new ImageIcon(imgUrl);
+	          
+	       } catch (Exception e) {
+	    	   System.out.println(e.toString());
+	       }
+        panzer.setIcon(imgIcon);
         panzer.setText("Panzer");
         panzer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         panzer.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        aereo.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Aereo1_Icon.gif")); 
+        try {
+			URL imgUrl=getClass().getResource("Icon pack/Unit Pack/Aereo1_Icon.png");
+			imgIcon = new ImageIcon(imgUrl);
+	          
+	       } catch (Exception e) {
+	    	   System.out.println(e.toString());
+	       }
+        aereo.setIcon(imgIcon);
         aereo.setText("Aereo");
         aereo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         aereo.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        artiglieria.setIcon(new javax.swing.ImageIcon("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Artiglieria1_Icon.gif")); 
+        try {
+			URL imgUrl=getClass().getResource("Icon pack/Unit Pack/Artiglieria1_Icon.png");
+			imgIcon = new ImageIcon(imgUrl);
+	          
+	       } catch (Exception e) {
+	    	   System.out.println(e.toString());
+	       }
+        artiglieria.setIcon(imgIcon);
         artiglieria.setText("Artiglieria");
         artiglieria.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         artiglieria.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
