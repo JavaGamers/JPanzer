@@ -54,7 +54,11 @@ public class MappaListener extends MouseAdapter {
 		int newSelected = Integer.MAX_VALUE;
 
 		Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
-		g2.setColor(Color.BLACK);
+
+		// così funziona
+		if (g2 != null) {
+			g2.setColor(Color.BLACK);
+		}
 		EsagonoGrafico eG = new EsagonoGrafico(0, xC, yC, raggio);
 
 		// se qualcuno era selezionato (prima di questo click)
@@ -91,7 +95,7 @@ public class MappaListener extends MouseAdapter {
 						newSelected, oldSelected);
 			}
 
-			if (gameMode.isAttackMode()) {
+			if (gameMode.isAttackMode() && !selectedUnit.hasAlreadyAttack()) {
 				attackMode(nuovo, vecchio, eG2, selectedUnit, other, img,
 						newSelected, oldSelected);
 			}
@@ -105,8 +109,12 @@ public class MappaListener extends MouseAdapter {
 				scorporaMode(nuovo, vecchio, eG2, selectedUnit, other, img,
 						newSelected, oldSelected);
 			}
-			g2.setColor(Color.RED);
-			g2.draw(eG);
+
+			// così funziona
+			if (g2 != null) {
+				g2.setColor(Color.RED);
+				g2.draw(eG);
+			}
 		}
 	}
 
@@ -158,16 +166,14 @@ public class MappaListener extends MouseAdapter {
 
 				// unità attaccante
 				int numSelectedRemaining = selectedUnit.getNumUnits();
-				int defSelected = selectedUnit.getDif();
+				int defSelected = selectedUnit.getDef();
 				int attSelected = selectedUnit.getAtt();
 
 				// unità attaccata
 				int numOtherRemaining = other.getNumUnits();
-				int defOther = other.getDif();
+				int defOther = other.getDef();
 				int attOther = other.getAtt();
 
-				System.out.println("attacco: " + numSelectedRemaining
-						+ " difesa: " + numOtherRemaining);
 				CommandPanel commandPanel = gameMode.getCommandPanel();
 				commandPanel.setInfoBattleLabel(selectedUnit, other);
 
@@ -190,6 +196,10 @@ public class MappaListener extends MouseAdapter {
 					img = nuovo.getTerritorio().getImage();
 					mappaGrafica.paintImage(g2, eG2, img);
 
+					// setto il numero di unità rimanenti a 0 così da aggiornare
+					// correttamente la label
+					other.setNumUnits(0);
+
 				}
 
 				if (numSelectedRemaining > 0) {
@@ -206,7 +216,14 @@ public class MappaListener extends MouseAdapter {
 					eG2.newSet(oldSelected, xC, yC, raggio);
 					img = vecchio.getTerritorio().getImage();
 					mappaGrafica.paintImage(g2, eG2, img);
+
+					// setto il numero di unità rimanenti a 0 così da aggiornare
+					// correttamente la label
+					selectedUnit.setNumUnits(0);
 				}
+
+				commandPanel.setBattleStatsLabel(selectedUnit, other);
+
 			}
 			gameMode.setAttackMode(false);
 

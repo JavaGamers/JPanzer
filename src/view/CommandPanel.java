@@ -1,5 +1,7 @@
 package view;
 
+import javax.swing.AbstractButton;
+
 import model.Player;
 import model.Unità;
 import controller.CommandListener;
@@ -11,26 +13,30 @@ public class CommandPanel extends javax.swing.JPanel {
 	private javax.swing.JButton accorpa;
 	private javax.swing.JButton attacca;
 	private javax.swing.JButton carica;
+	private javax.swing.JButton muovi;
+	private javax.swing.JButton passa;
+	private javax.swing.JButton salva;
+	private javax.swing.JButton scorpora;
+	private javax.swing.JButton shop;
+	private javax.swing.JButton zoom;
+
 	private javax.swing.JLabel esperienza;
-	private javax.swing.JLabel infoBattle;
-	private javax.swing.JLabel infoAtt;
-	private javax.swing.JLabel infoDef;
+	private javax.swing.JLabel infoBattle1;
+	private javax.swing.JLabel infoBattle2;
+	private javax.swing.JLabel infoBattle3;
+	private javax.swing.JLabel infoBattle4;
 	private javax.swing.JLabel infoUnità;
 	private javax.swing.JLabel soldi;
+	private javax.swing.JLabel numUnits;
+	private javax.swing.JLabel player;
+	private javax.swing.JLabel passi;
+
 	private javax.swing.JSeparator jSeparator1;
 	private javax.swing.JSeparator jSeparator2;
 	private javax.swing.JSeparator jSeparator3;
 	private javax.swing.JSeparator jSeparator4;
 	private javax.swing.JSeparator jSeparator5;
-	private javax.swing.JButton muovi;
-	private javax.swing.JLabel numUnits;
-	private javax.swing.JButton passa;
-	private javax.swing.JLabel player;
-	private javax.swing.JButton salva;
-	private javax.swing.JButton scorpora;
-	private javax.swing.JButton shop;
-	private javax.swing.JButton zoom;
-	private javax.swing.JLabel passi;
+
 	public static GameMode gameMode = GameMode.getGameMode();
 
 	private static final String ESPERIENZATXT = "Esperienza: ";
@@ -97,15 +103,21 @@ public class CommandPanel extends javax.swing.JPanel {
 		Player playerAtt = gameMode.getPlayer(att.getPlayer());
 		Player playerDef = gameMode.getPlayer(def.getPlayer());
 
-		this.infoBattle.setText(att.getNome() + " di " + playerAtt.getNome()
-				+ " attacca con " + att.getAtt()*att.getNumUnits() + " potenza di fuoco "
-				+ def.getNome() + " di " + playerDef.getNome()
-				+ " che difende con " + def.getDif()*def.getNumUnits() + " scudo");
+		this.infoBattle1.setText(att.getNome() + " di " + playerAtt.getNome()
+				+ " attacca con " + att.getAtt() * att.getNumUnits()
+				+ " potenza di fuoco ");
+
+		this.infoBattle3
+				.setText(def.getNome() + " di " + playerDef.getNome()
+						+ " difende con " + def.getDef() * def.getNumUnits()
+						+ " scudo");
 	}
 
 	public void setBattleStatsLabel(Unità att, Unità def) {
-		this.infoAtt.setText(att.getNome() + " dopo la battaglia resta con " + att.getNumUnits());
-		this.infoDef.setText(def.getNome() + " dopo la battaglia resta con " + def.getNumUnits());
+		this.infoBattle2.setText("Dopo la battaglia resta con "
+				+ att.getNumUnits()+" unità");
+		this.infoBattle4.setText("Dopo la battaglia resta con "
+				+ def.getNumUnits()+" unità");
 	}
 
 	private void initComponents() {
@@ -265,15 +277,18 @@ public class CommandPanel extends javax.swing.JPanel {
 		jSeparator5 = new javax.swing.JSeparator();
 		jSeparator5.setBackground(new java.awt.Color(241, 157, 30));
 		jSeparator5.setForeground(new java.awt.Color(196, 68, 4));
+		
+		infoBattle1 = new javax.swing.JLabel();
+		infoBattle1.setText("");
 
-		infoBattle = new javax.swing.JLabel();
-		infoBattle.setText("");
+		infoBattle2 = new javax.swing.JLabel();
+		infoBattle2.setText("");
 
-		infoAtt = new javax.swing.JLabel();
-		infoAtt.setText("");
+		infoBattle3 = new javax.swing.JLabel();
+		infoBattle3.setText("");
 
-		infoDef = new javax.swing.JLabel();
-		infoDef.setText("");
+		infoBattle4 = new javax.swing.JLabel();
+		infoBattle4.setText("");
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);
@@ -291,7 +306,7 @@ public class CommandPanel extends javax.swing.JPanel {
 										layout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
 												.addComponent(
-														infoBattle,
+														infoBattle1,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE)
@@ -427,12 +442,17 @@ public class CommandPanel extends javax.swing.JPanel {
 																										0,
 																										Short.MAX_VALUE))))
 												.addComponent(
-														infoAtt,
+														infoBattle2,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE)
 												.addComponent(
-														infoDef,
+														infoBattle3,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														Short.MAX_VALUE)
+												.addComponent(
+														infoBattle4,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE))
@@ -543,10 +563,11 @@ public class CommandPanel extends javax.swing.JPanel {
 										javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(infoBattle).addGap(18, 18, 18)
-								.addComponent(infoAtt).addGap(18, 18, 18)
-								.addComponent(infoDef)
-								.addContainerGap(30, Short.MAX_VALUE)));
+								.addComponent(infoBattle1).addGap(18, 18, 18)
+								.addComponent(infoBattle2).addGap(18, 18, 18)
+								.addComponent(infoBattle3).addGap(18, 18, 18)
+								.addComponent(infoBattle4)
+								.addContainerGap(38, Short.MAX_VALUE)));
 	}
 
 }

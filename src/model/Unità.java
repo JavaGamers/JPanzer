@@ -78,7 +78,7 @@ public abstract class Unità {
 		return this.att;
 	}
 	
-	public int getDif(){
+	public int getDef(){
 		return this.dif;
 	}
 	
@@ -91,7 +91,7 @@ public abstract class Unità {
 	}
 	
 	public double getRig(){
-		return this.att;
+		return this.rig;
 	}
 	
 	public double getBonus(){

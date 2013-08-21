@@ -1,4 +1,7 @@
-Mappa Jpanzer
+Partita Jpanzer
+fede-1-400
+eli-2-600
+1
 4
 0-Foresta- - - - - - 
 1-Pianura- - - - - - 
@@ -6,24 +9,24 @@ Mappa Jpanzer
 3-Lago- - - - - - 
 4-Montagna- - - - - - 
 5-Pianura- - - - - - 
-6-Montagna- - - - - - 
+6-Montagna-fanterialeggera-1-30-0.0-10-false
 7-Lago- - - - - - 
 8-Pianura- - - - - - 
-9-Pianura- - - - - - 
-10-Foresta- - - - - - 
+9-Pianura-fanteriapesante-2-10-0.0-0-false
+10-Foresta-fanteriapesante-2-10-0.0-0-false
 11-Lago- - - - - - 
 12-Montagna- - - - - - 
 13-Montagna- - - - - - 
 14-Pianura- - - - - - 
 15-Pianura- - - - - - 
-16-Foresta- - - - - - 
-17-Collina- - - - - - 
-18-Montagna- - - - - - 
-19-Pianura- - - - - - 
+16-Foresta-panzer-1-10-0.0-0-false
+17-Collina-artiglieria-1-10-0.0-0-false
+18-Montagna-panzer-1-10-0.0-0-false
+19-Foresta- - - - - - 
 20-Montagna- - - - - - 
-21-Foresta- - - - - - 
-22-Foresta- - - - - - 
-23-Montagna- - - - - - 
+21-Foresta-fanterialeggera-2-10-0.0-10-false
+22-Collina- - - - - - 
+23-Montagna-artiglieria-2-10-0.0-0-false
 24-Lago- - - - - - 
 25-Lago- - - - - - 
 26-Lago- - - - - - 
@@ -37,7 +40,7 @@ Mappa Jpanzer
 34-Collina- - - - - - 
 35-Pianura- - - - - - 
 36-Lago- - - - - - 
-37-Foresta- - - - - - 
+37- - - - - - - 
 38-Pianura- - - - - - 
 39-Montagna- - - - - - 
 40-Pianura- - - - - - 
@@ -49,7 +52,7 @@ Mappa Jpanzer
 46-Foresta- - - - - - 
 47-Foresta- - - - - - 
 48-Montagna- - - - - - 
-49-Montagna- - - - - - 
+49- - - - - - - 
 50-Pianura- - - - - - 
 51-Montagna- - - - - - 
 52-Montagna- - - - - - 
@@ -60,4 +63,4 @@ Mappa Jpanzer
 57-Pianura- - - - - - 
 58-Collina- - - - - - 
 59-Foresta- - - - - - 
-60-Pianura- - - - - - 
+60-Collina- - - - - - 

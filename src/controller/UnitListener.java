@@ -19,6 +19,7 @@ import model.Mappa;
 import model.Panzer;
 import model.Player;
 import model.Unità;
+import view.CommandPanel;
 import view.ErrorWindow;
 import view.GameWin;
 import view.MappaGrafica;
@@ -77,17 +78,16 @@ public class UnitListener implements ActionListener {
 				c.removeAll();
 				// ora inizia il gioco
 				gameMode.setPlayingMode(true);
-				c.add(gameMode.getCommandPanel(), BorderLayout.EAST);
+				CommandPanel commandPanel = gameMode.getCommandPanel();
+				commandPanel.setPlayerLabel(gameMode.getPlayer(1));
+				c.add(commandPanel, BorderLayout.EAST);
 				JScrollPane jsp = new JScrollPane();
 				jsp.setViewportView(gameMode.getMappaGrafica());
 				jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 				c.add(jsp, BorderLayout.CENTER);
 				gameWin.repaint();
 				gameWin.validate();
-				Player p1 = gameMode.getPlayer(1);
-				Player p2 = gameMode.getPlayer(2);
-				System.out.println(p1.getUnitList().toString());
-				System.out.println(p2.getUnitList().toString());
+				
 			} else {
 				ErrorWindow ew = gameMode.getErrorWindow();
 				ew.setErrorLabel("Devi posizionare almeno 1 unità per giocare");

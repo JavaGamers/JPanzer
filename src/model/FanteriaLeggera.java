@@ -22,14 +22,16 @@ public class FanteriaLeggera extends Unità {
 		this.passi = FanteriaLeggera.PTT;
 		if (this.player == 1) {
 			try {
-				URL imgUrl=getClass().getResource("/view/Icon pack/Unit Pack/Fanteria Leggera1_Icon.png");
+				URL imgUrl = getClass().getResource(
+						"/view/Icon pack/Unit Pack/Fanteria Leggera1_Icon.png");
 				bImg = ImageIO.read(imgUrl);
 			} catch (IOException e) {
 				// da scrivere
 			}
 		} else {
 			try {
-				URL imgUrl=getClass().getResource("/view/Icon pack/Unit Pack/Fanteria Leggera2_Icon.png");
+				URL imgUrl = getClass().getResource(
+						"/view/Icon pack/Unit Pack/Fanteria Leggera2_Icon.png");
 				bImg = ImageIO.read(imgUrl);
 			} catch (IOException e) {
 				// da scrivere
@@ -52,6 +54,6 @@ public class FanteriaLeggera extends Unità {
 	}
 
 	public int getDef() {
-		return (int) (BASEDIF *(1 + this.esp)*this.bonus);
+		return (int) (BASEDIF * (1 + this.esp) * this.bonus);
 	}
 }
