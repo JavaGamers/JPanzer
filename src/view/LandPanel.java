@@ -59,16 +59,21 @@ public class LandPanel extends javax.swing.JPanel {
 		panel = new JPanel();
 		scrollPane = new JScrollPane();
 
-		ImageIcon imgIcon = null;
+		ImageIcon imgIcon1 = null;
+		ImageIcon imgIcon2 = null;
+		ImageIcon imgIcon3 = null;
+		ImageIcon imgIcon4 = null;
+		ImageIcon imgIcon5 = null;
+
 		try {
 			URL imgUrl = getClass().getResource(
 					"Icon pack/Land Pack/pianura_mini.png");
-			imgIcon = new ImageIcon(imgUrl);
+			imgIcon1 = new ImageIcon(imgUrl);
 
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-		pianura.setIcon(imgIcon);
+		pianura.setIcon(imgIcon1);
 		pianura.setText("Pianura");
 		pianura.addActionListener(lL);
 		pianura.setActionCommand("pianura");
@@ -78,12 +83,12 @@ public class LandPanel extends javax.swing.JPanel {
 		try {
 			URL imgUrl = getClass().getResource(
 					"Icon pack/Land Pack/collina_mini.png");
-			imgIcon = new ImageIcon(imgUrl);
+			imgIcon2 = new ImageIcon(imgUrl);
 
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-		collina.setIcon(imgIcon);
+		collina.setIcon(imgIcon2);
 		collina.setText("Collina");
 		collina.addActionListener(lL);
 		collina.setActionCommand("collina");
@@ -93,12 +98,12 @@ public class LandPanel extends javax.swing.JPanel {
 		try {
 			URL imgUrl = getClass().getResource(
 					"Icon pack/Land Pack/foresta_mini.png");
-			imgIcon = new ImageIcon(imgUrl);
+			imgIcon3 = new ImageIcon(imgUrl);
 
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-		foresta.setIcon(imgIcon);
+		foresta.setIcon(imgIcon3);
 		foresta.setText("Foresta");
 		foresta.addActionListener(lL);
 		foresta.setActionCommand("foresta");
@@ -108,12 +113,12 @@ public class LandPanel extends javax.swing.JPanel {
 		try {
 			URL imgUrl = getClass().getResource(
 					"Icon pack/Land Pack/montagna_mini.png");
-			imgIcon = new ImageIcon(imgUrl);
+			imgIcon4 = new ImageIcon(imgUrl);
 
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-		montagna.setIcon(imgIcon);
+		montagna.setIcon(imgIcon4);
 		montagna.setText("Montagna");
 		montagna.addActionListener(lL);
 		montagna.setActionCommand("montagna");
@@ -121,13 +126,14 @@ public class LandPanel extends javax.swing.JPanel {
 		montagna.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
 		try {
-			URL imgUrl = getClass().getResource("Icon pack/Land Pack/lago_mini.png");
-			imgIcon = new ImageIcon(imgUrl);
+			URL imgUrl = getClass().getResource(
+					"Icon pack/Land Pack/lago_mini.png");
+			imgIcon5 = new ImageIcon(imgUrl);
 
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-		lago.setIcon(imgIcon);
+		lago.setIcon(imgIcon5);
 		lago.setText("Lago");
 		lago.addActionListener(lL);
 		lago.setActionCommand("lago");

@@ -6,31 +6,12 @@ import java.awt.Container;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
-import java.util.StringTokenizer;
 
-import javax.swing.JFileChooser;
-
-import model.Aereo;
-import model.Artiglieria;
-import model.Collina;
 import model.Esagono;
 import model.EsagonoGrafico;
-import model.FanteriaLeggera;
-import model.FanteriaPesante;
-import model.Foresta;
-import model.Lago;
 import model.Mappa;
-import model.Montagna;
-import model.Panzer;
-import model.Pianura;
 import model.Player;
 import model.Unità;
 
@@ -300,16 +281,4 @@ public class CommandListener implements ActionListener {
 		gameWin.repaint();
 		mG.validate();
 	}
-	
-	private static String[] getElements(String s){
-		String[] elements= new String[6];
-		StringTokenizer str = new StringTokenizer(s,"-");
-		int i=0;
-		while(str.hasMoreTokens()){
-			elements[i]= str.nextToken();
-			i++;
-		}
-		return elements;
-	}
-
 }

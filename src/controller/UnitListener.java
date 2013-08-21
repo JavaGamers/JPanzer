@@ -54,7 +54,6 @@ public class UnitListener implements ActionListener {
 	}
 
 	private void giocaOpt() {
-		MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
 		if (!gameMode.isPlayingMode()) {
 			int turno = gameMode.getTurno();
 			if (turno == 1 && gameMode.getPlayer(turno).hasUnits()) {

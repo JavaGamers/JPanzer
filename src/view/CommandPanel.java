@@ -1,7 +1,5 @@
 package view;
 
-import javax.swing.AbstractButton;
-
 import model.Player;
 import model.Unità;
 import controller.CommandListener;
