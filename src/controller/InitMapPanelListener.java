@@ -108,8 +108,11 @@ public class InitMapPanelListener implements ActionListener,
 			// rimuovo gli eventuali altri pannelli presenti sulla finestra e
 			// aggiungo quelli nuovi
 			c.removeAll();
-			c.add(gameMode.getMappaGrafica(), BorderLayout.CENTER);
 			c.add(landPanel, BorderLayout.EAST);
+			JScrollPane jsp = new JScrollPane();
+			jsp.setViewportView(gameMode.getMappaGrafica());
+			jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+			c.add(jsp, BorderLayout.CENTER);;
 			// ridisegno della finestra
 			gameWin.repaint();
 			gameWin.validate();

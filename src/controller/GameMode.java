@@ -64,6 +64,8 @@ public class GameMode {
 	private boolean accorpaMode;
 	private boolean scorporaMode;
 	private boolean zoomOutMode;
+	private final static String INTESTAZIONEPARTITA = "Partita Jpanzer";
+	private final static String INTESTAZIONEMAPPA = "Mappa Jpanzer";
 
 	private GameMode() {
 		this.gameWin = null;
@@ -135,8 +137,8 @@ public class GameMode {
 		}
 		return this.leavingWin;
 	}
-	
-	public LoadWin getLoadWin(){
+
+	public LoadWin getLoadWin() {
 		if (this.loadWin == null) {
 			this.loadWin = new LoadWin();
 		}
@@ -312,6 +314,9 @@ public class GameMode {
 				fw = new FileWriter(file);
 				bw = new BufferedWriter(fw);
 
+				// stampo intestazione file
+				bw.write(INTESTAZIONEPARTITA+'\n');
+
 				// stampo info sui player
 				bw.write("" + this.player1 + '\n' + this.player2 + '\n');
 				// stampo il turno
@@ -343,192 +348,215 @@ public class GameMode {
 			if (file.isFile()) {
 				try {
 					br = new BufferedReader(new FileReader(file));
-					// leggo la 1° riga del file (info player1)
+					// leggo l'intestazione del file
 					String text = br.readLine();
-					elements = getElements(text);
-					String nome1 = elements.remove();
-					int player1 = Integer.parseInt(elements.remove());
-					int money1 = Integer.parseInt(elements.remove());
-					Player p1 = new Player(nome1, player1);
-					p1.setMoney(money1);
-					this.setPlayer(p1, player1);
+					if (text.equals(INTESTAZIONEPARTITA)) {
 
-					// leggo la 2° riga del file (info player2)
-					text = br.readLine();
-					elements = getElements(text);
-					String nome2 = elements.remove();
-					int player2 = Integer.parseInt(elements.remove());
-					int money2 = Integer.parseInt(elements.remove());
-					Player p2 = new Player(nome2, player2);
-					p2.setMoney(money2);
-					this.setPlayer(p2, player2);
-
-					// leggo la 3° riga (turno)
-					text = br.readLine();
-					int turno = Integer.parseInt(text);
-					this.turno = turno;
-
-					// leggo la 4° riga (dimensione mappa)
-					text = br.readLine();
-					int dim = Integer.parseInt(text);
-					Mappa m = new Mappa(dim);
-					
-					Esagono e;
-					// leggo le altre righe
-					while ((text = br.readLine()) != null) {
+						// leggo la 1° riga del file (info player1)
+						text = br.readLine();
 						elements = getElements(text);
-						e = m.getComponent()[Integer
-								.parseInt(elements.remove())];
-						// setto il territorio dell'esagono
-						String territorio = elements.remove();
-						if (territorio.equals("Pianura")) {
-							e.setTerritorio(new Pianura());
-						} else if (territorio.equals("Collina")) {
-							e.setTerritorio(new Collina());
-						} else if (territorio.equals("Montagna")) {
-							e.setTerritorio(new Montagna());
-						} else if (territorio.equals("Lago")) {
-							e.setTerritorio(new Lago());
-						} else if (territorio.equals("Foresta")) {
-							e.setTerritorio(new Foresta());
-						} else {
-							e.setTerritorio(null);
-						}
+						String nome1 = elements.remove();
+						int player1 = Integer.parseInt(elements.remove());
+						int money1 = Integer.parseInt(elements.remove());
+						Player p1 = new Player(nome1, player1);
+						p1.setMoney(money1);
+						this.setPlayer(p1, player1);
 
-						// controllo se è presento un'unità sul territorio
-						String nomeUnità = elements.remove();
-						if (!nomeUnità.equals(" ")) {
-							int player = Integer.parseInt(elements.remove());
-							int numUnits = Integer.parseInt(elements.remove());
-							double esp = Double.parseDouble(elements.remove());
-							int passi = Integer.parseInt(elements.remove());
-							boolean alreadyAttacked = Boolean
-									.parseBoolean(elements.remove());
+						// leggo la 2° riga del file (info player2)
+						text = br.readLine();
+						elements = getElements(text);
+						String nome2 = elements.remove();
+						int player2 = Integer.parseInt(elements.remove());
+						int money2 = Integer.parseInt(elements.remove());
+						Player p2 = new Player(nome2, player2);
+						p2.setMoney(money2);
+						this.setPlayer(p2, player2);
 
-							if (nomeUnità.equals("aereo")) {
-								e.setUnit(new Aereo(numUnits, player));
+						// leggo la 3° riga (turno)
+						text = br.readLine();
+						int turno = Integer.parseInt(text);
+						this.turno = turno;
 
-							} else if (nomeUnità.equals("artiglieria")) {
-								e.setUnit(new Artiglieria(numUnits, player));
+						// leggo la 4° riga (dimensione mappa)
+						text = br.readLine();
+						int dim = Integer.parseInt(text);
+						Mappa m = new Mappa(dim);
 
-							} else if (nomeUnità.equals("fanterialeggera")) {
-								e.setUnit(new FanteriaLeggera(numUnits, player));
-
-							} else if (nomeUnità.equals("fanteriapesante")) {
-								e.setUnit(new FanteriaPesante(numUnits, player));
-
-							} else if (nomeUnità.equals("panzer")) {
-								e.setUnit(new Panzer(numUnits, player));
-
+						Esagono e;
+						// leggo le altre righe
+						while ((text = br.readLine()) != null) {
+							elements = getElements(text);
+							e = m.getComponent()[Integer.parseInt(elements
+									.remove())];
+							// setto il territorio dell'esagono
+							String territorio = elements.remove();
+							if (territorio.equals("Pianura")) {
+								e.setTerritorio(new Pianura());
+							} else if (territorio.equals("Collina")) {
+								e.setTerritorio(new Collina());
+							} else if (territorio.equals("Montagna")) {
+								e.setTerritorio(new Montagna());
+							} else if (territorio.equals("Lago")) {
+								e.setTerritorio(new Lago());
+							} else if (territorio.equals("Foresta")) {
+								e.setTerritorio(new Foresta());
+							} else {
+								e.setTerritorio(null);
 							}
-							e.getUnit().setEsp(esp);
-							e.getUnit().setPassi(passi);
-							e.getUnit().setAlreadyAttack(alreadyAttacked);
+
+							// controllo se è presento un'unità sul territorio
+							String nomeUnità = elements.remove();
+							if (!nomeUnità.equals(" ")) {
+								int player = Integer
+										.parseInt(elements.remove());
+								int numUnits = Integer.parseInt(elements
+										.remove());
+								double esp = Double.parseDouble(elements
+										.remove());
+								int passi = Integer.parseInt(elements.remove());
+								boolean alreadyAttacked = Boolean
+										.parseBoolean(elements.remove());
+
+								if (nomeUnità.equals("aereo")) {
+									e.setUnit(new Aereo(numUnits, player));
+
+								} else if (nomeUnità.equals("artiglieria")) {
+									e.setUnit(new Artiglieria(numUnits, player));
+
+								} else if (nomeUnità.equals("fanterialeggera")) {
+									e.setUnit(new FanteriaLeggera(numUnits,
+											player));
+
+								} else if (nomeUnità.equals("fanteriapesante")) {
+									e.setUnit(new FanteriaPesante(numUnits,
+											player));
+
+								} else if (nomeUnità.equals("panzer")) {
+									e.setUnit(new Panzer(numUnits, player));
+
+								}
+								e.getUnit().setEsp(esp);
+								e.getUnit().setPassi(passi);
+								e.getUnit().setAlreadyAttack(alreadyAttacked);
+							}
+
 						}
+						br.close();
 
+						// setto la nuova mappa nel GameMode
+						this.setMappa(m);
+						this.createAndSetMappaGrafica();
+
+						done = true;
+					} else {
+						this.getErrorWindow().setErrorLabel(
+								"devi caricare un file partita valido");
+						this.getErrorWindow().setVisible(true);
 					}
-					br.close();
-
-					// setto la nuova mappa nel GameMode
-					this.setMappa(m);
-					this.createAndSetMappaGrafica();
 				} catch (IOException ioException) {
 				}
+			}
+
+		}
+		return done;
+	}
+
+	public boolean salvaMappa() {
+		boolean done = false;
+		MappaGrafica mG = getMappaGrafica();
+		JFileChooser jfc = new JFileChooser();
+		int returnVal = jfc.showSaveDialog(mG);
+
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File file = jfc.getSelectedFile();
+			FileWriter fw;
+			BufferedWriter bw;
+
+			try {
+
+				fw = new FileWriter(file);
+				bw = new BufferedWriter(fw);
+				// scrivo intestazione mappa
+				bw.write(INTESTAZIONEMAPPA+'\n');
+
+				bw.write(getMappa().toString());
+
+				bw.close();
+				fw.close();
+
+			} catch (IOException io) {
+				System.out.println(io.toString());
 			}
 			done = true;
 		}
 		return done;
 	}
-	
-	public boolean salvaMappa(){
-		boolean done = false;
-		MappaGrafica mG = getMappaGrafica();
-		JFileChooser jfc = new JFileChooser();		
-		int returnVal = jfc.showSaveDialog(mG);
-		 
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = jfc.getSelectedFile();
-            FileWriter fw;
-    		BufferedWriter bw;
-    		
-    		try{
-    			
-    		fw = new FileWriter(file);
-    		bw = new BufferedWriter(fw);
-    		
-    		bw.write(getMappa().toString());
-    		
-    		bw.close();
-    		fw.close();
-    		
-    		} catch(IOException io){
-    			System.out.println(io.toString());
-    		}
-    		done = true;
-        }
-        return done;
-	}
-	
-	public boolean caricaMappa(){
+
+	public boolean caricaMappa() {
 		boolean done = false;
 		MappaGrafica mG = getMappaGrafica();
 		JFileChooser jfc = new JFileChooser();
 		int returnVal = jfc.showOpenDialog(mG);
 		int i = 0;
-		 
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = jfc.getSelectedFile();
-            BufferedReader br;
-    		LinkedList<String> elements;
-    		if (file.isFile()) {
-    			try {
-    				br = new BufferedReader(new FileReader(file));
-    				// leggo la 1° riga del file
-    				String text = br.readLine();
-    				int dim = Integer.parseInt(text);
-    				Mappa m = new Mappa(dim);
-    				Esagono e;
-    				//leggo le altre righe
-    				
-    				while ((text = br.readLine()) != null){
-    					i++;
-    					elements=getElements(text);
-    					e = m.getComponent()[Integer.parseInt(elements.remove())];
-    					String territorio = elements.remove();
-    					// setto il territorio dell'esagono
-    					if(territorio.equals("Pianura")){
-    						e.setTerritorio(new Pianura());
-    					}
-    					else if(territorio.equals("Collina")){
-    						e.setTerritorio(new Collina());
-    					}
-    					else if(territorio.equals("Montagna")){
-    						e.setTerritorio(new Montagna());
-    					}
-    					else if(territorio.equals("Lago")){
-    						e.setTerritorio(new Lago());
-    					}
-    					else if(territorio.equals("Foresta")){
-    						e.setTerritorio(new Foresta());
-    					}
-    					else{
-    						e.setTerritorio(null);
-    					}
-    				}
-    				br.close();
-    				
-    				//setto la nuova mappa nel pannello
-    				this.setMappa(m);
-    				this.createAndSetMappaGrafica();
-    			} 
-    			catch (IOException ioException) {
-    				System.out.println(ioException.toString());
-    			}
-    		}
-    		done = true;
-        }
-        System.out.println(i);
-        return done;
+
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File file = jfc.getSelectedFile();
+			BufferedReader br;
+			LinkedList<String> elements;
+			if (file.isFile()) {
+				try {
+					br = new BufferedReader(new FileReader(file));
+					// leggo intestazione mappa
+					String text = br.readLine();
+					if (text.equals(INTESTAZIONEMAPPA)) {
+
+						// leggo la 1° riga del file
+						text = br.readLine();
+						int dim = Integer.parseInt(text);
+						Mappa m = new Mappa(dim);
+						Esagono e;
+						// leggo le altre righe
+
+						while ((text = br.readLine()) != null) {
+							i++;
+							elements = getElements(text);
+							e = m.getComponent()[Integer.parseInt(elements
+									.remove())];
+							String territorio = elements.remove();
+							// setto il territorio dell'esagono
+							if (territorio.equals("Pianura")) {
+								e.setTerritorio(new Pianura());
+							} else if (territorio.equals("Collina")) {
+								e.setTerritorio(new Collina());
+							} else if (territorio.equals("Montagna")) {
+								e.setTerritorio(new Montagna());
+							} else if (territorio.equals("Lago")) {
+								e.setTerritorio(new Lago());
+							} else if (territorio.equals("Foresta")) {
+								e.setTerritorio(new Foresta());
+							} else {
+								e.setTerritorio(null);
+							}
+						}
+						br.close();
+
+						// setto la nuova mappa nel pannello
+						this.setMappa(m);
+						this.createAndSetMappaGrafica();
+
+						done = true;
+					} else {
+						this.getErrorWindow().setErrorLabel(
+								"devi caricare un file mappa valido");
+						this.getErrorWindow().setVisible(true);
+					}
+				} catch (IOException ioException) {
+					System.out.println(ioException.toString());
+				}
+			}
+		}
+		System.out.println(i);
+		return done;
 	}
 
 	private static LinkedList<String> getElements(String s) {

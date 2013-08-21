@@ -5,6 +5,9 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JScrollPane;
+import javax.swing.JViewport;
+
 import view.GameWin;
 
 public class StartPanelListener implements ActionListener {
@@ -51,8 +54,11 @@ public class StartPanelListener implements ActionListener {
 			// rimuovo gli eventuali altri pannelli presenti sulla finestra e
 			// aggiungo quelli nuovi
 			c.removeAll();
-			c.add(gameMode.getMappaGrafica(), BorderLayout.CENTER);
 			c.add(gameMode.getCommandPanel(), BorderLayout.EAST);
+			JScrollPane jsp = new JScrollPane();
+			jsp.setViewportView(gameMode.getMappaGrafica());
+			jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+			c.add(jsp, BorderLayout.CENTER);
 
 			// ridisegno della finestra
 			gameWin.repaint();

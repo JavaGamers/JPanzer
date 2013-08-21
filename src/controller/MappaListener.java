@@ -135,21 +135,9 @@ public class MappaListener extends MouseAdapter {
 			nuovo.setUnit(selectedUnit);
 			img = selectedUnit.getImage();
 			mappaGrafica.paintImage(g2, eG, img);
-			// da controllare
 			selectedUnit.aggiornaPassi((int) nuovo.getMinDistance());
 		}
 		gameMode.setMovingMode(false);
-
-		/*
-		 * // ridisegno i contorni dei vecchi esagoni raggiungibili
-		 * Iterator<Esagono> it = esagoniRaggiungibili.iterator(); int id =0;
-		 * Esagono e = null;
-		 * 
-		 * 
-		 * while(it.hasNext()){ e = it.next(); id = e.getId(); eG2.newSet(id,
-		 * xC, yC, raggio); g2.setColor(Color.BLACK); g2.draw(eG2); }
-		 */
-
 		gameMode.getGameWin().repaint();
 		gameMode.getGameWin().validate();
 	}
@@ -243,7 +231,7 @@ public class MappaListener extends MouseAdapter {
 			}
 		}
 	}
-	
+
 	private static int calulateMoneyEarned(int prevNum, int postNum, Unità u) {
 		int gain = 0;
 		int diff = prevNum - postNum;

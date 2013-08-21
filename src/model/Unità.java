@@ -5,6 +5,7 @@ import java.util.List;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -50,7 +51,8 @@ public abstract class Unità {
 		
 		if(this.player==1){
 			try {
-				xImage = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Xrossa.png"));
+				URL imgUrl=getClass().getResource("/view/Icon pack/Unit Pack/Xrossa.png");
+				xImage = ImageIO.read(imgUrl);
 		       } catch (IOException e) {
 		    	   // da scrivere
 		       }
@@ -59,7 +61,8 @@ public abstract class Unità {
 		}
 		else{
 			try {
-				xImage = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Xblu.png"));
+				URL imgUrl=getClass().getResource("/view/Icon pack/Unit Pack/Xblu.png");
+				xImage = ImageIO.read(imgUrl);
 		       } catch (IOException e) {
 		    	   // da scrivere
 		       }

@@ -5,6 +5,9 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JScrollPane;
+import javax.swing.JViewport;
+
 import model.Aereo;
 import model.Artiglieria;
 import model.Esagono;
@@ -16,7 +19,6 @@ import model.Mappa;
 import model.Panzer;
 import model.Player;
 import model.Unità;
-
 import view.ErrorWindow;
 import view.GameWin;
 import view.MappaGrafica;
@@ -61,7 +63,10 @@ public class UnitListener implements ActionListener {
 				c.removeAll();
 				gameMode.getUnitPanel().updateLabel();
 				c.add(gameMode.getUnitPanel(), BorderLayout.EAST);
-				c.add(mappaGrafica, BorderLayout.CENTER);
+				JScrollPane jsp = new JScrollPane();
+				jsp.setViewportView(gameMode.getMappaGrafica());
+				jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+				c.add(jsp, BorderLayout.CENTER);
 				gameWin.repaint();
 				gameWin.validate();
 			} else if (turno == 2 && gameMode.getPlayer(turno).hasUnits()) {
@@ -73,7 +78,10 @@ public class UnitListener implements ActionListener {
 				// ora inizia il gioco
 				gameMode.setPlayingMode(true);
 				c.add(gameMode.getCommandPanel(), BorderLayout.EAST);
-				c.add(mappaGrafica, BorderLayout.CENTER);
+				JScrollPane jsp = new JScrollPane();
+				jsp.setViewportView(gameMode.getMappaGrafica());
+				jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+				c.add(jsp, BorderLayout.CENTER);
 				gameWin.repaint();
 				gameWin.validate();
 				Player p1 = gameMode.getPlayer(1);
@@ -93,8 +101,11 @@ public class UnitListener implements ActionListener {
 			c.removeAll();
 			// ricomincia il gioco
 			gameMode.setPlayingMode(true);
-			c.add(mappaGrafica, BorderLayout.CENTER);
 			c.add(gameMode.getCommandPanel(), BorderLayout.EAST);
+			JScrollPane jsp = new JScrollPane();
+			jsp.setViewportView(gameMode.getMappaGrafica());
+			jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+			c.add(jsp, BorderLayout.CENTER);
 			gameWin.repaint();
 			gameWin.validate();
 		}
@@ -130,8 +141,7 @@ public class UnitListener implements ActionListener {
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());
 						int soldiPrecedenti = player.getSoldi();
-						int soldiNuovi = soldiPrecedenti
-								- Artiglieria.COSTO;
+						int soldiNuovi = soldiPrecedenti - Artiglieria.COSTO;
 						player.setMoney(soldiNuovi);
 						UnitPanel unitPanel = gameMode.getUnitPanel();
 						unitPanel.setSoldiLabel(soldiNuovi);
@@ -145,8 +155,7 @@ public class UnitListener implements ActionListener {
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());
 						int soldiPrecedenti = player.getSoldi();
-						int soldiNuovi = soldiPrecedenti
-								- Artiglieria.COSTO;
+						int soldiNuovi = soldiPrecedenti - Artiglieria.COSTO;
 						player.setMoney(soldiNuovi);
 						UnitPanel unitPanel = gameMode.getUnitPanel();
 						unitPanel.setSoldiLabel(soldiNuovi);
