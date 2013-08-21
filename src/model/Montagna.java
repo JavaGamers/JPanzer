@@ -2,6 +2,7 @@ package model;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -15,8 +16,8 @@ public class Montagna implements Territorio {
 	
 	public Montagna(){
 		try {
-			URL imgUrl=getClass().getResource("/view/Icon pack/Land Pack/Montagna_Icon.png");
-			bImg = ImageIO.read(imgUrl);
+			bImg = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Land Pack/montagna.png"));
+			
 	       } catch (IOException e) {
 	    	   System.out.println("c'è qualcosa che non va");
 	       }

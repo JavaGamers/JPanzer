@@ -42,13 +42,13 @@ public class Aereo extends Unità {
 	}
 	
 	public List<Esagono> getEsagoniRaggiungibili(){
-		if(counter>0 || this.esagoniRaggiungibili==null){
+		if(this.isMoved || this.esagoniRaggiungibili==null){
 			Mappa m = gameMode.getMappa();
 			m.resetDistances();
 			List<Esagono> l = new LinkedList<Esagono>();
 			calcolaEsagoniRaggiungibili(this.passi,this.pos,l,0);
 			this.esagoniRaggiungibili = l;
-			this.counter=0;
+			this.isMoved=false;
 		}
 		return this.esagoniRaggiungibili;
 	}

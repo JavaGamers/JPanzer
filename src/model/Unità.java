@@ -26,13 +26,7 @@ public abstract class Unità {
 	protected List<Esagono> esagoniRaggiungibili;
 	protected boolean alreadyAttack;
 	public static GameMode gameMode = GameMode.getGameMode();
-	
-	/*
-	 counter è una variabile che indica la correttezza di esagoniRaggiungibili:
-	 counter = 0 esagoniRaggiungibili è coerente con la posizione dell'esagono
-	 counter > 0 l'unità è stata spostata di counter volte senza aver aggiornato esagoniRaggiungibili
-	 */
-	protected int counter;
+	protected boolean isMoved;
 	
 	public static final int UNITACOMPRABILI = 10;
 	
@@ -51,12 +45,12 @@ public abstract class Unità {
 		this.player=player;
 		this.bImg=null;
 		this.esagoniRaggiungibili=null;
-		this.counter = 0;
+		this.isMoved = false;
 		this.alreadyAttack=false;
 		
 		if(this.player==1){
 			try {
-				xImage = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Xrossa.jpg"));
+				xImage = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Xrossa.png"));
 		       } catch (IOException e) {
 		    	   // da scrivere
 		       }
@@ -65,7 +59,7 @@ public abstract class Unità {
 		}
 		else{
 			try {
-				xImage = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Xblu.jpg"));
+				xImage = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Unit Pack/Xblu.png"));
 		       } catch (IOException e) {
 		    	   // da scrivere
 		       }
@@ -124,7 +118,7 @@ public abstract class Unità {
 	}
 	
 	public List<Esagono> getEsagoniRaggiungibili(){
-		if(counter>0 || this.esagoniRaggiungibili==null){
+		if(isMoved || this.esagoniRaggiungibili==null){
 			this.calcolaEsagoniRaggiungibili();
 		}
 		return this.esagoniRaggiungibili;
@@ -134,7 +128,7 @@ public abstract class Unità {
 		Mappa m = gameMode.getMappa();
 		m.resetDistances();
 		this.esagoniRaggiungibili = Dijkstra.shortestPath(m, pos, passi);
-		this.counter=0;
+		this.isMoved=false;
 	}
 	
 	public void setEsp(double e){
@@ -167,7 +161,7 @@ public abstract class Unità {
 		if(p.getTerritorio()!=null){
 			this.bonus=p.getTerritorio().getBonus();
 		}
-		this.counter++;
+		this.isMoved=true;
 	}
 	
 	public abstract void resetPassi();

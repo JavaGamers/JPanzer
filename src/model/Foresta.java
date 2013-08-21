@@ -2,6 +2,7 @@ package model;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -14,9 +15,8 @@ public class Foresta implements Territorio {
 	
 	public Foresta(){
 		try {
-			URL imgUrl=getClass().getResource("/view/Icon pack/Land Pack/Foresta_Icon.png");
-			bImg = ImageIO.read(imgUrl);
-          
+			bImg = ImageIO.read(new File("C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/Land Pack/foresta.png"));
+			
        } catch (Exception e) {
     	   System.out.println(e.toString());
        }
