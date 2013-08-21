@@ -246,6 +246,7 @@ public class CommandListener implements ActionListener {
 	private void abbandonaOpt() {
 		gameMode.getCommandPanel().silenceAll(0);
 		LeavingWin leavingWin = gameMode.getLeavingWin();
+		leavingWin.setTextLabel(LeavingWin.EXITGAMEMSG);
 		leavingWin.setVisible(true);
 	}
 

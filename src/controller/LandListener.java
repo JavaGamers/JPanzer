@@ -13,8 +13,8 @@ import model.Mappa;
 import model.Montagna;
 import model.Pianura;
 import model.EsagonoGrafico;
-
 import view.GameWin;
+import view.LeavingWin;
 import view.MappaGrafica;
 
 public class LandListener implements ActionListener {
@@ -53,15 +53,10 @@ public class LandListener implements ActionListener {
 	}
 
 	private void mainMenuOpt() {
-		GameWin gameWin = gameMode.getGameWin();
-		Container c = gameWin.getContentPane();
-
-		// rimuovo gli eventuali altri pannelli presenti sulla finestra e
-		// aggiungo quelli nuovi
-		c.removeAll();
-		c.add(gameMode.getStartPanel(), BorderLayout.CENTER);
-		gameWin.repaint();
-		gameWin.validate();
+		gameMode.getLandPanel().silenceAll(0);
+		LeavingWin leavingWin = gameMode.getLeavingWin();
+		leavingWin.setTextLabel(LeavingWin.EXITMAPMSG);
+		leavingWin.setVisible(true);
 
 	}
 

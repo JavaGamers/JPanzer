@@ -28,8 +28,13 @@ public class LeavingListener implements ActionListener {
 	}
 
 	private void annullaOpt() {
-		gameMode.getLeavingWin().setVisible(false);
-		gameMode.getCommandPanel().enableAll();
+		if (gameMode.isPlayingMode()) {
+			gameMode.getLeavingWin().setVisible(false);
+			gameMode.getCommandPanel().enableAll();
+		} else {
+			gameMode.getLeavingWin().setVisible(false);
+			gameMode.getLandPanel().enableAll();
+		}
 
 	}
 
@@ -43,28 +48,51 @@ public class LeavingListener implements ActionListener {
 		// rimuovo gli eventuali altri pannelli presenti sulla finestra e
 		// aggiungo quelli nuovi
 		c.removeAll();
+		gameMode.getLandPanel().enableAll();
 		gameMode.resetAll();
 		c.add(gameMode.getStartPanel(), BorderLayout.CENTER);
 		gameWin.repaint();
 		gameWin.validate();
-
 	}
 
 	private void siOpt() {
-		if (gameMode.salvaPartita()) {
+		if (gameMode.isPlayingMode()) {
+			if (gameMode.salvaPartita()) {
 
-			GameWin gameWin = gameMode.getGameWin();
-			Container c = gameWin.getContentPane();
+				GameWin gameWin = gameMode.getGameWin();
+				Container c = gameWin.getContentPane();
 
-			gameMode.getLeavingWin().setVisible(false);
+				gameMode.getLeavingWin().setVisible(false);
 
-			// rimuovo gli eventuali altri pannelli presenti sulla finestra e
-			// aggiungo quelli nuovi
-			c.removeAll();
-			gameMode.resetAll();
-			c.add(gameMode.getStartPanel(), BorderLayout.CENTER);
-			gameWin.repaint();
-			gameWin.validate();
+				// rimuovo gli eventuali altri pannelli presenti sulla finestra
+				// e
+				// aggiungo quelli nuovi
+				c.removeAll();
+				gameMode.getLandPanel().enableAll();
+				gameMode.resetAll();
+				c.add(gameMode.getStartPanel(), BorderLayout.CENTER);
+				gameWin.repaint();
+				gameWin.validate();
+			}
+		} else {
+			if (gameMode.salvaMappa()) {
+
+				GameWin gameWin = gameMode.getGameWin();
+				Container c = gameWin.getContentPane();
+
+				gameMode.getLeavingWin().setVisible(false);
+
+				// rimuovo gli eventuali altri pannelli presenti sulla finestra
+				// e
+				// aggiungo quelli nuovi
+				c.removeAll();
+				gameMode.getLandPanel().enableAll();
+				gameMode.resetAll();
+				c.add(gameMode.getStartPanel(), BorderLayout.CENTER);
+				gameWin.repaint();
+				gameWin.validate();
+			}
+
 		}
 	}
 }
