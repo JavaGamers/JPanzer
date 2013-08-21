@@ -62,7 +62,7 @@ public class LandPanel extends javax.swing.JPanel {
 		ImageIcon imgIcon = null;
 		try {
 			URL imgUrl = getClass().getResource(
-					"Icon pack/Land Pack/pianura.png");
+					"Icon pack/Land Pack/pianura_mini.png");
 			imgIcon = new ImageIcon(imgUrl);
 
 		} catch (Exception e) {
@@ -77,7 +77,7 @@ public class LandPanel extends javax.swing.JPanel {
 
 		try {
 			URL imgUrl = getClass().getResource(
-					"Icon pack/Land Pack/collina.png");
+					"Icon pack/Land Pack/collina_mini.png");
 			imgIcon = new ImageIcon(imgUrl);
 
 		} catch (Exception e) {
@@ -92,7 +92,7 @@ public class LandPanel extends javax.swing.JPanel {
 
 		try {
 			URL imgUrl = getClass().getResource(
-					"Icon pack/Land Pack/foresta.png");
+					"Icon pack/Land Pack/foresta_mini.png");
 			imgIcon = new ImageIcon(imgUrl);
 
 		} catch (Exception e) {
@@ -107,7 +107,7 @@ public class LandPanel extends javax.swing.JPanel {
 
 		try {
 			URL imgUrl = getClass().getResource(
-					"Icon pack/Land Pack/montagna.png");
+					"Icon pack/Land Pack/montagna_mini.png");
 			imgIcon = new ImageIcon(imgUrl);
 
 		} catch (Exception e) {
@@ -121,7 +121,7 @@ public class LandPanel extends javax.swing.JPanel {
 		montagna.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
 		try {
-			URL imgUrl = getClass().getResource("Icon pack/Land Pack/lago.jpg");
+			URL imgUrl = getClass().getResource("Icon pack/Land Pack/lago_mini.png");
 			imgIcon = new ImageIcon(imgUrl);
 
 		} catch (Exception e) {
