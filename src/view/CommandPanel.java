@@ -47,6 +47,32 @@ public class CommandPanel extends javax.swing.JPanel {
 		initComponents();
 	}
 
+	// disabilita bottoni: option = 0 tutti, option = 1 tutti tranne lo zoom
+	public void silenceAll() {
+		this.abbandona.setEnabled(false);
+		this.accorpa.setEnabled(false);
+		this.attacca.setEnabled(false);
+		this.carica.setEnabled(false);
+		this.muovi.setEnabled(false);
+		this.passa.setEnabled(false);
+		this.salva.setEnabled(false);
+		this.scorpora.setEnabled(false);
+		this.shop.setEnabled(false);
+		
+	}
+
+	public void enableAll() {
+		this.abbandona.setEnabled(true);
+		this.accorpa.setEnabled(true);
+		this.attacca.setEnabled(true);
+		this.carica.setEnabled(true);
+		this.muovi.setEnabled(true);
+		this.passa.setEnabled(true);
+		this.salva.setEnabled(true);
+		this.scorpora.setEnabled(true);
+		this.shop.setEnabled(true);
+	}
+
 	public void setUnitLabel(Unità u) {
 		if (u != null) {
 			this.esperienza.setText(ESPERIENZATXT + u.getEsp());
@@ -65,36 +91,6 @@ public class CommandPanel extends javax.swing.JPanel {
 	}
 
 	// disabilita bottoni: option = 0 tutti, option = 1 tutti tranne lo zoom
-	public void silenceAll(int option) {
-		this.abbandona.setEnabled(false);
-		this.accorpa.setEnabled(false);
-		this.attacca.setEnabled(false);
-		this.carica.setEnabled(false);
-		this.muovi.setEnabled(false);
-		this.passa.setEnabled(false);
-		this.salva.setEnabled(false);
-		this.scorpora.setEnabled(false);
-		this.shop.setEnabled(false);
-		if (option < 0 || option > 1) {
-			throw new IllegalArgumentException(
-					"argomento errato del metodo silenceAll");
-		} else if (option == 0) {
-			this.zoom.setEnabled(false);
-		}
-	}
-
-	public void enableAll() {
-		this.abbandona.setEnabled(true);
-		this.accorpa.setEnabled(true);
-		this.attacca.setEnabled(true);
-		this.carica.setEnabled(true);
-		this.muovi.setEnabled(true);
-		this.passa.setEnabled(true);
-		this.salva.setEnabled(true);
-		this.scorpora.setEnabled(true);
-		this.shop.setEnabled(true);
-		this.zoom.setEnabled(true);
-	}
 
 	public void setInfoBattleLabel(Unità att, Unità def) {
 
@@ -113,9 +109,9 @@ public class CommandPanel extends javax.swing.JPanel {
 
 	public void setBattleStatsLabel(Unità att, Unità def) {
 		this.infoBattle2.setText("Dopo la battaglia resta con "
-				+ att.getNumUnits()+" unità");
+				+ att.getNumUnits() + " unità");
 		this.infoBattle4.setText("Dopo la battaglia resta con "
-				+ def.getNumUnits()+" unità");
+				+ def.getNumUnits() + " unità");
 	}
 
 	private void initComponents() {
@@ -275,7 +271,7 @@ public class CommandPanel extends javax.swing.JPanel {
 		jSeparator5 = new javax.swing.JSeparator();
 		jSeparator5.setBackground(new java.awt.Color(241, 157, 30));
 		jSeparator5.setForeground(new java.awt.Color(196, 68, 4));
-		
+
 		infoBattle1 = new javax.swing.JLabel();
 		infoBattle1.setText("");
 

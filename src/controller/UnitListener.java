@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 
@@ -20,7 +21,6 @@ import model.Panzer;
 import model.Player;
 import model.Unità;
 import view.CommandPanel;
-import view.ErrorWindow;
 import view.GameWin;
 import view.MappaGrafica;
 import view.UnitPanel;
@@ -86,12 +86,11 @@ public class UnitListener implements ActionListener {
 				c.add(jsp, BorderLayout.CENTER);
 				gameWin.repaint();
 				gameWin.validate();
-				
-			} else {
-				ErrorWindow ew = gameMode.getErrorWindow();
-				ew.setErrorLabel("Devi posizionare almeno 1 unità per giocare");
-				ew.setVisible(true);
 
+			} else {
+				JOptionPane.showMessageDialog(gameMode.getGameWin(),
+						"Devi posizionare almeno un'unità per giocare!",
+						"ERRORE!", JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
 			gameMode.setSelectionUnitMode(false);
@@ -160,28 +159,32 @@ public class UnitListener implements ActionListener {
 						unitPanel.setSoldiLabel(soldiNuovi);
 
 					} else if (!(e.getTerritorio() instanceof Lago)) {
-						ErrorWindow ew = gameMode.getErrorWindow();
-						ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
-						ew.setVisible(true);
+						JOptionPane
+								.showMessageDialog(
+										gameMode.getGameWin(),
+										"C'è già un'unità di tipo diverso su questo territorio!",
+										"ERRORE!", JOptionPane.ERROR_MESSAGE);
 					} else {
-						ErrorWindow ew = gameMode.getErrorWindow();
-						ew.setErrorLabel("Non puoi mettere un'Unità di terra nel lago!");
-						ew.setVisible(true);
+						JOptionPane.showMessageDialog(gameMode.getGameWin(),
+								"Non puoi mettere un'unità di terra nel lago!",
+								"ERRORE!", JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
-					ErrorWindow ew = gameMode.getErrorWindow();
-					ew.setErrorLabel("Devi posizionare l'unità negli esagoni evidenziati!");
-					ew.setVisible(true);
+					JOptionPane
+							.showMessageDialog(
+									gameMode.getGameWin(),
+									"Devi posizionare l'unità negli esagoni evidenziati!",
+									"ERRORE!", JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
-				ErrorWindow ew = gameMode.getErrorWindow();
-				ew.setErrorLabel("Non hai selezionato alcun territorio!");
-				ew.setVisible(true);
+				JOptionPane.showMessageDialog(gameMode.getGameWin(),
+						"Non hai selezionato alcun territorio!", "ERRORE!",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
-			ErrorWindow ew = gameMode.getErrorWindow();
-			ew.setErrorLabel("Non hai abbastanza soldi per comprare quest'unità!");
-			ew.setVisible(true);
+			JOptionPane.showMessageDialog(gameMode.getGameWin(),
+					"Non hai abbastanza soldi per comprare questa unità!",
+					"ERRORE!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -234,24 +237,28 @@ public class UnitListener implements ActionListener {
 						unitPanel.setSoldiLabel(soldiNuovi);
 
 					} else {
-						ErrorWindow ew = gameMode.getErrorWindow();
-						ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
-						ew.setVisible(true);
+						JOptionPane
+								.showMessageDialog(
+										gameMode.getGameWin(),
+										"C'è già un'unità di tipo diverso su questo territorio!",
+										"ERRORE!", JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
-					ErrorWindow ew = gameMode.getErrorWindow();
-					ew.setErrorLabel("Devi posizionare l'unità negli esagoni evidenziati!");
-					ew.setVisible(true);
+					JOptionPane
+							.showMessageDialog(
+									gameMode.getGameWin(),
+									"Devi posizionare l'unità negli esagoni evidenziati!",
+									"ERRORE!", JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
-				ErrorWindow ew = gameMode.getErrorWindow();
-				ew.setErrorLabel("Non hai selezionato alcun territorio!");
-				ew.setVisible(true);
+				JOptionPane.showMessageDialog(gameMode.getGameWin(),
+						"Non hai selezionato alcun territorio!", "ERRORE!",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
-			ErrorWindow ew = gameMode.getErrorWindow();
-			ew.setErrorLabel("Non hai abbastanza soldi per comprare quest'unità");
-			ew.setVisible(true);
+			JOptionPane.showMessageDialog(gameMode.getGameWin(),
+					"Non hai abbastanza soldi per comprare questa unità!",
+					"ERRORE!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -308,28 +315,32 @@ public class UnitListener implements ActionListener {
 						unitPanel.setSoldiLabel(soldiNuovi);
 
 					} else if (!(e.getTerritorio() instanceof Lago)) {
-						ErrorWindow ew = gameMode.getErrorWindow();
-						ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
-						ew.setVisible(true);
+						JOptionPane
+								.showMessageDialog(
+										gameMode.getGameWin(),
+										"C'è già un'unità di tipo diverso su questo territorio!",
+										"ERRORE!", JOptionPane.ERROR_MESSAGE);
 					} else {
-						ErrorWindow ew = gameMode.getErrorWindow();
-						ew.setErrorLabel("Non puoi mettere un'Unità di terra nel lago!");
-						ew.setVisible(true);
+						JOptionPane.showMessageDialog(gameMode.getGameWin(),
+								"Non puoi mettere un'unità di terra nel lago!",
+								"ERRORE!", JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
-					ErrorWindow ew = gameMode.getErrorWindow();
-					ew.setErrorLabel("Devi posizionare l'unità negli esagoni evidenziati!");
-					ew.setVisible(true);
+					JOptionPane
+							.showMessageDialog(
+									gameMode.getGameWin(),
+									"Devi posizionare l'unità negli esagoni evidenziati!",
+									"ERRORE!", JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
-				ErrorWindow ew = gameMode.getErrorWindow();
-				ew.setErrorLabel("Non hai selezionato alcun territorio!");
-				ew.setVisible(true);
+				JOptionPane.showMessageDialog(gameMode.getGameWin(),
+						"Non hai selezionato alcun territorio!", "ERRORE!",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
-			ErrorWindow ew = gameMode.getErrorWindow();
-			ew.setErrorLabel("Non hai abbastanza soldi per comprare quest'unità!");
-			ew.setVisible(true);
+			JOptionPane.showMessageDialog(gameMode.getGameWin(),
+					"Non hai abbastanza soldi per comprare questa unità!",
+					"ERRORE!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -385,28 +396,32 @@ public class UnitListener implements ActionListener {
 						unitPanel.setSoldiLabel(soldiNuovi);
 
 					} else if (!(e.getTerritorio() instanceof Lago)) {
-						ErrorWindow ew = gameMode.getErrorWindow();
-						ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
-						ew.setVisible(true);
+						JOptionPane
+								.showMessageDialog(
+										gameMode.getGameWin(),
+										"C'è già un'unità di tipo diverso su questo territorio!",
+										"ERRORE!", JOptionPane.ERROR_MESSAGE);
 					} else {
-						ErrorWindow ew = gameMode.getErrorWindow();
-						ew.setErrorLabel("Non puoi mettere un'Unità di terra nel lago!");
-						ew.setVisible(true);
+						JOptionPane.showMessageDialog(gameMode.getGameWin(),
+								"Non puoi mettere un'unità di terra nel lago!",
+								"ERRORE!", JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
-					ErrorWindow ew = gameMode.getErrorWindow();
-					ew.setErrorLabel("Devi posizionare l'unità negli esagoni evidenziati!");
-					ew.setVisible(true);
+					JOptionPane
+							.showMessageDialog(
+									gameMode.getGameWin(),
+									"Devi posizionare l'unità negli esagoni evidenziati!",
+									"ERRORE!", JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
-				ErrorWindow ew = gameMode.getErrorWindow();
-				ew.setErrorLabel("Non hai selezionato alcun territorio!");
-				ew.setVisible(true);
+				JOptionPane.showMessageDialog(gameMode.getGameWin(),
+						"Non hai selezionato alcun territorio!", "ERRORE!",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
-			ErrorWindow ew = gameMode.getErrorWindow();
-			ew.setErrorLabel("Non hai abbastanza soldi per comprare quest'unità!");
-			ew.setVisible(true);
+			JOptionPane.showMessageDialog(gameMode.getGameWin(),
+					"Non hai abbastanza soldi per comprare questa unità!",
+					"ERRORE!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -462,28 +477,32 @@ public class UnitListener implements ActionListener {
 						unitPanel.setSoldiLabel(soldiNuovi);
 
 					} else if (!(e.getTerritorio() instanceof Lago)) {
-						ErrorWindow ew = gameMode.getErrorWindow();
-						ew.setErrorLabel("C'è già un'unità di tipo diverso in questo territorio");
-						ew.setVisible(true);
+						JOptionPane
+								.showMessageDialog(
+										gameMode.getGameWin(),
+										"C'è già un'unità di tipo diverso su questo territorio!",
+										"ERRORE!", JOptionPane.ERROR_MESSAGE);
 					} else {
-						ErrorWindow ew = gameMode.getErrorWindow();
-						ew.setErrorLabel("Non puoi mettere un'Unità di terra nel lago!");
-						ew.setVisible(true);
+						JOptionPane.showMessageDialog(gameMode.getGameWin(),
+								"Non puoi mettere un'unità di terra nel lago!",
+								"ERRORE!", JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
-					ErrorWindow ew = gameMode.getErrorWindow();
-					ew.setErrorLabel("Devi posizionare l'unità negli esagoni evidenziati!");
-					ew.setVisible(true);
+					JOptionPane
+							.showMessageDialog(
+									gameMode.getGameWin(),
+									"Devi posizionare l'unità negli esagoni evidenziati!",
+									"ERRORE!", JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
-				ErrorWindow ew = gameMode.getErrorWindow();
-				ew.setErrorLabel("Non hai selezionato alcun territorio!");
-				ew.setVisible(true);
+				JOptionPane.showMessageDialog(gameMode.getGameWin(),
+						"Non hai selezionato alcun territorio!", "ERRORE!",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
-			ErrorWindow ew = gameMode.getErrorWindow();
-			ew.setErrorLabel("Non hai abbastanza soldi per comprare quest'unità!");
-			ew.setVisible(true);
+			JOptionPane.showMessageDialog(gameMode.getGameWin(),
+					"Non hai abbastanza soldi per comprare questa unità!",
+					"ERRORE!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }

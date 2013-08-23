@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import model.Aereo;
 import model.Artiglieria;
@@ -27,14 +28,11 @@ import model.Pianura;
 import model.Player;
 import model.Unità;
 import view.CommandPanel;
-import view.ErrorWindow;
 import view.FinalPanel;
 import view.GameWin;
 import view.InitGame;
 import view.InitMapPanel;
 import view.LandPanel;
-import view.LeavingWin;
-import view.LoadWin;
 import view.MappaGrafica;
 import view.StartPanel;
 import view.UnitPanel;
@@ -53,9 +51,6 @@ public class GameMode {
 	private StartPanel startPanel;
 	private UnitPanel unitPanel;
 	private FinalPanel finalPanel;
-	private ErrorWindow errorWindow;
-	private LeavingWin leavingWin;
-	private LoadWin loadWin;
 	private int turno;
 	private boolean selectionUnitMode;
 	private boolean playingMode;
@@ -80,8 +75,6 @@ public class GameMode {
 		this.startPanel = null;
 		this.unitPanel = null;
 		this.finalPanel = null;
-		this.errorWindow = null;
-		this.loadWin = null;
 		this.turno = 1;
 		this.selectionUnitMode = false;
 		this.playingMode = false;
@@ -122,27 +115,6 @@ public class GameMode {
 
 	public boolean isSelecionUnitMode() {
 		return this.selectionUnitMode;
-	}
-
-	public ErrorWindow getErrorWindow() {
-		if (this.errorWindow == null) {
-			this.errorWindow = new ErrorWindow();
-		}
-		return this.errorWindow;
-	}
-
-	public LeavingWin getLeavingWin() {
-		if (this.leavingWin == null) {
-			this.leavingWin = new LeavingWin();
-		}
-		return this.leavingWin;
-	}
-
-	public LoadWin getLoadWin() {
-		if (this.loadWin == null) {
-			this.loadWin = new LoadWin();
-		}
-		return this.loadWin;
 	}
 
 	public GameWin getGameWin() {
@@ -315,7 +287,7 @@ public class GameMode {
 				bw = new BufferedWriter(fw);
 
 				// stampo intestazione file
-				bw.write(INTESTAZIONEPARTITA+'\n');
+				bw.write(INTESTAZIONEPARTITA + '\n');
 
 				// stampo info sui player
 				bw.write("" + this.player1 + '\n' + this.player2 + '\n');
@@ -449,9 +421,15 @@ public class GameMode {
 
 						done = true;
 					} else {
-						this.getErrorWindow().setErrorLabel(
-								"devi caricare un file partita valido");
-						this.getErrorWindow().setVisible(true);
+						/*
+						 * this.getErrorWindow().setErrorLabel(
+						 * "devi caricare un file partita valido");
+						 * this.getErrorWindow().setVisible(true);
+						 */
+
+						JOptionPane.showMessageDialog(this.gameWin,
+								"devi caricare un file partita valido",
+								"ERRORE!", JOptionPane.ERROR_MESSAGE);
 					}
 				} catch (IOException ioException) {
 				}
@@ -477,7 +455,7 @@ public class GameMode {
 				fw = new FileWriter(file);
 				bw = new BufferedWriter(fw);
 				// scrivo intestazione mappa
-				bw.write(INTESTAZIONEMAPPA+'\n');
+				bw.write(INTESTAZIONEMAPPA + '\n');
 
 				bw.write(getMappa().toString());
 
@@ -546,9 +524,8 @@ public class GameMode {
 
 						done = true;
 					} else {
-						this.getErrorWindow().setErrorLabel(
+						JOptionPane.showMessageDialog(this.gameWin,
 								"devi caricare un file mappa valido");
-						this.getErrorWindow().setVisible(true);
 					}
 				} catch (IOException ioException) {
 					System.out.println(ioException.toString());

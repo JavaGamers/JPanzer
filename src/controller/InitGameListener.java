@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JViewport;
@@ -12,8 +13,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import model.Player;
-
-import view.ErrorWindow;
 import view.GameWin;
 import view.InitGame;
 import view.MappaGrafica;
@@ -59,10 +58,7 @@ public class InitGameListener implements ActionListener, ChangeListener {
 	private void forwardOpt() {
 		error = false;
 		if (!scelta) {
-			ErrorWindow errorWindow = gameMode.getErrorWindow();
-			errorWindow.setErrorLabel("non hai scelto la mappa!");
-			errorWindow.setVisible(true);
-			error = true;
+			JOptionPane.showMessageDialog(gameMode.getGameWin(), "Non hai scelto la mappa", "ERRORE!", JOptionPane.ERROR_MESSAGE);
 		} else {
 			gameMode.setMappa(gameMode.getInitGame().getPreviewMap().getMappa());
 			if (gameMode.getMappaGrafica() == null) {
@@ -86,10 +82,7 @@ public class InitGameListener implements ActionListener, ChangeListener {
 			int soldi1 = Integer.parseInt(gameMode.getInitGame()
 					.getTextFieldSoldi(1).getText());
 			if (soldi1 < Player.MINMONEY || soldi1 > Player.MAXMONEY) {
-				ErrorWindow errorWindow = gameMode.getErrorWindow();
-				errorWindow.setErrorLabel("Valore soldi player 1 errato!");
-				errorWindow.setVisible(true);
-				error = true;
+				JOptionPane.showMessageDialog(gameMode.getGameWin(), "Valore soldi Player 1 errato!", "ERRORE!", JOptionPane.ERROR_MESSAGE);
 
 			} else {
 				gameMode.getPlayer(1).setMoney(soldi1);
@@ -113,10 +106,7 @@ public class InitGameListener implements ActionListener, ChangeListener {
 					.getTextFieldSoldi(2).getText());
 
 			if (soldi2 < Player.MINMONEY || soldi2 > Player.MAXMONEY) {
-				ErrorWindow errorWindow = gameMode.getErrorWindow();
-				errorWindow.setErrorLabel("Valore soldi player 2 errato!");
-				errorWindow.setVisible(true);
-				error = true;
+				JOptionPane.showMessageDialog(gameMode.getGameWin(), "Valore soldi Player 2 errato!", "ERRORE!", JOptionPane.ERROR_MESSAGE);
 
 			} else {
 				gameMode.getPlayer(2).setMoney(soldi2);

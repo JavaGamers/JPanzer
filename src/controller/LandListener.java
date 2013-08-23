@@ -5,6 +5,8 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import model.Collina;
 import model.Esagono;
 import model.Foresta;
@@ -13,9 +15,7 @@ import model.Mappa;
 import model.Montagna;
 import model.Pianura;
 import model.EsagonoGrafico;
-import view.CommandPanel;
 import view.GameWin;
-import view.LeavingWin;
 import view.MappaGrafica;
 
 public class LandListener implements ActionListener {
@@ -69,11 +69,51 @@ public class LandListener implements ActionListener {
 	}
 
 	private void mainMenuOpt() {
-		gameMode.getLandPanel().silenceAll();
-		LeavingWin leavingWin = gameMode.getLeavingWin();
-		leavingWin.setTextLabel(LeavingWin.EXITMAPMSG);
-		leavingWin.setVisible(true);
+		int option = JOptionPane.showConfirmDialog(gameMode.getGameWin(),
+				"Stai Stai uscendo dall'editor: vuoi salvare la mappa?",
+				"EXIT EDITOR", JOptionPane.YES_NO_CANCEL_OPTION,
+				JOptionPane.QUESTION_MESSAGE);
+		switch (option) {
+		case (JOptionPane.YES_OPTION):
+			yesOpt();
+			break;
+		case (JOptionPane.NO_OPTION):
+			noOpt();
+			break;
 
+		}
+	}
+
+	private void yesOpt() {
+
+		GameWin gameWin = gameMode.getGameWin();
+		Container c = gameWin.getContentPane();
+
+		// rimuovo gli eventuali altri pannelli presenti sulla finestra
+		// e
+		// aggiungo quelli nuovi
+		c.removeAll();
+		gameMode.getLandPanel().enableAll();
+		gameMode.resetAll();
+		c.add(gameMode.getStartPanel(), BorderLayout.CENTER);
+		gameWin.repaint();
+		gameWin.validate();
+
+	}
+
+	private void noOpt() {
+
+		GameWin gameWin = gameMode.getGameWin();
+		Container c = gameWin.getContentPane();
+
+		// rimuovo gli eventuali altri pannelli presenti sulla finestra e
+		// aggiungo quelli nuovi
+		c.removeAll();
+		gameMode.getLandPanel().enableAll();
+		gameMode.resetAll();
+		c.add(gameMode.getStartPanel(), BorderLayout.CENTER);
+		gameWin.repaint();
+		gameWin.validate();
 	}
 
 	private void pianuraOpt() {
