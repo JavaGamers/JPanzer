@@ -155,7 +155,7 @@ public class MappaGrafica extends JPanel {
 				g2.draw(eG);
 			}
 		}
-		super.paintComponent(g);
+		//super.paintComponent(g2);
 	}
 
 	public void paintImage(Graphics g, EsagonoGrafico eG, Image img) {
