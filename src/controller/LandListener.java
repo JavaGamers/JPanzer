@@ -13,6 +13,7 @@ import model.Mappa;
 import model.Montagna;
 import model.Pianura;
 import model.EsagonoGrafico;
+import view.CommandPanel;
 import view.GameWin;
 import view.LeavingWin;
 import view.MappaGrafica;
@@ -27,6 +28,7 @@ public class LandListener implements ActionListener {
 	public final static String SALVAOPT = "salva";
 	public final static String CARICAOPT = "carica";
 	public final static String MAINMENUOPT = "main";
+	public final static String ZOOMOPT = "zoom";
 	public static GameMode gameMode = GameMode.getGameMode();
 
 	public void actionPerformed(ActionEvent e) {
@@ -42,8 +44,8 @@ public class LandListener implements ActionListener {
 			montagnaOpt();
 		} else if (com.equals(LAGOOPT)) {
 			lagoOpt();
-		} else if (com.equals(CARICAOPT)) {
-			caricaOpt();
+		} else if (com.equals(ZOOMOPT)) {
+			zoomOpt();
 		} else if (com.equals(SALVAOPT)) {
 			salvaOpt();
 		} else if (com.equals(MAINMENUOPT)) {
@@ -52,8 +54,22 @@ public class LandListener implements ActionListener {
 
 	}
 
+	private void zoomOpt() {
+		GameWin gameWin = gameMode.getGameWin();
+		MappaGrafica mG = gameMode.getMappaGrafica();
+		if (mG.getRaggio() == MappaGrafica.STDRAGGIO) {
+			gameMode.setZoomOutMode(true);
+			mG.setRaggio(MappaGrafica.ZOOMRAGGIO);
+		} else {
+			gameMode.setZoomOutMode(false);
+			mG.setRaggio(MappaGrafica.STDRAGGIO);
+		}
+		gameWin.repaint();
+		mG.validate();
+	}
+
 	private void mainMenuOpt() {
-		gameMode.getLandPanel().silenceAll(0);
+		gameMode.getLandPanel().silenceAll();
 		LeavingWin leavingWin = gameMode.getLeavingWin();
 		leavingWin.setTextLabel(LeavingWin.EXITMAPMSG);
 		leavingWin.setVisible(true);
@@ -137,17 +153,5 @@ public class LandListener implements ActionListener {
 
 	private void salvaOpt() {
 		gameMode.salvaMappa();
-	}
-
-	private void caricaOpt() {
-		if (gameMode.caricaPartita()) {
-			GameWin gameWin = gameMode.getGameWin();
-			Container c = gameWin.getContentPane();
-			c.removeAll();
-			c.add(gameMode.getCommandPanel(), BorderLayout.EAST);
-			c.add(gameMode.getMappaGrafica(), BorderLayout.CENTER);
-			c.repaint();
-			c.validate();
-		}
 	}
 }

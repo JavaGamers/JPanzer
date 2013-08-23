@@ -592,8 +592,10 @@ public class GameMode {
 		this.player1 = new Player(1);
 		this.player2 = new Player(2);
 		this.mappaGrafica = null;
+		this.initGame = null;
 		this.commandPanel = null;
 		this.finalPanel = null;
+		this.unitPanel = null;
 		this.turno = 1;
 		this.selectionUnitMode = false;
 		this.playingMode = false;
