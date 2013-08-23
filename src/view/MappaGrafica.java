@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -53,6 +54,7 @@ public class MappaGrafica extends JPanel {
 		g.setColor(Color.BLACK);
 		EsagonoGrafico eG;
 		Graphics2D g2 = (Graphics2D) g;
+		g2.setStroke(new BasicStroke(3));
 		Esagono e = this.mappa.getComponent()[0];
 		Image imgLand = null;
 		Image imgUnit = null;
@@ -155,7 +157,7 @@ public class MappaGrafica extends JPanel {
 				g2.draw(eG);
 			}
 		}
-		//super.paintComponent(g2);
+		// super.paintComponent(g2);
 	}
 
 	public void paintImage(Graphics g, EsagonoGrafico eG, Image img) {

@@ -1,14 +1,20 @@
 package controller;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics2D;
 import java.awt.Image;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import java.util.List;
+
+import javax.swing.JLabel;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
 
 import model.Aereo;
 import model.Artiglieria;
@@ -29,6 +35,38 @@ import view.MappaGrafica;
 public class MappaListener extends MouseAdapter {
 
 	public static GameMode gameMode = GameMode.getGameMode();
+
+	public void mouseMoved(MouseEvent mE) {
+		double x = mE.getX();
+		double y = mE.getY();
+
+		// mappaGrafica e suoi attributi
+		MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
+		int xC = mappaGrafica.getXCentro();
+		int yC = mappaGrafica.getYCentro();
+		double raggio = mappaGrafica.getRaggio();
+
+		// esagono su cui è presente il mouse(in questo momento)
+		Esagono e = mappaGrafica.contains(x, y);
+		if (e != null) {
+			System.out.println("entra");
+			EsagonoGrafico eG = new EsagonoGrafico(e.getId(), xC, yC, raggio);
+			int xLabel = eG.xpoints[4];
+			int yLabel = eG.ypoints[4];
+			Unità u = e.getUnit();
+			if (u != null) {
+				JLabel label = new JLabel("Hello, World");
+				PopupFactory factory = PopupFactory.getSharedInstance();
+				final Popup popup = factory.getPopup(mappaGrafica, label,
+						xLabel, yLabel);
+				popup.show();
+			}
+		}
+	}
+
+	public void mouseExited(MouseEvent mE) {
+
+	}
 
 	public void mouseClicked(MouseEvent mE) {
 		// coordinate del click
@@ -54,6 +92,7 @@ public class MappaListener extends MouseAdapter {
 		int newSelected = Integer.MAX_VALUE;
 
 		Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
+		g2.setStroke(new BasicStroke(3));
 
 		// così funziona
 		if (g2 != null) {
@@ -73,6 +112,7 @@ public class MappaListener extends MouseAdapter {
 						&& !(settore == 4 && posizione == 0)
 						&& !(settore == 1 && posizione == 0)) {
 					g2.setColor(Color.BLUE);
+
 				}
 			}
 			g2.draw(eG);

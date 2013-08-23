@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -107,6 +108,7 @@ public class CommandListener implements ActionListener {
 						if(u==null){
 							eG.newSet(adiacenza.getId(), xC, yC, raggio);
 							g2.setColor(Color.MAGENTA);
+							g2.setStroke(new BasicStroke(3));
 							g2.draw(eG);
 							gameMode.setScorporaMode(true);
 						}
@@ -179,6 +181,7 @@ public class CommandListener implements ActionListener {
 						if(u!=null && u.getPlayer()!=turno){
 							eG.newSet(id, xC, yC, raggio);
 							g2.setColor(Color.MAGENTA);
+							g2.setStroke(new BasicStroke(3));
 							g2.draw(eG);
 							gameMode.setAttackMode(true);
 						}
@@ -214,6 +217,7 @@ public class CommandListener implements ActionListener {
 						if(u!=null && unitSelected.isSameUnitOf(u) && u.getPlayer()==turno){
 							eG.newSet(adiacenza.getId(), xC, yC, raggio);
 							g2.setColor(Color.MAGENTA);
+							g2.setStroke(new BasicStroke(3));
 							g2.draw(eG);
 							gameMode.setAccorpaMode(true);
 						}
@@ -254,7 +258,8 @@ public class CommandListener implements ActionListener {
 					Esagono e = it.next();
 					id = e.getId();
 					eG.newSet(id, xC, yC, raggio);
-					g2.setColor(Color.MAGENTA);
+					g2.setColor(Color.YELLOW);
+					g2.setStroke(new BasicStroke(3));
 					g2.draw(eG);
 				}
 				gameMode.setMovingMode(true);

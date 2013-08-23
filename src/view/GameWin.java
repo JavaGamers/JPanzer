@@ -18,6 +18,7 @@ public class GameWin extends JFrame{
 		super.setPreferredSize(new Dimension(1024,768));
 		super.setLayout(new BorderLayout());
 		super.pack();
+		this.addMouseListener(new GameWinListener());
 	}
 
 	public static void main(String[] args) {
