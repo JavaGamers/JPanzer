@@ -9,16 +9,14 @@ public class Panzer extends Unità {
 
 	private final static int BASEATT = 0; // attacco di base
 	private final static int BASEDIF = 0; // difesa di base
-	private final static double BASERIG = 0; // rigenerazione di base
-	private final static int PTT = 0; // passi per turno
+	private final static int PPT = 0; // passi per turno
 	public final static int COSTO = 100;
 
 	public Panzer(int n, int player) {
 		super(n, player);
 		this.att = Panzer.BASEATT;
 		this.dif = Panzer.BASEDIF;
-		this.rig = Panzer.BASERIG;
-		this.passi = Panzer.PTT;
+		this.passi = Panzer.PPT;
 		if (this.player == 1) {
 			try {
 				URL imgUrl=getClass().getResource("/view/Icon pack/Unit Pack/Panzer1_Icon.png");
@@ -42,7 +40,7 @@ public class Panzer extends Unità {
 	}
 
 	public void resetPassi() {
-		this.passi = Panzer.PTT;
+		this.passi = Panzer.PPT;
 	}
 
 	// attacco e difesa sono relativi ad una singola unità (numUnits = 1)

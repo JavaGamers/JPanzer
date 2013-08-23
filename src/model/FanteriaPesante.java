@@ -9,16 +9,14 @@ public class FanteriaPesante extends Unità {
 
 	private final static int BASEATT = 0; // attacco di base
 	private final static int BASEDIF = 0; // difesa di base
-	private final static double BASERIG = 0; // rigenerazione di base
-	private final static int PTT = 0; // passi per turno
+	private final static int PPT = 0; // passi per turno
 	public final static int COSTO = 100;
 
 	public FanteriaPesante(int n, int player) {
 		super(n, player);
 		this.att = FanteriaPesante.BASEATT;
 		this.dif = FanteriaPesante.BASEDIF;
-		this.rig = FanteriaPesante.BASERIG;
-		this.passi = FanteriaPesante.PTT;
+		this.passi = FanteriaPesante.PPT;
 		if (this.player == 1) {
 			try {
 				URL imgUrl=getClass().getResource("/view/Icon pack/Unit Pack/Fanteria Pesante1_Icon.png");
@@ -42,7 +40,7 @@ public class FanteriaPesante extends Unità {
 	}
 
 	public void resetPassi() {
-		this.passi = FanteriaPesante.PTT;
+		this.passi = FanteriaPesante.PPT;
 	}
 
 	// attacco e difesa sono relativi ad una singola unità (numUnits = 1)

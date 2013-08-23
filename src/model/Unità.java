@@ -16,7 +16,6 @@ public abstract class Unità {
 	protected int dif;	// difesa
 	protected double esp;	// esperienza valori da 0 a 1 con passo 0.1
 	protected int passi;	// passi rimanenti
-	protected double rig;	// rigenerazione
 	protected double bonus;	// bonus territorio
 	protected int numUnits;	// numero di unità
 	protected Esagono pos;	//	posizione sulla mappa
@@ -36,7 +35,6 @@ public abstract class Unità {
 		}
 		this.att=0;
 		this.dif=0;
-		this.rig=0;
 		this.passi=0;
 		this.esp=0;
 		this.numUnits=n;
@@ -87,10 +85,6 @@ public abstract class Unità {
 	
 	public int getPassi(){
 		return this.passi;
-	}
-	
-	public double getRig(){
-		return this.rig;
 	}
 	
 	public double getBonus(){

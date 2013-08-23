@@ -9,16 +9,14 @@ public class FanteriaLeggera extends Unità {
 
 	private final static int BASEATT = 40; // attacco di base
 	private final static int BASEDIF = 30; // difesa di base
-	private final static double BASERIG = 0; // rigenerazione di base
-	private final static int PTT = 10; // passi per turno
+	private final static int PPT = 10; // passi per turno
 	public final static int COSTO = 100;
 
 	public FanteriaLeggera(int n, int player) {
 		super(n, player);
 		this.att = FanteriaLeggera.BASEATT;
 		this.dif = FanteriaLeggera.BASEDIF;
-		this.rig = FanteriaLeggera.BASERIG;
-		this.passi = FanteriaLeggera.PTT;
+		this.passi = FanteriaLeggera.PPT;
 		if (this.player == 1) {
 			try {
 				URL imgUrl = getClass().getResource(
@@ -44,7 +42,7 @@ public class FanteriaLeggera extends Unità {
 	}
 
 	public void resetPassi() {
-		this.passi = FanteriaLeggera.PTT;
+		this.passi = FanteriaLeggera.PPT;
 	}
 
 	// attacco e difesa sono relativi ad una singola unità (numUnits = 1)

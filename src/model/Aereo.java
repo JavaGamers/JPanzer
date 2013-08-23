@@ -11,16 +11,14 @@ public class Aereo extends Unità {
 
 	private final static int BASEATT=0;	// attacco di base
 	private final static int BASEDIF=0;	// difesa di base
-	private final static double BASERIG=0;	// rigenerazione di base	
-	private final static int PTT=2;	// passi per turno
+	private final static int PPT=2;	// passi per turno
 	public final static int COSTO = 100;
 
 	public Aereo (int n, int player){
 		super(n,player);
 		this.att=Aereo.BASEATT;
 		this.dif=Aereo.BASEDIF;
-		this.rig=Aereo.BASERIG;
-		this.passi=Aereo.PTT;
+		this.passi=Aereo.PPT;
 		if(this.player==1){
 			try {
 				URL imgUrl=getClass().getResource("/view/Icon pack/Unit Pack/Aereo1_Icon.png");
@@ -40,7 +38,7 @@ public class Aereo extends Unità {
 	}
 	
 	public void resetPassi(){
-		this.passi=Aereo.PTT;
+		this.passi=Aereo.PPT;
 	}
 	
 	public List<Esagono> getEsagoniRaggiungibili(){
