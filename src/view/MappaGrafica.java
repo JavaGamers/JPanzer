@@ -28,7 +28,9 @@ public class MappaGrafica extends JPanel {
 	public static final double PREVIEWRAGGIO = 8;
 
 	public MappaGrafica(Mappa m, int x, int y) {
-		this.addMouseListener(new MappaListener());
+		MappaListener mL = new MappaListener();
+		this.addMouseListener(mL);
+		this.addMouseMotionListener(mL);
 		this.raggio = STDRAGGIO;
 		this.xC = x;
 		this.yC = y;

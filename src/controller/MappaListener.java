@@ -6,11 +6,12 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics2D;
 import java.awt.Image;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import java.util.List;
+import javax.swing.Timer;
 
 import javax.swing.JLabel;
 import javax.swing.Popup;
@@ -26,7 +27,6 @@ import model.Mappa;
 import model.Panzer;
 import model.Player;
 import model.Unità;
-
 import view.CommandPanel;
 import view.FinalPanel;
 import view.GameWin;
@@ -35,6 +35,7 @@ import view.MappaGrafica;
 public class MappaListener extends MouseAdapter {
 
 	public static GameMode gameMode = GameMode.getGameMode();
+	private static Esagono prec = null;
 
 	public void mouseMoved(MouseEvent mE) {
 		double x = mE.getX();
@@ -49,23 +50,55 @@ public class MappaListener extends MouseAdapter {
 		// esagono su cui è presente il mouse(in questo momento)
 		Esagono e = mappaGrafica.contains(x, y);
 		if (e != null) {
-			System.out.println("entra");
-			EsagonoGrafico eG = new EsagonoGrafico(e.getId(), xC, yC, raggio);
-			int xLabel = eG.xpoints[4];
-			int yLabel = eG.ypoints[4];
-			Unità u = e.getUnit();
-			if (u != null) {
-				JLabel label = new JLabel("Hello, World");
-				PopupFactory factory = PopupFactory.getSharedInstance();
-				final Popup popup = factory.getPopup(mappaGrafica, label,
-						xLabel, yLabel);
-				popup.show();
+			if (prec != null) {
+				if (!e.equals(prec)) {
+					EsagonoGrafico eG = new EsagonoGrafico(e.getId(), xC, yC,
+							raggio);
+					int xLabel = eG.xpoints[2];
+					int yLabel = eG.ypoints[2];
+					Unità u = e.getUnit();
+					if (u != null) {
+						JLabel label = new JLabel("" + u.getNumUnits());
+						PopupFactory factory = PopupFactory.getSharedInstance();
+						final Popup popup = factory.getPopup(mappaGrafica,
+								label, xLabel, yLabel);
+						popup.show();
+						ActionListener hider = new ActionListener() {
+							public synchronized void actionPerformed(
+									ActionEvent e) {
+								popup.hide();
+							}
+						};
+						// Hide popup in 3 seconds
+						Timer timer = new Timer(3000, hider);
+						timer.start();
+						prec = e;
+					}
+				}
+			} else {
+				EsagonoGrafico eG = new EsagonoGrafico(e.getId(), xC, yC,
+						raggio);
+				int xLabel = eG.xpoints[2];
+				int yLabel = eG.ypoints[2];
+				Unità u = e.getUnit();
+				if (u != null) {
+					JLabel label = new JLabel("" + u.getNumUnits());
+					PopupFactory factory = PopupFactory.getSharedInstance();
+					final Popup popup = factory.getPopup(mappaGrafica, label,
+							xLabel, yLabel);
+					popup.show();
+					ActionListener hider = new ActionListener() {
+						public synchronized void actionPerformed(ActionEvent e) {
+							popup.hide();
+						}
+					};
+					// Hide popup in 3 seconds
+					Timer timer = new Timer(3000, hider);
+					timer.start();
+					prec = e;
+				}
 			}
 		}
-	}
-
-	public void mouseExited(MouseEvent mE) {
-
 	}
 
 	public void mouseClicked(MouseEvent mE) {
