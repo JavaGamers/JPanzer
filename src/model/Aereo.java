@@ -9,10 +9,10 @@ import javax.imageio.ImageIO;
 
 public class Aereo extends Unità {
 
-	private final static int BASEATT=0;	// attacco di base
-	private final static int BASEDIF=0;	// difesa di base
-	private final static int PPT=2;	// passi per turno
-	public final static int COSTO = 100;
+	private final static int BASEATT=80;	// attacco di base
+	private final static int BASEDIF=40;	// difesa di base
+	private final static int PPT=5;	// passi per turno
+	public final static int COSTO = 75;
 
 	public Aereo (int n, int player){
 		super(n,player);

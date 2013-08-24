@@ -180,6 +180,8 @@ public class MappaListener extends MouseAdapter {
 			EsagonoGrafico eG, Unità selectedUnit, Unità other, Image img,
 			int newSelected, int oldSelected) {
 
+		gameMode.getSound().startMoveMusic();
+
 		selectedUnit = vecchio.getUnit();
 		MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
 		Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
@@ -211,6 +213,9 @@ public class MappaListener extends MouseAdapter {
 	private static void attackMode(Esagono nuovo, Esagono vecchio,
 			EsagonoGrafico eG2, Unità selectedUnit, Unità other, Image img,
 			int newSelected, int oldSelected) {
+
+		gameMode.getSound().startAttackMusic();
+
 		selectedUnit = vecchio.getUnit();
 		MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
 		Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
@@ -335,6 +340,8 @@ public class MappaListener extends MouseAdapter {
 	private static void accorpaMode(Esagono nuovo, Esagono vecchio,
 			EsagonoGrafico eG2, Unità selectedUnit, Unità other, Image img,
 			int newSelected, int oldSelected) {
+
+		gameMode.getSound().startMoveMusic();
 		selectedUnit = vecchio.getUnit();
 		MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
 		Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
@@ -383,6 +390,8 @@ public class MappaListener extends MouseAdapter {
 	private static void scorporaMode(Esagono nuovo, Esagono vecchio,
 			EsagonoGrafico eG2, Unità selectedUnit, Unità other, Image img,
 			int newSelected, int oldSelected) {
+
+		gameMode.getSound().startMoveMusic();
 		selectedUnit = vecchio.getUnit();
 		int turno = gameMode.getTurno();
 		List<Esagono> esagoniRaggiungibili = selectedUnit

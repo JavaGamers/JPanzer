@@ -26,6 +26,7 @@ import model.Montagna;
 import model.Panzer;
 import model.Pianura;
 import model.Player;
+import model.Sound;
 import model.Unità;
 import view.CommandPanel;
 import view.FinalPanel;
@@ -51,6 +52,7 @@ public class GameMode {
 	private StartPanel startPanel;
 	private UnitPanel unitPanel;
 	private FinalPanel finalPanel;
+	private Sound sound;
 	private int turno;
 	private boolean selectionUnitMode;
 	private boolean playingMode;
@@ -75,6 +77,7 @@ public class GameMode {
 		this.startPanel = null;
 		this.unitPanel = null;
 		this.finalPanel = null;
+		this.sound = null;
 		this.turno = 1;
 		this.selectionUnitMode = false;
 		this.playingMode = false;
@@ -190,6 +193,13 @@ public class GameMode {
 		} else {
 			return this.player2;
 		}
+	}
+	
+	public Sound getSound(){
+		if(this.sound == null){
+			this.sound = new Sound();
+		}
+		return this.sound;
 	}
 
 	public void setScorporaMode(boolean value) {

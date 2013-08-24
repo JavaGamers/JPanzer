@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.JFrame;
 
+import model.Sound;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -18,7 +20,8 @@ public class GameWin extends JFrame{
 		super.setPreferredSize(new Dimension(1024,768));
 		super.setLayout(new BorderLayout());
 		super.pack();
-		//this.addMouseListener(new GameWinListener());
+		Sound sound = gameMode.getSound();
+		sound.startThemeMusic();
 	}
 
 	public static void main(String[] args) {

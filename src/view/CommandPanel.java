@@ -75,7 +75,7 @@ public class CommandPanel extends javax.swing.JPanel {
 
 	public void setUnitLabel(Unità u) {
 		if (u != null) {
-			this.esperienza.setText(ESPERIENZATXT + u.getEsp());
+			this.esperienza.setText(ESPERIENZATXT + u.getEsp()*10);
 			this.passi.setText(PASSITXT + u.getPassi());
 			this.numUnits.setText(NUMUNITSTXT + u.getNumUnits());
 		} else {

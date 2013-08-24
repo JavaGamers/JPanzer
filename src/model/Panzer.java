@@ -7,10 +7,10 @@ import javax.imageio.ImageIO;
 
 public class Panzer extends Unità {
 
-	private final static int BASEATT = 0; // attacco di base
-	private final static int BASEDIF = 0; // difesa di base
-	private final static int PPT = 0; // passi per turno
-	public final static int COSTO = 100;
+	private final static int BASEATT = 80; // attacco di base
+	private final static int BASEDIF = 70; // difesa di base
+	private final static int PPT = 6; // passi per turno
+	public final static int COSTO = 65;
 
 	public Panzer(int n, int player) {
 		super(n, player);
