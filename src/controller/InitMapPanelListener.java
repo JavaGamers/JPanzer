@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
@@ -64,6 +65,8 @@ public class InitMapPanelListener implements ActionListener,
 			}
 
 			GameWin gameWin = gameMode.getGameWin();
+			gameWin.setResizable(true);
+			gameWin.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			LandPanel landPanel = gameMode.getLandPanel();
 
 			Container c = gameWin.getContentPane();
@@ -101,6 +104,8 @@ public class InitMapPanelListener implements ActionListener,
 	private void editOpt() {
 		if (gameMode.caricaMappa()) {
 			GameWin gameWin = gameMode.getGameWin();
+			gameWin.setResizable(true);
+			gameWin.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			LandPanel landPanel = gameMode.getLandPanel();
 
 			Container c = gameWin.getContentPane();

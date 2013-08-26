@@ -87,6 +87,10 @@ public class LandListener implements ActionListener {
 	private void yesOpt() {
 
 		GameWin gameWin = gameMode.getGameWin();
+		gameWin.setResizable(false);
+		int height = gameWin.getBackgroundImage().getHeight(null);
+		int width = gameWin.getBackgroundImage().getWidth(null);
+		gameWin.setSize(width,height);
 		Container c = gameWin.getContentPane();
 
 		// rimuovo gli eventuali altri pannelli presenti sulla finestra
@@ -104,6 +108,10 @@ public class LandListener implements ActionListener {
 	private void noOpt() {
 
 		GameWin gameWin = gameMode.getGameWin();
+		gameWin.setResizable(false);
+		int height = gameWin.getBackgroundImage().getHeight(null);
+		int width = gameWin.getBackgroundImage().getWidth(null);
+		gameWin.setSize(width,height);
 		Container c = gameWin.getContentPane();
 
 		// rimuovo gli eventuali altri pannelli presenti sulla finestra e

@@ -29,8 +29,13 @@ public class GameWin extends JFrame{
 	       } catch (IOException e) {
 	    	   System.out.println(e.toString());
 	       }
+		
 		super.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		super.setPreferredSize(new Dimension(800,600));
+		Dimension size = new Dimension(bImg.getWidth(null), bImg.getHeight(null));
+		setPreferredSize(size);
+	    setMinimumSize(size);
+	    setMaximumSize(size);
+	    setSize(size);
 		super.setResizable(false);
 		super.setLayout(new BorderLayout());
 		super.pack();

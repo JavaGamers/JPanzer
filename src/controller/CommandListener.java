@@ -280,6 +280,10 @@ public class CommandListener implements ActionListener {
 		if (gameMode.salvaPartita()) {
 
 			GameWin gameWin = gameMode.getGameWin();
+			gameWin.setResizable(false);
+			int height = gameWin.getBackgroundImage().getHeight(null);
+			int width = gameWin.getBackgroundImage().getWidth(null);
+			gameWin.setSize(width,height);
 			Container c = gameWin.getContentPane();
 
 			// rimuovo gli eventuali altri pannelli presenti sulla finestra
@@ -298,6 +302,10 @@ public class CommandListener implements ActionListener {
 	private void noOpt() {
 
 		GameWin gameWin = gameMode.getGameWin();
+		gameWin.setResizable(false);
+		int height = gameWin.getBackgroundImage().getHeight(null);
+		int width = gameWin.getBackgroundImage().getWidth(null);
+		gameWin.setSize(width,height);
 		Container c = gameWin.getContentPane();
 
 		// rimuovo gli eventuali altri pannelli presenti sulla finestra e

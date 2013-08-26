@@ -6,10 +6,10 @@ public class Mappa {
 	private int selezionato; // indica l'id dell'esagono selezionato. -1 se
 								// nessun esagono selezionato
 
-	public static final int SMALL = 10;
-	public static final int MEDIUM = 15;
-	public static final int LARGE = 20;
-	public static final int EPIC = 30;
+	public static final int SMALL = 7;
+	public static final int MEDIUM = 12;
+	public static final int LARGE = 18;
+	public static final int EPIC = 22;
 
 	// d= dimensione
 	public Mappa(int d) {

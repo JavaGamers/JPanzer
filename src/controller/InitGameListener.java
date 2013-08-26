@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
@@ -114,6 +115,8 @@ public class InitGameListener implements ActionListener, ChangeListener {
 
 			if (!error) {
 				GameWin gameWin = gameMode.getGameWin();
+				gameWin.setResizable(true);
+				gameWin.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				Container c = gameWin.getContentPane();
 				UnitPanel unitPanel = gameMode.getUnitPanel();
 
