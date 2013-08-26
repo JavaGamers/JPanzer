@@ -47,6 +47,8 @@ public class StartPanelListener implements ActionListener {
 
 	private void loadOpt() {
 		if (gameMode.caricaPartita()) {
+			
+			gameMode.setPlayingMode(true);
 
 			// visualizzo la partita
 			GameWin gameWin = gameMode.getGameWin();

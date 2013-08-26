@@ -33,27 +33,45 @@ public class MappaListener extends MouseAdapter {
 
 	public static GameMode gameMode = GameMode.getGameMode();
 	private static Esagono prec = null;
+	private static EsagonoGrafico esagonoGrafico = new EsagonoGrafico(0,0,0,0);
 	private static Popup popup = null;
 
 	public void mouseMoved(MouseEvent mE) {
 		double x = mE.getX();
 		double y = mE.getY();
 
-		// mappaGrafica e suoi attributi
-		MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
-		int xC = mappaGrafica.getXCentro();
-		int yC = mappaGrafica.getYCentro();
-		double raggio = mappaGrafica.getRaggio();
+		if (gameMode.isPlayingMode()) {
+			// mappaGrafica e suoi attributi
+			MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
+			int xC = mappaGrafica.getXCentro();
+			int yC = mappaGrafica.getYCentro();
+			double raggio = mappaGrafica.getRaggio();
 
-		// esagono su cui è presente il mouse(in questo momento)
-		Esagono e = mappaGrafica.contains(x, y);
+			// esagono su cui è presente il mouse(in questo momento)
+			Esagono e = mappaGrafica.contains(x, y);
 
-		if (e != null) {
-			if (prec != null) {
-				if (!e.equals(prec)) {
-					if (popup != null) {
-						popup.hide();
+			if (e != null) {
+				if (prec != null) {
+					if (!e.equals(prec)) {
+						if (popup != null) {
+							popup.hide();
+						}
+						esagonoGrafico.newSet(e.getId(), xC,
+								yC, raggio);
+						int xLabel = esagonoGrafico.xpoints[2];
+						int yLabel = esagonoGrafico.ypoints[2];
+						Unità u = e.getUnit();
+						if (u != null) {
+							JLabel label = new JLabel("" + u.getNumUnits());
+							PopupFactory factory = PopupFactory
+									.getSharedInstance();
+							popup = factory.getPopup(mappaGrafica, label,
+									xLabel, yLabel);
+							popup.show();
+							prec = e;
+						}
 					}
+				} else {
 					EsagonoGrafico eG = new EsagonoGrafico(e.getId(), xC, yC,
 							raggio);
 					int xLabel = eG.xpoints[2];
@@ -67,20 +85,6 @@ public class MappaListener extends MouseAdapter {
 						popup.show();
 						prec = e;
 					}
-				}
-			} else {
-				EsagonoGrafico eG = new EsagonoGrafico(e.getId(), xC, yC,
-						raggio);
-				int xLabel = eG.xpoints[2];
-				int yLabel = eG.ypoints[2];
-				Unità u = e.getUnit();
-				if (u != null) {
-					JLabel label = new JLabel("" + u.getNumUnits());
-					PopupFactory factory = PopupFactory.getSharedInstance();
-					popup = factory.getPopup(mappaGrafica, label, xLabel,
-							yLabel);
-					popup.show();
-					prec = e;
 				}
 			}
 		}
