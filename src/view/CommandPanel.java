@@ -42,6 +42,7 @@ public class CommandPanel extends javax.swing.JPanel {
 	private static final String PASSITXT = "Passi rimanenti: ";
 	private static final String PLAYERTXT = "Giocatore: ";
 	private static final String SOLDITXT = "Soldi: ";
+	private static final String NOMEUNITATXT = "Unità: ";
 
 	public CommandPanel() {
 		initComponents();
@@ -75,10 +76,12 @@ public class CommandPanel extends javax.swing.JPanel {
 
 	public void setUnitLabel(Unità u) {
 		if (u != null) {
+			this.infoUnità.setText(NOMEUNITATXT + u.getNome());
 			this.esperienza.setText(ESPERIENZATXT + u.getEsp()*10);
 			this.passi.setText(PASSITXT + u.getPassi());
 			this.numUnits.setText(NUMUNITSTXT + u.getNumUnits());
 		} else {
+			this.infoUnità.setText(NOMEUNITATXT);
 			this.esperienza.setText(ESPERIENZATXT);
 			this.passi.setText(PASSITXT);
 			this.numUnits.setText(NUMUNITSTXT);
@@ -179,90 +182,90 @@ public class CommandPanel extends javax.swing.JPanel {
 		setBackground(new java.awt.Color(241, 157, 30));
 
 		infoUnità.setBackground(new java.awt.Color(241, 157, 30));
-		infoUnità.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-		infoUnità.setText("Unità: ");
+		infoUnità.setFont(new java.awt.Font("Arial", 1, 14));
+		infoUnità.setText(NOMEUNITATXT);
 
 		esperienza.setBackground(new java.awt.Color(241, 157, 30));
-		esperienza.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+		esperienza.setFont(new java.awt.Font("Arial", 1, 14)); 
 		esperienza.setText(ESPERIENZATXT);
 
 		numUnits.setBackground(new java.awt.Color(241, 157, 30));
-		numUnits.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+		numUnits.setFont(new java.awt.Font("Arial", 1, 14));
 		numUnits.setText(NUMUNITSTXT);
 
 		jSeparator1.setBackground(new java.awt.Color(241, 157, 30));
 		jSeparator1.setForeground(new java.awt.Color(196, 68, 4));
 
 		zoom.setBackground(new java.awt.Color(241, 157, 30));
-		zoom.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+		zoom.setFont(new java.awt.Font("Arial", 1, 14)); 
 		zoom.setText("ZOOM");
 
 		muovi.setBackground(new java.awt.Color(241, 157, 30));
-		muovi.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+		muovi.setFont(new java.awt.Font("Arial", 1, 14));
 		muovi.setText("MUOVI");
 		muovi.setMaximumSize(new java.awt.Dimension(89, 25));
 		muovi.setMinimumSize(new java.awt.Dimension(89, 25));
 		muovi.setPreferredSize(new java.awt.Dimension(89, 25));
 
 		attacca.setBackground(new java.awt.Color(241, 157, 30));
-		attacca.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+		attacca.setFont(new java.awt.Font("Arial", 1, 14));
 		attacca.setText("ATTACCA");
 
 		abbandona.setBackground(new java.awt.Color(241, 157, 30));
-		abbandona.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+		abbandona.setFont(new java.awt.Font("Arial", 1, 14)); 
 		abbandona.setText("ABBANDONA PARTITA");
 		abbandona.setMaximumSize(new java.awt.Dimension(89, 25));
 		abbandona.setMinimumSize(new java.awt.Dimension(89, 25));
 		abbandona.setPreferredSize(new java.awt.Dimension(89, 25));
 
 		salva.setBackground(new java.awt.Color(241, 157, 30));
-		salva.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+		salva.setFont(new java.awt.Font("Arial", 1, 14)); 
 		salva.setText("SALVA");
 		salva.setMaximumSize(new java.awt.Dimension(89, 25));
 		salva.setMinimumSize(new java.awt.Dimension(89, 25));
 		salva.setPreferredSize(new java.awt.Dimension(89, 25));
 
 		carica.setBackground(new java.awt.Color(241, 157, 30));
-		carica.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+		carica.setFont(new java.awt.Font("Arial", 1, 14));
 		carica.setText("CARICA");
 		carica.setMaximumSize(new java.awt.Dimension(89, 25));
 		carica.setMinimumSize(new java.awt.Dimension(89, 25));
 		carica.setPreferredSize(new java.awt.Dimension(89, 25));
 
 		scorpora.setBackground(new java.awt.Color(241, 157, 30));
-		scorpora.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+		scorpora.setFont(new java.awt.Font("Arial", 1, 14)); 
 		scorpora.setText("SCORPORA");
 		scorpora.setMaximumSize(new java.awt.Dimension(89, 25));
 		scorpora.setMinimumSize(new java.awt.Dimension(89, 25));
 		scorpora.setPreferredSize(new java.awt.Dimension(89, 25));
 
 		accorpa.setBackground(new java.awt.Color(241, 157, 30));
-		accorpa.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+		accorpa.setFont(new java.awt.Font("Arial", 1, 14)); 
 		accorpa.setText("ACCORPA");
 
 		jSeparator2.setBackground(new java.awt.Color(241, 157, 30));
 		jSeparator2.setForeground(new java.awt.Color(196, 68, 4));
 
 		passa.setBackground(new java.awt.Color(241, 157, 30));
-		passa.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+		passa.setFont(new java.awt.Font("Arial", 1, 14));
 		passa.setText("PASSA TURNO");
 		passa.setMaximumSize(new java.awt.Dimension(89, 25));
 		passa.setMinimumSize(new java.awt.Dimension(89, 25));
 		passa.setPreferredSize(new java.awt.Dimension(89, 25));
 
 		soldi.setBackground(new java.awt.Color(241, 157, 30));
-		soldi.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+		soldi.setFont(new java.awt.Font("Arial", 1, 14));
 		soldi.setText(SOLDITXT);
 
 		player.setBackground(new java.awt.Color(241, 157, 30));
-		player.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+		player.setFont(new java.awt.Font("Arial", 1, 14));
 		player.setText(PLAYERTXT);
 
 		jSeparator3.setBackground(new java.awt.Color(241, 157, 30));
 		jSeparator3.setForeground(new java.awt.Color(196, 68, 4));
 
 		shop.setBackground(new java.awt.Color(241, 157, 30));
-		shop.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+		shop.setFont(new java.awt.Font("Arial", 1, 14));
 		shop.setText("SHOP");
 
 		jSeparator4.setBackground(new java.awt.Color(241, 157, 30));

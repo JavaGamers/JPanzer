@@ -11,6 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JViewport;
 
 import model.Esagono;
 import model.EsagonoGrafico;
@@ -58,7 +60,6 @@ public class CommandListener implements ActionListener {
 		} else if (com.equals(SHOPOPT)) {
 			shopOpt();
 		}
-
 	}
 
 	private void shopOpt() {
@@ -67,8 +68,11 @@ public class CommandListener implements ActionListener {
 		Container c = gameWin.getContentPane();
 		c.removeAll();
 		gameMode.getUnitPanel().updateLabel();
+		JScrollPane jsp = new JScrollPane();
+		jsp.setViewportView(gameMode.getMappaGrafica());
+		jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+		c.add(jsp, BorderLayout.CENTER);
 		c.add(gameMode.getUnitPanel(), BorderLayout.EAST);
-		c.add(gameMode.getMappaGrafica(), BorderLayout.CENTER);
 		c.repaint();
 		c.validate();
 	}
