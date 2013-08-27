@@ -245,7 +245,7 @@ public class Esagono implements Comparable<Esagono> {
 			s+="-";
 			s+=this.unit.getPassi();
 			s+="-";
-			s+=this.unit.alreadyAttack;
+			s+=this.unit.hasAlreadyAttack();
 		}
 		else{
 			s+=" ";

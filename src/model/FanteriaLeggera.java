@@ -54,4 +54,17 @@ public class FanteriaLeggera extends Unità {
 	public int getDef() {
 		return (int) (BASEDIF * (1 + this.esp) * this.bonus);
 	}
+	
+	public void setPassi(int passi) {
+		if (passi < 0) {
+			throw new IllegalArgumentException(
+					"non hanno senso un numero di passi negativo");
+		}
+		if (passi > FanteriaLeggera.PPT) {
+			throw new IllegalArgumentException(
+					"non puoi settare un numero di passi maggiori di quelli disponibili per tale unità");
+		}
+		this.passi = passi;
+		this.isMoved=true;
+	}
 }

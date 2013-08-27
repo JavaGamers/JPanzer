@@ -207,7 +207,8 @@ public class MappaListener extends MouseAdapter {
 			nuovo.setUnit(selectedUnit);
 			img = selectedUnit.getImage();
 			mappaGrafica.paintImage(g2, eG, img);
-			selectedUnit.aggiornaPassi((int) nuovo.getMinDistance());
+			int nuoviP = selectedUnit.getPassi()-(int) nuovo.getMinDistance();
+			selectedUnit.setPassi(nuoviP);
 		}
 		gameMode.setMovingMode(false);
 		gameMode.getGameWin().repaint();
@@ -430,7 +431,8 @@ public class MappaListener extends MouseAdapter {
 				}
 
 				other.setEsp(esp);
-				other.aggiornaPassi(nuovo.getCosto());
+				int nuoviP =other.getPassi()-nuovo.getCosto();
+				other.setPassi(nuoviP);
 				nuovo.setUnit(other);
 
 				// aggiungo other alla UnitList del suo player
