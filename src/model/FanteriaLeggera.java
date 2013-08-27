@@ -43,6 +43,7 @@ public class FanteriaLeggera extends Unità {
 
 	public void resetPassi() {
 		this.passi = FanteriaLeggera.PPT;
+		this.calcolaEsagoniRaggiungibili();
 	}
 
 	// attacco e difesa sono relativi ad una singola unità (numUnits = 1)

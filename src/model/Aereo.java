@@ -39,6 +39,7 @@ public class Aereo extends Unità {
 	
 	public void resetPassi(){
 		this.passi=Aereo.PPT;
+		this.calcolaEsagoniRaggiungibili();
 	}
 	
 	public List<Esagono> getEsagoniRaggiungibili(){

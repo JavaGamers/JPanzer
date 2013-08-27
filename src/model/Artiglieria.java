@@ -41,6 +41,7 @@ public class Artiglieria extends Unità {
 
 	public void resetPassi() {
 		this.passi = Artiglieria.PPT;
+		this.calcolaEsagoniRaggiungibili();
 	}
 
 	// attacco e difesa sono relativi ad una singola unità (numUnits = 1)

@@ -120,7 +120,7 @@ public abstract class Unità {
 		return this.esagoniRaggiungibili;
 	}
 	
-	private void calcolaEsagoniRaggiungibili(){
+	protected void calcolaEsagoniRaggiungibili(){
 		Mappa m = gameMode.getMappa();
 		m.resetDistances();
 		this.esagoniRaggiungibili = Dijkstra.shortestPath(m, pos, passi);

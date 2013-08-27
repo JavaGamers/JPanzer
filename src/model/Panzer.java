@@ -41,6 +41,7 @@ public class Panzer extends Unità {
 
 	public void resetPassi() {
 		this.passi = Panzer.PPT;
+		this.calcolaEsagoniRaggiungibili();
 	}
 
 	// attacco e difesa sono relativi ad una singola unità (numUnits = 1)
