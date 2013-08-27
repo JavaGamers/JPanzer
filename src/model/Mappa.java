@@ -61,24 +61,27 @@ public class Mappa {
 					}
 					if (p != 0) {
 						if (p == l - 1) {
-							int[] pre = { s, l, p - 1 };
-							int[] dLeft = { s, l - 1, p - 1 };
-							int[] dRight = { s + 1, l - 1, 0 };
+							if (s != 6) {
+								int[] pre = { s, l, p - 1 };
+								int[] dLeft = { s, l - 1, p - 1 };
+								int[] dRight = { s + 1, l - 1, 0 };
 
-							e.setAdiacenza(this.getEsagono(pre),
-									Esagono.mod(s + 4, 6));
-							e.setAdiacenza(this.getEsagono(dLeft),
-									Esagono.mod(s + 3, 6));
-							e.setAdiacenza(this.getEsagono(dRight),
-									Esagono.mod(s + 2, 6));
-
-						} else if (s == 6 && p == l - 1) {
-							int[] post = { 1, l, 0 };
-							int[] dPost = { 1, l - 1, 0 };
-							int[] down = { s, l - 1, p - 1 };
-							e.setAdiacenza(this.getEsagono(post), 1);
-							e.setAdiacenza(this.getEsagono(dPost), 2);
-							e.setAdiacenza(this.getEsagono(down), 3);
+								e.setAdiacenza(this.getEsagono(pre),
+										Esagono.mod(s + 4, 6));
+								e.setAdiacenza(this.getEsagono(dLeft),
+										Esagono.mod(s + 3, 6));
+								e.setAdiacenza(this.getEsagono(dRight),
+										Esagono.mod(s + 2, 6));
+							} else {
+								int[] post = { 1, l, 0 };
+								int[] dPost = { 1, l - 1, 0 };
+								int[] down = { s, l - 1, p - 1 };
+								int[] pre = { s, l, p - 1 };
+								e.setAdiacenza(this.getEsagono(post), 1);
+								e.setAdiacenza(this.getEsagono(dPost), 2);
+								e.setAdiacenza(this.getEsagono(down), 3);
+								e.setAdiacenza(this.getEsagono(pre), 4);
+							}
 
 						} else {
 
@@ -143,16 +146,8 @@ public class Mappa {
 		}
 	}
 
-/*	public String toString() {
-		String s = "";
-		for (int i = 0; i < this.component.length; i++) {
-			s += this.component[i].toString() + '\n';
-		}
-		return s;
-	}  */
-
 	public String toString() {
-		String s = "" + this.dim+'\n';
+		String s = "" + this.dim + '\n';
 		for (int i = 0; i < this.component.length; i++) {
 			s += this.component[i].toString() + '\n';
 		}

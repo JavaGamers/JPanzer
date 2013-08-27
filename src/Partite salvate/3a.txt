@@ -1,0 +1,66 @@
+Partita Jpanzer
+Fede-1-825
+eli-2-875
+1
+4
+0-Foresta- - - - - - 
+1-Pianura- - - - - - 
+2-Lago- - - - - - 
+3-Lago- - - - - - 
+4-Montagna- - - - - - 
+5-Pianura- - - - - - 
+6-Montagna-fanteriapesante-1-10-0.0-8-false
+7-Lago- - - - - - 
+8-Pianura-fanteriapesante-2-10-0.0-8-false
+9-Pianura- - - - - - 
+10-Foresta- - - - - - 
+11-Lago- - - - - - 
+12-Montagna- - - - - - 
+13-Montagna- - - - - - 
+14-Pianura- - - - - - 
+15-Pianura- - - - - - 
+16-Foresta- - - - - - 
+17-Collina- - - - - - 
+18-Montagna-panzer-1-10-0.0-6-false
+19-Pianura- - - - - - 
+20-Montagna- - - - - - 
+21-Foresta-fanterialeggera-2-10-0.0-10-false
+22-Foresta- - - - - - 
+23-Montagna- - - - - - 
+24-Lago- - - - - - 
+25-Lago- - - - - - 
+26-Lago- - - - - - 
+27-Montagna- - - - - - 
+28-Montagna- - - - - - 
+29-Pianura- - - - - - 
+30-Pianura- - - - - - 
+31-Collina- - - - - - 
+32-Collina- - - - - - 
+33-Collina- - - - - - 
+34-Collina- - - - - - 
+35-Pianura- - - - - - 
+36-Lago- - - - - - 
+37-Foresta- - - - - - 
+38-Pianura- - - - - - 
+39-Montagna-aereo-2-10-0.0-5-false
+40-Pianura- - - - - - 
+41-Collina- - - - - - 
+42-Collina- - - - - - 
+43-Montagna- - - - - - 
+44-Foresta- - - - - - 
+45-Foresta- - - - - - 
+46-Foresta- - - - - - 
+47-Foresta- - - - - - 
+48-Montagna- - - - - - 
+49-Montagna- - - - - - 
+50-Pianura- - - - - - 
+51-Montagna- - - - - - 
+52-Montagna- - - - - - 
+53-Foresta- - - - - - 
+54-Foresta- - - - - - 
+55-Pianura- - - - - - 
+56-Collina- - - - - - 
+57-Pianura- - - - - - 
+58-Collina- - - - - - 
+59-Foresta- - - - - - 
+60-Pianura-fanterialeggera-1-40-0.0-10-false
