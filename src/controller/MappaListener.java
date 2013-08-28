@@ -6,13 +6,10 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.MouseInfo;
 import java.awt.Point;
-import java.awt.PointerInfo;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
-
 import javax.swing.JLabel;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
@@ -69,8 +66,8 @@ public class MappaListener extends MouseAdapter {
 						xLabel = esagonoGrafico.xpoints[2];
 						yLabel = esagonoGrafico.ypoints[2];
 						Point point = new Point(xLabel, yLabel);
-						SwingUtilities.convertPointToScreen(point,
-								mappaGrafica);
+						SwingUtilities
+								.convertPointToScreen(point, mappaGrafica);
 						Unità u = e.getUnit();
 						if (u != null) {
 							JLabel label = new JLabel("" + u.getNumUnits());
@@ -311,8 +308,12 @@ public class MappaListener extends MouseAdapter {
 			if (winner != 0) {
 
 				GameWin gameWin = gameMode.getGameWin();
-				Container c = gameWin.getContentPane();
+				gameWin.setResizable(false);
 				FinalPanel finalPanel = gameMode.getFinalPanel();
+				int height = finalPanel.getVictoryImage().getHeight(null);
+				int width = finalPanel.getVictoryImage().getWidth(null);
+				gameWin.setSize(width, height);
+				Container c = gameWin.getContentPane();
 
 				// rimuovo gli eventuali altri pannelli presenti sulla finestra
 				// e aggiungo quelli nuovi

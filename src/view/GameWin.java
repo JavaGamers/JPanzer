@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import model.Sound;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -34,8 +33,6 @@ public class GameWin extends JFrame{
 		
 		Dimension size = new Dimension(bImg.getWidth(null), bImg.getHeight(null));
 		setPreferredSize(size);
-	    setMinimumSize(size);
-	    setMaximumSize(size);
 	    setSize(size);
 	    super.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		super.setResizable(false);

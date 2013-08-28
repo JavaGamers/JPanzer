@@ -1,9 +1,12 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.net.URL;
+
 import javax.imageio.ImageIO;
 
 import model.Player;
@@ -11,72 +14,90 @@ import controller.FinalPanelListener;
 import controller.GameMode;
 
 public class FinalPanel extends javax.swing.JPanel {
-	
-    private javax.swing.JButton menù;
-    private javax.swing.JLabel victoryMessage;
-    public static GameMode gameMode = GameMode.getGameMode();
-    private BufferedImage bImg;
-    private final String DEFVICTORYMESSAGE = "Gloria al vincitore ";
 
-    public FinalPanel() {
-        initComponents();
-    }
-    
-    public void setWinner(Player p){
-    	this.victoryMessage.setText(DEFVICTORYMESSAGE+p.getNome()+"!");
-    }
-    
-    public void setText(String s){
-    	this.victoryMessage.setText(s);
-    }
-                    
-    private void initComponents() {
+	private javax.swing.JButton menù;
+	private javax.swing.JLabel victoryMessage;
+	private javax.swing.JLabel winner;
+	public static GameMode gameMode = GameMode.getGameMode();
+	private BufferedImage bImg;
 
-        victoryMessage = new javax.swing.JLabel();
-        menù = new javax.swing.JButton();
+	public FinalPanel() {
+		initComponents();
+	}
 
-        victoryMessage.setFont(new java.awt.Font("Monotype Corsiva", 0, 48));
-        victoryMessage.setText("Gloria al vincitore ");
+	public void setWinner(Player p) {
+		this.winner.setText(p.getNome() + "!");
+	}
 
-        menù.setText("Menù Principale");
-        menù.addActionListener(new FinalPanelListener());
-        
-        try {
-			bImg = ImageIO.read(new File(
-					"C:/Users/Federico/Documents/GitHub/JPanzer/src/view/Icon pack/vittoria.gif"));
-          
-        } catch (Exception e) {
-    	   System.out.println(e.toString());
-        } 
+	public void setText(String s) {
+		this.victoryMessage.setText(s);
+	}
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+	private void initComponents() {
+
+		victoryMessage = new javax.swing.JLabel();
+		winner = new javax.swing.JLabel();
+		menù = new javax.swing.JButton();
+
+		victoryMessage.setFont(new java.awt.Font("Monotype Corsiva", 3, 80));
+		victoryMessage.setForeground(new Color(158, 39, 0));
+		victoryMessage
+				.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		victoryMessage.setText("Gloria al vincitore ");
+
+		winner.setFont(new java.awt.Font("Monotype Corsiva", 3, 80));
+		winner.setForeground(new Color(158, 39, 0));
+		winner.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+		menù.setText("Menù Principale");
+		menù.addActionListener(new FinalPanelListener());
+
+		try {
+			URL imgUrl = getClass().getResource(
+					"/view/Icon pack/victory_image.jpg");
+			bImg = ImageIO.read(imgUrl);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		Dimension size = new Dimension(bImg.getWidth(null),
+				bImg.getHeight(null));
+		setPreferredSize(size);
+		setMinimumSize(size);
+		setMaximumSize(size);
+		setSize(size);
+
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(victoryMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                    .addComponent(victoryMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(menù)))
                 .addContainerGap())
+            .addComponent(winner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(victoryMessage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                .addComponent(victoryMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(winner)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(menù)
                 .addContainerGap())
         );
     }
-    
-    public void paint(Graphics g){
-        
-        Graphics2D g2d = (Graphics2D) this.getGraphics();
-        g2d.drawImage(bImg, 500, 300, null);
-        super.paint(g);
-    }              
+
+	public void paintComponent(Graphics g) {
+		g.drawImage(bImg, 0, 0, null);
+	}
+
+	public Image getVictoryImage() {
+		return this.bImg;
+	}
 }
