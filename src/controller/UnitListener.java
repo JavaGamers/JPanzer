@@ -33,6 +33,7 @@ public class UnitListener implements ActionListener {
 	public final static String AEREOOPT = "aereo";
 	public final static String ARTIGLIERIAOPT = "artiglieria";
 	public final static String GIOCAOPT = "gioca";
+	public final static String ZOOMOPT = "zoom";
 	public static GameMode gameMode = GameMode.getGameMode();
 
 	public void actionPerformed(ActionEvent e) {
@@ -50,7 +51,23 @@ public class UnitListener implements ActionListener {
 			artiglieriaOpt();
 		} else if (com.equals(GIOCAOPT)) {
 			giocaOpt();
+		} else if (com.equals(ZOOMOPT)) {
+			zoomOpt();
 		}
+	}
+
+	private void zoomOpt() {
+		GameWin gameWin = gameMode.getGameWin();
+		MappaGrafica mG = gameMode.getMappaGrafica();
+		if (mG.getRaggio() == MappaGrafica.STDRAGGIO) {
+			gameMode.setZoomOutMode(true);
+			mG.setRaggio(MappaGrafica.ZOOMRAGGIO);
+		} else {
+			gameMode.setZoomOutMode(false);
+			mG.setRaggio(MappaGrafica.STDRAGGIO);
+		}
+		gameWin.repaint();
+		mG.validate();
 	}
 
 	private void giocaOpt() {
@@ -133,8 +150,13 @@ public class UnitListener implements ActionListener {
 						eG = new EsagonoGrafico(m.getSelezionato(),
 								mG.getXCentro(), mG.getYCentro(),
 								mG.getRaggio());
-						mG.paintImage(mG.getGraphics(), eG, e.getUnit()
-								.getImage());
+						if (!gameMode.isZoomOutMode()) {
+							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
+									.getImage());
+						} else {
+							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
+									.getXImage());
+						}
 
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());
@@ -212,8 +234,13 @@ public class UnitListener implements ActionListener {
 						eG = new EsagonoGrafico(m.getSelezionato(),
 								mG.getXCentro(), mG.getYCentro(),
 								mG.getRaggio());
-						mG.paintImage(mG.getGraphics(), eG, e.getUnit()
-								.getImage());
+						if (!gameMode.isZoomOutMode()) {
+							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
+									.getImage());
+						} else {
+							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
+									.getXImage());
+						}
 
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());
@@ -289,8 +316,13 @@ public class UnitListener implements ActionListener {
 						eG = new EsagonoGrafico(m.getSelezionato(),
 								mG.getXCentro(), mG.getYCentro(),
 								mG.getRaggio());
-						mG.paintImage(mG.getGraphics(), eG, e.getUnit()
-								.getImage());
+						if (!gameMode.isZoomOutMode()) {
+							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
+									.getImage());
+						} else {
+							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
+									.getXImage());
+						}
 
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());
@@ -368,8 +400,13 @@ public class UnitListener implements ActionListener {
 						eG = new EsagonoGrafico(m.getSelezionato(),
 								mG.getXCentro(), mG.getYCentro(),
 								mG.getRaggio());
-						mG.paintImage(mG.getGraphics(), eG, e.getUnit()
-								.getImage());
+						if (!gameMode.isZoomOutMode()) {
+							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
+									.getImage());
+						} else {
+							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
+									.getXImage());
+						}
 
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());
@@ -449,8 +486,13 @@ public class UnitListener implements ActionListener {
 						eG = new EsagonoGrafico(m.getSelezionato(),
 								mG.getXCentro(), mG.getYCentro(),
 								mG.getRaggio());
-						mG.paintImage(mG.getGraphics(), eG, e.getUnit()
-								.getImage());
+						if (!gameMode.isZoomOutMode()) {
+							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
+									.getImage());
+						} else {
+							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
+									.getXImage());
+						}
 
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());

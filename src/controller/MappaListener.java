@@ -6,6 +6,9 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -13,6 +16,7 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
+import javax.swing.SwingUtilities;
 
 import model.Aereo;
 import model.Artiglieria;
@@ -48,6 +52,10 @@ public class MappaListener extends MouseAdapter {
 			int yC = mappaGrafica.getYCentro();
 			double raggio = mappaGrafica.getRaggio();
 
+			// posizione del popup
+			int xLabel = 0;
+			int yLabel = 0;
+
 			// esagono su cui è presente il mouse(in questo momento)
 			Esagono e = mappaGrafica.contains(x, y);
 
@@ -58,29 +66,34 @@ public class MappaListener extends MouseAdapter {
 							popup.hide();
 						}
 						esagonoGrafico.newSet(e.getId(), xC, yC, raggio);
-						int xLabel = esagonoGrafico.xpoints[2];
-						int yLabel = esagonoGrafico.ypoints[2];
+						xLabel = esagonoGrafico.xpoints[2];
+						yLabel = esagonoGrafico.ypoints[2];
+						Point point = new Point(xLabel, yLabel);
+						SwingUtilities.convertPointToScreen(point,
+								mappaGrafica);
 						Unità u = e.getUnit();
 						if (u != null) {
 							JLabel label = new JLabel("" + u.getNumUnits());
 							PopupFactory factory = PopupFactory
 									.getSharedInstance();
 							popup = factory.getPopup(mappaGrafica, label,
-									xLabel, yLabel);
+									(int) point.getX(), (int) point.getY());
 							popup.show();
 						}
 					}
 					prec = e;
 				} else {
 					esagonoGrafico.newSet(e.getId(), xC, yC, raggio);
-					int xLabel = esagonoGrafico.xpoints[2];
-					int yLabel = esagonoGrafico.ypoints[2];
+					xLabel = esagonoGrafico.xpoints[2];
+					yLabel = esagonoGrafico.ypoints[2];
+					Point point = new Point(xLabel, yLabel);
+					SwingUtilities.convertPointToScreen(point, mappaGrafica);
 					Unità u = e.getUnit();
 					if (u != null) {
 						JLabel label = new JLabel("" + u.getNumUnits());
 						PopupFactory factory = PopupFactory.getSharedInstance();
-						popup = factory.getPopup(mappaGrafica, label, xLabel,
-								yLabel);
+						popup = factory.getPopup(mappaGrafica, label,
+								(int) point.getX(), (int) point.getY());
 						popup.show();
 					}
 					prec = e;
