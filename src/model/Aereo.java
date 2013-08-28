@@ -72,7 +72,7 @@ public class Aereo extends Unità {
 	}
 	
 	public String getNome() {
-		return "aereo";
+		return "Aereo";
 	}
 	
 	//attacco e difesa sono relativi ad una singola unità (numUnits = 1)

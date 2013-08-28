@@ -36,7 +36,7 @@ public class Panzer extends Unità {
 
 	public String getNome() {
 
-		return "panzer";
+		return "Panzer";
 	}
 
 	public void resetPassi() {

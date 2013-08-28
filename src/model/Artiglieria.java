@@ -36,7 +36,7 @@ public class Artiglieria extends Unità {
 
 	public String getNome() {
 
-		return "artiglieria";
+		return "Artiglieria";
 	}
 
 	public void resetPassi() {

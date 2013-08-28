@@ -33,7 +33,8 @@ public class MappaListener extends MouseAdapter {
 
 	public static GameMode gameMode = GameMode.getGameMode();
 	private static Esagono prec = null;
-	private static EsagonoGrafico esagonoGrafico = new EsagonoGrafico(0,0,0,0);
+	private static EsagonoGrafico esagonoGrafico = new EsagonoGrafico(0, 0, 0,
+			0);
 	private static Popup popup = null;
 
 	public void mouseMoved(MouseEvent mE) {
@@ -56,8 +57,7 @@ public class MappaListener extends MouseAdapter {
 						if (popup != null) {
 							popup.hide();
 						}
-						esagonoGrafico.newSet(e.getId(), xC,
-								yC, raggio);
+						esagonoGrafico.newSet(e.getId(), xC, yC, raggio);
 						int xLabel = esagonoGrafico.xpoints[2];
 						int yLabel = esagonoGrafico.ypoints[2];
 						Unità u = e.getUnit();
@@ -68,14 +68,13 @@ public class MappaListener extends MouseAdapter {
 							popup = factory.getPopup(mappaGrafica, label,
 									xLabel, yLabel);
 							popup.show();
-							prec = e;
 						}
 					}
+					prec = e;
 				} else {
-					EsagonoGrafico eG = new EsagonoGrafico(e.getId(), xC, yC,
-							raggio);
-					int xLabel = eG.xpoints[2];
-					int yLabel = eG.ypoints[2];
+					esagonoGrafico.newSet(e.getId(), xC, yC, raggio);
+					int xLabel = esagonoGrafico.xpoints[2];
+					int yLabel = esagonoGrafico.ypoints[2];
 					Unità u = e.getUnit();
 					if (u != null) {
 						JLabel label = new JLabel("" + u.getNumUnits());
@@ -83,8 +82,8 @@ public class MappaListener extends MouseAdapter {
 						popup = factory.getPopup(mappaGrafica, label, xLabel,
 								yLabel);
 						popup.show();
-						prec = e;
 					}
+					prec = e;
 				}
 			}
 		}
@@ -207,7 +206,7 @@ public class MappaListener extends MouseAdapter {
 			nuovo.setUnit(selectedUnit);
 			img = selectedUnit.getImage();
 			mappaGrafica.paintImage(g2, eG, img);
-			int nuoviP = selectedUnit.getPassi()-(int) nuovo.getMinDistance();
+			int nuoviP = selectedUnit.getPassi() - (int) nuovo.getMinDistance();
 			selectedUnit.setPassi(nuoviP);
 		}
 		gameMode.setMovingMode(false);
@@ -431,7 +430,7 @@ public class MappaListener extends MouseAdapter {
 				}
 
 				other.setEsp(esp);
-				int nuoviP =other.getPassi()-nuovo.getCosto();
+				int nuoviP = other.getPassi() - nuovo.getCosto();
 				other.setPassi(nuoviP);
 				nuovo.setUnit(other);
 

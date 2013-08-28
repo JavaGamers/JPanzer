@@ -38,7 +38,7 @@ public class FanteriaLeggera extends Unità {
 
 	public String getNome() {
 
-		return "fanterialeggera";
+		return "Fanteria Leggera";
 	}
 
 	public void resetPassi() {

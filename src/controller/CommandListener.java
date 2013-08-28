@@ -144,10 +144,12 @@ public class CommandListener implements ActionListener {
 	}
 
 	private void caricaOpt() {
-		int option = JOptionPane.showConfirmDialog(gameMode.getGameWin(),
-				"Stai abbandonando la partita corrente: vuoi salvare prima di uscire?",
-				"LOAD GAME", JOptionPane.YES_NO_CANCEL_OPTION,
-				JOptionPane.QUESTION_MESSAGE);
+		int option = JOptionPane
+				.showConfirmDialog(
+						gameMode.getGameWin(),
+						"Stai abbandonando la partita corrente: vuoi salvare prima di uscire?",
+						"LOAD GAME", JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE);
 		switch (option) {
 		case (JOptionPane.YES_OPTION):
 			yesOptLoad();
@@ -287,7 +289,7 @@ public class CommandListener implements ActionListener {
 			gameWin.setResizable(false);
 			int height = gameWin.getBackgroundImage().getHeight(null);
 			int width = gameWin.getBackgroundImage().getWidth(null);
-			gameWin.setSize(width,height);
+			gameWin.setSize(width, height);
 			Container c = gameWin.getContentPane();
 
 			// rimuovo gli eventuali altri pannelli presenti sulla finestra
@@ -309,7 +311,7 @@ public class CommandListener implements ActionListener {
 		gameWin.setResizable(false);
 		int height = gameWin.getBackgroundImage().getHeight(null);
 		int width = gameWin.getBackgroundImage().getWidth(null);
-		gameWin.setSize(width,height);
+		gameWin.setSize(width, height);
 		Container c = gameWin.getContentPane();
 
 		// rimuovo gli eventuali altri pannelli presenti sulla finestra e

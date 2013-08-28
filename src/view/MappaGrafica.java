@@ -21,6 +21,7 @@ public class MappaGrafica extends JPanel {
 	private int yC;
 	public double raggio;
 	private Mappa mappa;
+	private final static Color BACKGROUND = new Color(116, 156, 44);
 	public static GameMode gameMode = GameMode.getGameMode();
 
 	public static final double STDRAGGIO = 70;
@@ -51,7 +52,12 @@ public class MappaGrafica extends JPanel {
 
 	}
 
-	public void paint(Graphics g) {
+	public void paintComponent(Graphics g) {
+		if (gameMode.isPlayingMode() || gameMode.isSelecionUnitMode()
+				|| gameMode.isZoomOutMode()) {
+			g.setColor(BACKGROUND);
+			g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		}
 
 		g.setColor(Color.BLACK);
 		EsagonoGrafico eG;
@@ -159,6 +165,8 @@ public class MappaGrafica extends JPanel {
 				g2.draw(eG);
 			}
 		}
+
+		super.paintComponents(g2);
 	}
 
 	public void paintImage(Graphics g, EsagonoGrafico eG, Image img) {

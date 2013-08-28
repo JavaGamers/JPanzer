@@ -194,9 +194,9 @@ public class GameMode {
 			return this.player2;
 		}
 	}
-	
-	public Sound getSound(){
-		if(this.sound == null){
+
+	public Sound getSound() {
+		if (this.sound == null) {
 			this.sound = new Sound();
 		}
 		return this.sound;
@@ -485,7 +485,6 @@ public class GameMode {
 		MappaGrafica mG = getMappaGrafica();
 		JFileChooser jfc = new JFileChooser();
 		int returnVal = jfc.showOpenDialog(mG);
-		int i = 0;
 
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File file = jfc.getSelectedFile();
@@ -506,7 +505,6 @@ public class GameMode {
 						// leggo le altre righe
 
 						while ((text = br.readLine()) != null) {
-							i++;
 							elements = getElements(text);
 							e = m.getComponent()[Integer.parseInt(elements
 									.remove())];
@@ -542,7 +540,6 @@ public class GameMode {
 				}
 			}
 		}
-		System.out.println(i);
 		return done;
 	}
 
