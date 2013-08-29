@@ -10,6 +10,7 @@ public class Artiglieria extends Unità {
 	private final static int BASEATT = 100; // attacco di base
 	private final static int BASEDIF = 20; // difesa di base
 	private final static int PPT = 5; // passi per turno
+	public final static String STRNOME = "Artiglieria";
 	public final static int COSTO = 55;
 
 	public Artiglieria(int n, int player) {
@@ -36,7 +37,7 @@ public class Artiglieria extends Unità {
 
 	public String getNome() {
 
-		return "Artiglieria";
+		return STRNOME;
 	}
 
 	public void resetPassi() {

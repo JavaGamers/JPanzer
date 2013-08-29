@@ -163,6 +163,18 @@ public class Esagono implements Comparable<Esagono> {
 		return coordinate;
 	}
 
+	public boolean isAdiacente(Esagono other) {
+		boolean trovato = false;
+		for (int i = 0; i < 6 && !trovato; i++) {
+			if (this.adiacenze[i] != null) {
+				if (this.adiacenze[i].equals(other)) {
+					trovato = true;
+				}
+			}
+		}
+		return trovato;
+	}
+
 	// metodo per calcolare n mod p
 	public static int mod(int n, int base) {
 		if (n >= base)
@@ -250,6 +262,9 @@ public class Esagono implements Comparable<Esagono> {
 	}
 
 	public boolean equals(Esagono o) {
-		return (this.id == o.id);
+		if (o == null) {
+			throw new IllegalArgumentException("confronto con esagono nullo");
+		}
+		return (this.id == o.getId());
 	}
 }

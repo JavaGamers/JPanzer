@@ -10,6 +10,7 @@ public class FanteriaPesante extends Unità {
 	private final static int BASEATT = 60; // attacco di base
 	private final static int BASEDIF = 50; // difesa di base
 	private final static int PPT = 8; // passi per turno
+	public final static String STRNOME = "Fanteria Pesante";
 	public final static int COSTO = 30;
 
 	public FanteriaPesante(int n, int player) {
@@ -36,7 +37,7 @@ public class FanteriaPesante extends Unità {
 
 	public String getNome() {
 
-		return "Fanteria Pesante";
+		return STRNOME;
 	}
 
 	public void resetPassi() {

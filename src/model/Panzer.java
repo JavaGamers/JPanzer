@@ -10,6 +10,7 @@ public class Panzer extends Unità {
 	private final static int BASEATT = 80; // attacco di base
 	private final static int BASEDIF = 70; // difesa di base
 	private final static int PPT = 6; // passi per turno
+	public final static String STRNOME = "Panzer";
 	public final static int COSTO = 65;
 
 	public Panzer(int n, int player) {
@@ -36,7 +37,7 @@ public class Panzer extends Unità {
 
 	public String getNome() {
 
-		return "Panzer";
+		return STRNOME;
 	}
 
 	public void resetPassi() {

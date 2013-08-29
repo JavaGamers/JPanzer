@@ -9,6 +9,8 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.Popup;
@@ -193,17 +195,23 @@ public class MappaListener extends MouseAdapter {
 			EsagonoGrafico eG, Unità selectedUnit, Unità other, Image img,
 			int newSelected, int oldSelected) {
 
-		gameMode.getSound().startMoveMusic();
-
 		selectedUnit = vecchio.getUnit();
 		MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
 		Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
 		int xC = mappaGrafica.getXCentro();
 		int yC = mappaGrafica.getYCentro();
 		double raggio = mappaGrafica.getRaggio();
-		List<Esagono> esagoniRaggiungibili = selectedUnit
+		LinkedList<Esagono> esagoniRaggiungibili = selectedUnit
 				.getEsagoniRaggiungibili();
 		if (esagoniRaggiungibili.contains(nuovo) && nuovo.getUnit() == null) {
+
+			Iterator<Esagono> it = esagoniRaggiungibili.iterator();
+			while(it.hasNext()){
+				Esagono e = it.next();
+				System.out.println("Esagono "+e.toString()+" "+e.getMinDistance());
+			}
+
+			gameMode.getSound().startMoveMusic();
 
 			// cancello l'unità dalla vecchia posizione
 			vecchio.setUnit(null);
@@ -216,7 +224,9 @@ public class MappaListener extends MouseAdapter {
 			nuovo.setUnit(selectedUnit);
 			img = selectedUnit.getImage();
 			mappaGrafica.paintImage(g2, eG, img);
-			int nuoviP = selectedUnit.getPassi() - (int) nuovo.getMinDistance();
+			System.out.println(nuovo.getMinDistance());
+			int nuoviP = selectedUnit.getPassi() -  (int)nuovo.getMinDistance();
+			System.out.println("nuoviP 1: "+nuoviP);
 			selectedUnit.setPassi(nuoviP);
 		}
 		gameMode.setMovingMode(false);
@@ -228,8 +238,6 @@ public class MappaListener extends MouseAdapter {
 			EsagonoGrafico eG2, Unità selectedUnit, Unità other, Image img,
 			int newSelected, int oldSelected) {
 
-		gameMode.getSound().startAttackMusic();
-
 		selectedUnit = vecchio.getUnit();
 		MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
 		Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
@@ -238,8 +246,12 @@ public class MappaListener extends MouseAdapter {
 		double raggio = mappaGrafica.getRaggio();
 		if (!selectedUnit.hasAlreadyAttack()) {
 			other = nuovo.getUnit();
+
 			// se esiste un'unità attaccata e se appartiene all'avversario
-			if (other != null && other.getPlayer() != gameMode.getTurno()) {
+			if (other != null && other.getPlayer() != gameMode.getTurno()
+					&& vecchio.isAdiacente(nuovo)) {
+
+				gameMode.getSound().startAttackMusic();
 
 				// unità attaccante
 				int numSelectedRemaining = selectedUnit.getNumUnits();
@@ -359,7 +371,7 @@ public class MappaListener extends MouseAdapter {
 			EsagonoGrafico eG2, Unità selectedUnit, Unità other, Image img,
 			int newSelected, int oldSelected) {
 
-		gameMode.getSound().startMoveMusic();
+		
 		selectedUnit = vecchio.getUnit();
 		MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
 		Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
@@ -372,6 +384,7 @@ public class MappaListener extends MouseAdapter {
 		if (esagoniRaggiungibili.contains(nuovo)) {
 			other = nuovo.getUnit();
 			if (other != null && selectedUnit.isSameUnitOf(other)) {
+				gameMode.getSound().startMoveMusic();
 				int numUnits = selectedUnit.getNumUnits() + other.getNumUnits();
 				double esperienza = (selectedUnit.getEsp()
 						* selectedUnit.getNumUnits() + other.getEsp()
@@ -418,6 +431,7 @@ public class MappaListener extends MouseAdapter {
 		if (esagoniRaggiungibili.contains(nuovo)) {
 			other = nuovo.getUnit();
 			if (other == null) {
+				gameMode.getSound().startMoveMusic();
 				double esp = selectedUnit.getEsp();
 				int num1 = 0;
 				int num2 = 0;

@@ -399,21 +399,21 @@ public class GameMode {
 								boolean alreadyAttacked = Boolean
 										.parseBoolean(elements.remove());
 
-								if (nomeUnità.equals("aereo")) {
+								if (nomeUnità.equals(Aereo.STRNOME)) {
 									e.setUnit(new Aereo(numUnits, player));
 
-								} else if (nomeUnità.equals("artiglieria")) {
+								} else if (nomeUnità.equals(Artiglieria.STRNOME)) {
 									e.setUnit(new Artiglieria(numUnits, player));
 
-								} else if (nomeUnità.equals("fanterialeggera")) {
+								} else if (nomeUnità.equals(FanteriaLeggera.STRNOME)) {
 									e.setUnit(new FanteriaLeggera(numUnits,
 											player));
 
-								} else if (nomeUnità.equals("fanteriapesante")) {
+								} else if (nomeUnità.equals(FanteriaPesante.STRNOME)) {
 									e.setUnit(new FanteriaPesante(numUnits,
 											player));
 
-								} else if (nomeUnità.equals("panzer")) {
+								} else if (nomeUnità.equals(Panzer.STRNOME)) {
 									e.setUnit(new Panzer(numUnits, player));
 
 								}

@@ -1,7 +1,7 @@
 package model;
 
 import java.awt.Image;
-import java.util.List;
+import java.util.LinkedList;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -22,7 +22,7 @@ public abstract class Unità {
 	protected int player; // 1=player 1 / 2=player 2
 	protected BufferedImage bImg;
 	protected BufferedImage xImage;
-	protected List<Esagono> esagoniRaggiungibili;
+	protected LinkedList<Esagono> esagoniRaggiungibili;
 	protected boolean alreadyAttack;
 	public static GameMode gameMode = GameMode.getGameMode();
 	protected boolean isMoved;
@@ -114,7 +114,7 @@ public abstract class Unità {
 		return this.bImg;
 	}
 
-	public List<Esagono> getEsagoniRaggiungibili() {
+	public LinkedList<Esagono> getEsagoniRaggiungibili() {
 		if (isMoved || this.esagoniRaggiungibili == null) {
 			this.calcolaEsagoniRaggiungibili();
 		}
