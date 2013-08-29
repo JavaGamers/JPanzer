@@ -47,12 +47,11 @@ public class Aereo extends Unità {
 	// l'aereo per muoversi considera unitario il costo di attraversamento di
 	// ciascun territorio
 	public LinkedList<Esagono> getEsagoniRaggiungibili() {
-		if (this.isMoved || this.esagoniRaggiungibili == null) {
-			Mappa m = gameMode.getMappa();
-			m.resetDistances();
-			this.esagoniRaggiungibili = calcolaEsagoniRaggiungibili(m, this.pos, this.passi);
-			this.isMoved = false;
-		}
+
+		Mappa m = gameMode.getMappa();
+		m.resetDistances();
+		this.esagoniRaggiungibili = calcolaEsagoniRaggiungibili(m, this.pos,
+				this.passi);
 		return this.esagoniRaggiungibili;
 	}
 
@@ -82,8 +81,9 @@ public class Aereo extends Unità {
 				for (int i = 0; i < 6; i++) {
 					Esagono v = u.getAdiacenze()[i];
 					if (v != null) {
-						
-						// unica differenza rispetto al codice della classe Dijkstra
+
+						// unica differenza rispetto al codice della classe
+						// Dijkstra
 						int weight = 1;
 						long distanceToU = u.getMinDistance() + weight;
 						if (distanceToU < v.getMinDistance()) {
@@ -125,6 +125,5 @@ public class Aereo extends Unità {
 					"non puoi settare un numero di passi maggiori di quelli disponibili per tale unità");
 		}
 		this.passi = passi;
-		this.isMoved = true;
 	}
 }

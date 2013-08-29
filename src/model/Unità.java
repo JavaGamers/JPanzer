@@ -25,7 +25,6 @@ public abstract class Unità {
 	protected LinkedList<Esagono> esagoniRaggiungibili;
 	protected boolean alreadyAttack;
 	public static GameMode gameMode = GameMode.getGameMode();
-	protected boolean isMoved;
 
 	public static final int UNITACOMPRABILI = 10;
 
@@ -43,7 +42,6 @@ public abstract class Unità {
 		this.player = player;
 		this.bImg = null;
 		this.esagoniRaggiungibili = null;
-		this.isMoved = false;
 		this.alreadyAttack = false;
 
 		if (this.player == 1) {
@@ -115,9 +113,7 @@ public abstract class Unità {
 	}
 
 	public LinkedList<Esagono> getEsagoniRaggiungibili() {
-		if (isMoved || this.esagoniRaggiungibili == null) {
-			this.calcolaEsagoniRaggiungibili();
-		}
+		this.calcolaEsagoniRaggiungibili();
 		return this.esagoniRaggiungibili;
 	}
 
@@ -125,7 +121,6 @@ public abstract class Unità {
 		Mappa m = gameMode.getMappa();
 		m.resetDistances();
 		this.esagoniRaggiungibili = Dijkstra.shortestPath(m, pos, passi);
-		this.isMoved = false;
 	}
 
 	public void setEsp(double e) {
@@ -159,7 +154,6 @@ public abstract class Unità {
 		if (p.getTerritorio() != null) {
 			this.bonus = p.getTerritorio().getBonus();
 		}
-		this.isMoved = true;
 	}
 
 	public abstract void resetPassi();

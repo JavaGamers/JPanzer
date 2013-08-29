@@ -64,6 +64,5 @@ public class FanteriaPesante extends Unità {
 					"non puoi settare un numero di passi maggiori di quelli disponibili per tale unità");
 		}
 		this.passi = passi;
-		this.isMoved=true;
 	}
 }

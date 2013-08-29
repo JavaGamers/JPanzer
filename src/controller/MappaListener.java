@@ -168,9 +168,11 @@ public class MappaListener extends MouseAdapter {
 						newSelected, oldSelected);
 			}
 
-			if (gameMode.isAttackMode() && !selectedUnit.hasAlreadyAttack()) {
-				attackMode(nuovo, vecchio, eG2, selectedUnit, other, img,
-						newSelected, oldSelected);
+			if (selectedUnit != null) {
+				if (gameMode.isAttackMode() && !selectedUnit.hasAlreadyAttack()) {
+					attackMode(nuovo, vecchio, eG2, selectedUnit, other, img,
+							newSelected, oldSelected);
+				}
 			}
 
 			if (gameMode.isAccorpaMode()) {
@@ -205,12 +207,6 @@ public class MappaListener extends MouseAdapter {
 				.getEsagoniRaggiungibili();
 		if (esagoniRaggiungibili.contains(nuovo) && nuovo.getUnit() == null) {
 
-			Iterator<Esagono> it = esagoniRaggiungibili.iterator();
-			while(it.hasNext()){
-				Esagono e = it.next();
-				System.out.println("Esagono "+e.toString()+" "+e.getMinDistance());
-			}
-
 			gameMode.getSound().startMoveMusic();
 
 			// cancello l'unità dalla vecchia posizione
@@ -224,9 +220,10 @@ public class MappaListener extends MouseAdapter {
 			nuovo.setUnit(selectedUnit);
 			img = selectedUnit.getImage();
 			mappaGrafica.paintImage(g2, eG, img);
-			System.out.println(nuovo.getMinDistance());
-			int nuoviP = selectedUnit.getPassi() -  (int)nuovo.getMinDistance();
-			System.out.println("nuoviP 1: "+nuoviP);
+			int nuoviP = selectedUnit.getPassi() - (int) nuovo.getMinDistance();
+			/*
+			 * if(nuoviP<0){ nuoviP = 0; }
+			 */
 			selectedUnit.setPassi(nuoviP);
 		}
 		gameMode.setMovingMode(false);
@@ -371,7 +368,6 @@ public class MappaListener extends MouseAdapter {
 			EsagonoGrafico eG2, Unità selectedUnit, Unità other, Image img,
 			int newSelected, int oldSelected) {
 
-		
 		selectedUnit = vecchio.getUnit();
 		MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
 		Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
