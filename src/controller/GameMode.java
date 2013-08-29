@@ -431,12 +431,6 @@ public class GameMode {
 
 						done = true;
 					} else {
-						/*
-						 * this.getErrorWindow().setErrorLabel(
-						 * "devi caricare un file partita valido");
-						 * this.getErrorWindow().setVisible(true);
-						 */
-
 						JOptionPane.showMessageDialog(this.gameWin,
 								"devi caricare un file partita valido",
 								"ERRORE!", JOptionPane.ERROR_MESSAGE);
@@ -554,7 +548,7 @@ public class GameMode {
 
 	/*
 	 * metodo per controllare se qualcuno ha vinto la partita valori di ritorno:
-	 * 0 nessuo ha ancora vinto - 1 vittoria player 1 - 2 vittoria player 2 - 3
+	 * 0 nessuno ha ancora vinto - 1 vittoria player 1 - 2 vittoria player 2 - 3
 	 * pareggio
 	 */
 	public int checkVictory() {

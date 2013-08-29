@@ -10,6 +10,7 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
+
 import javax.swing.JLabel;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
@@ -25,6 +26,7 @@ import model.Mappa;
 import model.Panzer;
 import model.Player;
 import model.Unità;
+import model.Utilities;
 import view.CommandPanel;
 import view.FinalPanel;
 import view.GameWin;
@@ -266,7 +268,7 @@ public class MappaListener extends MouseAdapter {
 
 				numOtherRemaining = (int) ((numOtherRemaining * defOther - numSelectedRemaining
 						* attSelected) / (defOther));
-				int moneyEarned = calulateMoneyEarned(other.getNumUnits(),
+				int moneyEarned = Utilities.calulateMoneyEarned(other.getNumUnits(),
 						numOtherRemaining, other);
 
 				if (numOtherRemaining > 0) {
@@ -344,30 +346,7 @@ public class MappaListener extends MouseAdapter {
 		}
 	}
 
-	private static int calulateMoneyEarned(int prevNum, int postNum, Unità u) {
-		int gain = 0;
-		int diff = prevNum - postNum;
-		double percent = 2 / 5;
-
-		if (diff > prevNum) {
-			diff = prevNum;
-		}
-
-		double d = diff * percent / 10;
-
-		if (u instanceof Artiglieria) {
-			gain = (int) (d * Artiglieria.COSTO);
-		} else if (u instanceof Aereo) {
-			gain = (int) (d * Aereo.COSTO);
-		} else if (u instanceof FanteriaPesante) {
-			gain = (int) (d * FanteriaPesante.COSTO);
-		} else if (u instanceof FanteriaLeggera) {
-			gain = (int) (d * FanteriaLeggera.COSTO);
-		} else if (u instanceof Panzer) {
-			gain = (int) (d * Panzer.COSTO);
-		}
-		return gain;
-	}
+	
 
 	private static void accorpaMode(Esagono nuovo, Esagono vecchio,
 			EsagonoGrafico eG2, Unità selectedUnit, Unità other, Image img,

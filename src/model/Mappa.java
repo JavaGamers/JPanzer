@@ -14,7 +14,7 @@ public class Mappa {
 	// d= dimensione
 	public Mappa(int d) {
 		this.dim = d;
-		this.component = new Esagono[Esagono.endLiv(dim) + 1];
+		this.component = new Esagono[Utilities.endLiv(dim) + 1];
 		this.selezionato = -1;
 		component[0] = new Esagono(0);
 
@@ -30,7 +30,7 @@ public class Mappa {
 				coord[1] = 1;
 				coord[2] = 0;
 
-				e.setAdiacenza(this.getEsagono(coord), Esagono.mod(i + 3, 6));
+				e.setAdiacenza(this.getEsagono(coord), Utilities.mod(i + 3, 6));
 				if (i == 6) {
 					int[] uno = { 1, 1, 0 };
 					e.setAdiacenza(this.getEsagono(uno), 1);
@@ -55,9 +55,9 @@ public class Mappa {
 						int[] down = { s, l - 1, p };
 						int[] left = { s - 1, l, l - 1 };
 						e.setAdiacenza(this.getEsagono(down),
-								Esagono.mod(s + 2, 6));
+								Utilities.mod(s + 2, 6));
 						e.setAdiacenza(this.getEsagono(left),
-								Esagono.mod(s + 3, 6));
+								Utilities.mod(s + 3, 6));
 					}
 					if (p != 0) {
 						if (p == l - 1) {
@@ -67,11 +67,11 @@ public class Mappa {
 								int[] dRight = { s + 1, l - 1, 0 };
 
 								e.setAdiacenza(this.getEsagono(pre),
-										Esagono.mod(s + 4, 6));
+										Utilities.mod(s + 4, 6));
 								e.setAdiacenza(this.getEsagono(dLeft),
-										Esagono.mod(s + 3, 6));
+										Utilities.mod(s + 3, 6));
 								e.setAdiacenza(this.getEsagono(dRight),
-										Esagono.mod(s + 2, 6));
+										Utilities.mod(s + 2, 6));
 							} else {
 								int[] post = { 1, l, 0 };
 								int[] dPost = { 1, l - 1, 0 };
@@ -90,11 +90,11 @@ public class Mappa {
 							int[] dRight = { s, l - 1, p };
 
 							e.setAdiacenza(this.getEsagono(pre),
-									Esagono.mod(s + 4, 6));
+									Utilities.mod(s + 4, 6));
 							e.setAdiacenza(this.getEsagono(dLeft),
-									Esagono.mod(s + 3, 6));
+									Utilities.mod(s + 3, 6));
 							e.setAdiacenza(this.getEsagono(dRight),
-									Esagono.mod(s + 2, 6));
+									Utilities.mod(s + 2, 6));
 
 						}
 					}
@@ -114,7 +114,7 @@ public class Mappa {
 			id = coord[0];
 		else
 			id = (coord[0] - 1) * coord[1] + coord[2]
-					+ Esagono.startLiv(coord[1]);
+					+ Utilities.startLiv(coord[1]);
 
 		return this.component[id];
 
