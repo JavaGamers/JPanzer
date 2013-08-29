@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 
 import javax.swing.JPanel;
+import javax.swing.Popup;
 
 import controller.GameMode;
 import controller.MappaListener;
@@ -22,6 +23,7 @@ public class MappaGrafica extends JPanel {
 	public double raggio;
 	private Mappa mappa;
 	private final static Color BACKGROUND = new Color(116, 156, 44);
+	private static Popup popup = null;
 	public static GameMode gameMode = GameMode.getGameMode();
 
 	public static final double STDRAGGIO = 70;
@@ -219,6 +221,10 @@ public class MappaGrafica extends JPanel {
 	public double getRaggio() {
 		return this.raggio;
 	}
+	
+	public static Popup getPopup(){
+		return popup;
+	}
 
 	public void newSet(int x, int y) {
 		this.xC = x;
@@ -231,5 +237,9 @@ public class MappaGrafica extends JPanel {
 
 	public void setMappa(Mappa m) {
 		this.mappa = m;
+	}
+	
+	public static void setPopup(Popup p){
+		popup = p;
 	}
 }

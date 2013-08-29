@@ -39,7 +39,7 @@ public class GameWin extends JFrame{
 		super.setLayout(new BorderLayout());
 		super.pack();
 		Sound sound = gameMode.getSound();
-	//	sound.startThemeMusic();
+		sound.startThemeMusic();
 	}
 
 	public static void main(String[] args) {

@@ -202,7 +202,7 @@ public class CommandListener implements ActionListener {
 		Esagono adiacenza = null;
 		Unità u = null;
 		if (unitSelected != null) {
-			if (unitSelected.getPlayer() == turno) {
+			if (unitSelected.getPlayer() == turno && !unitSelected.hasAlreadyAttack()) {
 				MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
 				int xC = mappaGrafica.getXCentro();
 				int yC = mappaGrafica.getYCentro();
@@ -285,6 +285,10 @@ public class CommandListener implements ActionListener {
 	private void yesOpt() {
 		if (gameMode.salvaPartita()) {
 
+			if (MappaGrafica.getPopup() != null) {
+				MappaGrafica.getPopup().hide();
+			}
+
 			GameWin gameWin = gameMode.getGameWin();
 			gameWin.setResizable(false);
 			int height = gameWin.getBackgroundImage().getHeight(null);
@@ -306,6 +310,10 @@ public class CommandListener implements ActionListener {
 	}
 
 	private void noOpt() {
+
+		if (MappaGrafica.getPopup() != null) {
+			MappaGrafica.getPopup().hide();
+		}
 
 		GameWin gameWin = gameMode.getGameWin();
 		gameWin.setResizable(false);

@@ -9,9 +9,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
@@ -38,7 +36,6 @@ public class MappaListener extends MouseAdapter {
 	private static Esagono prec = null;
 	private static EsagonoGrafico esagonoGrafico = new EsagonoGrafico(0, 0, 0,
 			0);
-	private static Popup popup = null;
 
 	public void mouseMoved(MouseEvent mE) {
 		double x = mE.getX();
@@ -50,6 +47,7 @@ public class MappaListener extends MouseAdapter {
 			int xC = mappaGrafica.getXCentro();
 			int yC = mappaGrafica.getYCentro();
 			double raggio = mappaGrafica.getRaggio();
+			Popup popup = MappaGrafica.getPopup();
 
 			// posizione del popup
 			int xLabel = 0;
@@ -77,6 +75,7 @@ public class MappaListener extends MouseAdapter {
 									.getSharedInstance();
 							popup = factory.getPopup(mappaGrafica, label,
 									(int) point.getX(), (int) point.getY());
+							MappaGrafica.setPopup(popup);
 							popup.show();
 						}
 					}
@@ -93,6 +92,7 @@ public class MappaListener extends MouseAdapter {
 						PopupFactory factory = PopupFactory.getSharedInstance();
 						popup = factory.getPopup(mappaGrafica, label,
 								(int) point.getX(), (int) point.getY());
+						MappaGrafica.setPopup(popup);
 						popup.show();
 					}
 					prec = e;
@@ -248,6 +248,7 @@ public class MappaListener extends MouseAdapter {
 			if (other != null && other.getPlayer() != gameMode.getTurno()
 					&& vecchio.isAdiacente(nuovo)) {
 
+				GameWin gameWin = gameMode.getGameWin();
 				gameMode.getSound().startAttackMusic();
 
 				// unità attaccante
@@ -310,28 +311,32 @@ public class MappaListener extends MouseAdapter {
 
 				commandPanel.setBattleStatsLabel(selectedUnit, other);
 
-			}
-			gameMode.setAttackMode(false);
+				gameMode.setAttackMode(false);
 
-			int winner = gameMode.checkVictory();
-			if (winner != 0) {
+				int winner = gameMode.checkVictory();
+				if (winner != 0) {
+					Popup popup = MappaGrafica.getPopup();
+					if (popup != null) {
+						popup.hide();
+					}
 
-				GameWin gameWin = gameMode.getGameWin();
-				gameWin.setResizable(false);
-				FinalPanel finalPanel = gameMode.getFinalPanel();
-				int height = finalPanel.getVictoryImage().getHeight(null);
-				int width = finalPanel.getVictoryImage().getWidth(null);
-				gameWin.setSize(width, height);
-				Container c = gameWin.getContentPane();
+					gameWin.setResizable(false);
+					FinalPanel finalPanel = gameMode.getFinalPanel();
+					int height = finalPanel.getVictoryImage().getHeight(null);
+					int width = finalPanel.getVictoryImage().getWidth(null);
+					gameWin.setSize(width, height);
+					Container c = gameWin.getContentPane();
 
-				// rimuovo gli eventuali altri pannelli presenti sulla finestra
-				// e aggiungo quelli nuovi
-				c.removeAll();
-				c.add(finalPanel, BorderLayout.CENTER);
-				if (winner == 3) {
-					finalPanel.setText("nessuno ha vinto!");
-				} else {
-					finalPanel.setWinner(gameMode.getPlayer(winner));
+					// rimuovo gli eventuali altri pannelli presenti sulla
+					// finestra
+					// e aggiungo quelli nuovi
+					c.removeAll();
+					c.add(finalPanel, BorderLayout.CENTER);
+					if (winner == 3) {
+						finalPanel.setText("nessuno ha vinto!");
+					} else {
+						finalPanel.setWinner(gameMode.getPlayer(winner));
+					}
 				}
 				gameWin.repaint();
 				gameWin.validate();
@@ -374,7 +379,7 @@ public class MappaListener extends MouseAdapter {
 		int xC = mappaGrafica.getXCentro();
 		int yC = mappaGrafica.getYCentro();
 		double raggio = mappaGrafica.getRaggio();
-		List<Esagono> esagoniRaggiungibili = selectedUnit
+		LinkedList<Esagono> esagoniRaggiungibili = selectedUnit
 				.getEsagoniRaggiungibili();
 
 		if (esagoniRaggiungibili.contains(nuovo)) {
@@ -421,7 +426,7 @@ public class MappaListener extends MouseAdapter {
 		gameMode.getSound().startMoveMusic();
 		selectedUnit = vecchio.getUnit();
 		int turno = gameMode.getTurno();
-		List<Esagono> esagoniRaggiungibili = selectedUnit
+		LinkedList<Esagono> esagoniRaggiungibili = selectedUnit
 				.getEsagoniRaggiungibili();
 
 		if (esagoniRaggiungibili.contains(nuovo)) {

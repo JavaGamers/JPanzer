@@ -62,7 +62,7 @@ public class Sound {
 			clip.open(this.themeMusic);
 			FloatControl gainControl = (FloatControl) clip
 					.getControl(FloatControl.Type.MASTER_GAIN);
-			gainControl.setValue(-10.0f);
+			gainControl.setValue(-5.0f);
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 
 		} catch (IOException error) {
@@ -74,9 +74,12 @@ public class Sound {
 
 	public void startMoveMusic() {
 		try {
+
+			this.moveMusic.mark(1000000000);
 			Clip clip = AudioSystem.getClip();
 			clip.open(this.moveMusic);
 			clip.loop(0);
+			this.moveMusic.reset();
 
 		} catch (IOException error) {
 			System.out.println(error.getMessage());
@@ -87,9 +90,12 @@ public class Sound {
 
 	public void startAttackMusic() {
 		try {
+			
+			this.attackMusic.mark(1000000000);
 			Clip clip = AudioSystem.getClip();
 			clip.open(this.attackMusic);
 			clip.loop(0);
+			this.attackMusic.reset();
 
 		} catch (IOException error) {
 			System.out.println(error.getMessage());
