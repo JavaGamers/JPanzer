@@ -73,7 +73,7 @@ public class MappaListener extends MouseAdapter {
 							JLabel label = new JLabel("" + u.getNumUnits());
 							PopupFactory factory = PopupFactory
 									.getSharedInstance();
-							popup = factory.getPopup(mappaGrafica, label,
+							popup = factory.getPopup(null, label,
 									(int) point.getX(), (int) point.getY());
 							MappaGrafica.setPopup(popup);
 							popup.show();
@@ -90,7 +90,7 @@ public class MappaListener extends MouseAdapter {
 					if (u != null) {
 						JLabel label = new JLabel("" + u.getNumUnits());
 						PopupFactory factory = PopupFactory.getSharedInstance();
-						popup = factory.getPopup(mappaGrafica, label,
+						popup = factory.getPopup(null, label,
 								(int) point.getX(), (int) point.getY());
 						MappaGrafica.setPopup(popup);
 						popup.show();

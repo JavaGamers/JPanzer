@@ -34,14 +34,16 @@ public class Dijkstra {
 				for (int i = 0; i < 6; i++) {
 					Esagono v = u.getAdiacenze()[i];
 					if (v != null) {
-						int weight = v.getCosto();
-						long distanceToU = u.getMinDistance() + weight;
-						if (distanceToU < v.getMinDistance()) {
-							q.remove(v);
-							if (color[v.getId()] == 0) {
-								v.setDistance(distanceToU);
-								q.add(v);
-								color[v.getId()] = 1;
+						if (v.getUnit() == null) {
+							int weight = v.getCosto();
+							long distanceToU = u.getMinDistance() + weight;
+							if (distanceToU < v.getMinDistance()) {
+								q.remove(v);
+								if (color[v.getId()] == 0) {
+									v.setDistance(distanceToU);
+									q.add(v);
+									color[v.getId()] = 1;
+								}
 							}
 						}
 					}
