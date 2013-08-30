@@ -402,14 +402,17 @@ public class GameMode {
 								if (nomeUnità.equals(Aereo.STRNOME)) {
 									e.setUnit(new Aereo(numUnits, player));
 
-								} else if (nomeUnità.equals(Artiglieria.STRNOME)) {
+								} else if (nomeUnità
+										.equals(Artiglieria.STRNOME)) {
 									e.setUnit(new Artiglieria(numUnits, player));
 
-								} else if (nomeUnità.equals(FanteriaLeggera.STRNOME)) {
+								} else if (nomeUnità
+										.equals(FanteriaLeggera.STRNOME)) {
 									e.setUnit(new FanteriaLeggera(numUnits,
 											player));
 
-								} else if (nomeUnità.equals(FanteriaPesante.STRNOME)) {
+								} else if (nomeUnità
+										.equals(FanteriaPesante.STRNOME)) {
 									e.setUnit(new FanteriaPesante(numUnits,
 											player));
 
@@ -515,7 +518,9 @@ public class GameMode {
 							} else if (territorio.equals("Foresta")) {
 								e.setTerritorio(new Foresta());
 							} else {
-								e.setTerritorio(null);
+								// quando in una mappa ci sono esagoni vuoti
+								// essi vengo messi di default a Pianura
+								e.setTerritorio(new Pianura());
 							}
 						}
 						br.close();

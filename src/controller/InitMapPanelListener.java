@@ -16,6 +16,7 @@ import view.GameWin;
 import view.LandPanel;
 
 import model.Mappa;
+import model.Pianura;
 
 public class InitMapPanelListener implements ActionListener,
 		ListSelectionListener {
@@ -58,6 +59,12 @@ public class InitMapPanelListener implements ActionListener,
 				gameMode.setMappa(Mappa.EPIC);
 				break;
 
+			}
+			
+			// la nuova mappa invece che essere vuota viene creata con esagoni Pianura
+			Mappa m = gameMode.getMappa();
+			for(int i=0;i<m.getComponent().length;i++){
+				m.getComponent()[i].setTerritorio(new Pianura());
 			}
 
 			if (gameMode.getMappaGrafica() == null) {

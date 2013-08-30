@@ -59,7 +59,9 @@ public class InitGameListener implements ActionListener, ChangeListener {
 	private void forwardOpt() {
 		error = false;
 		if (!scelta) {
-			JOptionPane.showMessageDialog(gameMode.getGameWin(), "Non hai scelto la mappa", "ERRORE!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(gameMode.getGameWin(),
+					"Non hai scelto la mappa", "ERRORE!",
+					JOptionPane.ERROR_MESSAGE);
 		} else {
 			gameMode.setMappa(gameMode.getInitGame().getPreviewMap().getMappa());
 			if (gameMode.getMappaGrafica() == null) {
@@ -83,7 +85,9 @@ public class InitGameListener implements ActionListener, ChangeListener {
 			int soldi1 = Integer.parseInt(gameMode.getInitGame()
 					.getTextFieldSoldi(1).getText());
 			if (soldi1 < Player.MINMONEY || soldi1 > Player.MAXMONEY) {
-				JOptionPane.showMessageDialog(gameMode.getGameWin(), "Valore soldi Player 1 errato!", "ERRORE!", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(gameMode.getGameWin(),
+						"Valore soldi Player 1 errato!", "ERRORE!",
+						JOptionPane.ERROR_MESSAGE);
 
 			} else {
 				gameMode.getPlayer(1).setMoney(soldi1);
@@ -107,7 +111,9 @@ public class InitGameListener implements ActionListener, ChangeListener {
 					.getTextFieldSoldi(2).getText());
 
 			if (soldi2 < Player.MINMONEY || soldi2 > Player.MAXMONEY) {
-				JOptionPane.showMessageDialog(gameMode.getGameWin(), "Valore soldi Player 2 errato!", "ERRORE!", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(gameMode.getGameWin(),
+						"Valore soldi Player 2 errato!", "ERRORE!",
+						JOptionPane.ERROR_MESSAGE);
 
 			} else {
 				gameMode.getPlayer(2).setMoney(soldi2);
@@ -128,6 +134,9 @@ public class InitGameListener implements ActionListener, ChangeListener {
 				jsp.setViewportView(gameMode.getMappaGrafica());
 				jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 				c.add(jsp, BorderLayout.CENTER);
+				JOptionPane.showMessageDialog(gameMode.getGameWin(),
+						"Posiziona le unità negli esagoni evidenziati",
+						"PER INIZIARE", JOptionPane.INFORMATION_MESSAGE);
 
 				// ridisegno della finestra
 				gameWin.repaint();
