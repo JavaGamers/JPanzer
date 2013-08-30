@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -56,41 +57,50 @@ public class UnitPanel extends javax.swing.JPanel {
     private void initComponents() {
   
     	UnitListener uL = new UnitListener();
+    	Color background = new Color(241, 157, 30);
+		setBackground(background);
 
         fanteriaLegg = new javax.swing.JButton();
         fanteriaLegg.addActionListener(uL);
         fanteriaLegg.setActionCommand("fanteriaLegg");
         fanteriaLegg.addMouseListener(uL);
+        fanteriaLegg.setBackground(background);
         
         fanteriaPes = new javax.swing.JButton();
         fanteriaPes.addActionListener(uL);
         fanteriaPes.setActionCommand("fanteriaPes");
         fanteriaPes.addMouseListener(uL);
+        fanteriaPes.setBackground(background);
         
         panzer = new javax.swing.JButton();
         panzer.addActionListener(uL);
         panzer.setActionCommand("panzer");
         panzer.addMouseListener(uL);
+        panzer.setBackground(background);
         
         aereo = new javax.swing.JButton();
         aereo.addActionListener(uL);
         aereo.setActionCommand("aereo");
         aereo.addMouseListener(uL);
+        aereo.setBackground(background);
         
         artiglieria = new javax.swing.JButton();
         artiglieria.addActionListener(uL);
         artiglieria.setActionCommand("artiglieria");
         artiglieria.addMouseListener(uL);
+        artiglieria.setBackground(background);
         
         gioca = new javax.swing.JButton();
         gioca.setText("Gioca");
         gioca.addActionListener(uL);
         gioca.setActionCommand("gioca");
+        gioca.setBackground(background);
         
         zoom = new javax.swing.JButton();
         zoom.setText("Zoom");
         zoom.addActionListener(uL);
         zoom.setActionCommand("zoom");
+        zoom.setBackground(background);
         
         ImageIcon imgIcon= null;
 

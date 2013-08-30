@@ -82,6 +82,9 @@ public class InitGame extends javax.swing.JPanel {
 	}
 
 	private void initComponents() {
+		
+		Color buttonFore = new Color(240,180,0);
+		Color buttonBack = new Color(161,47,14);
 
 		Image img = gameMode.getGameWin().getBackgroundImage();
 		Color color = new Color(240, 180, 0);
@@ -136,15 +139,22 @@ public class InitGame extends javax.swing.JPanel {
 				Short.MAX_VALUE));
 
 		chooseMap.setText("Scegli Mappa");
+		chooseMap.setForeground(buttonFore);
+		chooseMap.setBackground(buttonBack);
 		chooseMap.addActionListener(igl);
 		chooseMap.setActionCommand("chooseMap");
 
 		p1Slider.addChangeListener(igl);
+		p1Slider.setForeground(buttonFore);
+
+		p1Slider.setBackground(buttonBack);
 		p1Slider.setMajorTickSpacing(500);
 		p1Slider.setMinorTickSpacing(100);
 		p1Slider.setPaintTicks(true);
 
 		p2Slider.addChangeListener(igl);
+		p2Slider.setForeground(buttonFore);
+		p2Slider.setBackground(buttonBack);
 		p2Slider.setMajorTickSpacing(500);
 		p2Slider.setMinorTickSpacing(100);
 		p2Slider.setPaintTicks(true);
@@ -168,10 +178,14 @@ public class InitGame extends javax.swing.JPanel {
 		p2NameLabel.setForeground(color);
 
 		back.setText("Indietro");
+		back.setForeground(buttonFore);
+		back.setBackground(buttonBack);
 		back.addActionListener(igl);
 		back.setActionCommand("back");
 
 		forward.setText("Avanti");
+		forward.setForeground(buttonFore);
+		forward.setBackground(buttonBack);
 		forward.addActionListener(igl);
 		forward.setActionCommand("forward");
 

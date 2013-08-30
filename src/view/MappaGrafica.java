@@ -55,8 +55,7 @@ public class MappaGrafica extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
-		if (gameMode.isPlayingMode() || gameMode.isSelecionUnitMode()
-				|| gameMode.isZoomOutMode()) {
+		if (this.raggio!=PREVIEWRAGGIO ) {
 			g.setColor(BACKGROUND);
 			g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		}

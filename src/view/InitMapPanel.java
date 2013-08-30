@@ -14,7 +14,7 @@ import controller.InitMapPanelListener;
 public class InitMapPanel extends javax.swing.JPanel {
 
 	private javax.swing.JButton back;
-	private javax.swing.JList dimList;
+	private javax.swing.JList<String> dimList;
 	private javax.swing.JButton editMap;
 	private javax.swing.JButton forward;
 	private javax.swing.JScrollPane jScrollPane1;
@@ -40,6 +40,9 @@ public class InitMapPanel extends javax.swing.JPanel {
 	}
 
 	private void initComponents() {
+		
+		Color buttonFore = new Color(240,180,0);
+		Color buttonBack = new Color(161,47,14);
 
 		InitMapPanelListener impl = new InitMapPanelListener();
 
@@ -60,11 +63,13 @@ public class InitMapPanel extends javax.swing.JPanel {
 		forward = new javax.swing.JButton();
 
 		titleLabel.setFont(new java.awt.Font("Monotype Corsiva", 0, 60));
-		titleLabel.setForeground(new Color(240,180,0));
+		titleLabel.setForeground(buttonFore);
 		titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		titleLabel.setText("Cosa vuoi fare?");
 
 		editMap.setText("Edita preesistente");
+		editMap.setForeground(buttonFore);
+		editMap.setBackground(buttonBack);
 		editMap.addActionListener(impl);
 		editMap.setActionCommand("edit");
 
@@ -84,18 +89,26 @@ public class InitMapPanel extends javax.swing.JPanel {
 		dimList.setEnabled(false);
 		dimList.setVisibleRowCount(4);
 		dimList.addListSelectionListener(impl);
+		dimList.setBackground(buttonBack);
+		dimList.setForeground(buttonFore);
 
 		jScrollPane1.setViewportView(dimList);
 
 		newMap.setText("Nuova Mappa");
+		newMap.setForeground(buttonFore);
+		newMap.setBackground(buttonBack);
 		newMap.addActionListener(impl);
 		newMap.setActionCommand("new");
 
 		back.setText("Indietro");
+		back.setForeground(buttonFore);
+		back.setBackground(buttonBack);
 		back.addActionListener(impl);
 		back.setActionCommand("back");
 
 		forward.setText("Avanti");
+		forward.setForeground(buttonFore);
+		forward.setBackground(buttonBack);
 		forward.addActionListener(impl);
 		forward.setActionCommand("forward");
 

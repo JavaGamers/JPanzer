@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -45,6 +46,8 @@ public class LandPanel extends javax.swing.JPanel {
 	private void initComponents() {
 
 		LandListener lL = new LandListener();
+		Color background = new Color(241, 157, 30);
+		setBackground(background);
 
 		pianura = new javax.swing.JButton();
 		collina = new javax.swing.JButton();
@@ -69,6 +72,8 @@ public class LandPanel extends javax.swing.JPanel {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
+		
+		pianura.setBackground(background);
 		pianura.setIcon(imgIcon1);
 		pianura.setText("Pianura");
 		pianura.addActionListener(lL);
@@ -84,6 +89,8 @@ public class LandPanel extends javax.swing.JPanel {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
+		
+		collina.setBackground(background);
 		collina.setIcon(imgIcon2);
 		collina.setText("Collina");
 		collina.addActionListener(lL);
@@ -99,6 +106,8 @@ public class LandPanel extends javax.swing.JPanel {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
+		
+		foresta.setBackground(background);
 		foresta.setIcon(imgIcon3);
 		foresta.setText("Foresta");
 		foresta.addActionListener(lL);
@@ -114,6 +123,8 @@ public class LandPanel extends javax.swing.JPanel {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
+		
+		montagna.setBackground(background);
 		montagna.setIcon(imgIcon4);
 		montagna.setText("Montagna");
 		montagna.addActionListener(lL);
@@ -129,6 +140,8 @@ public class LandPanel extends javax.swing.JPanel {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
+		
+		lago.setBackground(background);
 		lago.setIcon(imgIcon5);
 		lago.setText("Lago");
 		lago.addActionListener(lL);
@@ -136,14 +149,20 @@ public class LandPanel extends javax.swing.JPanel {
 		lago.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		lago.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
+		
+		salva.setBackground(background);
 		salva.setText("Salva");
 		salva.addActionListener(lL);
 		salva.setActionCommand("salva");
 
+		
+		mainMenu.setBackground(background);
 		mainMenu.setText("Menù principale");
 		mainMenu.addActionListener(lL);
 		mainMenu.setActionCommand("main");
 		
+		
+		zoom.setBackground(background);
 		zoom.setText("Zoom");
 		zoom.setActionCommand("zoom");
 		zoom.addActionListener(lL);

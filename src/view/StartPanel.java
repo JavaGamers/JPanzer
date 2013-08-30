@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 
+import javax.swing.BorderFactory;
+
 import controller.GameMode;
 import controller.StartPanelListener;
 
@@ -25,6 +27,9 @@ public class StartPanel extends javax.swing.JPanel {
 		
 		Image img = gameMode.getGameWin().getBackgroundImage();
 		
+		Color buttonFore = new Color(240,180,0);
+		Color buttonBack = new Color(161,47,14);
+
 		Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
 		setPreferredSize(size);
 	    setMinimumSize(size);
@@ -41,14 +46,20 @@ public class StartPanel extends javax.swing.JPanel {
 		newGame.setText("Nuova Partita");
 		newGame.addActionListener(spl);
 		newGame.setActionCommand("new");
+		newGame.setForeground(buttonFore);
+		newGame.setBackground(buttonBack);
 
 		loadGame.setText("Carica Partita");
 		loadGame.addActionListener(spl);
 		loadGame.setActionCommand("load");
+		loadGame.setForeground(buttonFore);
+		loadGame.setBackground(buttonBack);
 
 		editMap.setText("Editor di Mappa");
 		editMap.addActionListener(spl);
 		editMap.setActionCommand("edit");
+		editMap.setForeground(buttonFore);
+		editMap.setBackground(buttonBack);
 
 		welcomeTxt.setFont(new java.awt.Font("Monotype Corsiva", 0, 72));
 		welcomeTxt.setForeground(new Color(240,180,0));

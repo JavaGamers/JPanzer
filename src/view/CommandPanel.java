@@ -126,7 +126,7 @@ public class CommandPanel extends javax.swing.JPanel {
 		numUnits = new javax.swing.JLabel();
 
 		passi = new javax.swing.JLabel();
-		passi.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+		passi.setFont(new java.awt.Font("Arial", 1, 14)); 
 		passi.setText(PASSITXT);
 
 		jSeparator1 = new javax.swing.JSeparator();
@@ -184,7 +184,7 @@ public class CommandPanel extends javax.swing.JPanel {
 		infoUnità.setBackground(new java.awt.Color(241, 157, 30));
 		infoUnità.setFont(new java.awt.Font("Arial", 1, 14));
 		infoUnità.setText(NOMEUNITATXT);
-
+		
 		esperienza.setBackground(new java.awt.Color(241, 157, 30));
 		esperienza.setFont(new java.awt.Font("Arial", 1, 14)); 
 		esperienza.setText(ESPERIENZATXT);

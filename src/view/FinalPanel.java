@@ -34,6 +34,8 @@ public class FinalPanel extends javax.swing.JPanel {
 	}
 
 	private void initComponents() {
+		Color buttonFore = new Color(240,180,0);
+		Color buttonBack = new Color(161,47,14);
 
 		victoryMessage = new javax.swing.JLabel();
 		winner = new javax.swing.JLabel();
@@ -50,6 +52,8 @@ public class FinalPanel extends javax.swing.JPanel {
 		winner.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
 		menù.setText("Menù Principale");
+		menù.setBackground(buttonBack);
+		menù.setForeground(buttonFore);
 		menù.addActionListener(new FinalPanelListener());
 
 		try {
