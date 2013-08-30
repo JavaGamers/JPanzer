@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
+import javax.swing.Popup;
 
 import model.Esagono;
 import model.EsagonoGrafico;
@@ -141,6 +142,25 @@ public class CommandListener implements ActionListener {
 		// settiamo le label del CommandPanel
 		p = gameMode.getPlayer(gameMode.getTurno());
 		gameMode.getCommandPanel().setPlayerLabel(p);
+		
+		//aggiorno le label dello SwitchPanel
+		gameMode.getSwitchPanel().updateLabel();
+		
+		//faccio comparire lo SwitchPanel
+		GameWin gameWin = gameMode.getGameWin();
+		Container c = gameWin.getContentPane();
+		c.removeAll();
+		c.add(gameMode.getSwitchPanel(), BorderLayout.CENTER);
+		
+		//elimino l'ultimo popup se c'è
+		Popup popup = MappaGrafica.getPopup();
+		if (popup != null) {
+			popup.hide();
+		}
+		
+		// ridisegno della finestra
+		gameWin.repaint();
+		gameWin.validate();
 	}
 
 	private void caricaOpt() {

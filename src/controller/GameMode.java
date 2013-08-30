@@ -36,6 +36,7 @@ import view.InitMapPanel;
 import view.LandPanel;
 import view.MappaGrafica;
 import view.StartPanel;
+import view.SwitchPanel;
 import view.UnitPanel;
 
 public class GameMode {
@@ -52,8 +53,10 @@ public class GameMode {
 	private StartPanel startPanel;
 	private UnitPanel unitPanel;
 	private FinalPanel finalPanel;
+	private SwitchPanel switchPanel;
 	private Sound sound;
 	private int turno;
+	private int turnCounter;
 	private boolean selectionUnitMode;
 	private boolean playingMode;
 	private boolean movingMode;
@@ -77,6 +80,7 @@ public class GameMode {
 		this.startPanel = null;
 		this.unitPanel = null;
 		this.finalPanel = null;
+		this.switchPanel = null;
 		this.sound = null;
 		this.turno = 1;
 		this.selectionUnitMode = false;
@@ -86,6 +90,7 @@ public class GameMode {
 		this.accorpaMode = false;
 		this.scorporaMode = false;
 		this.zoomOutMode = false;
+		this.turnCounter = 0;
 	}
 
 	public boolean isScorporaMode() {
@@ -125,6 +130,13 @@ public class GameMode {
 			this.gameWin = new GameWin("JPanzer");
 		}
 		return this.gameWin;
+	}
+
+	public SwitchPanel getSwitchPanel() {
+		if (this.switchPanel == null) {
+			this.switchPanel = new SwitchPanel();
+		}
+		return this.switchPanel;
 	}
 
 	public MappaGrafica getMappaGrafica() {
@@ -200,6 +212,10 @@ public class GameMode {
 			this.sound = new Sound();
 		}
 		return this.sound;
+	}
+
+	public int getTurnCounter() {
+		return this.turnCounter;
 	}
 
 	public void setScorporaMode(boolean value) {
@@ -278,6 +294,7 @@ public class GameMode {
 		} else {
 			this.turno = 1;
 		}
+		this.turnCounter++;
 	}
 
 	public boolean salvaPartita() {
@@ -303,6 +320,9 @@ public class GameMode {
 				bw.write("" + this.player1 + '\n' + this.player2 + '\n');
 				// stampo il turno
 				bw.write("" + this.turno + '\n');
+				// stampo il numero di turni
+				bw.write("" + this.turnCounter+ '\n');
+
 				// stampo la mappa
 				bw.write(this.mappa.toString());
 
@@ -358,6 +378,11 @@ public class GameMode {
 						text = br.readLine();
 						int turno = Integer.parseInt(text);
 						this.turno = turno;
+						
+						//leggo la 4° riga (turnCounter)
+						text = br.readLine();
+						int turnCounter = Integer.parseInt(text);
+						this.turnCounter = turnCounter;
 
 						// leggo la 4° riga (dimensione mappa)
 						text = br.readLine();
@@ -580,6 +605,7 @@ public class GameMode {
 		this.finalPanel = null;
 		this.unitPanel = null;
 		this.turno = 1;
+		this.turnCounter = 0;
 		this.selectionUnitMode = false;
 		this.playingMode = false;
 		this.movingMode = false;
