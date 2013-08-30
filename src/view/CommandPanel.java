@@ -59,7 +59,7 @@ public class CommandPanel extends javax.swing.JPanel {
 		this.salva.setEnabled(false);
 		this.scorpora.setEnabled(false);
 		this.shop.setEnabled(false);
-		
+
 	}
 
 	public void enableAll() {
@@ -77,7 +77,7 @@ public class CommandPanel extends javax.swing.JPanel {
 	public void setUnitLabel(Unità u) {
 		if (u != null) {
 			this.infoUnità.setText(NOMEUNITATXT + u.getNome());
-			this.esperienza.setText(ESPERIENZATXT + u.getEsp()*10);
+			this.esperienza.setText(ESPERIENZATXT + u.getEsp() * 10);
 			this.passi.setText(PASSITXT + u.getPassi());
 			this.numUnits.setText(NUMUNITSTXT + u.getNumUnits());
 		} else {
@@ -126,7 +126,7 @@ public class CommandPanel extends javax.swing.JPanel {
 		numUnits = new javax.swing.JLabel();
 
 		passi = new javax.swing.JLabel();
-		passi.setFont(new java.awt.Font("Arial", 1, 14)); 
+		passi.setFont(new java.awt.Font("Arial", 1, 14));
 		passi.setText(PASSITXT);
 
 		jSeparator1 = new javax.swing.JSeparator();
@@ -183,10 +183,11 @@ public class CommandPanel extends javax.swing.JPanel {
 
 		infoUnità.setBackground(new java.awt.Color(241, 157, 30));
 		infoUnità.setFont(new java.awt.Font("Arial", 1, 14));
+		infoUnità.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		infoUnità.setText(NOMEUNITATXT);
-		
+
 		esperienza.setBackground(new java.awt.Color(241, 157, 30));
-		esperienza.setFont(new java.awt.Font("Arial", 1, 14)); 
+		esperienza.setFont(new java.awt.Font("Arial", 1, 14));
 		esperienza.setText(ESPERIENZATXT);
 
 		numUnits.setBackground(new java.awt.Color(241, 157, 30));
@@ -197,7 +198,7 @@ public class CommandPanel extends javax.swing.JPanel {
 		jSeparator1.setForeground(new java.awt.Color(196, 68, 4));
 
 		zoom.setBackground(new java.awt.Color(241, 157, 30));
-		zoom.setFont(new java.awt.Font("Arial", 1, 14)); 
+		zoom.setFont(new java.awt.Font("Arial", 1, 14));
 		zoom.setText("ZOOM");
 
 		muovi.setBackground(new java.awt.Color(241, 157, 30));
@@ -212,14 +213,14 @@ public class CommandPanel extends javax.swing.JPanel {
 		attacca.setText("ATTACCA");
 
 		abbandona.setBackground(new java.awt.Color(241, 157, 30));
-		abbandona.setFont(new java.awt.Font("Arial", 1, 14)); 
+		abbandona.setFont(new java.awt.Font("Arial", 1, 14));
 		abbandona.setText("ABBANDONA PARTITA");
 		abbandona.setMaximumSize(new java.awt.Dimension(89, 25));
 		abbandona.setMinimumSize(new java.awt.Dimension(89, 25));
 		abbandona.setPreferredSize(new java.awt.Dimension(89, 25));
 
 		salva.setBackground(new java.awt.Color(241, 157, 30));
-		salva.setFont(new java.awt.Font("Arial", 1, 14)); 
+		salva.setFont(new java.awt.Font("Arial", 1, 14));
 		salva.setText("SALVA");
 		salva.setMaximumSize(new java.awt.Dimension(89, 25));
 		salva.setMinimumSize(new java.awt.Dimension(89, 25));
@@ -233,14 +234,14 @@ public class CommandPanel extends javax.swing.JPanel {
 		carica.setPreferredSize(new java.awt.Dimension(89, 25));
 
 		scorpora.setBackground(new java.awt.Color(241, 157, 30));
-		scorpora.setFont(new java.awt.Font("Arial", 1, 14)); 
+		scorpora.setFont(new java.awt.Font("Arial", 1, 14));
 		scorpora.setText("SCORPORA");
 		scorpora.setMaximumSize(new java.awt.Dimension(89, 25));
 		scorpora.setMinimumSize(new java.awt.Dimension(89, 25));
 		scorpora.setPreferredSize(new java.awt.Dimension(89, 25));
 
 		accorpa.setBackground(new java.awt.Color(241, 157, 30));
-		accorpa.setFont(new java.awt.Font("Arial", 1, 14)); 
+		accorpa.setFont(new java.awt.Font("Arial", 1, 14));
 		accorpa.setText("ACCORPA");
 
 		jSeparator2.setBackground(new java.awt.Color(241, 157, 30));
@@ -302,6 +303,11 @@ public class CommandPanel extends javax.swing.JPanel {
 								.addGroup(
 										layout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(
+														infoUnità,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														Short.MAX_VALUE)
 												.addComponent(
 														infoBattle1,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
@@ -411,33 +417,18 @@ public class CommandPanel extends javax.swing.JPanel {
 																		javax.swing.GroupLayout.PREFERRED_SIZE)
 																.addPreferredGap(
 																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addGroup(
-																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addGroup(
-																						layout.createSequentialGroup()
-																								.addComponent(
-																										esperienza,
-																										javax.swing.GroupLayout.DEFAULT_SIZE,
-																										javax.swing.GroupLayout.DEFAULT_SIZE,
-																										Short.MAX_VALUE)
-																								.addPreferredGap(
-																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																								.addComponent(
-																										numUnits,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
-																										84,
-																										javax.swing.GroupLayout.PREFERRED_SIZE))
-																				.addGroup(
-																						layout.createSequentialGroup()
-																								.addComponent(
-																										infoUnità,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
-																										201,
-																										javax.swing.GroupLayout.PREFERRED_SIZE)
-																								.addGap(0,
-																										0,
-																										Short.MAX_VALUE))))
+																.addComponent(
+																		esperienza,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																.addComponent(
+																		numUnits,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		84,
+																		javax.swing.GroupLayout.PREFERRED_SIZE))
 												.addComponent(
 														infoBattle2,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
@@ -566,5 +557,4 @@ public class CommandPanel extends javax.swing.JPanel {
 								.addComponent(infoBattle4)
 								.addContainerGap(38, Short.MAX_VALUE)));
 	}
-
 }
