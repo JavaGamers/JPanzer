@@ -4,10 +4,17 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
 
 import model.Aereo;
 import model.Artiglieria;
@@ -25,7 +32,7 @@ import view.GameWin;
 import view.MappaGrafica;
 import view.UnitPanel;
 
-public class UnitListener implements ActionListener {
+public class UnitListener extends MouseAdapter implements ActionListener {
 
 	public final static String FANTLEGGOPT = "fanteriaLegg";
 	public final static String FANTPESOPT = "fanteriaPes";
@@ -35,6 +42,56 @@ public class UnitListener implements ActionListener {
 	public final static String GIOCAOPT = "gioca";
 	public final static String ZOOMOPT = "zoom";
 	public static GameMode gameMode = GameMode.getGameMode();
+
+	public void mouseEntered(MouseEvent mE) {
+
+		if (mE.getSource() instanceof JButton) {
+			JButton source = (JButton) mE.getSource();
+			String action = source.getActionCommand();
+			Popup popup = UnitPanel.getPopup();
+			JLabel label = UnitPanel.getPopupLabel();
+			int x = source.getLocationOnScreen().x;
+			int y = source.getLocationOnScreen().y + source.getHeight();
+			if (action.equals(AEREOOPT)) {
+				label.setText("Costo: " + Aereo.COSTO);
+				PopupFactory factory = PopupFactory.getSharedInstance();
+				popup = factory.getPopup(null, label, x, y);
+				UnitPanel.setPopup(popup);
+				popup.show();
+			} else if (action.equals(ARTIGLIERIAOPT)) {
+				label.setText("Costo: " + Artiglieria.COSTO);
+				PopupFactory factory = PopupFactory.getSharedInstance();
+				popup = factory.getPopup(null, label, x, y);
+				UnitPanel.setPopup(popup);
+				popup.show();
+			} else if (action.equals(FANTLEGGOPT)) {
+				label.setText("Costo: " + FanteriaLeggera.COSTO);
+				PopupFactory factory = PopupFactory.getSharedInstance();
+				popup = factory.getPopup(null, label, x, y);
+				UnitPanel.setPopup(popup);
+				popup.show();
+			} else if (action.equals(FANTPESOPT)) {
+				label.setText("Costo: " + FanteriaPesante.COSTO);
+				PopupFactory factory = PopupFactory.getSharedInstance();
+				popup = factory.getPopup(null, label, x, y);
+				UnitPanel.setPopup(popup);
+				popup.show();
+			} else if (action.equals(PANZEROPT)) {
+				label.setText("Costo: " + Panzer.COSTO);
+				PopupFactory factory = PopupFactory.getSharedInstance();
+				popup = factory.getPopup(null, label, x, y);
+				UnitPanel.setPopup(popup);
+				popup.show();
+			}
+		}
+	}
+
+	public void mouseExited(MouseEvent mE) {
+		Popup popup = UnitPanel.getPopup();
+		if (popup != null) {
+			popup.hide();
+		}
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		String com = e.getActionCommand();

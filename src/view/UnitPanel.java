@@ -4,8 +4,10 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.Popup;
 
 import controller.GameMode;
+import controller.MappaListener;
 import controller.UnitListener;
 
 public class UnitPanel extends javax.swing.JPanel {
@@ -20,7 +22,8 @@ public class UnitPanel extends javax.swing.JPanel {
     private javax.swing.JButton zoom;
     private javax.swing.JLabel soldi;
     private javax.swing.JLabel playerTxt;
-    
+    private static Popup popup = null;
+    private static JLabel popupLabel = new JLabel();
     
     public static final String SOLDITXT = "Soldi rimanenti: ";
     public static final String PLAYERTXT = "Giocatore ";
@@ -37,30 +40,46 @@ public class UnitPanel extends javax.swing.JPanel {
     	this.soldi.setText(SOLDITXT+gameMode.getPlayer(gameMode.getTurno()).getSoldi());
     	this.playerTxt.setText(PLAYERTXT+gameMode.getTurno());
     }
-                             
+    
+    public static Popup getPopup(){
+    	return popup;
+    }
+    
+    public static JLabel getPopupLabel(){
+    	return popupLabel;
+    }
+    
+    public static void setPopup(Popup p){
+    	popup = p;
+    }
     private void initComponents() {
-    	
+  
     	UnitListener uL = new UnitListener();
 
         fanteriaLegg = new javax.swing.JButton();
         fanteriaLegg.addActionListener(uL);
         fanteriaLegg.setActionCommand("fanteriaLegg");
+        fanteriaLegg.addMouseListener(uL);
         
         fanteriaPes = new javax.swing.JButton();
         fanteriaPes.addActionListener(uL);
         fanteriaPes.setActionCommand("fanteriaPes");
+        fanteriaPes.addMouseListener(uL);
         
         panzer = new javax.swing.JButton();
         panzer.addActionListener(uL);
         panzer.setActionCommand("panzer");
+        panzer.addMouseListener(uL);
         
         aereo = new javax.swing.JButton();
         aereo.addActionListener(uL);
         aereo.setActionCommand("aereo");
+        aereo.addMouseListener(uL);
         
         artiglieria = new javax.swing.JButton();
         artiglieria.addActionListener(uL);
         artiglieria.setActionCommand("artiglieria");
+        artiglieria.addMouseListener(uL);
         
         gioca = new javax.swing.JButton();
         gioca.setText("Gioca");

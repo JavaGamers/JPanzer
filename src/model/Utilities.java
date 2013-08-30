@@ -2,10 +2,6 @@ package model;
 
 public class Utilities {
 	
-	
-	//Ce lo mettiamo il getCoord di esagono?
-	//Ce lo mettiamo il getElements del gameMode?
-	
 	//Da Esagono
 	
 	// metodo per calcolare n mod p
