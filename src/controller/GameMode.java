@@ -26,7 +26,7 @@ import model.Montagna;
 import model.Panzer;
 import model.Pianura;
 import model.Player;
-import model.Sound;
+import model.SoundEffect;
 import model.Unità;
 import view.CommandPanel;
 import view.FinalPanel;
@@ -54,7 +54,7 @@ public class GameMode {
 	private UnitPanel unitPanel;
 	private FinalPanel finalPanel;
 	private SwitchPanel switchPanel;
-	private Sound sound;
+	private SoundEffect sound;
 	private int turno;
 	private int turnCounter;
 	private boolean selectionUnitMode;
@@ -207,9 +207,9 @@ public class GameMode {
 		}
 	}
 
-	public Sound getSound() {
+	public SoundEffect getSound() {
 		if (this.sound == null) {
-			this.sound = new Sound();
+			this.sound = new SoundEffect();
 		}
 		return this.sound;
 	}
@@ -604,6 +604,7 @@ public class GameMode {
 		this.commandPanel = null;
 		this.finalPanel = null;
 		this.unitPanel = null;
+		this.switchPanel = null;
 		this.turno = 1;
 		this.turnCounter = 0;
 		this.selectionUnitMode = false;

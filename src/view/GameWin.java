@@ -3,7 +3,7 @@ package view;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-import model.Sound;
+import model.SoundEffect;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -38,7 +38,7 @@ public class GameWin extends JFrame{
 		super.setResizable(false);
 		super.setLayout(new BorderLayout());
 		super.pack();
-		Sound sound = gameMode.getSound();
+		SoundEffect sound = gameMode.getSound();
 		sound.startThemeMusic();
 	}
 
