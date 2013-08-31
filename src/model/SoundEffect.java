@@ -6,15 +6,12 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
 public class SoundEffect {
 
+	// URL dei temi musicali del gioco
 	private URL themeMusic;
 	private URL attackMusic;
 	private URL moveMusic;
@@ -25,6 +22,13 @@ public class SoundEffect {
 		this.attackMusic = getClass().getResource("Sound/attackMusic.wav");
 
 	}
+
+	/*
+	 * I seguenti metodi servono a creare delle clip musicali da degli
+	 * AudioInputStream ottenuti dagli URL dei temi musicali. Il themeMusic dopo
+	 * la chiamata del metodo corrispondente cicla all'infinito finchè il gioco
+	 * è aperto.
+	 */
 
 	public void startThemeMusic() {
 		try {
@@ -41,7 +45,7 @@ public class SoundEffect {
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 
 		} catch (Exception e) {
-			// whatevers
+			System.out.println(e.toString());
 		}
 	}
 
@@ -57,7 +61,7 @@ public class SoundEffect {
 			clip.start();
 
 		} catch (Exception e) {
-			// whatevers
+			System.out.println(e.toString());
 		}
 	}
 
@@ -73,7 +77,7 @@ public class SoundEffect {
 			clip.start();
 
 		} catch (Exception e) {
-			// whatevers
+			System.out.println(e.toString());
 		}
 	}
 }

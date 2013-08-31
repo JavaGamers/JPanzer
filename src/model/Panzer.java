@@ -11,7 +11,10 @@ public class Panzer extends Unità {
 	private final static int BASEDIF = 70; // difesa di base
 	private final static int PPT = 6; // passi per turno
 	public final static String STRNOME = "Panzer";
-	public final static int COSTO = 65;
+	public final static int COSTO = 65; /*
+										 * costo del battaglione minimo (10
+										 * unità)
+										 */
 
 	public Panzer(int n, int player) {
 		super(n, player);
@@ -20,17 +23,19 @@ public class Panzer extends Unità {
 		this.passi = Panzer.PPT;
 		if (this.player == 1) {
 			try {
-				URL imgUrl=getClass().getResource("/view/Icon pack/Unit Pack/Panzer1_Icon.png");
+				URL imgUrl = getClass().getResource(
+						"/view/Icon pack/Unit Pack/Panzer1_Icon.png");
 				bImg = ImageIO.read(imgUrl);
 			} catch (IOException e) {
-				// da scrivere
+				System.out.println(e.toString());
 			}
 		} else {
 			try {
-				URL imgUrl=getClass().getResource("/view/Icon pack/Unit Pack/Panzer2_Icon.png");
+				URL imgUrl = getClass().getResource(
+						"/view/Icon pack/Unit Pack/Panzer2_Icon.png");
 				bImg = ImageIO.read(imgUrl);
 			} catch (IOException e) {
-				// da scrivere
+				System.out.println(e.toString());
 			}
 		}
 	}
@@ -53,7 +58,7 @@ public class Panzer extends Unità {
 	public int getDef() {
 		return (int) (BASEDIF * (1 + this.esp) * this.bonus);
 	}
-	
+
 	public void setPassi(int passi) {
 		if (passi < 0) {
 			throw new IllegalArgumentException(

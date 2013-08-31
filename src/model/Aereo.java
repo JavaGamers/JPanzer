@@ -13,7 +13,8 @@ public class Aereo extends Unità {
 	private final static int BASEDIF = 40; // difesa di base
 	private final static int PPT = 5; // passi per turno
 	public final static String STRNOME = "Aereo";
-	public final static int COSTO = 75;
+	public final static int COSTO = 75; /* costo del battaglione minimo (10
+										 unità) */
 
 	public Aereo(int n, int player) {
 		super(n, player);
@@ -26,7 +27,7 @@ public class Aereo extends Unità {
 						"/view/Icon pack/Unit Pack/Aereo1_Icon.png");
 				bImg = ImageIO.read(imgUrl);
 			} catch (IOException e) {
-				// da scrivere
+				System.out.println(e.toString());
 			}
 		} else {
 			try {
@@ -34,18 +35,15 @@ public class Aereo extends Unità {
 						"/view/Icon pack/Unit Pack/Aereo2_Icon.png");
 				bImg = ImageIO.read(imgUrl);
 			} catch (IOException e) {
-				// da scrivere
+				System.out.println(e.toString());
 			}
 		}
 	}
 
 	public void resetPassi() {
 		this.passi = Aereo.PPT;
-		this.calcolaEsagoniRaggiungibili();
 	}
 
-	// l'aereo per muoversi considera unitario il costo di attraversamento di
-	// ciascun territorio
 	public LinkedList<Esagono> getEsagoniRaggiungibili() {
 
 		Mappa m = gameMode.getMappa();
@@ -55,6 +53,7 @@ public class Aereo extends Unità {
 		return this.esagoniRaggiungibili;
 	}
 
+	/* versione modificata e adattata del codice presente nella classe Dijkstra */
 	private static LinkedList<Esagono> calcolaEsagoniRaggiungibili(Mappa m,
 			Esagono source, int passi) {
 		int lenght = m.getComponent().length;
@@ -82,9 +81,15 @@ public class Aereo extends Unità {
 					Esagono v = u.getAdiacenze()[i];
 					if (v != null) {
 
-						// unica differenza rispetto al codice della classe
-						// Dijkstra
-						int weight = 1;
+						/*
+						 * unica differenza rispetto al codice della classe
+						 * Dijkstra
+						 */
+						int weight = 1; /*
+										 * l'aereo per muoversi considera
+										 * unitario il costo di attraversamento
+										 * di ciascun territorio
+										 */
 						long distanceToU = u.getMinDistance() + weight;
 						if (distanceToU < v.getMinDistance()) {
 							q.remove(v);

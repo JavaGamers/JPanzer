@@ -2,15 +2,19 @@ package model;
 
 // gli esagoni sono comparabili in base al costo del loro territorio
 public class Esagono implements Comparable<Esagono> {
-	private int id; // numerdo d'ordine all'interno della lista
+	private int id; // numerdo d'ordine all'interno della lista (vedi Mappa)
 	private int[] coordinate; // settore - livello - posizione
-	private Esagono[] adiacenze; // contiene le adiacenze: i lati degli esagoni
-									// sono numerati a partire da quello in alto
-									// da 0 a 5 in senso orario
+	private Esagono[] adiacenze; /*
+								 * contiene le adiacenze: i lati degli esagoni
+								 * sono numerati, a partire da quello in alto,
+								 * da 0 a 5 in senso orario
+								 */
 	private Unità unit; // unità presente sull'esagono
 	private Territorio territorio;
-	private long minDistance;
+	private long minDistance; // distanza minima dall'esagono source (utilizzata
+								// in Dijkstra)
 
+	// costruttore tramite coordinate settore - livello - posizione
 	public Esagono(int[] c) {
 		this.territorio = null;
 		this.unit = null;
@@ -35,6 +39,7 @@ public class Esagono implements Comparable<Esagono> {
 			this.id = (c[0] - 1) * c[1] + c[2] + Utilities.startLiv(c[1]);
 	}
 
+	// costruttore tramite numero identificativo id
 	public Esagono(int id) {
 		this.territorio = null;
 		this.unit = null;
@@ -124,6 +129,10 @@ public class Esagono implements Comparable<Esagono> {
 		this.territorio = t;
 	}
 
+	/*
+	 * algoritmo che dato in ingresso il numero identificativo dell'esagono "id"
+	 * dà in uscita le corrispondeti coordinate settore livello posizione
+	 */
 	public static int[] getCoord(int id) {
 		int[] coordinate = new int[3];
 		coordinate[1] = 0;
@@ -175,8 +184,10 @@ public class Esagono implements Comparable<Esagono> {
 		return trovato;
 	}
 
-
-
+	/*
+	 * questo metodo è strutturato nell'ottica del salvataggio della
+	 * mappa/partita
+	 */
 	public String toString() {
 
 		String s = "";

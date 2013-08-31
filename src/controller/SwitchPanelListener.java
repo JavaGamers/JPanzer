@@ -22,8 +22,8 @@ public class SwitchPanelListener extends MouseAdapter {
 		JScrollPane jsp = new JScrollPane();
 		jsp.setViewportView(gameMode.getMappaGrafica());
 		jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-		c.add(jsp, BorderLayout.CENTER);
 		c.add(gameMode.getCommandPanel(), BorderLayout.EAST);
+		c.add(jsp, BorderLayout.CENTER);
 
 		// ridisegno della finestra
 		gameWin.repaint();

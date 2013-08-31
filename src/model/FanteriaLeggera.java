@@ -11,7 +11,10 @@ public class FanteriaLeggera extends Unità {
 	private final static int BASEDIF = 30; // difesa di base
 	private final static int PPT = 10; // passi per turno
 	public final static String STRNOME = "Fanteria Leggera";
-	public final static int COSTO = 20;
+	public final static int COSTO = 20; /*
+										 * costo del battaglione minimo (10
+										 * unità)
+										 */
 
 	public FanteriaLeggera(int n, int player) {
 		super(n, player);
@@ -24,7 +27,7 @@ public class FanteriaLeggera extends Unità {
 						"/view/Icon pack/Unit Pack/Fanteria Leggera1_Icon.png");
 				bImg = ImageIO.read(imgUrl);
 			} catch (IOException e) {
-				// da scrivere
+				System.out.println(e.toString());
 			}
 		} else {
 			try {
@@ -32,7 +35,7 @@ public class FanteriaLeggera extends Unità {
 						"/view/Icon pack/Unit Pack/Fanteria Leggera2_Icon.png");
 				bImg = ImageIO.read(imgUrl);
 			} catch (IOException e) {
-				// da scrivere
+				System.out.println(e.toString());
 			}
 		}
 	}
@@ -55,7 +58,7 @@ public class FanteriaLeggera extends Unità {
 	public int getDef() {
 		return (int) (BASEDIF * (1 + this.esp) * this.bonus);
 	}
-	
+
 	public void setPassi(int passi) {
 		if (passi < 0) {
 			throw new IllegalArgumentException(

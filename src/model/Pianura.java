@@ -7,19 +7,24 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 public class Pianura implements Territorio {
-	
-	private final static double BONUS=1; // bonus di permanenza delle unità sul territorio (DA RIDEFINIRE)
+
+	private final static double BONUS = 1;/*
+										 * bonus moltiplicativo di permanenza
+										 * delle unità sul territorio
+										 * (moltiplicato alla difesa)
+										 */
 	private BufferedImage bImg; // immagine della pianura
-	private final static int costo= 1; // da ridefinire
-	
-	public Pianura(){
+	private final static int costo = 1; // Costo di attraversamento
+
+	public Pianura() {
 		try {
-			URL imgUrl=getClass().getResource("/view/Icon pack/Land Pack/pianura.png");
+			URL imgUrl = getClass().getResource(
+					"/view/Icon pack/Land Pack/pianura.png");
 			bImg = ImageIO.read(imgUrl);
-	          
-	       } catch (Exception e) {
-	    	   System.out.println(e.toString());
-	       }
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
 	}
 
 	public String getNome() {
@@ -29,14 +34,13 @@ public class Pianura implements Territorio {
 	public int getCosto() {
 		return costo;
 	}
-	
-	public double getBonus(){
+
+	public double getBonus() {
 		return BONUS;
 	}
 
-	
 	public Image getImage() {
-		
+
 		return bImg;
 	}
 

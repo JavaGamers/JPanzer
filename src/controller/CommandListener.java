@@ -72,8 +72,8 @@ public class CommandListener implements ActionListener {
 		JScrollPane jsp = new JScrollPane();
 		jsp.setViewportView(gameMode.getMappaGrafica());
 		jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-		c.add(jsp, BorderLayout.CENTER);
 		c.add(gameMode.getUnitPanel(), BorderLayout.EAST);
+		c.add(jsp, BorderLayout.CENTER);
 		c.repaint();
 		c.validate();
 	}

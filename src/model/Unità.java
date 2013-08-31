@@ -20,13 +20,25 @@ public abstract class Unità {
 	protected int numUnits; // numero di unità
 	protected Esagono pos; // posizione sulla mappa
 	protected int player; // 1=player 1 / 2=player 2
-	protected BufferedImage bImg;
-	protected BufferedImage xImage;
-	protected LinkedList<Esagono> esagoniRaggiungibili;
-	protected boolean alreadyAttack;
+	protected BufferedImage bImg; // immagine unità (zoom in)
+	protected BufferedImage xImage; // immagine unità (zoom out)
+	protected LinkedList<Esagono> esagoniRaggiungibili; /*
+														 * lista contenente gli
+														 * esagoni che l'unità
+														 * può raggiungere con i
+														 * passi rimanenti
+														 */
+	protected boolean alreadyAttack; /*
+									 * true = l'unità ha già attaccato durante
+									 * il turno / false = l'unità non ha ancora
+									 * attaccato durante il turno
+									 */
 	public static GameMode gameMode = GameMode.getGameMode();
 
-	public static final int UNITACOMPRABILI = 10;
+	public static final int UNITACOMPRABILI = 10; /*
+												 * numero minimo di unità
+												 * comprabili
+												 */
 
 	public Unità(int n, int player) {
 		if (player < 1 || player > 2) {
@@ -44,13 +56,18 @@ public abstract class Unità {
 		this.esagoniRaggiungibili = null;
 		this.alreadyAttack = false;
 
+		/*
+		 * a seconda del player di appartenenza dell'unità ad essa viene
+		 * associata un'immagine oppure un'altra in modo da identificarla
+		 * facilmente
+		 */
 		if (this.player == 1) {
 			try {
 				URL imgUrl = getClass().getResource(
 						"/view/Icon pack/Unit Pack/Xrossa.png");
 				xImage = ImageIO.read(imgUrl);
 			} catch (IOException e) {
-				// da scrivere
+				System.out.println(e.toString());
 			}
 
 			gameMode.getPlayer(1).aggiungiUnità(this);
@@ -60,7 +77,7 @@ public abstract class Unità {
 						"/view/Icon pack/Unit Pack/Xblu.png");
 				xImage = ImageIO.read(imgUrl);
 			} catch (IOException e) {
-				// da scrivere
+				System.out.println(e.toString());
 			}
 			gameMode.getPlayer(2).aggiungiUnità(this);
 		}
@@ -164,6 +181,10 @@ public abstract class Unità {
 		return this.getNome().equals(other.getNome());
 	}
 
+	/*
+	 * il criterio di confronto è basato sulla posizione dell'unità in quanto
+	 * non possono coesistere due unità diverse sullo stesso territorio
+	 */
 	public boolean equals(Unità other) {
 		boolean ok = false;
 		if (this.pos.equals(other.pos))
