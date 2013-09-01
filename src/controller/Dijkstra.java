@@ -7,6 +7,8 @@ import model.Esagono;
 import model.Mappa;
 
 public class Dijkstra {
+	
+	public static GameMode gameMode = GameMode.getGameMode();
 
 	public static LinkedList<Esagono> shortestPath(Mappa m, Esagono source,
 			int limit) {
@@ -34,7 +36,7 @@ public class Dijkstra {
 				for (int i = 0; i < 6; i++) {
 					Esagono v = u.getAdiacenze()[i];
 					if (v != null) {
-						if (v.getUnit() == null) {
+						if (v.getUnit() == null || v.getUnit().getPlayer()== gameMode.getTurno()) {
 							int weight = v.getCosto();
 							long distanceToU = u.getMinDistance() + weight;
 							if (distanceToU < v.getMinDistance()) {

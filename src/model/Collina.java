@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 public class Collina implements Territorio {
 
-	private final static double BONUS = 1.3; /*
+	private final static double BONUS = 1.2; /*
 											 * bonus moltiplicativo di
 											 * permanenza delle unità sul
 											 * territorio (moltiplicato alla

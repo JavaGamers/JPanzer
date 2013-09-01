@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 public class Lago implements Territorio {
 
-	private final static double BONUS = 0.8;/*
+	private final static double BONUS = 0.7;/*
 											 * bonus moltiplicativo di
 											 * permanenza delle unità sul
 											 * territorio (moltiplicato alla

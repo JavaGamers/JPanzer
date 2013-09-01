@@ -7,11 +7,11 @@ import javax.imageio.ImageIO;
 
 public class Artiglieria extends Unità {
 
-	private final static int BASEATT = 100; // attacco di base
-	private final static int BASEDIF = 20; // difesa di base
+	private final static int BASEATT = 750; // attacco di base
+	private final static int BASEDIF = 130; // difesa di base
 	private final static int PPT = 5; // passi per turno
 	public final static String STRNOME = "Artiglieria";
-	public final static int COSTO = 55; /*
+	public final static int COSTO = 100; /*
 										 * costo del battaglione minimo (10
 										 * unità)
 										 */
@@ -69,5 +69,9 @@ public class Artiglieria extends Unità {
 					"non puoi settare un numero di passi maggiori di quelli disponibili per tale unità");
 		}
 		this.passi = passi;
+	}
+	
+	public boolean isSameUnitOf(Unità other) {
+		return this.getNome().equals(other.getNome());
 	}
 }

@@ -9,11 +9,11 @@ import javax.imageio.ImageIO;
 
 public class Aereo extends Unità {
 
-	private final static int BASEATT = 80; // attacco di base
-	private final static int BASEDIF = 40; // difesa di base
-	private final static int PPT = 5; // passi per turno
+	private final static int BASEATT = 250; // attacco di base
+	private final static int BASEDIF = 350; // difesa di base
+	private final static int PPT = 7; // passi per turno
 	public final static String STRNOME = "Aereo";
-	public final static int COSTO = 75; /* costo del battaglione minimo (10
+	public final static int COSTO = 140; /* costo del battaglione minimo (10
 										 unità) */
 
 	public Aereo(int n, int player) {
@@ -130,5 +130,9 @@ public class Aereo extends Unità {
 					"non puoi settare un numero di passi maggiori di quelli disponibili per tale unità");
 		}
 		this.passi = passi;
+	}
+	
+	public boolean isSameUnitOf(Unità other) {
+		return this.getNome().equals(other.getNome());
 	}
 }

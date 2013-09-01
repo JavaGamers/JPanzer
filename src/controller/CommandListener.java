@@ -87,29 +87,39 @@ public class CommandListener implements ActionListener {
 		Unità u = null;
 		if (unitSelected != null) {
 			if (unitSelected.getPlayer() == turno) {
-				MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
-				int xC = mappaGrafica.getXCentro();
-				int yC = mappaGrafica.getYCentro();
-				double raggio = MappaGrafica.STDRAGGIO;
-				int id = 0;
-				EsagonoGrafico eG = new EsagonoGrafico(id, xC, yC, raggio);
-				Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
-				List<Esagono> esagoniRaggiungibili = unitSelected
-						.getEsagoniRaggiungibili();
-				for (int i = 0; i < 6; i++) {
-					adiacenza = selected.getAdiacenze()[i];
-					if (esagoniRaggiungibili.contains(adiacenza)) {
-						u = adiacenza.getUnit();
-						if (u == null) {
-							eG.newSet(adiacenza.getId(), xC, yC, raggio);
-							g2.setColor(Color.MAGENTA);
-							g2.setStroke(new BasicStroke(3));
-							g2.draw(eG);
-							gameMode.setScorporaMode(true);
+				if (unitSelected.getNumUnits() > 1) {
+					MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
+					int xC = mappaGrafica.getXCentro();
+					int yC = mappaGrafica.getYCentro();
+					double raggio = MappaGrafica.STDRAGGIO;
+					int id = 0;
+					EsagonoGrafico eG = new EsagonoGrafico(id, xC, yC, raggio);
+					Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
+					List<Esagono> esagoniRaggiungibili = unitSelected
+							.getEsagoniRaggiungibili();
+					for (int i = 0; i < 6; i++) {
+						adiacenza = selected.getAdiacenze()[i];
+						if (esagoniRaggiungibili.contains(adiacenza)) {
+							u = adiacenza.getUnit();
+							if (u == null) {
+								eG.newSet(adiacenza.getId(), xC, yC, raggio);
+								g2.setColor(Color.MAGENTA);
+								g2.setStroke(new BasicStroke(3));
+								g2.draw(eG);
+								gameMode.setScorporaMode(true);
+							}
 						}
 					}
+				} else {
+					JOptionPane.showMessageDialog(gameMode.getGameWin(),
+							"Hai rimasto una sola unità!", "ERRORE!",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
+		} else {
+			JOptionPane.showMessageDialog(gameMode.getGameWin(),
+					"Non hai selezionato alcuna unità!", "ERRORE!",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -142,22 +152,22 @@ public class CommandListener implements ActionListener {
 		// settiamo le label del CommandPanel
 		p = gameMode.getPlayer(gameMode.getTurno());
 		gameMode.getCommandPanel().setPlayerLabel(p);
-		
-		//aggiorno le label dello SwitchPanel
+
+		// aggiorno le label dello SwitchPanel
 		gameMode.getSwitchPanel().updateLabel();
-		
-		//faccio comparire lo SwitchPanel
+
+		// faccio comparire lo SwitchPanel
 		GameWin gameWin = gameMode.getGameWin();
 		Container c = gameWin.getContentPane();
 		c.removeAll();
 		c.add(gameMode.getSwitchPanel(), BorderLayout.CENTER);
-		
-		//elimino l'ultimo popup se c'è
+
+		// elimino l'ultimo popup se c'è
 		Popup popup = MappaGrafica.getPopup();
 		if (popup != null) {
 			popup.hide();
 		}
-		
+
 		// ridisegno della finestra
 		gameWin.repaint();
 		gameWin.validate();
@@ -222,7 +232,8 @@ public class CommandListener implements ActionListener {
 		Esagono adiacenza = null;
 		Unità u = null;
 		if (unitSelected != null) {
-			if (unitSelected.getPlayer() == turno && !unitSelected.hasAlreadyAttack()) {
+			if (unitSelected.getPlayer() == turno
+					&& !unitSelected.hasAlreadyAttack()) {
 				MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
 				int xC = mappaGrafica.getXCentro();
 				int yC = mappaGrafica.getYCentro();
@@ -283,6 +294,10 @@ public class CommandListener implements ActionListener {
 					}
 				}
 			}
+		} else {
+			JOptionPane.showMessageDialog(gameMode.getGameWin(),
+					"Non hai selezionato alcuna unità!", "ERRORE!",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -382,6 +397,10 @@ public class CommandListener implements ActionListener {
 				gameMode.setMovingMode(true);
 				g2.setColor(Color.BLACK);
 			}
+		} else {
+			JOptionPane.showMessageDialog(gameMode.getGameWin(),
+					"Non hai selezionato alcuna unità!", "ERRORE!",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

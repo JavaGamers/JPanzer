@@ -7,11 +7,11 @@ import javax.imageio.ImageIO;
 
 public class FanteriaPesante extends Unità {
 
-	private final static int BASEATT = 60; // attacco di base
-	private final static int BASEDIF = 50; // difesa di base
-	private final static int PPT = 8; // passi per turno
+	private final static int BASEATT = 150; // attacco di base
+	private final static int BASEDIF = 100; // difesa di base
+	private final static int PPT = 10; // passi per turno
 	public final static String STRNOME = "Fanteria Pesante";
-	public final static int COSTO = 30; /*
+	public final static int COSTO = 40; /*
 										 * costo del battaglione minimo (10
 										 * unità)
 										 */
@@ -69,5 +69,9 @@ public class FanteriaPesante extends Unità {
 					"non puoi settare un numero di passi maggiori di quelli disponibili per tale unità");
 		}
 		this.passi = passi;
+	}
+	
+	public boolean isSameUnitOf(Unità other) {
+		return this.getNome().equals(other.getNome());
 	}
 }

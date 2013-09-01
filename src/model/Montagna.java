@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 
 public class Montagna implements Territorio {
 
-	private final static double BONUS = 1.7; /*
+	private final static double BONUS = 2; /*
 											 * bonus moltiplicativo di
 											 * permanenza delle unità sul
 											 * territorio (moltiplicato alla

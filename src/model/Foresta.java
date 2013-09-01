@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 public class Foresta implements Territorio {
 
-	private final static double BONUS = 1.6;/*
+	private final static double BONUS = 1.5;/*
 											 * bonus moltiplicativo di
 											 * permanenza delle unità sul
 											 * territorio (moltiplicato alla

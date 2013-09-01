@@ -51,7 +51,7 @@ public class Utilities {
 	public static int calulateMoneyEarned(int prevNum, int postNum, Unità u) {
 		int gain = 0;
 		int diff = prevNum - postNum;
-		double percent = 2 / 5;
+		double percent = 1;
 
 		if (diff > prevNum) {
 			diff = prevNum;
@@ -62,7 +62,9 @@ public class Utilities {
 		if (u instanceof Artiglieria) {
 			gain = (int) (d * Artiglieria.COSTO);
 		} else if (u instanceof Aereo) {
+			System.out.println("entrato");
 			gain = (int) (d * Aereo.COSTO);
+			System.out.println("guadano metodo "+gain);
 		} else if (u instanceof FanteriaPesante) {
 			gain = (int) (d * FanteriaPesante.COSTO);
 		} else if (u instanceof FanteriaLeggera) {
