@@ -270,7 +270,6 @@ public class MappaListener extends MouseAdapter {
 						* attSelected) / (defOther));
 				int moneyEarned = Utilities.calulateMoneyEarned(
 						other.getNumUnits(), numOtherRemaining, other);
-				System.out.println("unità iniziali "+other.getNumUnits()+" unità rimanenti "+numOtherRemaining);
 
 				if (numOtherRemaining > 0) {
 					other.setNumUnits(numOtherRemaining);
@@ -298,8 +297,9 @@ public class MappaListener extends MouseAdapter {
 					selectedUnit.setNumUnits(numSelectedRemaining);
 					selectedUnit.setAlreadyAttack(true);
 					Player p = gameMode.getPlayer(gameMode.getTurno());
-					System.out.println("soldi guadagnati "+moneyEarned);
-					p.setMoney(p.getSoldi() + moneyEarned);
+					int nuoviS = p.getSoldi() + moneyEarned;
+					p.setMoney(nuoviS);
+					commandPanel.setPlayerLabel(p);
 				} else {
 					Player p = gameMode.getPlayer(selectedUnit.getPlayer());
 					p.rimuoviUnità(selectedUnit);

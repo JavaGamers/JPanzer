@@ -1,29 +1,29 @@
 package model;
 
 public class Utilities {
-	
-	//Da Esagono
-	
+
+	// Da Esagono
+
 	// metodo per calcolare n mod p
 	public static int mod(int n, int base) {
 		if (n >= base)
 			n = n % base;
 		return n;
 	}
-	
-	//Da Esagono
+
+	// Da Esagono
 	// metodo per calcolare il valore iniziale dato il livello
 	public static int startLiv(int x) {
 		return (3 * x * x - 3 * x + 1);
 	}
 
-	//Da Esagono
+	// Da Esagono
 	// metodo per calcolare il valore finale dato il livello
 	public static int endLiv(int x) {
 		return (3 * x * x + 3 * x);
 	}
-	
-	//Da Esagono
+
+	// Da Esagono
 	public static int sup(double d) {
 		int s = 0;
 
@@ -45,32 +45,34 @@ public class Utilities {
 			s = 6;
 		return s;
 	}
-	
-	
-	//Da MappaListener
+
+	// Da MappaListener
 	public static int calulateMoneyEarned(int prevNum, int postNum, Unità u) {
 		int gain = 0;
-		int diff = prevNum - postNum;
-		double percent = 1;
+		double diff = prevNum - postNum;
+		double percent = 9.0 / 10.0;
 
 		if (diff > prevNum) {
 			diff = prevNum;
 		}
 
-		double d = diff * percent / 10;
+		double d = ((diff * percent) / 10.0);
 
 		if (u instanceof Artiglieria) {
 			gain = (int) (d * Artiglieria.COSTO);
+
 		} else if (u instanceof Aereo) {
-			System.out.println("entrato");
 			gain = (int) (d * Aereo.COSTO);
-			System.out.println("guadano metodo "+gain);
+
 		} else if (u instanceof FanteriaPesante) {
 			gain = (int) (d * FanteriaPesante.COSTO);
+
 		} else if (u instanceof FanteriaLeggera) {
 			gain = (int) (d * FanteriaLeggera.COSTO);
+
 		} else if (u instanceof Panzer) {
 			gain = (int) (d * Panzer.COSTO);
+
 		}
 		return gain;
 	}
