@@ -64,6 +64,10 @@ public class CommandListener implements ActionListener {
 	}
 
 	private void shopOpt() {
+		gameMode.setAccorpaMode(false);
+		gameMode.setAttackMode(false);
+		gameMode.setMovingMode(false);
+		gameMode.setScorporaMode(false);
 		gameMode.setSelectionUnitMode(true);
 		GameWin gameWin = gameMode.getGameWin();
 		Container c = gameWin.getContentPane();
@@ -79,6 +83,12 @@ public class CommandListener implements ActionListener {
 	}
 
 	private void scorporaOpt() {
+		
+		gameMode.setAccorpaMode(false);
+		gameMode.setAttackMode(false);
+		gameMode.setMovingMode(false);
+		gameMode.setSelectionUnitMode(false);
+		
 		Mappa m = gameMode.getMappa();
 		Esagono selected = m.getComponent()[m.getSelezionato()];
 		int turno = gameMode.getTurno();
@@ -128,6 +138,12 @@ public class CommandListener implements ActionListener {
 	}
 
 	private void passaOpt() {
+		
+		gameMode.setAccorpaMode(false);
+		gameMode.setAttackMode(false);
+		gameMode.setMovingMode(false);
+		gameMode.setScorporaMode(false);
+		gameMode.setSelectionUnitMode(false);
 
 		// resettiamo i valori delle unità
 		Mappa m = gameMode.getMappa();
@@ -225,6 +241,12 @@ public class CommandListener implements ActionListener {
 	}
 
 	private void attaccaOpt() {
+		
+		gameMode.setAccorpaMode(false);
+		gameMode.setMovingMode(false);
+		gameMode.setScorporaMode(false);
+		gameMode.setSelectionUnitMode(false);
+		
 		Mappa m = gameMode.getMappa();
 		Esagono selected = m.getComponent()[m.getSelezionato()];
 		int turno = gameMode.getTurno();
@@ -262,6 +284,12 @@ public class CommandListener implements ActionListener {
 	}
 
 	private void accorpaOpt() {
+
+		gameMode.setAttackMode(false);
+		gameMode.setMovingMode(false);
+		gameMode.setScorporaMode(false);
+		gameMode.setSelectionUnitMode(false);
+		
 		Mappa m = gameMode.getMappa();
 		Esagono selected = m.getComponent()[m.getSelezionato()];
 		int turno = gameMode.getTurno();

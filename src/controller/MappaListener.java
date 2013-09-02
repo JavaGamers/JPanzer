@@ -223,9 +223,7 @@ public class MappaListener extends MouseAdapter {
 			img = selectedUnit.getImage();
 			mappaGrafica.paintImage(g2, eG, img);
 			int nuoviP = selectedUnit.getPassi() - (int) nuovo.getMinDistance();
-			/*
-			 * if(nuoviP<0){ nuoviP = 0; }
-			 */
+
 			selectedUnit.setPassi(nuoviP);
 		}
 		gameMode.setMovingMode(false);
@@ -297,9 +295,7 @@ public class MappaListener extends MouseAdapter {
 					selectedUnit.setNumUnits(numSelectedRemaining);
 					selectedUnit.setAlreadyAttack(true);
 					Player p = gameMode.getPlayer(gameMode.getTurno());
-					int nuoviS = p.getSoldi() + moneyEarned;
-					p.setMoney(nuoviS);
-					commandPanel.setPlayerLabel(p);
+					p.setMoney(p.getSoldi() + moneyEarned);
 				} else {
 					Player p = gameMode.getPlayer(selectedUnit.getPlayer());
 					p.rimuoviUnità(selectedUnit);
@@ -314,8 +310,6 @@ public class MappaListener extends MouseAdapter {
 				}
 
 				commandPanel.setBattleStatsLabel(selectedUnit, other);
-
-				
 
 				int winner = gameMode.checkVictory();
 				if (winner != 0) {
@@ -357,7 +351,8 @@ public class MappaListener extends MouseAdapter {
 		LinkedList<Esagono> esagoniRaggiungibili = selectedUnit
 				.getEsagoniRaggiungibili();
 
-		if (esagoniRaggiungibili.contains(nuovo) && vecchio.isAdiacente(nuovo) && !vecchio.equals(nuovo)) {
+		if (esagoniRaggiungibili.contains(nuovo) && vecchio.isAdiacente(nuovo)
+				&& !vecchio.equals(nuovo)) {
 			other = nuovo.getUnit();
 			if (other != null && selectedUnit.isSameUnitOf(other)) {
 				gameMode.getSound().startMoveMusic();
@@ -442,8 +437,13 @@ public class MappaListener extends MouseAdapter {
 				 * setto i valori della nuova unità in base ai valori dell'unità
 				 * di partenza
 				 */
+				int nuoviP;
 				other.setEsp(esp);
-				int nuoviP = other.getPassi() - nuovo.getCosto();
+				if (!(selectedUnit instanceof Aereo)) {
+					nuoviP = selectedUnit.getPassi() - nuovo.getCosto();
+				} else {
+					nuoviP = selectedUnit.getPassi() - 1;
+				}
 				other.setPassi(nuoviP);
 				other.setAlreadyAttack(selectedUnit.hasAlreadyAttack());
 				nuovo.setUnit(other);
@@ -454,7 +454,7 @@ public class MappaListener extends MouseAdapter {
 
 			}
 		}
-		
+
 		gameMode.setScorporaMode(false);
 		gameMode.getGameWin().repaint();
 		gameMode.getGameWin().validate();
