@@ -35,7 +35,7 @@ public class InitMapPanel extends javax.swing.JPanel {
 		return ok;
 	}
 
-	public JList getDimList() {
+	public JList<String> getDimList() {
 		return this.dimList;
 	}
 
@@ -55,24 +55,22 @@ public class InitMapPanel extends javax.swing.JPanel {
 		setSize(size);
 
 		titleLabel = new javax.swing.JLabel();
-		editMap = new javax.swing.JButton();
-		jScrollPane1 = new javax.swing.JScrollPane();
-		dimList = new javax.swing.JList();
-		newMap = new javax.swing.JButton();
-		back = new javax.swing.JButton();
-		forward = new javax.swing.JButton();
-
 		titleLabel.setFont(new java.awt.Font("Monotype Corsiva", 0, 60));
 		titleLabel.setForeground(buttonFore);
 		titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		titleLabel.setText("Cosa vuoi fare?");
-
+		
+		editMap = new javax.swing.JButton();
 		editMap.setText("Edita preesistente");
 		editMap.setForeground(buttonFore);
 		editMap.setBackground(buttonBack);
 		editMap.addActionListener(impl);
 		editMap.setActionCommand("edit");
-
+		
+		jScrollPane1 = new javax.swing.JScrollPane();
+		jScrollPane1.setViewportView(dimList);
+		
+		dimList = new javax.swing.JList<String>();
 		dimList.setModel(new javax.swing.AbstractListModel() {
 			String[] strings = { "Piccola", "Media", "Grande", "Epica" };
 
@@ -91,21 +89,22 @@ public class InitMapPanel extends javax.swing.JPanel {
 		dimList.addListSelectionListener(impl);
 		dimList.setBackground(buttonBack);
 		dimList.setForeground(buttonFore);
-
-		jScrollPane1.setViewportView(dimList);
-
+		
+		newMap = new javax.swing.JButton();
 		newMap.setText("Nuova Mappa");
 		newMap.setForeground(buttonFore);
 		newMap.setBackground(buttonBack);
 		newMap.addActionListener(impl);
 		newMap.setActionCommand("new");
-
+		
+		back = new javax.swing.JButton();
 		back.setText("Indietro");
 		back.setForeground(buttonFore);
 		back.setBackground(buttonBack);
 		back.addActionListener(impl);
 		back.setActionCommand("back");
-
+		
+		forward = new javax.swing.JButton();
 		forward.setText("Avanti");
 		forward.setForeground(buttonFore);
 		forward.setBackground(buttonBack);

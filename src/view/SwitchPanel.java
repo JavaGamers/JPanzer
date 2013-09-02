@@ -25,19 +25,17 @@ public class SwitchPanel extends javax.swing.JPanel {
     }
                        
     private void initComponents() {
+    	setBackground(new java.awt.Color(0, 0, 0));
     	SwitchPanelListener spl = new SwitchPanelListener();
     	this.addMouseListener(spl);
 
         day = new javax.swing.JLabel();
-        playerLabel = new javax.swing.JLabel();
-
-        setBackground(new java.awt.Color(0, 0, 0));
-
         day.setForeground(new java.awt.Color(255, 255, 255));
         day.setFont(new java.awt.Font("Monotype Corsiva", 0, 72));
         day.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         day.setText(DAY);
-
+        
+        playerLabel = new javax.swing.JLabel();
         playerLabel.setForeground(new java.awt.Color(255, 255, 255));
         playerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         playerLabel.setFont(new java.awt.Font("Monotype Corsiva", 0, 72));

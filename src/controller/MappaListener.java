@@ -362,10 +362,19 @@ public class MappaListener extends MouseAdapter {
 						* other.getNumUnits())
 						/ numUnits;
 				int passi = 0;
-				if (selectedUnit.getPassi() < other.getPassi()) {
-					passi = selectedUnit.getPassi();
+				if (selectedUnit instanceof Aereo) {
+					if ((selectedUnit.getPassi() - 1) < other.getPassi()) {
+						passi = selectedUnit.getPassi() - 1;
+					} else {
+						passi = other.getPassi();
+					}
 				} else {
-					passi = other.getPassi();
+					if ((selectedUnit.getPassi() - nuovo.getCosto()) < other
+							.getPassi()) {
+						passi = selectedUnit.getPassi() - nuovo.getCosto();
+					} else {
+						passi = other.getPassi();
+					}
 				}
 				other.setNumUnits(numUnits);
 				other.setEsp(esperienza);
@@ -445,7 +454,8 @@ public class MappaListener extends MouseAdapter {
 					nuoviP = selectedUnit.getPassi() - 1;
 				}
 				other.setPassi(nuoviP);
-				other.setAlreadyAttack(selectedUnit.hasAlreadyAttack());
+				other.setAlreadyAttack(selectedUnit.hasAlreadyAttack()
+						&& other.hasAlreadyAttack());
 				nuovo.setUnit(other);
 
 				// aggiungo other alla UnitList del suo player

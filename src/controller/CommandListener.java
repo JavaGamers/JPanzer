@@ -471,9 +471,9 @@ public class CommandListener implements ActionListener {
 					eG.newSet(id, xC, yC, raggio);
 					g2.setColor(Color.YELLOW);
 					g2.setStroke(new BasicStroke(3));
-					System.out.println("sto per colorare gli esagoni");
+			//		System.out.println("sto per colorare gli esagoni");
 					g2.draw(eG);
-					System.out.println("ho colorato gli esagoni");
+			//		System.out.println("ho colorato gli esagoni");
 				}
 				gameMode.setMovingMode(true);
 				g2.setColor(Color.BLACK);

@@ -82,9 +82,9 @@ public class InitGame extends javax.swing.JPanel {
 	}
 
 	private void initComponents() {
-		
-		Color buttonFore = new Color(240,180,0);
-		Color buttonBack = new Color(161,47,14);
+
+		Color buttonFore = new Color(240, 180, 0);
+		Color buttonBack = new Color(161, 47, 14);
 
 		Image img = gameMode.getGameWin().getBackgroundImage();
 		Color color = new Color(240, 180, 0);
@@ -96,36 +96,14 @@ public class InitGame extends javax.swing.JPanel {
 		setSize(size);
 
 		InitGameListener igl = new InitGameListener();
+
 		titleLabel = new javax.swing.JLabel();
-
-		PreviewMap = new MappaGrafica(DEFMAP, -50, 130);
-		PreviewMap.setRaggio(MappaGrafica.PREVIEWRAGGIO);
-
-		chooseMap = new javax.swing.JButton();
-		player1Label = new javax.swing.JLabel();
-		p1NameLabel = new javax.swing.JLabel();
-		p1Name = new javax.swing.JTextField();
-		p1moneyLabel = new javax.swing.JLabel();
-		p1initValueMoney = new javax.swing.JTextField();
-		p1Slider = new JSlider(JSlider.HORIZONTAL, Player.MINMONEY,
-				Player.MAXMONEY, Player.STDMONEY);
-		p2Slider = new JSlider(JSlider.HORIZONTAL, Player.MINMONEY,
-				Player.MAXMONEY, Player.STDMONEY);
-		p2initValueMoney = new javax.swing.JTextField();
-		p2Name = new javax.swing.JTextField();
-		p2moneyLabel = new javax.swing.JLabel();
-		player2Label = new javax.swing.JLabel();
-		p2NameLabel = new javax.swing.JLabel();
-		back = new javax.swing.JButton();
-		forward = new javax.swing.JButton();
-
 		titleLabel.setFont(new java.awt.Font("Monotype Corsiva", 0, 60));
 		titleLabel.setForeground(color);
 		titleLabel.setText("Pronti per cominciare...");
 
-		p1initValueMoney.setText("" + Player.STDMONEY);
-		p2initValueMoney.setText("" + Player.STDMONEY);
-
+		PreviewMap = new MappaGrafica(DEFMAP, -50, 130);
+		PreviewMap.setRaggio(MappaGrafica.PREVIEWRAGGIO);
 		PreviewMap.setPreferredSize(new java.awt.Dimension(245, 245));
 
 		javax.swing.GroupLayout PreviewMapLayout = new javax.swing.GroupLayout(
@@ -138,20 +116,40 @@ public class InitGame extends javax.swing.JPanel {
 				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 245,
 				Short.MAX_VALUE));
 
+		chooseMap = new javax.swing.JButton();
 		chooseMap.setText("Scegli Mappa");
 		chooseMap.setForeground(buttonFore);
 		chooseMap.setBackground(buttonBack);
 		chooseMap.addActionListener(igl);
 		chooseMap.setActionCommand("chooseMap");
 
+		player1Label = new javax.swing.JLabel();
+		player1Label.setText("Player 1");
+		player1Label.setForeground(color);
+
+		p1NameLabel = new javax.swing.JLabel();
+		p1NameLabel.setText("Nome: ");
+		p1NameLabel.setForeground(color);
+
+		p1Name = new javax.swing.JTextField();
+
+		p1moneyLabel = new javax.swing.JLabel();
+		p1moneyLabel.setText("Soldi Iniziali: ");
+		p1moneyLabel.setForeground(color);
+
+		p1initValueMoney = new javax.swing.JTextField();
+
+		p1Slider = new JSlider(JSlider.HORIZONTAL, Player.MINMONEY,
+				Player.MAXMONEY, Player.STDMONEY);
 		p1Slider.addChangeListener(igl);
 		p1Slider.setForeground(buttonFore);
-
 		p1Slider.setBackground(buttonBack);
 		p1Slider.setMajorTickSpacing(500);
 		p1Slider.setMinorTickSpacing(100);
 		p1Slider.setPaintTicks(true);
 
+		p2Slider = new JSlider(JSlider.HORIZONTAL, Player.MINMONEY,
+				Player.MAXMONEY, Player.STDMONEY);
 		p2Slider.addChangeListener(igl);
 		p2Slider.setForeground(buttonFore);
 		p2Slider.setBackground(buttonBack);
@@ -159,35 +157,38 @@ public class InitGame extends javax.swing.JPanel {
 		p2Slider.setMinorTickSpacing(100);
 		p2Slider.setPaintTicks(true);
 
-		player1Label.setText("Player 1");
-		player1Label.setForeground(color);
+		p2initValueMoney = new javax.swing.JTextField();
 
-		p1NameLabel.setText("Nome: ");
-		p1NameLabel.setForeground(color);
+		p2Name = new javax.swing.JTextField();
 
-		p1moneyLabel.setText("Soldi Iniziali: ");
-		p1moneyLabel.setForeground(color);
-
+		p2moneyLabel = new javax.swing.JLabel();
 		p2moneyLabel.setText("Soldi Iniziali: ");
 		p2moneyLabel.setForeground(color);
 
+		player2Label = new javax.swing.JLabel();
 		player2Label.setText("Player 2");
 		player2Label.setForeground(color);
 
+		p2NameLabel = new javax.swing.JLabel();
 		p2NameLabel.setText("Nome: ");
 		p2NameLabel.setForeground(color);
 
+		back = new javax.swing.JButton();
 		back.setText("Indietro");
 		back.setForeground(buttonFore);
 		back.setBackground(buttonBack);
 		back.addActionListener(igl);
 		back.setActionCommand("back");
 
+		forward = new javax.swing.JButton();
 		forward.setText("Avanti");
 		forward.setForeground(buttonFore);
 		forward.setBackground(buttonBack);
 		forward.addActionListener(igl);
 		forward.setActionCommand("forward");
+
+		p1initValueMoney.setText("" + Player.STDMONEY);
+		p2initValueMoney.setText("" + Player.STDMONEY);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);
