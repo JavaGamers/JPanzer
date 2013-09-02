@@ -11,7 +11,7 @@ public class FanteriaPesante extends Unità {
 	private final static int BASEDIF = 100; // difesa di base
 	private final static int PPT = 10; // passi per turno
 	public final static String STRNOME = "Fanteria Pesante";
-	public final static int COSTO = 40; /*
+	public final static int COSTO = 60; /*
 										 * costo del battaglione minimo (10
 										 * unità)
 										 */

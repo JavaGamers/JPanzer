@@ -64,13 +64,23 @@ public class CommandListener implements ActionListener {
 	}
 
 	private void shopOpt() {
-		gameMode.setAccorpaMode(false);
-		gameMode.setAttackMode(false);
-		gameMode.setMovingMode(false);
-		gameMode.setScorporaMode(false);
-		gameMode.setSelectionUnitMode(true);
+		
 		GameWin gameWin = gameMode.getGameWin();
 		Container c = gameWin.getContentPane();
+		if (gameMode.isAccorpaMode() || gameMode.isAttackMode()
+				|| gameMode.isMovingMode() || gameMode.isScorporaMode()) {
+			
+			gameMode.setAccorpaMode(false);
+			gameMode.setAttackMode(false);
+			gameMode.setMovingMode(false);
+			gameMode.setScorporaMode(false);
+			c.repaint();
+			c.validate();
+		}
+
+		
+		gameMode.setSelectionUnitMode(true);
+
 		c.removeAll();
 		gameMode.getUnitPanel().updateLabel();
 		JScrollPane jsp = new JScrollPane();
@@ -84,11 +94,20 @@ public class CommandListener implements ActionListener {
 
 	private void scorporaOpt() {
 		
-		gameMode.setAccorpaMode(false);
-		gameMode.setAttackMode(false);
-		gameMode.setMovingMode(false);
-		gameMode.setSelectionUnitMode(false);
+		GameWin gameWin = gameMode.getGameWin();
+		Container c = gameWin.getContentPane();
+		if (gameMode.isAccorpaMode() || gameMode.isAttackMode()
+				|| gameMode.isMovingMode() || gameMode.isSelecionUnitMode()) {
+			
+			gameMode.setAccorpaMode(false);
+			gameMode.setAttackMode(false);
+			gameMode.setMovingMode(false);
+			gameMode.setSelectionUnitMode(false);
+			c.repaint();
+			c.validate();
+		}
 		
+
 		Mappa m = gameMode.getMappa();
 		Esagono selected = m.getComponent()[m.getSelezionato()];
 		int turno = gameMode.getTurno();
@@ -138,7 +157,7 @@ public class CommandListener implements ActionListener {
 	}
 
 	private void passaOpt() {
-		
+
 		gameMode.setAccorpaMode(false);
 		gameMode.setAttackMode(false);
 		gameMode.setMovingMode(false);
@@ -242,11 +261,19 @@ public class CommandListener implements ActionListener {
 
 	private void attaccaOpt() {
 		
-		gameMode.setAccorpaMode(false);
-		gameMode.setMovingMode(false);
-		gameMode.setScorporaMode(false);
-		gameMode.setSelectionUnitMode(false);
-		
+		GameWin gameWin = gameMode.getGameWin();
+		Container c = gameWin.getContentPane();
+		if (gameMode.isAccorpaMode() || gameMode.isMovingMode()
+				|| gameMode.isSelecionUnitMode() || gameMode.isScorporaMode()) {
+			
+			gameMode.setAccorpaMode(false);
+			gameMode.setMovingMode(false);
+			gameMode.setScorporaMode(false);
+			gameMode.setSelectionUnitMode(false);
+			c.repaint();
+			c.validate();
+		}
+
 		Mappa m = gameMode.getMappa();
 		Esagono selected = m.getComponent()[m.getSelezionato()];
 		int turno = gameMode.getTurno();
@@ -284,12 +311,20 @@ public class CommandListener implements ActionListener {
 	}
 
 	private void accorpaOpt() {
-
-		gameMode.setAttackMode(false);
-		gameMode.setMovingMode(false);
-		gameMode.setScorporaMode(false);
-		gameMode.setSelectionUnitMode(false);
 		
+		GameWin gameWin = gameMode.getGameWin();
+		Container c = gameWin.getContentPane();
+		if (gameMode.isAttackMode() || gameMode.isMovingMode()
+				|| gameMode.isSelecionUnitMode() || gameMode.isScorporaMode()) {
+			
+			gameMode.setAttackMode(false);
+			gameMode.setMovingMode(false);
+			gameMode.setScorporaMode(false);
+			gameMode.setSelectionUnitMode(false);
+			c.repaint();
+			c.validate();
+		}
+
 		Mappa m = gameMode.getMappa();
 		Esagono selected = m.getComponent()[m.getSelezionato()];
 		int turno = gameMode.getTurno();
@@ -396,6 +431,22 @@ public class CommandListener implements ActionListener {
 	}
 
 	private void muoviOpt() {
+		
+		GameWin gameWin = gameMode.getGameWin();
+		Container c = gameWin.getContentPane();
+		if (gameMode.isAttackMode() || gameMode.isAccorpaMode()
+				|| gameMode.isSelecionUnitMode() || gameMode.isScorporaMode()) {
+			
+			gameMode.setAttackMode(false);
+			gameMode.setAccorpaMode(false);
+			gameMode.setScorporaMode(false);
+			gameMode.setSelectionUnitMode(false);
+			c.repaint();
+			System.out.println("dopo repaint prima di validate");
+			c.validate();
+			System.out.println("ho validato");
+		}
+		
 		Mappa m = gameMode.getMappa();
 		Esagono selected = m.getComponent()[m.getSelezionato()];
 		int turno = gameMode.getTurno();
@@ -420,7 +471,9 @@ public class CommandListener implements ActionListener {
 					eG.newSet(id, xC, yC, raggio);
 					g2.setColor(Color.YELLOW);
 					g2.setStroke(new BasicStroke(3));
+					System.out.println("sto per colorare gli esagoni");
 					g2.draw(eG);
+					System.out.println("ho colorato gli esagoni");
 				}
 				gameMode.setMovingMode(true);
 				g2.setColor(Color.BLACK);

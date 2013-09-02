@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 import javax.swing.JPanel;
 import javax.swing.Popup;
@@ -15,6 +17,7 @@ import controller.MappaListener;
 import model.Esagono;
 import model.EsagonoGrafico;
 import model.Mappa;
+import model.Unità;
 
 public class MappaGrafica extends JPanel {
 
@@ -26,8 +29,8 @@ public class MappaGrafica extends JPanel {
 	private static Popup popup = null;
 	public static GameMode gameMode = GameMode.getGameMode();
 
-	public static final double STDRAGGIO = 70;
-	public static final double ZOOMRAGGIO = 30;
+	public static final double STDRAGGIO = 60;
+	public static final double ZOOMRAGGIO = 25;
 	public static final double PREVIEWRAGGIO = 8;
 
 	public MappaGrafica(Mappa m, int x, int y) {
@@ -115,6 +118,27 @@ public class MappaGrafica extends JPanel {
 				this.paintImage(g2, eG, imgLand);
 				this.paintImage(g2, eG, imgUnit);
 				g2.draw(eG);
+			}
+			
+			Esagono selezionato;
+			if(gameMode.isMovingMode()){
+				selezionato = this.mappa.getComponent()[this.mappa.getSelezionato()];
+				Unità u = selezionato.getUnit();
+				if(u!=null){
+					LinkedList<Esagono> esagoniRaggiungibili = u.getEsagoniRaggiungibili();
+					Iterator<Esagono> it = esagoniRaggiungibili.iterator();
+
+					int id = 0;
+					Esagono e1;
+					while (it.hasNext()) {
+						e1 = it.next();
+						id = e1.getId();
+						eG.newSet(id, xC, yC, raggio);
+						g2.setColor(Color.YELLOW);
+						g2.setStroke(new BasicStroke(3));
+						g2.draw(eG);
+					}
+				}
 			}
 		}
 		// zoom out

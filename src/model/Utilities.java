@@ -50,7 +50,7 @@ public class Utilities {
 	public static int calulateMoneyEarned(int prevNum, int postNum, Unità u) {
 		int gain = 0;
 		double diff = prevNum - postNum;
-		double percent = 9.0 / 10.0;
+		double percent = 0.5;
 
 		if (diff > prevNum) {
 			diff = prevNum;
