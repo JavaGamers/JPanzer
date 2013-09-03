@@ -16,30 +16,36 @@ import java.net.URL;
 
 import controller.GameMode;
 
-public class GameWin extends JFrame{
+public class GameWin extends JFrame {
 	public static GameMode gameMode = GameMode.getGameMode();
-	private BufferedImage bImg;
-	
-	public GameWin(String title){		
+	private BufferedImage backgroundImg;
+
+	public GameWin(String title) {
 		super(title);
-		
+
 		try {
-			URL imgUrl=getClass().getResource("/view/Icon pack/JPanzer_background.png");
-			bImg = ImageIO.read(imgUrl);
-	       } catch (IOException e) {
-	    	   System.out.println(e.toString());
-	       }
-		
-		
-		Dimension size = new Dimension(bImg.getWidth(null), bImg.getHeight(null));
+			URL imgUrl = getClass().getResource(
+					"/view/Icon pack/JPanzer_background.png");
+			backgroundImg = ImageIO.read(imgUrl);
+		} catch (IOException e) {
+			System.out.println(e.toString());
+		}
+
+		/*
+		 * impostiamo la dimensione della finestra in modo tale da coincidere
+		 * con la dimensione dell'immagine backgroundImg
+		 */
+		Dimension size = new Dimension(backgroundImg.getWidth(null),
+				backgroundImg.getHeight(null));
 		setPreferredSize(size);
-	    setSize(size);
-	    super.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setSize(size);
+
+		super.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		super.setResizable(false);
 		super.setLayout(new BorderLayout());
 		super.pack();
 		SoundEffect sound = gameMode.getSound();
-//		sound.startThemeMusic();
+		sound.startThemeMusic();
 	}
 
 	public static void main(String[] args) {
@@ -49,17 +55,18 @@ public class GameWin extends JFrame{
 
 		c.add(gameMode.getStartPanel());
 		gameWin.setVisible(true);
-		
+
 	}
-	
-	public Image getBackgroundImage(){
-		return this.bImg;
+
+	public Image getBackgroundImage() {
+		return this.backgroundImg;
 	}
-	
-	public void paint(Graphics g){
-		if(gameMode.getMappaGrafica()!=null){
+
+	public void paint(Graphics g) {
+		if (gameMode.getMappaGrafica() != null) {
 			MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
-			mappaGrafica.newSet(mappaGrafica.getWidth()/2, mappaGrafica.getHeight()/2);
+			mappaGrafica.newSet(mappaGrafica.getWidth() / 2,
+					mappaGrafica.getHeight() / 2);
 		}
 		super.paint(g);
 	}

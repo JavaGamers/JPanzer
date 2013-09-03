@@ -52,7 +52,7 @@ public class CommandPanel extends javax.swing.JPanel {
 		initComponents();
 	}
 
-	// disabilita bottoni: option = 0 tutti, option = 1 tutti tranne lo zoom
+	// disabilita bottoni
 	public void silenceAll() {
 		this.abbandona.setEnabled(false);
 		this.accorpa.setEnabled(false);
@@ -66,6 +66,7 @@ public class CommandPanel extends javax.swing.JPanel {
 
 	}
 
+	// abilita i bottoni
 	public void enableAll() {
 		this.abbandona.setEnabled(true);
 		this.accorpa.setEnabled(true);
@@ -81,7 +82,7 @@ public class CommandPanel extends javax.swing.JPanel {
 	public void setUnitLabel(Unità u) {
 		if (u != null) {
 			this.infoUnità.setText(NOMEUNITATXT + u.getNome());
-			this.esperienza.setText(ESPERIENZATXT + (int)(u.getEsp() * 10));
+			this.esperienza.setText(ESPERIENZATXT + (int) (u.getEsp() * 10));
 			this.passi.setText(PASSITXT + u.getPassi());
 			this.numUnits.setText(NUMUNITSTXT + u.getNumUnits());
 		} else {
@@ -97,8 +98,10 @@ public class CommandPanel extends javax.swing.JPanel {
 		this.player.setText(PLAYERTXT + p.getNome());
 	}
 
-	// disabilita bottoni: option = 0 tutti, option = 1 tutti tranne lo zoom
-
+	/*
+	 * i due metodi seguenti servono per aggiornare le label descrittive
+	 * dell'esito del combattimento
+	 */
 	public void setInfoBattleLabel(Unità att, Unità def) {
 
 		Player playerAtt = gameMode.getPlayer(att.getPlayer());
@@ -123,7 +126,6 @@ public class CommandPanel extends javax.swing.JPanel {
 
 	private void initComponents() {
 
-		
 		Color background = new Color(241, 157, 30);
 		Color foreground = new Color(196, 68, 4);
 		Dimension stdDim = new Dimension(89, 25);
@@ -137,12 +139,12 @@ public class CommandPanel extends javax.swing.JPanel {
 		infoUnità.setFont(font);
 		infoUnità.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		infoUnità.setText(NOMEUNITATXT);
-		
+
 		esperienza = new javax.swing.JLabel();
 		esperienza.setBackground(background);
 		esperienza.setFont(font);
 		esperienza.setText(ESPERIENZATXT);
-		
+
 		numUnits = new javax.swing.JLabel();
 		numUnits.setBackground(background);
 		numUnits.setFont(font);
@@ -162,7 +164,6 @@ public class CommandPanel extends javax.swing.JPanel {
 		zoom.setBackground(background);
 		zoom.setFont(font);
 		zoom.setText("ZOOM");
-		
 
 		muovi = new javax.swing.JButton();
 		muovi.addActionListener(cL);
@@ -190,7 +191,7 @@ public class CommandPanel extends javax.swing.JPanel {
 		abbandona.setMaximumSize(stdDim);
 		abbandona.setMinimumSize(stdDim);
 		abbandona.setPreferredSize(stdDim);
-		
+
 		salva = new javax.swing.JButton();
 		salva.addActionListener(cL);
 		salva.setActionCommand("salva");
@@ -200,7 +201,7 @@ public class CommandPanel extends javax.swing.JPanel {
 		salva.setMaximumSize(stdDim);
 		salva.setMinimumSize(stdDim);
 		salva.setPreferredSize(stdDim);
-		
+
 		carica = new javax.swing.JButton();
 		carica.addActionListener(cL);
 		carica.setActionCommand("carica");
@@ -210,7 +211,7 @@ public class CommandPanel extends javax.swing.JPanel {
 		carica.setMaximumSize(stdDim);
 		carica.setMinimumSize(stdDim);
 		carica.setPreferredSize(stdDim);
-		
+
 		scorpora = new javax.swing.JButton();
 		scorpora.addActionListener(cL);
 		scorpora.setActionCommand("scorpora");
@@ -230,7 +231,7 @@ public class CommandPanel extends javax.swing.JPanel {
 
 		jSeparator2 = new javax.swing.JSeparator();
 		jSeparator2.setBackground(background);
-		jSeparator2.setForeground(foreground);	
+		jSeparator2.setForeground(foreground);
 
 		passa = new javax.swing.JButton();
 		passa.addActionListener(cL);
@@ -246,12 +247,12 @@ public class CommandPanel extends javax.swing.JPanel {
 		soldi.setBackground(background);
 		soldi.setFont(font);
 		soldi.setText(SOLDITXT);
-		
+
 		player = new javax.swing.JLabel();
 		player.setBackground(background);
 		player.setFont(font);
 		player.setText(PLAYERTXT);
-		
+
 		jSeparator3 = new javax.swing.JSeparator();
 		jSeparator3.setBackground(background);
 		jSeparator3.setForeground(foreground);
@@ -265,8 +266,8 @@ public class CommandPanel extends javax.swing.JPanel {
 
 		jSeparator4 = new javax.swing.JSeparator();
 		jSeparator4.setBackground(background);
-		jSeparator4.setForeground(foreground);	
-		
+		jSeparator4.setForeground(foreground);
+
 		jSeparator5 = new javax.swing.JSeparator();
 		jSeparator5.setBackground(background);
 		jSeparator5.setForeground(foreground);

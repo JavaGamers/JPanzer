@@ -48,6 +48,10 @@ public class InitMapPanel extends javax.swing.JPanel {
 
 		Image img = gameMode.getGameWin().getBackgroundImage();
 
+		/*
+		 * impostiamo la dimensione della finestra in modo tale da coincidere
+		 * con la dimensione dell'immagine di sfondo img
+		 */
 		Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
 		setPreferredSize(size);
 		setMinimumSize(size);

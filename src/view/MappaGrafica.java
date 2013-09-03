@@ -7,7 +7,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
-
 import javax.swing.JPanel;
 import javax.swing.Popup;
 
@@ -19,14 +18,23 @@ import model.Mappa;
 
 public class MappaGrafica extends JPanel {
 
-	private int xC;
-	private int yC;
-	public double raggio;
-	private Mappa mappa;
+	private int xC; // ascissa centro della mappa
+	private int yC; // ordinata centro della mappa
+	public double raggio; /*
+						 * raggio= raggio circonferenza circoscritta a ciascun
+						 * esagono
+						 */
+	private Mappa mappa; // mappa logica da disegnare
 	private final static Color BACKGROUND = new Color(116, 156, 44);
-	private static Popup popup = null;
+
+	private static Popup popup = null;/*
+									 * popup utilizzato per mostrare il numero
+									 * di unità presenti sull'esagono su cui è
+									 * posizionato il mouse
+									 */
 	public static GameMode gameMode = GameMode.getGameMode();
 
+	/* valori possibili dei raggi, rispettivamente: Standard, Zoom Out, Anteprima */
 	public static final double STDRAGGIO = 60;
 	public static final double ZOOMRAGGIO = 25;
 	public static final double PREVIEWRAGGIO = 8;
@@ -56,7 +64,7 @@ public class MappaGrafica extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
-		if (this.raggio!=PREVIEWRAGGIO ) {
+		if (this.raggio != PREVIEWRAGGIO) {
 			g.setColor(BACKGROUND);
 			g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		}
@@ -221,8 +229,8 @@ public class MappaGrafica extends JPanel {
 	public double getRaggio() {
 		return this.raggio;
 	}
-	
-	public static Popup getPopup(){
+
+	public static Popup getPopup() {
 		return popup;
 	}
 
@@ -238,8 +246,8 @@ public class MappaGrafica extends JPanel {
 	public void setMappa(Mappa m) {
 		this.mappa = m;
 	}
-	
-	public static void setPopup(Popup p){
+
+	public static void setPopup(Popup p) {
 		popup = p;
 	}
 }

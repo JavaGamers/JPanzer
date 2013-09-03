@@ -21,6 +21,7 @@ public class LandPanel extends javax.swing.JPanel {
 		initComponents();
 	}
 
+	// disabilita tutti i bottoni
 	public void silenceAll() {
 		this.collina.setEnabled(false);
 		this.foresta.setEnabled(false);
@@ -32,6 +33,7 @@ public class LandPanel extends javax.swing.JPanel {
 		this.zoom.setEnabled(false);
 	}
 
+	// abilita tutti i bottoni
 	public void enableAll() {
 		this.collina.setEnabled(true);
 		this.foresta.setEnabled(true);

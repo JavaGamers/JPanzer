@@ -115,13 +115,14 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 	private void zoomOpt() {
 		GameWin gameWin = gameMode.getGameWin();
 		MappaGrafica mG = gameMode.getMappaGrafica();
-		gameMode.getCommandPanel().silenceAll();
 		if (mG.getRaggio() == MappaGrafica.STDRAGGIO) {
 			gameMode.setZoomOutMode(true);
 			mG.setRaggio(MappaGrafica.ZOOMRAGGIO);
+			gameMode.getCommandPanel().silenceAll();
 		} else {
 			gameMode.setZoomOutMode(false);
 			mG.setRaggio(MappaGrafica.STDRAGGIO);
+			gameMode.getCommandPanel().enableAll();
 		}
 		gameWin.repaint();
 		mG.validate();

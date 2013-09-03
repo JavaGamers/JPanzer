@@ -30,13 +30,7 @@ public class Esagono implements Comparable<Esagono> {
 			this.coordinate[i] = c[i];
 		}
 
-		// algoritmo che date le coordinate fornisce id
-		if (c[1] == 0)
-			this.id = 0;
-		if (c[1] == 1)
-			this.id = c[0];
-		else
-			this.id = (c[0] - 1) * c[1] + c[2] + Utilities.startLiv(c[1]);
+		this.id = getIdFromCoord(c);
 	}
 
 	// costruttore tramite numero identificativo id
@@ -48,7 +42,7 @@ public class Esagono implements Comparable<Esagono> {
 		this.adiacenze = new Esagono[6];
 		this.minDistance = Integer.MAX_VALUE;
 
-		this.coordinate = Esagono.getCoord(id);
+		this.coordinate = Esagono.getCoordFromId(id);
 
 	}
 
@@ -133,7 +127,7 @@ public class Esagono implements Comparable<Esagono> {
 	 * algoritmo che dato in ingresso il numero identificativo dell'esagono "id"
 	 * dà in uscita le corrispondeti coordinate settore livello posizione
 	 */
-	public static int[] getCoord(int id) {
+	public static int[] getCoordFromId(int id) {
 		int[] coordinate = new int[3];
 		coordinate[1] = 0;
 		if (id == 0) {
@@ -170,6 +164,22 @@ public class Esagono implements Comparable<Esagono> {
 			}
 		}
 		return coordinate;
+	}
+
+	public static int getIdFromCoord(int[] coord) {
+		if(coord.length!=3){
+			throw new IllegalArgumentException("usa formato coordinate corretto");
+		}
+		int id;
+		if (coord[1] == 0)
+			id = 0;
+		if (coord[1] == 1)
+			id = coord[0];
+		else
+			id = (coord[0] - 1) * coord[1] + coord[2]
+					+ Utilities.startLiv(coord[1]);
+
+		return id;
 	}
 
 	public boolean isAdiacente(Esagono other) {

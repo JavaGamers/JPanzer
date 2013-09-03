@@ -89,6 +89,11 @@ public class InitGame extends javax.swing.JPanel {
 		Image img = gameMode.getGameWin().getBackgroundImage();
 		Color color = new Color(240, 180, 0);
 
+		
+		/*
+		 * impostiamo la dimensione del pannello in modo tale da coincidere
+		 * con la dimensione dell'immagine di sfondo img
+		 */
 		Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
 		setPreferredSize(size);
 		setMinimumSize(size);

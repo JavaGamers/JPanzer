@@ -26,9 +26,9 @@ public class EsagonoGrafico extends Polygon {
 		super.ypoints = new int[6];
 		this.raggio = r;
 		this.apotema = Math.sqrt(3) / 2 * r;
-		int s = Esagono.getCoord(id)[0];
-		int l = Esagono.getCoord(id)[1];
-		int p = Esagono.getCoord(id)[2];
+		int s = Esagono.getCoordFromId(id)[0];
+		int l = Esagono.getCoordFromId(id)[1];
+		int p = Esagono.getCoordFromId(id)[2];
 
 		switch (s) {
 
@@ -109,9 +109,9 @@ public class EsagonoGrafico extends Polygon {
 		this.raggio = r;
 		this.apotema = Math.sqrt(3) / 2 * r;
 		// s=settore - l=livello - p=posizione dell'esagono da disegnare
-		int s = Esagono.getCoord(id)[0];
-		int l = Esagono.getCoord(id)[1];
-		int p = Esagono.getCoord(id)[2];
+		int s = Esagono.getCoordFromId(id)[0];
+		int l = Esagono.getCoordFromId(id)[1];
+		int p = Esagono.getCoordFromId(id)[2];
 
 		switch (s) {
 		case 0:

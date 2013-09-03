@@ -137,15 +137,7 @@ public class Mappa {
 		if (coord.length != 3)
 			throw new IllegalArgumentException(
 					"Invalid format, use settore - livello - posizione");
-		int id;
-		if (coord[1] == 0)
-			id = 0;
-		if (coord[1] == 1)
-			id = coord[0];
-		else
-			id = (coord[0] - 1) * coord[1] + coord[2]
-					+ Utilities.startLiv(coord[1]);
-
+			int id = Esagono.getIdFromCoord(coord);
 		return this.component[id];
 
 	}

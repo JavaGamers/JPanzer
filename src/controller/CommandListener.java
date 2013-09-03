@@ -141,7 +141,7 @@ public class CommandListener implements ActionListener {
 					}
 				} else {
 					JOptionPane.showMessageDialog(gameMode.getGameWin(),
-							"Hai rimasto una sola unità!", "ERRORE!",
+							"Ti è rimasta una sola unità!", "ERRORE!",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
