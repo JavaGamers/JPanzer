@@ -70,8 +70,4 @@ public class FanteriaPesante extends Unità {
 		}
 		this.passi = passi;
 	}
-	
-	public boolean isSameUnitOf(Unità other) {
-		return this.getNome().equals(other.getNome());
-	}
 }

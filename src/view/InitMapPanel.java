@@ -71,9 +71,6 @@ public class InitMapPanel extends javax.swing.JPanel {
 		editMap.addActionListener(impl);
 		editMap.setActionCommand("edit");
 		
-		jScrollPane1 = new javax.swing.JScrollPane();
-		jScrollPane1.setViewportView(dimList);
-		
 		dimList = new javax.swing.JList<String>();
 		dimList.setModel(new javax.swing.AbstractListModel() {
 			String[] strings = { "Piccola", "Media", "Grande", "Epica" };
@@ -93,6 +90,9 @@ public class InitMapPanel extends javax.swing.JPanel {
 		dimList.addListSelectionListener(impl);
 		dimList.setBackground(buttonBack);
 		dimList.setForeground(buttonFore);
+		
+		jScrollPane1 = new javax.swing.JScrollPane();
+		jScrollPane1.setViewportView(dimList);
 		
 		newMap = new javax.swing.JButton();
 		newMap.setText("Nuova Mappa");

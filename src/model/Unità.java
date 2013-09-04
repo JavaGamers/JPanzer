@@ -177,7 +177,9 @@ public abstract class Unità {
 
 	public abstract void setPassi(int passi);
 
-	public abstract boolean isSameUnitOf(Unità other);
+	public boolean isSameUnitOf(Unità other){
+		return this.getNome().equals(other.getNome());
+	}
 	
 	/*
 	 * il criterio di confronto è basato sulla posizione dell'unità in quanto
