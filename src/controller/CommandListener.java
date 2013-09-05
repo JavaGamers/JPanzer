@@ -63,13 +63,17 @@ public class CommandListener implements ActionListener {
 		}
 	}
 
+	/*
+	 * Se clicco il pulsante shop deve comparire lo UnitPanel e devo entrare in
+	 * selectionUnitMode
+	 */
 	private void shopOpt() {
-		
+
 		GameWin gameWin = gameMode.getGameWin();
 		Container c = gameWin.getContentPane();
 		if (gameMode.isAccorpaMode() || gameMode.isAttackMode()
 				|| gameMode.isMovingMode() || gameMode.isScorporaMode()) {
-			
+
 			gameMode.setAccorpaMode(false);
 			gameMode.setAttackMode(false);
 			gameMode.setMovingMode(false);
@@ -78,7 +82,6 @@ public class CommandListener implements ActionListener {
 			c.validate();
 		}
 
-		
 		gameMode.setSelectionUnitMode(true);
 
 		c.removeAll();
@@ -92,13 +95,18 @@ public class CommandListener implements ActionListener {
 		c.validate();
 	}
 
+	/*
+	 * Se clicco il pulsante scorpora, se l'operazione è possibile, devono
+	 * evidenziarsi gli esagoni che potrebbero ospitare una nuova unità e si
+	 * deve entrare in selectionUnitMode
+	 */
 	private void scorporaOpt() {
-		
+
 		GameWin gameWin = gameMode.getGameWin();
 		Container c = gameWin.getContentPane();
 		if (gameMode.isAccorpaMode() || gameMode.isAttackMode()
 				|| gameMode.isMovingMode() || gameMode.isSelecionUnitMode()) {
-			
+
 			gameMode.setAccorpaMode(false);
 			gameMode.setAttackMode(false);
 			gameMode.setMovingMode(false);
@@ -106,7 +114,6 @@ public class CommandListener implements ActionListener {
 			c.repaint();
 			c.validate();
 		}
-		
 
 		Mappa m = gameMode.getMappa();
 		Esagono selected = m.getComponent()[m.getSelezionato()];
@@ -114,6 +121,12 @@ public class CommandListener implements ActionListener {
 		Unità unitSelected = selected.getUnit();
 		Esagono adiacenza = null;
 		Unità u = null;
+		/*
+		 * L'operazione di scorporamento è possibile solo se
+		 * -si è selezionata una unità
+		 * -questa appartiene al player di turno
+		 * -ed ha più di una unità
+		 */
 		if (unitSelected != null) {
 			if (unitSelected.getPlayer() == turno) {
 				if (unitSelected.getNumUnits() > 1) {
@@ -126,6 +139,11 @@ public class CommandListener implements ActionListener {
 					Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
 					List<Esagono> esagoniRaggiungibili = unitSelected
 							.getEsagoniRaggiungibili();
+					/*
+					 * Scorro le adiacenze dell'esagono per trovare quelli
+					 * adatti ad ospitare la nuova unità. Questi devono essere
+					 * vuoti e raggiungibili
+					 */
 					for (int i = 0; i < 6; i++) {
 						adiacenza = selected.getAdiacenze()[i];
 						if (esagoniRaggiungibili.contains(adiacenza)) {
@@ -156,6 +174,7 @@ public class CommandListener implements ActionListener {
 		gameMode.salvaPartita();
 	}
 
+	// metodo per il passa turno
 	private void passaOpt() {
 
 		gameMode.setAccorpaMode(false);
@@ -259,13 +278,18 @@ public class CommandListener implements ActionListener {
 		}
 	}
 
+	/*
+	 * Se clicco il pulsante attacca, se l'operazione è possibile, devono
+	 * evidenziarsi gli esagoni contenenti un'unità nemica adiacente a quella
+	 * selezionata e si deve entrare in attackMode
+	 */
 	private void attaccaOpt() {
-		
+
 		GameWin gameWin = gameMode.getGameWin();
 		Container c = gameWin.getContentPane();
 		if (gameMode.isAccorpaMode() || gameMode.isMovingMode()
 				|| gameMode.isSelecionUnitMode() || gameMode.isScorporaMode()) {
-			
+
 			gameMode.setAccorpaMode(false);
 			gameMode.setMovingMode(false);
 			gameMode.setScorporaMode(false);
@@ -280,6 +304,12 @@ public class CommandListener implements ActionListener {
 		Unità unitSelected = selected.getUnit();
 		Esagono adiacenza = null;
 		Unità u = null;
+		/*
+		 * Si può entrare in attackMode solo se:
+		 * -si è selezionata una unità
+		 * -questa è del player di turno
+		 * -questa non ha già attaccato
+		 */
 		if (unitSelected != null) {
 			if (unitSelected.getPlayer() == turno
 					&& !unitSelected.hasAlreadyAttack()) {
@@ -291,6 +321,11 @@ public class CommandListener implements ActionListener {
 				EsagonoGrafico eG = new EsagonoGrafico(id, xC, yC, raggio);
 				Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
 
+				/*
+				 * Scorro le adiacenze dell'esagono per trovare quelli
+				 * contenenti un'unità nemica. Questi devono essere
+				 * raggiungibili
+				 */
 				for (int i = 0; i < 6; i++) {
 					adiacenza = selected.getAdiacenze()[i];
 					if (adiacenza != null) {
@@ -310,13 +345,18 @@ public class CommandListener implements ActionListener {
 		}
 	}
 
+	/*
+	 * Se clicco il pulsante accorpa, se l'operazione è possibile, devono
+	 * evidenziarsi gli esagoni contenenti un'unità del player di turno adiacente a quella
+	 * selezionata e si deve entrare in accorpaMode
+	 */
 	private void accorpaOpt() {
-		
+
 		GameWin gameWin = gameMode.getGameWin();
 		Container c = gameWin.getContentPane();
 		if (gameMode.isAttackMode() || gameMode.isMovingMode()
 				|| gameMode.isSelecionUnitMode() || gameMode.isScorporaMode()) {
-			
+
 			gameMode.setAttackMode(false);
 			gameMode.setMovingMode(false);
 			gameMode.setScorporaMode(false);
@@ -431,12 +471,12 @@ public class CommandListener implements ActionListener {
 	}
 
 	private void muoviOpt() {
-		
+
 		GameWin gameWin = gameMode.getGameWin();
 		Container c = gameWin.getContentPane();
 		if (gameMode.isAttackMode() || gameMode.isAccorpaMode()
 				|| gameMode.isSelecionUnitMode() || gameMode.isScorporaMode()) {
-			
+
 			gameMode.setAttackMode(false);
 			gameMode.setAccorpaMode(false);
 			gameMode.setScorporaMode(false);
@@ -446,7 +486,7 @@ public class CommandListener implements ActionListener {
 			c.validate();
 			System.out.println("ho validato");
 		}
-		
+
 		Mappa m = gameMode.getMappa();
 		Esagono selected = m.getComponent()[m.getSelezionato()];
 		int turno = gameMode.getTurno();
@@ -471,9 +511,9 @@ public class CommandListener implements ActionListener {
 					eG.newSet(id, xC, yC, raggio);
 					g2.setColor(Color.YELLOW);
 					g2.setStroke(new BasicStroke(3));
-			//		System.out.println("sto per colorare gli esagoni");
+					// System.out.println("sto per colorare gli esagoni");
 					g2.draw(eG);
-			//		System.out.println("ho colorato gli esagoni");
+					// System.out.println("ho colorato gli esagoni");
 				}
 				gameMode.setMovingMode(true);
 				g2.setColor(Color.BLACK);

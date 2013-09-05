@@ -2,29 +2,27 @@ package model;
 
 public class Utilities {
 
-	// Da Esagono
 
-	// metodo per calcolare n mod p
+	// metodo per calcolare n mod (base)
 	public static int mod(int n, int base) {
 		if (n >= base)
 			n = n % base;
 		return n;
 	}
 
-	// Da Esagono
-	// metodo per calcolare il valore iniziale dato il livello
+	// metodo per calcolare l'id dell'esagono iniziale del livello x
 	public static int startLiv(int x) {
 		return (3 * x * x - 3 * x + 1);
 	}
 
-	// Da Esagono
-	// metodo per calcolare il valore finale dato il livello
+	// metodo per calcolare l'id dell'esagono finale del livello x
 	public static int endLiv(int x) {
 		return (3 * x * x + 3 * x);
 	}
 
-	// Da Esagono
+	//metodo per ottenere un int corrispondente alla parte intera superiore del double d
 	public static int sup(double d) {
+		
 		int s = 0;
 
 		if (d < 0 || d > 6) {
@@ -43,10 +41,10 @@ public class Utilities {
 			s = 5;
 		else if (d < 6)
 			s = 6;
-		return s;
+		return s; 
 	}
 
-	// Da MappaListener
+	//metodo per calcolare il guadagno ottenuto dall'attacco dell'unità u
 	public static int calulateMoneyEarned(int prevNum, int postNum, Unità u) {
 		int gain = 0;
 		double diff = prevNum - postNum;
@@ -58,6 +56,7 @@ public class Utilities {
 
 		double d = ((diff * percent) / 10.0);
 
+		//gain deve essere proporzionale alle unità uccise (diff) e al costo di tali unità
 		if (u instanceof Artiglieria) {
 			gain = (int) (d * Artiglieria.COSTO);
 

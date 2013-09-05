@@ -35,23 +35,40 @@ import view.MappaGrafica;
 public class MappaListener extends MouseAdapter {
 
 	public static GameMode gameMode = GameMode.getGameMode();
-	private static Esagono prec = null;
+
+	private static Esagono prec = null;/*
+										 * Esagono su cui precedentemente era
+										 * apparso il popup. Utile per
+										 * l'avvicendamento dei popup sullo
+										 * schermo
+										 */
 	private static EsagonoGrafico esagonoGrafico = new EsagonoGrafico(0, 0, 0,
 			0);
 
+	/*
+	 * Questo metodo è quello che si occupa di mostrare le label di popup
+	 * contenenti il numero di unità presenti sull'esagono su cui si è
+	 * posizionato il mouse senza cliccare
+	 */
 	public void mouseMoved(MouseEvent mE) {
 		double x = mE.getX();
 		double y = mE.getY();
 
+		// Il popup va mostrato solo se si sta giocando altrimenti il metodo non
+		// deve fare nulla
 		if (gameMode.isPlayingMode()) {
 			// mappaGrafica e suoi attributi
 			MappaGrafica mappaGrafica = gameMode.getMappaGrafica();
 			int xC = mappaGrafica.getXCentro();
 			int yC = mappaGrafica.getYCentro();
 			double raggio = mappaGrafica.getRaggio();
+			/*
+			 * Il popup è un elemento grafico della MappaGrafica, pertanto è in
+			 * essa contenuto
+			 */
 			Popup popup = MappaGrafica.getPopup();
 
-			// posizione del popup
+			// (xLabel, yLabel) indicheranno la posizione del popup
 			int xLabel = 0;
 			int yLabel = 0;
 
@@ -59,15 +76,26 @@ public class MappaListener extends MouseAdapter {
 			Esagono e = mappaGrafica.contains(x, y);
 
 			if (e != null) {
+				/*
+				 * se il popup era già apparso in un esagono e questo è diverso
+				 * da quello su cui ora si è posizionato il mouse
+				 */
 				if (prec != null) {
 					if (!e.equals(prec)) {
+						// Si nasconde il popup mostrato in precedenza
 						if (popup != null) {
 							popup.hide();
 						}
 						esagonoGrafico.newSet(e.getId(), xC, yC, raggio);
 						xLabel = esagonoGrafico.xpoints[2];
 						yLabel = esagonoGrafico.ypoints[2];
+
 						Point point = new Point(xLabel, yLabel);
+						/*
+						 * il popup dovra mostrarsi in un punto dello schermo le
+						 * cui coordinate si possono ricavare da quelle del
+						 * pannello di partenza attraverso il seguente metodo
+						 */
 						SwingUtilities
 								.convertPointToScreen(point, mappaGrafica);
 						Unità u = e.getUnit();
@@ -82,7 +110,12 @@ public class MappaListener extends MouseAdapter {
 						}
 					}
 					prec = e;
-				} else {
+				}
+				/*
+				 * Se non era già apparso non ho bisogno di nasconderlo dalla
+				 * posizione precedente
+				 */
+				else {
 					esagonoGrafico.newSet(e.getId(), xC, yC, raggio);
 					xLabel = esagonoGrafico.xpoints[2];
 					yLabel = esagonoGrafico.ypoints[2];
@@ -117,9 +150,17 @@ public class MappaListener extends MouseAdapter {
 		Mappa m = gameMode.getMappa();
 		int turno = gameMode.getTurno();
 
-		// variabili puntatore
+		/*
+		 * variabili puntatore:
+		 * 		-selectedUnit = eventuale unità appartenente all'esagono selezionato
+		 * 		-otherUnit = eventuale unità con cui quella selezionata interagisce
+		 * 		-nuovo = ultimo esagono su cui si è cliaccato
+		 * 		-vecchio = eventuale esagono precedentemente cliccato
+		 * 		-oldSelected = indice del vecchio esagono selezionato
+		 * 		-newSelected = indice del nuovo esagono selezionato
+		 */
 		Unità selectedUnit = null;
-		Unità other = null;
+		Unità otherUnit = null;
 		Image img = null;
 		Esagono nuovo = null;
 		Esagono vecchio = null;
@@ -129,13 +170,15 @@ public class MappaListener extends MouseAdapter {
 		Graphics2D g2 = (Graphics2D) mappaGrafica.getGraphics();
 		g2.setStroke(new BasicStroke(3));
 
-		// così funziona
 		if (g2 != null) {
 			g2.setColor(Color.BLACK);
 		}
 		EsagonoGrafico eG = new EsagonoGrafico(0, xC, yC, raggio);
-
-		// se qualcuno era selezionato (prima di questo click)
+		/*
+		 * se qualcuno era selezionato (prima del click che si sta gestendo)
+		 * si ricolora il suo contorno di nero o di blue a seconda che ci si trovi
+		 * o meno in SelectionUnitMode
+		 */
 		if (oldSelected != -1) {
 			vecchio = m.getComponent()[oldSelected];
 			eG.newSet(oldSelected, xC, yC, raggio);
@@ -157,6 +200,11 @@ public class MappaListener extends MouseAdapter {
 		nuovo = mappaGrafica.contains(x, y);
 
 		if (nuovo != null) {
+			/*
+			 * Setto il nuovo valore della variabile selezionato di mappa
+			 * che userò alla fine del metodo per colorare il bordo
+			 * dell'esagono selezionato di rosso
+			 */
 			newSelected = nuovo.getId();
 			m.setSelezionato(newSelected);
 			eG.newSet(newSelected, xC, yC, raggio);
@@ -165,38 +213,42 @@ public class MappaListener extends MouseAdapter {
 			selectedUnit = nuovo.getUnit();
 			gameMode.getCommandPanel().setUnitLabel(selectedUnit);
 
+			/*
+			 * A seconda di quale bit di modalità è posto a true si invoca il metodo
+			 * corrispondente alla situazione in cui ci si trova
+			 */
 			if (gameMode.isMovingMode()) {
-				movingMode(nuovo, vecchio, eG2, selectedUnit, other, img,
+				movingMode(nuovo, vecchio, eG2, selectedUnit, otherUnit, img,
 						newSelected, oldSelected);
 			}
 
 			if (selectedUnit != null) {
 				if (gameMode.isAttackMode() && !selectedUnit.hasAlreadyAttack()) {
-					attackMode(nuovo, vecchio, eG2, selectedUnit, other, img,
+					attackMode(nuovo, vecchio, eG2, selectedUnit, otherUnit, img,
 							newSelected, oldSelected);
 				}
 			}
 
 			if (gameMode.isAccorpaMode()) {
-				accorpaMode(nuovo, vecchio, eG2, selectedUnit, other, img,
+				accorpaMode(nuovo, vecchio, eG2, selectedUnit, otherUnit, img,
 						newSelected, oldSelected);
 			}
 
 			if (gameMode.isScorporaMode()) {
-				scorporaMode(nuovo, vecchio, eG2, selectedUnit, other, img,
+				scorporaMode(nuovo, vecchio, eG2, selectedUnit, otherUnit, img,
 						newSelected, oldSelected);
 			}
 
-			// così funziona
 			if (g2 != null) {
 				g2.setColor(Color.RED);
 				g2.draw(eG);
 			}
 		}
 	}
-
+	
+	
 	private static void movingMode(Esagono nuovo, Esagono vecchio,
-			EsagonoGrafico eG, Unità selectedUnit, Unità other, Image img,
+			EsagonoGrafico eG, Unità selectedUnit, Unità otherUnit, Image img,
 			int newSelected, int oldSelected) {
 
 		selectedUnit = vecchio.getUnit();
@@ -207,6 +259,10 @@ public class MappaListener extends MouseAdapter {
 		double raggio = mappaGrafica.getRaggio();
 		LinkedList<Esagono> esagoniRaggiungibili = selectedUnit
 				.getEsagoniRaggiungibili();
+		/*
+		 * Posso muovere l'unità nel nuovo esagono solo se è contenuto nei suoi
+		 * esagoni raggiungibili e se non ha già un'unità su di esso
+		 */
 		if (esagoniRaggiungibili.contains(nuovo) && nuovo.getUnit() == null) {
 
 			gameMode.getSound().startMoveMusic();
@@ -226,13 +282,14 @@ public class MappaListener extends MouseAdapter {
 
 			selectedUnit.setPassi(nuoviP);
 		}
+		//Esco dal movingMode
 		gameMode.setMovingMode(false);
 		gameMode.getGameWin().repaint();
 		gameMode.getGameWin().validate();
 	}
 
 	private static void attackMode(Esagono nuovo, Esagono vecchio,
-			EsagonoGrafico eG2, Unità selectedUnit, Unità other, Image img,
+			EsagonoGrafico eG2, Unità selectedUnit, Unità otherUnit, Image img,
 			int newSelected, int oldSelected) {
 
 		selectedUnit = vecchio.getUnit();
@@ -241,54 +298,68 @@ public class MappaListener extends MouseAdapter {
 		int xC = mappaGrafica.getXCentro();
 		int yC = mappaGrafica.getYCentro();
 		double raggio = mappaGrafica.getRaggio();
+		//L'unità selezionata può attaccare solo se non ha già attaccato
 		if (!selectedUnit.hasAlreadyAttack()) {
-			other = nuovo.getUnit();
+			otherUnit = nuovo.getUnit();
 
 			// se esiste un'unità attaccata e se appartiene all'avversario
-			if (other != null && other.getPlayer() != gameMode.getTurno()
+			if (otherUnit != null && otherUnit.getPlayer() != gameMode.getTurno()
 					&& vecchio.isAdiacente(nuovo)) {
 
 				GameWin gameWin = gameMode.getGameWin();
 				gameMode.getSound().startAttackMusic();
 
-				// unità attaccante
-				int numSelectedRemaining = selectedUnit.getNumUnits();
-				int defSelected = selectedUnit.getDef();
-				int attSelected = selectedUnit.getAtt();
+				//informazioni relative all'unità attaccante
+				int numSelectedRemaining = selectedUnit.getNumUnits(); //unità rimanenti
+				int defSelected = selectedUnit.getDef(); //difesa
+				int attSelected = selectedUnit.getAtt(); //attacco
 
-				// unità attaccata
-				int numOtherRemaining = other.getNumUnits();
-				int defOther = other.getDef();
-				int attOther = other.getAtt();
+				//informazioni relative all'unità attaccata
+				int numOtherUnitRemaining = otherUnit.getNumUnits(); //unità rimanenti
+				int defOtherUnit = otherUnit.getDef(); //difesa
+				int attOtherUnit = otherUnit.getAtt(); //attacco
 
 				CommandPanel commandPanel = gameMode.getCommandPanel();
-				commandPanel.setInfoBattleLabel(selectedUnit, other);
+				commandPanel.setInfoBattleLabel(selectedUnit, otherUnit);
 
-				numOtherRemaining = (int) ((numOtherRemaining * defOther - numSelectedRemaining
-						* attSelected) / (defOther));
+				/*
+				 * Il numero di unità rimaste all'unità attaccata è
+				 * calcolato attraverso il seguente algoritmo
+				 */
+				numOtherUnitRemaining = (int) ((numOtherUnitRemaining * defOtherUnit - numSelectedRemaining
+						* attSelected) / (defOtherUnit));
 				int moneyEarned = Utilities.calulateMoneyEarned(
-						other.getNumUnits(), numOtherRemaining, other);
+						otherUnit.getNumUnits(), numOtherUnitRemaining, otherUnit);
 
-				if (numOtherRemaining > 0) {
-					other.setNumUnits(numOtherRemaining);
-					// se l'unità di difesa non è morta contrattacca
+				//Se al battaglione attaccato è rimasta almeno un'unità esso contrattaccherà
+				if (numOtherUnitRemaining > 0) {
+					otherUnit.setNumUnits(numOtherUnitRemaining);
 					numSelectedRemaining = (int) ((numSelectedRemaining
-							* defSelected - numOtherRemaining * attOther) / (defSelected));
-					other.updateEsp();
-				} else {
-					Player p = gameMode.getPlayer(other.getPlayer());
-					p.rimuoviUnità(other);
+							* defSelected - numOtherUnitRemaining * attOtherUnit) / (defSelected));
+					otherUnit.updateEsp();
+				}
+				//Altrimenti si rimuove l'unità sia logicamente che graficamente
+				else {
+					Player p = gameMode.getPlayer(otherUnit.getPlayer());
+					p.rimuoviUnità(otherUnit);
 					nuovo.setUnit(null);
 					eG2.newSet(newSelected, xC, yC, raggio);
 					img = nuovo.getTerritorio().getImage();
 					mappaGrafica.paintImage(g2, eG2, img);
 
-					// setto il numero di unità rimanenti a 0 così da aggiornare
-					// correttamente la label
-					other.setNumUnits(0);
+					/*
+					 * setto il numero di unità rimanenti a 0 così da aggiornare
+					 * correttamente la label del CommandPanel
+					 */
+					otherUnit.setNumUnits(0);
 
 				}
 
+				/*
+				 * Se dopo il contrattacco il battaglione che ha attaccato
+				 * per primo ha ancora almeno un'unità setto i suoi attributi
+				 * in modo che siano coerenti con la nuova situazione creata
+				 */
 				if (numSelectedRemaining > 0) {
 					selectedUnit.setNumUnits(numSelectedRemaining);
 					selectedUnit.updateEsp();
@@ -296,21 +367,25 @@ public class MappaListener extends MouseAdapter {
 					selectedUnit.setAlreadyAttack(true);
 					Player p = gameMode.getPlayer(gameMode.getTurno());
 					p.setMoney(p.getSoldi() + moneyEarned);
-				} else {
+				} 
+				//Altrimenti si rimuove l'unità sia logicamente che graficamente
+				else {
 					Player p = gameMode.getPlayer(selectedUnit.getPlayer());
 					p.rimuoviUnità(selectedUnit);
 					vecchio.setUnit(null);
 					eG2.newSet(oldSelected, xC, yC, raggio);
 					img = vecchio.getTerritorio().getImage();
 					mappaGrafica.paintImage(g2, eG2, img);
-
-					// setto il numero di unità rimanenti a 0 così da aggiornare
-					// correttamente la label
+					/*
+					 * setto il numero di unità rimanenti a 0 così da aggiornare
+					 * correttamente la label del Commandpanel
+					 */
 					selectedUnit.setNumUnits(0);
 				}
 
-				commandPanel.setBattleStatsLabel(selectedUnit, other);
+				commandPanel.setBattleStatsLabel(selectedUnit, otherUnit);
 
+				//A questo punto controllo se uno dei due vincitori ha vinto
 				int winner = gameMode.checkVictory();
 				if (winner != 0) {
 					Popup popup = MappaGrafica.getPopup();
@@ -325,9 +400,10 @@ public class MappaListener extends MouseAdapter {
 					gameWin.setSize(width, height);
 					Container c = gameWin.getContentPane();
 
-					// rimuovo gli eventuali altri pannelli presenti sulla
-					// finestra
-					// e aggiungo quelli nuovi
+				   /*
+					* rimuovo gli eventuali altri pannelli presenti sulla finestra
+					* e aggiungo il FinalPanel
+					*/
 					c.removeAll();
 					c.add(finalPanel, BorderLayout.CENTER);
 					if (winner == 3) {
@@ -340,45 +416,59 @@ public class MappaListener extends MouseAdapter {
 				gameWin.validate();
 			}
 		}
+		//Esco dall'attackMode
 		gameMode.setAttackMode(false);
 	}
 
 	private static void accorpaMode(Esagono nuovo, Esagono vecchio,
-			EsagonoGrafico eG2, Unità selectedUnit, Unità other, Image img,
+			EsagonoGrafico eG2, Unità selectedUnit, Unità otherUnit, Image img,
 			int newSelected, int oldSelected) {
 
 		selectedUnit = vecchio.getUnit();
 		LinkedList<Esagono> esagoniRaggiungibili = selectedUnit
 				.getEsagoniRaggiungibili();
 
+		/*Posso effettivamente accorpare un'unità coon un'altra se:
+		 * -la seconda può essere raggiunta dalla prima
+		 * -la seconda si trova in una delle adiacenze dell'esagono della prima
+		 * -se le due unità sono dello stesso tipo*/
 		if (esagoniRaggiungibili.contains(nuovo) && vecchio.isAdiacente(nuovo)
 				&& !vecchio.equals(nuovo)) {
-			other = nuovo.getUnit();
-			if (other != null && selectedUnit.isSameUnitOf(other)) {
+			otherUnit = nuovo.getUnit();
+			if (otherUnit != null && selectedUnit.isSameUnitOf(otherUnit)) {
 				gameMode.getSound().startMoveMusic();
-				int numUnits = selectedUnit.getNumUnits() + other.getNumUnits();
+				
+				//Setto i valori della nuova unità che si è creata dall'accorpamento
+				int numUnits = selectedUnit.getNumUnits() + otherUnit.getNumUnits();
 				double esperienza = (selectedUnit.getEsp()
-						* selectedUnit.getNumUnits() + other.getEsp()
-						* other.getNumUnits())
+						* selectedUnit.getNumUnits() + otherUnit.getEsp()
+						* otherUnit.getNumUnits())
 						/ numUnits;
+				/*
+				 * si settare come valore dei passi rimanenti della nuova unità
+				 * il risultato della sottrazione tra il numero di passi dell'unità
+				 * che ne aveva rimasti di meno e il costo di attraversamento del
+				 * territorio di partenza. Va distinto però il caso dell'aereo per
+				 * il quale il costo di attraversamento è sempre unitario
+				 */
 				int passi = 0;
 				if (selectedUnit instanceof Aereo) {
-					if ((selectedUnit.getPassi() - 1) < other.getPassi()) {
+					if ((selectedUnit.getPassi() - 1) < otherUnit.getPassi()) {
 						passi = selectedUnit.getPassi() - 1;
 					} else {
-						passi = other.getPassi();
+						passi = otherUnit.getPassi();
 					}
 				} else {
-					if ((selectedUnit.getPassi() - nuovo.getCosto()) < other
+					if ((selectedUnit.getPassi() - nuovo.getCosto()) < otherUnit
 							.getPassi()) {
 						passi = selectedUnit.getPassi() - nuovo.getCosto();
 					} else {
-						passi = other.getPassi();
+						passi = otherUnit.getPassi();
 					}
 				}
-				other.setNumUnits(numUnits);
-				other.setEsp(esperienza);
-				other.setPassi(passi);
+				otherUnit.setNumUnits(numUnits);
+				otherUnit.setEsp(esperienza);
+				otherUnit.setPassi(passi);
 
 				// rimuovo selectedUnit dalla UnitList del suo player
 				Player player = gameMode.getPlayer(gameMode.getTurno());
@@ -388,13 +478,14 @@ public class MappaListener extends MouseAdapter {
 				vecchio.setUnit(null);
 			}
 		}
+		//esco dall'accorpaMode
 		gameMode.setAccorpaMode(false);
 		gameMode.getGameWin().repaint();
 		gameMode.getGameWin().validate();
 	}
 
 	private static void scorporaMode(Esagono nuovo, Esagono vecchio,
-			EsagonoGrafico eG2, Unità selectedUnit, Unità other, Image img,
+			EsagonoGrafico eG2, Unità selectedUnit, Unità otherUnit, Image img,
 			int newSelected, int oldSelected) {
 
 		// selectedUnit è l'unità da scorporare
@@ -404,13 +495,14 @@ public class MappaListener extends MouseAdapter {
 				.getEsagoniRaggiungibili();
 
 		/*
-		 * posso scorporare l'unità solo se l'esagono di destinazione è
-		 * raggiungibile dall'unità, non è presente alcun unità su di esso ed è
-		 * adiacente all'esagono dell'unità
+		 * posso scorporare l'unità solo se:
+		 * -l'esagono di destinazione è raggiungibile dall'unità
+		 * -non è presente alcuna unità su di esso
+		 * -l'esagono destinazione è adiacente a quello dell'unità
 		 */
 		if (esagoniRaggiungibili.contains(nuovo)) {
-			other = nuovo.getUnit();
-			if (other == null && vecchio.isAdiacente(nuovo)) {
+			otherUnit = nuovo.getUnit();
+			if (otherUnit == null && vecchio.isAdiacente(nuovo)) {
 				gameMode.getSound().startMoveMusic();
 				double esp = selectedUnit.getEsp();
 
@@ -431,15 +523,15 @@ public class MappaListener extends MouseAdapter {
 				selectedUnit.setNumUnits(num1);
 
 				if (selectedUnit instanceof Artiglieria) {
-					other = new Artiglieria(num2, turno);
+					otherUnit = new Artiglieria(num2, turno);
 				} else if (selectedUnit instanceof Aereo) {
-					other = new Aereo(num2, turno);
+					otherUnit = new Aereo(num2, turno);
 				} else if (selectedUnit instanceof FanteriaPesante) {
-					other = new FanteriaPesante(num2, turno);
+					otherUnit = new FanteriaPesante(num2, turno);
 				} else if (selectedUnit instanceof FanteriaLeggera) {
-					other = new FanteriaLeggera(num2, turno);
+					otherUnit = new FanteriaLeggera(num2, turno);
 				} else if (selectedUnit instanceof Panzer) {
-					other = new Panzer(num2, turno);
+					otherUnit = new Panzer(num2, turno);
 				}
 
 				/*
@@ -447,24 +539,25 @@ public class MappaListener extends MouseAdapter {
 				 * di partenza
 				 */
 				int nuoviP;
-				other.setEsp(esp);
+				otherUnit.setEsp(esp);
 				if (!(selectedUnit instanceof Aereo)) {
 					nuoviP = selectedUnit.getPassi() - nuovo.getCosto();
 				} else {
 					nuoviP = selectedUnit.getPassi() - 1;
 				}
-				other.setPassi(nuoviP);
-				other.setAlreadyAttack(selectedUnit.hasAlreadyAttack()
-						&& other.hasAlreadyAttack());
-				nuovo.setUnit(other);
+				otherUnit.setPassi(nuoviP);
+				otherUnit.setAlreadyAttack(selectedUnit.hasAlreadyAttack()
+						&& otherUnit.hasAlreadyAttack());
+				nuovo.setUnit(otherUnit);
 
-				// aggiungo other alla UnitList del suo player
+				// aggiungo otherUnit alla UnitList del suo player
 				Player player = gameMode.getPlayer(gameMode.getTurno());
-				player.aggiungiUnità(other);
+				player.aggiungiUnità(otherUnit);
 
 			}
 		}
 
+		//esco dallo scorporaMode
 		gameMode.setScorporaMode(false);
 		gameMode.getGameWin().repaint();
 		gameMode.getGameWin().validate();
