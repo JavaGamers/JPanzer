@@ -31,34 +31,39 @@ public class StartPanelListener implements ActionListener {
 
 	}
 
+	//Metodo per accedere all'editor di mappa
 	private void editOpt() {
 		GameWin gameWin = gameMode.getGameWin();
 		Container c = gameWin.getContentPane();
 
-		// rimuovo gli eventuali altri pannelli presenti sulla finestra e
-		// aggiungo quelli nuovi
+		/*
+		 *  rimuovo gli eventuali altri pannelli presenti sulla finestra
+		 * e aggiungo quelli nuovi
+		 */
 		c.removeAll();
 		c.add(gameMode.getInitMapPanel(), BorderLayout.CENTER);
 
-		// ridisegno della finestra
 		gameWin.repaint();
 		gameWin.validate();
 
 	}
 
+	//Metodo per caricare la partita
 	private void loadOpt() {
 		if (gameMode.caricaPartita()) {
 			
 			gameMode.setPlayingMode(true);
 
-			// visualizzo la partita
+			// visualizzo la partita caricata
 			GameWin gameWin = gameMode.getGameWin();
 			gameWin.setResizable(true);
 			gameWin.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			Container c = gameWin.getContentPane();
 
-			// rimuovo gli eventuali altri pannelli presenti sulla finestra e
-			// aggiungo quelli nuovi
+			/*
+			 *  rimuovo gli eventuali altri pannelli presenti sulla finestra
+			 * e aggiungo quelli nuovi
+			 */
 			c.removeAll();
 			CommandPanel commandPanel = gameMode.getCommandPanel();
 			commandPanel
@@ -69,22 +74,23 @@ public class StartPanelListener implements ActionListener {
 			jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 			c.add(jsp, BorderLayout.CENTER);
 
-			// ridisegno della finestra
 			gameWin.repaint();
 			gameWin.validate();
 		}
 	}
 
+	//Metodo per iniziare una nuova partita
 	private void newOpt() {
 		GameWin gameWin = gameMode.getGameWin();
 		Container c = gameWin.getContentPane();
 
-		// rimuovo gli eventuali altri pannelli presenti sulla finestra e
-		// aggiungo quelli nuovi
+		/*
+		 *  rimuovo gli eventuali altri pannelli presenti sulla finestra
+		 * e aggiungo quelli nuovi
+		 */
 		c.removeAll();
 		c.add(gameMode.getInitGame(), BorderLayout.CENTER);
 
-		// ridisegno della finestra
 		gameWin.repaint();
 		gameWin.validate();
 

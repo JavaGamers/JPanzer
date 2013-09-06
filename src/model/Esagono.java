@@ -167,8 +167,9 @@ public class Esagono implements Comparable<Esagono> {
 	}
 
 	public static int getIdFromCoord(int[] coord) {
-		if(coord.length!=3){
-			throw new IllegalArgumentException("usa formato coordinate corretto");
+		if (coord.length != 3) {
+			throw new IllegalArgumentException(
+					"usa formato coordinate corretto");
 		}
 		int id;
 		if (coord[1] == 0)

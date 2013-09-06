@@ -41,10 +41,13 @@ import view.UnitPanel;
 
 public class GameMode {
 	private static GameMode gM = null;
-	private GameWin gameWin;
+	//mappa corrente
 	private Mappa mappa;
+	//giocatori correnti
 	private Player player1;
 	private Player player2;
+	//elementi grafici
+	private GameWin gameWin;
 	private MappaGrafica mappaGrafica;
 	private CommandPanel commandPanel;
 	private InitGame initGame;
@@ -54,9 +57,13 @@ public class GameMode {
 	private UnitPanel unitPanel;
 	private FinalPanel finalPanel;
 	private SwitchPanel switchPanel;
+	//elementi sonori
 	private SoundEffect sound;
+	//turno
 	private int turno;
+	//contatore del numero di turni giocati
 	private int turnCounter;
+	//bit di modalità
 	private boolean selectionUnitMode;
 	private boolean playingMode;
 	private boolean movingMode;
@@ -64,6 +71,7 @@ public class GameMode {
 	private boolean accorpaMode;
 	private boolean scorporaMode;
 	private boolean zoomOutMode;
+	//stringhe di intestazione per i file di salvataggio
 	private final static String INTESTAZIONEPARTITA = "Partita Jpanzer";
 	private final static String INTESTAZIONEMAPPA = "Mappa Jpanzer";
 
@@ -93,6 +101,8 @@ public class GameMode {
 		this.turnCounter = 0;
 	}
 
+	//METODI DI CONTROLLO DELLA MODALITA' DI GIOCO
+	
 	public boolean isScorporaMode() {
 		return this.scorporaMode;
 	}
@@ -125,6 +135,8 @@ public class GameMode {
 		return this.selectionUnitMode;
 	}
 
+	//METODI GETTER CON LAZY INITIALIZATION
+	
 	public GameWin getGameWin() {
 		if (this.gameWin == null) {
 			this.gameWin = new GameWin("JPanzer");
@@ -139,9 +151,6 @@ public class GameMode {
 		return this.switchPanel;
 	}
 
-	public MappaGrafica getMappaGrafica() {
-		return this.mappaGrafica;
-	}
 
 	public CommandPanel getCommandPanel() {
 		if (this.commandPanel == null) {
@@ -192,8 +201,21 @@ public class GameMode {
 		return this.finalPanel;
 	}
 
+	public SoundEffect getSound() {
+		if (this.sound == null) {
+			this.sound = new SoundEffect();
+		}
+		return this.sound;
+	}
+	
+	//METODI GETTER SENZA LAZY INITIALIZATION
+	
 	public Mappa getMappa() {
 		return this.mappa;
+	}
+	
+	public MappaGrafica getMappaGrafica() {
+		return this.mappaGrafica;
 	}
 
 	public Player getPlayer(int player) {
@@ -207,17 +229,12 @@ public class GameMode {
 		}
 	}
 
-	public SoundEffect getSound() {
-		if (this.sound == null) {
-			this.sound = new SoundEffect();
-		}
-		return this.sound;
-	}
-
 	public int getTurnCounter() {
 		return this.turnCounter;
 	}
 
+	//METODI SETTER
+	
 	public void setScorporaMode(boolean value) {
 		this.scorporaMode = value;
 	}
@@ -287,7 +304,8 @@ public class GameMode {
 			System.out.println("no mappa");
 		}
 	}
-
+	
+	//metodo per cambiare turno
 	public void switchTurno() {
 		if (this.turno == 1) {
 			this.turno = 2;
@@ -297,6 +315,8 @@ public class GameMode {
 		this.turnCounter++;
 	}
 
+	//METODI DI SALVATAGGIO E CARICAMENTO DELLA PARTITA
+	
 	public boolean salvaPartita() {
 		boolean done = false;
 		MappaGrafica mG = getMappaGrafica();
@@ -313,17 +333,17 @@ public class GameMode {
 				fw = new FileWriter(file);
 				bw = new BufferedWriter(fw);
 
-				// stampo intestazione file
+				// scrivo intestazione file
 				bw.write(INTESTAZIONEPARTITA + '\n');
 
-				// stampo info sui player
+				// scrivo info sui player
 				bw.write("" + this.player1 + '\n' + this.player2 + '\n');
-				// stampo il turno
+				// scrivo il turno
 				bw.write("" + this.turno + '\n');
-				// stampo il numero di turni
+				// scrivo il numero di turni
 				bw.write("" + this.turnCounter+ '\n');
 
-				// stampo la mappa
+				// scrivo la mappa
 				bw.write(this.mappa.toString());
 
 				bw.close();
@@ -338,6 +358,7 @@ public class GameMode {
 	}
 
 	public boolean caricaPartita() {
+		// done = true se salvataggio è andato a buon fine
 		boolean done = false;
 		MappaGrafica mG = getMappaGrafica();
 		JFileChooser jfc = new JFileChooser();
@@ -389,8 +410,8 @@ public class GameMode {
 						int dim = Integer.parseInt(text);
 						Mappa m = new Mappa(dim);
 
-						Esagono e;
 						// leggo le altre righe
+						Esagono e;	
 						while ((text = br.readLine()) != null) {
 							elements = getElements(text);
 							e = m.getComponent()[Integer.parseInt(elements
@@ -411,7 +432,7 @@ public class GameMode {
 								e.setTerritorio(null);
 							}
 
-							// controllo se è presento un'unità sul territorio
+							// controllo se è presente un'unità sul territorio e in caso la inserisco
 							String nomeUnità = elements.remove();
 							if (!nomeUnità.equals(" ")) {
 								int player = Integer
@@ -489,6 +510,7 @@ public class GameMode {
 				// scrivo intestazione mappa
 				bw.write(INTESTAZIONEMAPPA + '\n');
 
+				//scrivo la mappa
 				bw.write(getMappa().toString());
 
 				bw.close();
@@ -567,6 +589,7 @@ public class GameMode {
 		return done;
 	}
 
+	/*Metodo di estrazione delle informazioni dalla linea di testo*/
 	private static LinkedList<String> getElements(String s) {
 		LinkedList<String> elements = new LinkedList<String>();
 		StringTokenizer str = new StringTokenizer(s, "-");
@@ -577,9 +600,11 @@ public class GameMode {
 	}
 
 	/*
-	 * metodo per controllare se qualcuno ha vinto la partita valori di ritorno:
-	 * 0 nessuno ha ancora vinto - 1 vittoria player 1 - 2 vittoria player 2 - 3
-	 * pareggio
+	 * metodo per controllare se qualcuno ha vinto la partita, valori di ritorno:
+	 * - 0 nessuno ha ancora vinto
+	 * - 1 vittoria player 1
+	 * - 2 vittoria player 2
+	 * - 3 pareggio
 	 */
 	public int checkVictory() {
 		int victory = 0;
@@ -595,6 +620,7 @@ public class GameMode {
 		return victory;
 	}
 
+	//Metodo che resetta tutte le variabili della classe
 	public void resetAll() {
 		this.mappa = null;
 		this.player1 = new Player(1);

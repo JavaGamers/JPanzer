@@ -24,10 +24,12 @@ public class InitGameListener implements ActionListener, ChangeListener {
 	private static final String CHOOSEMAPOPT = "chooseMap";
 	private static final String FORWARDOPT = "forward";
 	private static final String BACKOPT = "back";
-	private static boolean scelta = false; // variabile usata per verificare se
-											// la mappa è stata scelta o no
-	private static boolean error = false; // variabile usata per verificare se
-											// ci sono errori
+	private static boolean scelta = false; /* variabile usata per verificare se
+											* la mappa è stata scelta o no
+											*/
+	private static boolean error = false; /* variabile usata per verificare se
+										   * ci sono errori
+										   */
 
 	public void actionPerformed(ActionEvent e) {
 		String com = e.getActionCommand();
@@ -46,8 +48,10 @@ public class InitGameListener implements ActionListener, ChangeListener {
 		GameWin gameWin = gameMode.getGameWin();
 		Container c = gameWin.getContentPane();
 
-		// rimuovo gli eventuali altri pannelli presenti sulla finestra e
-		// aggiungo quelli nuovi
+		/*
+		 *  rimuovo gli eventuali altri pannelli presenti sulla finestra
+		 *  e aggiungo quelli nuovi
+		 */
 		c.removeAll();
 		c.add(gameMode.getStartPanel(), BorderLayout.CENTER);
 		gameWin.repaint();
@@ -69,8 +73,10 @@ public class InitGameListener implements ActionListener, ChangeListener {
 			}
 			gameMode.setSelectionUnitMode(true);
 
-			// gestisco il player 1
-			// gestisco il nome
+			//Setto i valori scelti dall'utente nel GameMode
+			
+			//PLAYER 1
+			//nome
 			String txt1 = gameMode.getInitGame().getTextFieldNome(1).getText();
 			Player p1 = null;
 
@@ -81,7 +87,7 @@ public class InitGameListener implements ActionListener, ChangeListener {
 			}
 			gameMode.setPlayer(p1, 1);
 
-			// gestisco soldi
+			//soldi
 			int soldi1 = Integer.parseInt(gameMode.getInitGame()
 					.getTextFieldSoldi(1).getText());
 			if (soldi1 < Player.MINMONEY || soldi1 > Player.MAXMONEY) {
@@ -93,8 +99,8 @@ public class InitGameListener implements ActionListener, ChangeListener {
 				gameMode.getPlayer(1).setMoney(soldi1);
 			}
 
-			// gestisco il plyer 2
-			// gestisco il nome
+			//PLAYER 2
+			//nome
 			String txt2 = gameMode.getInitGame().getTextFieldNome(2).getText();
 			Player p2 = null;
 
@@ -105,8 +111,7 @@ public class InitGameListener implements ActionListener, ChangeListener {
 			}
 			gameMode.setPlayer(p2, 2);
 
-			// gestisco soldi
-
+			//soldi
 			int soldi2 = Integer.parseInt(gameMode.getInitGame()
 					.getTextFieldSoldi(2).getText());
 
@@ -119,6 +124,7 @@ public class InitGameListener implements ActionListener, ChangeListener {
 				gameMode.getPlayer(2).setMoney(soldi2);
 			}
 
+			//se non ci sono errori
 			if (!error) {
 				GameWin gameWin = gameMode.getGameWin();
 				gameWin.setResizable(true);
@@ -126,8 +132,10 @@ public class InitGameListener implements ActionListener, ChangeListener {
 				Container c = gameWin.getContentPane();
 				UnitPanel unitPanel = gameMode.getUnitPanel();
 
-				// rimuovo gli eventuali altri pannelli presenti sulla finestra
-				// e aggiungo quelli nuovi
+				/*
+				 *  rimuovo gli eventuali altri pannelli presenti sulla finestra
+				 * e aggiungo quelli nuovi
+				 */
 				c.removeAll();
 				c.add(unitPanel, BorderLayout.EAST);
 				JScrollPane jsp = new JScrollPane();
@@ -138,7 +146,6 @@ public class InitGameListener implements ActionListener, ChangeListener {
 						"Posiziona le unità negli esagoni evidenziati",
 						"PER INIZIARE", JOptionPane.INFORMATION_MESSAGE);
 
-				// ridisegno della finestra
 				gameWin.repaint();
 				gameWin.validate();
 			}
@@ -147,7 +154,7 @@ public class InitGameListener implements ActionListener, ChangeListener {
 
 	private void chooseMapOpt() {
 		if (gameMode.caricaMappa()) {
-			// setto la nuova mappa nell'anteprima
+			// setto la nuova mappa nell'anteprima dopo aver caricato i dati relativi ad essa
 			MappaGrafica anteprima = gameMode.getInitGame().getPreviewMap();
 			GameWin gameWin = gameMode.getGameWin();
 			anteprima.setMappa(gameMode.getMappa());
@@ -158,6 +165,7 @@ public class InitGameListener implements ActionListener, ChangeListener {
 		}
 	}
 
+	//Metodo per gestire gli slider
 	public void stateChanged(ChangeEvent e) {
 		JSlider source = (JSlider) e.getSource();
 		if (source.equals(gameMode.getInitGame().getSlider(1))) {

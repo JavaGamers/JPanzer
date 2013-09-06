@@ -54,6 +54,7 @@ public class LandListener implements ActionListener {
 
 	}
 
+	//metodo di zoom
 	private void zoomOpt() {
 		GameWin gameWin = gameMode.getGameWin();
 		MappaGrafica mG = gameMode.getMappaGrafica();
@@ -68,6 +69,7 @@ public class LandListener implements ActionListener {
 		mG.validate();
 	}
 
+	//Metodo per tornare al menù principale
 	private void mainMenuOpt() {
 		int option = JOptionPane.showConfirmDialog(gameMode.getGameWin(),
 				"Stai Stai uscendo dall'editor: vuoi salvare la mappa?",
@@ -93,9 +95,10 @@ public class LandListener implements ActionListener {
 		gameWin.setSize(width,height);
 		Container c = gameWin.getContentPane();
 
-		// rimuovo gli eventuali altri pannelli presenti sulla finestra
-		// e
-		// aggiungo quelli nuovi
+		/*
+		 *  rimuovo gli eventuali altri pannelli presenti sulla finestra
+		 * e aggiungo quelli nuovi
+		 */
 		c.removeAll();
 		gameMode.getLandPanel().enableAll();
 		gameMode.resetAll();
@@ -114,8 +117,10 @@ public class LandListener implements ActionListener {
 		gameWin.setSize(width,height);
 		Container c = gameWin.getContentPane();
 
-		// rimuovo gli eventuali altri pannelli presenti sulla finestra e
-		// aggiungo quelli nuovi
+		/*
+		 *  rimuovo gli eventuali altri pannelli presenti sulla finestra
+		 * e aggiungo quelli nuovi
+		 */
 		c.removeAll();
 		gameMode.getLandPanel().enableAll();
 		gameMode.resetAll();
@@ -124,6 +129,7 @@ public class LandListener implements ActionListener {
 		gameWin.validate();
 	}
 
+	//METODI PER SETTARE I TERRITORI SULLA MAPPA
 	private void pianuraOpt() {
 		MappaGrafica mG = gameMode.getMappaGrafica();
 		Mappa m = gameMode.getMappa();

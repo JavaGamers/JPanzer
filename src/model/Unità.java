@@ -115,10 +115,6 @@ public abstract class Unità {
 		return this.pos;
 	}
 
-	public Image getXImage() {
-		return this.xImage;
-	}
-
 	public abstract String getNome();
 
 	public int getPlayer() {
@@ -126,7 +122,12 @@ public abstract class Unità {
 	}
 
 	public Image getImage() {
-		return this.bImg;
+		if(gameMode.isZoomOutMode()){
+			return this.xImage;
+		}
+		else{
+			return this.bImg;
+		}
 	}
 
 	public LinkedList<Esagono> getEsagoniRaggiungibili() {

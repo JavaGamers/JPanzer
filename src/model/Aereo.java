@@ -92,7 +92,6 @@ public class Aereo extends Unità {
 										 */
 						long distanceToU = u.getMinDistance() + weight;
 						if (distanceToU < v.getMinDistance()) {
-							q.remove(v);
 							if (color[v.getId()] == 0) {
 								v.setDistance(distanceToU);
 								q.add(v);

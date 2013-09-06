@@ -12,6 +12,10 @@ public class FinalPanelListener implements ActionListener {
 	public static GameMode gameMode = GameMode.getGameMode();
 
 	public void actionPerformed(ActionEvent e) {
+		/*
+		 * L'unico pulsante del pannello FinalPanel deve
+		 * ricondurre alla schermata del menù principale
+		 */
 
 		gameMode.resetAll();
 
@@ -22,8 +26,10 @@ public class FinalPanelListener implements ActionListener {
 		gameWin.setSize(width, height);
 		Container c = gameWin.getContentPane();
 
-		// rimuovo gli eventuali altri pannelli presenti sulla finestra e
-		// aggiungo quelli nuovi
+		/*
+		 *  rimuovo gli eventuali altri pannelli presenti sulla finestra
+		 * e aggiungo quelli nuovi
+		 */
 		c.removeAll();
 		c.add(gameMode.getStartPanel(), BorderLayout.CENTER);
 		gameWin.repaint();

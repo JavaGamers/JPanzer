@@ -42,6 +42,11 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 	public final static String ZOOMOPT = "zoom";
 	public static GameMode gameMode = GameMode.getGameMode();
 
+	/*
+	 * Metodo che al passaggio del mouse sopra i
+	 * pulsanti fa comparire il popup contente
+	 * il costo dell'unit‡ corrispondente
+	 */
 	public void mouseEntered(MouseEvent mE) {
 
 		if (mE.getSource() instanceof JButton) {
@@ -85,6 +90,11 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 		}
 	}
 
+	/*
+	 * Metodo che all'usicta del puntatore del mouse
+	 * da un pulsante fa scomparire il popup
+	 * corrispondente
+	 */
 	public void mouseExited(MouseEvent mE) {
 		Popup popup = UnitPanel.getPopup();
 		if (popup != null) {
@@ -112,6 +122,7 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 		}
 	}
 
+	//Metodo di zoom
 	private void zoomOpt() {
 		GameWin gameWin = gameMode.getGameWin();
 		MappaGrafica mG = gameMode.getMappaGrafica();
@@ -128,6 +139,12 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 		mG.validate();
 	}
 
+	/*
+	 * Metodo che compie azioni differenti a seconda
+	 * dei tre stati del pulsante ad esso associato:
+	 * -selectionUnitMode + click player 1 = switch to player 2 in selectionUnitMode
+	 * -selectionUnitMode + click player 2 = switch to player 1 in playingMode
+	 * -playingMode + click = torna CommandPanel in playingMode*/
 	private void giocaOpt() {
 		if (!gameMode.isPlayingMode()) {
 			int turno = gameMode.getTurno();
@@ -184,6 +201,7 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 		}
 	}
 
+	//METODI PER SETTARE LE UNITA' SULLA MAPPA
 	private void artiglieriaOpt() {
 		MappaGrafica mG = gameMode.getMappaGrafica();
 		Mappa m = gameMode.getMappa();
@@ -191,6 +209,14 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 		EsagonoGrafico eG = null;
 		int turno = gameMode.getTurno();
 		Player player = gameMode.getPlayer(turno);
+		/*
+		 * Il giocatore puÚ acquistare l'unit‡ solo se:
+		 * -ha abbastanza soldi per farlo
+		 * -ha selezionato un esagono
+		 * -l'esagono si trova nella sua parte di mappa
+		 * -non Ë un lago
+		 * -non contiene gi‡ un'unit‡ di tipo diverso
+		 */
 		if (player.getSoldi() >= Artiglieria.COSTO) {
 			if (m.getSelezionato() != -1) {
 				e = m.getComponent()[m.getSelezionato()];
@@ -208,13 +234,8 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 						eG = new EsagonoGrafico(m.getSelezionato(),
 								mG.getXCentro(), mG.getYCentro(),
 								mG.getRaggio());
-						if (!gameMode.isZoomOutMode()) {
-							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
-									.getImage());
-						} else {
-							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
-									.getXImage());
-						}
+						//setto l'immagine sulla mappa
+						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());
@@ -224,11 +245,20 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 						UnitPanel unitPanel = gameMode.getUnitPanel();
 						unitPanel.setSoldiLabel(soldiNuovi);
 
-					} else if (e.getUnit() instanceof Artiglieria
+					}
+					/*
+					 * Se Ë presente un'unit‡ dello stesso tipo sull'esagono
+					 * scelto
+					 */
+					else if (e.getUnit() instanceof Artiglieria
 							&& !(e.getTerritorio() instanceof Lago)) {
 						int unit‡Prec = e.getUnit().getNumUnits();
 						int unit‡Nuove = unit‡Prec + Unit‡.UNITACOMPRABILI;
+						//Setto il nuovo numero di unit‡
 						e.getUnit().setNumUnits(unit‡Nuove);
+						//Setto l'esperienza della nuova unit‡ come media pesata tra le due unit‡
+						double esp = e.getUnit().getEsp()*e.getUnit().getNumUnits()/unit‡Nuove;
+						e.getUnit().setEsp(esp);
 
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());
@@ -268,7 +298,17 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 		}
 	}
 
+	/*
+	 *Si tralascia di commentare i metodi relativi 
+	 *alle altre unit‡ in quanto sono assai simili
+	 *a quello precedentemente commentato
+	 */
 	private void aereoOpt() {
+		/*
+		 *per questa unit‡ non si fa il controllo
+		 *sul tipo di territorio in quanto questa
+		 *puÚ muoversi ovunque
+		 */
 		MappaGrafica mG = gameMode.getMappaGrafica();
 		Mappa m = gameMode.getMappa();
 		Esagono e = null;
@@ -292,13 +332,8 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 						eG = new EsagonoGrafico(m.getSelezionato(),
 								mG.getXCentro(), mG.getYCentro(),
 								mG.getRaggio());
-						if (!gameMode.isZoomOutMode()) {
-							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
-									.getImage());
-						} else {
-							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
-									.getXImage());
-						}
+
+						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());
@@ -312,6 +347,8 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 						int unit‡Prec = e.getUnit().getNumUnits();
 						int unit‡Nuove = unit‡Prec + Unit‡.UNITACOMPRABILI;
 						e.getUnit().setNumUnits(unit‡Nuove);
+						double esp = e.getUnit().getEsp()*e.getUnit().getNumUnits()/unit‡Nuove;
+						e.getUnit().setEsp(esp);
 
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());
@@ -374,13 +411,8 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 						eG = new EsagonoGrafico(m.getSelezionato(),
 								mG.getXCentro(), mG.getYCentro(),
 								mG.getRaggio());
-						if (!gameMode.isZoomOutMode()) {
-							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
-									.getImage());
-						} else {
-							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
-									.getXImage());
-						}
+						
+						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());
@@ -395,6 +427,8 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 						int unit‡Prec = e.getUnit().getNumUnits();
 						int unit‡Nuove = unit‡Prec + Unit‡.UNITACOMPRABILI;
 						e.getUnit().setNumUnits(unit‡Nuove);
+						double esp = e.getUnit().getEsp()*e.getUnit().getNumUnits()/unit‡Nuove;
+						e.getUnit().setEsp(esp);
 
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());
@@ -458,13 +492,8 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 						eG = new EsagonoGrafico(m.getSelezionato(),
 								mG.getXCentro(), mG.getYCentro(),
 								mG.getRaggio());
-						if (!gameMode.isZoomOutMode()) {
-							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
-									.getImage());
-						} else {
-							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
-									.getXImage());
-						}
+
+						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());
@@ -480,6 +509,8 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 						int unit‡Prec = e.getUnit().getNumUnits();
 						int unit‡Nuove = unit‡Prec + Unit‡.UNITACOMPRABILI;
 						e.getUnit().setNumUnits(unit‡Nuove);
+						double esp = e.getUnit().getEsp()*e.getUnit().getNumUnits()/unit‡Nuove;
+						e.getUnit().setEsp(esp);
 
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());
@@ -544,13 +575,8 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 						eG = new EsagonoGrafico(m.getSelezionato(),
 								mG.getXCentro(), mG.getYCentro(),
 								mG.getRaggio());
-						if (!gameMode.isZoomOutMode()) {
-							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
-									.getImage());
-						} else {
-							mG.paintImage(mG.getGraphics(), eG, e.getUnit()
-									.getXImage());
-						}
+						
+						mG.paintImage(mG.getGraphics(), eG, e.getUnit().getImage());
 
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());
@@ -566,6 +592,8 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 						int unit‡Prec = e.getUnit().getNumUnits();
 						int unit‡Nuove = unit‡Prec + Unit‡.UNITACOMPRABILI;
 						e.getUnit().setNumUnits(unit‡Nuove);
+						double esp = e.getUnit().getEsp()*e.getUnit().getNumUnits()/unit‡Nuove;
+						e.getUnit().setEsp(esp);
 
 						// aggiorno i soldi del player
 						player = gameMode.getPlayer(gameMode.getTurno());

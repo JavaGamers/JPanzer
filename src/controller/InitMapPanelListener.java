@@ -78,8 +78,10 @@ public class InitMapPanelListener implements ActionListener,
 
 			Container c = gameWin.getContentPane();
 
-			// rimuovo gli eventuali altri pannelli presenti sulla finestra e
-			// aggiungo quelli nuovi
+			/*
+			 *  rimuovo gli eventuali altri pannelli presenti sulla finestra
+			 * e aggiungo quelli nuovi
+			 */
 			c.removeAll();
 			c.add(landPanel, BorderLayout.EAST);
 			JScrollPane jsp = new JScrollPane();
@@ -87,7 +89,6 @@ public class InitMapPanelListener implements ActionListener,
 			jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 			c.add(jsp, BorderLayout.CENTER);
 
-			// ridisegno della finestra
 			gameWin.repaint();
 			gameWin.validate();
 
@@ -100,8 +101,10 @@ public class InitMapPanelListener implements ActionListener,
 		GameWin gameWin = gameMode.getGameWin();
 		Container c = gameWin.getContentPane();
 
-		// rimuovo gli eventuali altri pannelli presenti sulla finestra e
-		// aggiungo quelli nuovi
+		/*
+		 *  rimuovo gli eventuali altri pannelli presenti sulla finestra
+		 * e aggiungo quelli nuovi
+		 */
 		c.removeAll();
 		c.add(gameMode.getStartPanel(), BorderLayout.CENTER);
 		gameWin.repaint();
@@ -117,15 +120,17 @@ public class InitMapPanelListener implements ActionListener,
 
 			Container c = gameWin.getContentPane();
 
-			// rimuovo gli eventuali altri pannelli presenti sulla finestra e
-			// aggiungo quelli nuovi
+			/*
+			 *  rimuovo gli eventuali altri pannelli presenti sulla finestra
+			 * e aggiungo quelli nuovi
+			 */
 			c.removeAll();
 			c.add(landPanel, BorderLayout.EAST);
 			JScrollPane jsp = new JScrollPane();
 			jsp.setViewportView(gameMode.getMappaGrafica());
 			jsp.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 			c.add(jsp, BorderLayout.CENTER);;
-			// ridisegno della finestra
+
 			gameWin.repaint();
 			gameWin.validate();
 		}
@@ -137,6 +142,7 @@ public class InitMapPanelListener implements ActionListener,
 
 	}
 
+	//Metodo di gesione della JList
 	public void valueChanged(ListSelectionEvent e) {
 		JList list = null;
 		if (e.getSource() instanceof JList) {
