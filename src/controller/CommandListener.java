@@ -96,6 +96,8 @@ public class CommandListener implements ActionListener {
 	 * deve entrare in selectionUnitMode
 	 */
 	private void scorporaOpt() {
+		GameWin gameWin = gameMode.getGameWin();
+		Container c = gameWin.getContentPane();
 
 		if (gameMode.isAccorpaMode() || gameMode.isAttackMode()
 				|| gameMode.isMovingMode() || gameMode.isSelecionUnitMode()) {
@@ -104,6 +106,9 @@ public class CommandListener implements ActionListener {
 			gameMode.setAttackMode(false);
 			gameMode.setMovingMode(false);
 			gameMode.setSelectionUnitMode(false);
+			
+			c.repaint();
+			c.validate();
 		}
 
 		Mappa m = gameMode.getMappa();
@@ -155,8 +160,7 @@ public class CommandListener implements ActionListener {
 					JOptionPane.ERROR_MESSAGE);
 		}
 		if(gameMode.isScorporaMode()){
-			GameWin gameWin = gameMode.getGameWin();
-			Container c = gameWin.getContentPane();
+
 			c.repaint();
 			c.validate();
 		}
@@ -279,6 +283,8 @@ public class CommandListener implements ActionListener {
 	 * selezionata e si deve entrare in attackMode
 	 */
 	private void attaccaOpt() {
+		GameWin gameWin = gameMode.getGameWin();
+		Container c = gameWin.getContentPane();
 
 		if (gameMode.isAccorpaMode() || gameMode.isMovingMode()
 				|| gameMode.isSelecionUnitMode() || gameMode.isScorporaMode()) {
@@ -287,6 +293,9 @@ public class CommandListener implements ActionListener {
 			gameMode.setMovingMode(false);
 			gameMode.setScorporaMode(false);
 			gameMode.setSelectionUnitMode(false);
+			
+			c.repaint();
+			c.validate();
 		}
 
 		Mappa m = gameMode.getMappa();
@@ -326,8 +335,7 @@ public class CommandListener implements ActionListener {
 		}
 		
 		if(gameMode.isAttackMode()){
-			GameWin gameWin = gameMode.getGameWin();
-			Container c = gameWin.getContentPane();
+
 			c.repaint();
 			c.validate();
 		}		
@@ -339,6 +347,9 @@ public class CommandListener implements ActionListener {
 	 * selezionata e si deve entrare in accorpaMode
 	 */
 	private void accorpaOpt() {
+		
+		GameWin gameWin = gameMode.getGameWin();
+		Container c = gameWin.getContentPane();
 
 		if (gameMode.isAttackMode() || gameMode.isMovingMode()
 				|| gameMode.isSelecionUnitMode() || gameMode.isScorporaMode()) {
@@ -347,6 +358,9 @@ public class CommandListener implements ActionListener {
 			gameMode.setMovingMode(false);
 			gameMode.setScorporaMode(false);
 			gameMode.setSelectionUnitMode(false);
+			
+			c.repaint();
+			c.validate();
 		}
 
 		Mappa m = gameMode.getMappa();
@@ -393,8 +407,7 @@ public class CommandListener implements ActionListener {
 					JOptionPane.ERROR_MESSAGE);
 		}
 		if(gameMode.isAccorpaMode()){
-			GameWin gameWin = gameMode.getGameWin();
-			Container c = gameWin.getContentPane();
+
 			c.repaint();
 			c.validate();
 		}
@@ -473,7 +486,9 @@ public class CommandListener implements ActionListener {
 	 * evidenziarsi gli esagoni raggiungibili dall'unità e si deve entrare in moveMode
 	 */
 	private void muoviOpt() {
-
+		
+		GameWin gameWin = gameMode.getGameWin();
+		Container c = gameWin.getContentPane();
 		
 		if (gameMode.isAttackMode() || gameMode.isAccorpaMode()
 				|| gameMode.isSelecionUnitMode() || gameMode.isScorporaMode()) {
@@ -482,6 +497,10 @@ public class CommandListener implements ActionListener {
 			gameMode.setAccorpaMode(false);
 			gameMode.setScorporaMode(false);
 			gameMode.setSelectionUnitMode(false);
+			
+			c.repaint();
+			c.validate();
+				
 		}
 
 		Mappa m = gameMode.getMappa();
@@ -494,7 +513,7 @@ public class CommandListener implements ActionListener {
 		}
 
 		/*
-		 * Si può entrare in moveMode solo se:
+		 * Si può entrare in movingMode solo se:
 		 * -si è selezionata una unità
 		 * -questa è del player di turno
 		 */
@@ -508,8 +527,7 @@ public class CommandListener implements ActionListener {
 					JOptionPane.ERROR_MESSAGE);
 		}
 		if(gameMode.isMovingMode()){
-			GameWin gameWin = gameMode.getGameWin();
-			Container c = gameWin.getContentPane();
+
 			c.repaint();
 			c.validate();
 		}

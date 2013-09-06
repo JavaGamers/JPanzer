@@ -251,7 +251,7 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 					 * scelto
 					 */
 					else if (e.getUnit() instanceof Artiglieria
-							&& !(e.getTerritorio() instanceof Lago)) {
+							&& !(e.getTerritorio() instanceof Lago) && e.getUnit().getPlayer()==turno) {
 						int unit‡Prec = e.getUnit().getNumUnits();
 						int unit‡Nuove = unit‡Prec + Unit‡.UNITACOMPRABILI;
 						//Setto il nuovo numero di unit‡
@@ -343,7 +343,7 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 						UnitPanel unitPanel = gameMode.getUnitPanel();
 						unitPanel.setSoldiLabel(soldiNuovi);
 
-					} else if (e.getUnit() instanceof Aereo) {
+					} else if (e.getUnit() instanceof Aereo && e.getUnit().getPlayer()==turno) {
 						int unit‡Prec = e.getUnit().getNumUnits();
 						int unit‡Nuove = unit‡Prec + Unit‡.UNITACOMPRABILI;
 						e.getUnit().setNumUnits(unit‡Nuove);
@@ -423,7 +423,7 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 						unitPanel.setSoldiLabel(soldiNuovi);
 
 					} else if (e.getUnit() instanceof Panzer
-							&& !(e.getTerritorio() instanceof Lago)) {
+							&& !(e.getTerritorio() instanceof Lago) && e.getUnit().getPlayer()==turno) {
 						int unit‡Prec = e.getUnit().getNumUnits();
 						int unit‡Nuove = unit‡Prec + Unit‡.UNITACOMPRABILI;
 						e.getUnit().setNumUnits(unit‡Nuove);
@@ -505,7 +505,7 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 						unitPanel.setSoldiLabel(soldiNuovi);
 
 					} else if (e.getUnit() instanceof FanteriaLeggera
-							&& !(e.getTerritorio() instanceof Lago)) {
+							&& !(e.getTerritorio() instanceof Lago) && e.getUnit().getPlayer()==turno) {
 						int unit‡Prec = e.getUnit().getNumUnits();
 						int unit‡Nuove = unit‡Prec + Unit‡.UNITACOMPRABILI;
 						e.getUnit().setNumUnits(unit‡Nuove);
@@ -588,7 +588,7 @@ public class UnitListener extends MouseAdapter implements ActionListener {
 						unitPanel.setSoldiLabel(soldiNuovi);
 
 					} else if (e.getUnit() instanceof FanteriaPesante
-							&& !(e.getTerritorio() instanceof Lago)) {
+							&& !(e.getTerritorio() instanceof Lago) && e.getUnit().getPlayer()==turno) {
 						int unit‡Prec = e.getUnit().getNumUnits();
 						int unit‡Nuove = unit‡Prec + Unit‡.UNITACOMPRABILI;
 						e.getUnit().setNumUnits(unit‡Nuove);

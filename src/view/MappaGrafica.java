@@ -71,6 +71,7 @@ public class MappaGrafica extends JPanel {
 
 	public void paintComponent(Graphics g) {
 
+		//coloro lo sfondo non coperto dal disegno (tranne mappa di preview)
 		if (this.raggio != PREVIEWRAGGIO) {
 			g.setColor(BACKGROUND);
 			g.fillRect(0, 0, this.getWidth(), this.getHeight());
@@ -79,6 +80,7 @@ public class MappaGrafica extends JPanel {
 		g.setColor(Color.BLACK);
 		EsagonoGrafico eG;
 		Graphics2D g2 = (Graphics2D) g;
+		g2.setStroke(BASICSTROKE);
 		Esagono e = this.mappa.getComponent()[0];
 		Image imgLand = null;
 		Image imgUnit = null;
@@ -91,7 +93,6 @@ public class MappaGrafica extends JPanel {
 
 		for (int i = 0; i < this.mappa.getComponent().length; i++) {
 			g.setColor(Color.BLACK);
-			g2.setStroke(BASICSTROKE);
 			e = this.mappa.getComponent()[i];
 			turno = gameMode.getTurno();
 			if (this.mappa.getSelezionato() != -1) {

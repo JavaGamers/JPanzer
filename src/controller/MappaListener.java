@@ -467,6 +467,7 @@ public class MappaListener extends MouseAdapter {
 					}
 				}
 				otherUnit.setNumUnits(numUnits);
+				otherUnit.setAlreadyAttack(selectedUnit.hasAlreadyAttack() || otherUnit.hasAlreadyAttack());
 				otherUnit.setEsp(esperienza);
 				otherUnit.setPassi(passi);
 
@@ -546,8 +547,7 @@ public class MappaListener extends MouseAdapter {
 					nuoviP = selectedUnit.getPassi() - 1;
 				}
 				otherUnit.setPassi(nuoviP);
-				otherUnit.setAlreadyAttack(selectedUnit.hasAlreadyAttack()
-						&& otherUnit.hasAlreadyAttack());
+				otherUnit.setAlreadyAttack(selectedUnit.hasAlreadyAttack());
 				nuovo.setUnit(otherUnit);
 
 				// aggiungo otherUnit alla UnitList del suo player
